@@ -1,20 +1,23 @@
-type e = Soup.element Soup.node
-type t = {form : e; data : (string,string list) Hashtbl.t}
+module StringMap = Map.Make(String)
 
-type _ input = element node
-type _ inputs = element nodes
+type elt = Soup.element Soup.node
+type t = {form : elt; data : (string list) StringMap.t}
+
+type _ input = elt
+type _ inputs = Soup.element Soup.nodes
 
 let to_node n = n
 let to_nodes n = n
 
 let to_list = Soup.to_list
-let iter = iter
-let fold = fold
-let filter = filter
+let iter = Soup.iter
+let fold = Soup.fold
+let filter = Soup.filter
 
-let raw_set f key value = Hashtbl.add f.data key value
-let raw_unset f key = Hashtbl.remove f.data key
-let raw_values f = Hashtbl.fold (fun x y l -> (x,y)::l) f.data []
+let raw_set f key value = StringMap.add key value f.data
+let raw_get f key = StringMap.find key f.data
+let raw_unset f key = StringMap.remove key f.data
+let raw_values f = StringMap.fold (fun id value l -> (id,value)::l) f.data []
 
 let checkbox_with f selector = Soup.select_one ("input[type=checkbox]"^selector)
 f.form
@@ -28,8 +31,8 @@ let radio_buttons_with f selector = Soup.select
 ("input[type=radio_button]"^selector) f.form
 let radio_buttons f = radio_buttons_with f ""
 
-let select_list_with f selector = Soup.select_one ("input[type=select_list]"^selector) f.form 
-let select_lists_with f selector = Soup.select ("input[type=select_list]"^selector) f.form 
+let select_list_with f selector = Soup.select_one ("input[type=select_list]"^selector) f.form
+let select_lists_with f selector = Soup.select ("input[type=select_list]"^selector) f.form
 let select_lists f = select_lists_with f ""
 
 let field_with f selector = Soup.select_one ("input[type=fields_list]"^selector) f.form
@@ -60,111 +63,132 @@ let file_upload_with f selector = Soup.select_one ("input[type=file_upload]"^sel
 let file_uploads_with f selector = Soup.select ("input[type=file_upload]"^selector) f.form
 let file_uploads f = file_uploads_with f ""
 
-let submit f agent = ()
+let reset f = {f with data = StringMap.empty}
 
-let reset f = Hashtbl.clear f.data
+let name input = Soup.attribute "name" input
+let value input = Soup.attribute "value" input
 
-let (>>>) (x,y) f = match x,y with Some x, Some y -> Some (f x y) | _ -> None
-let (>|=) x f = match x with Some x -> Some (f x) | _ -> None
-let (>>) x f = match x,f with Some x, Some f -> Some (f x) | _ -> None
-let (|?) x default = match x with Some x -> x | None -> default
+open Infix.Option
+
 let singleton x = [x]
 let ladd x l = x::l
+let radd m k v = StringMap.add k v m
+let rrem m k = StringMap.remove k m
+let rmem m k = StringMap.mem k m
+let rfind m k = StringMap.find k m
+
+let update_form f data = {f with data = data |? f.data}
+
+let has_value m k v =
+  try
+    List.mem v (StringMap.find k m)
+  with Not_found -> false
 
 module Checkbox = struct
-  let check f cb = 
-    (Soup.id cb, Soup.attribute "value" cb >|= singleton) >>> Hashtbl.add f.data
-    |> ignore
+  let check f cb =
+    (name cb, value cb >|= singleton) >>> radd f.data
+    |> update_form f
 
   let uncheck f cb =
-    Soup.id cb >|= Hashtbl.remove f.data |> ignore
+    name cb >|= rrem f.data |> update_form f
 
   let is_checked f cb =
-    Soup.id cb >|= Hashtbl.mem f.data |? false
+    name cb >|= rmem f.data |? false
 end
 
 module RadioButton = struct
-  type value = string
+  type value = elt
 
   let rb_selector id = Printf.sprintf "[type=radio]#%s" id
 
   let values f rb =
-    Soup.id rb >|= rb_selector >|= (fun s ->
-      Soup.select s f.form |> to_list) |? []
- 
+    name rb >|= rb_selector >|=
+    (fun s -> Soup.select s f.form
+      |> to_list) |? []
+
   let select f rb =
-    (Soup.id rb, Soup.attribute "value" rb >|= singleton) >>> Hashtbl.add f.data |> ignore
+    (name rb, value rb >|= singleton) >>> radd f.data
+    |> update_form f
 
   let is_selected f rb =
-    Soup.attribute "value" rb >|= Hashtbl.mem f.data |? false
+    value rb >|=
+    (fun v -> values f rb
+      |> List.exists (fun x -> (value x |? "") = v))
+    |? false
+
+  let to_string item = item >|= Soup.attribute "value" |> Soup.require
 end
 
 module SelectList = struct
-  type item = element node 
+  type item = elt
 
   let items sl = Soup.select "[type=option]" sl |> to_list
 
   let select f sl item =
-    (Soup.id sl, Soup.attribute "value" item >|= singleton) >>> Hashtbl.replace f.data
-    |> ignore
+    (Soup.id sl, Soup.attribute "value" item >|= singleton) >>> radd f.data
+    |> update_form f
 
-  let unselect f sl item = 
-    Soup.id sl >|= Hashtbl.remove f.data |> ignore
+  let unselect f sl item =
+    Soup.id sl >|= rrem f.data |> update_form f
 
-  let is_selected f sl item = 
-    Soup.attribute "value" sl >|= Hashtbl.mem f.data |? false
+  let is_selected f sl item =
+    (Soup.id sl, Soup.attribute "value" sl) >>>
+    has_value f.data |? false
 
-  let to_string item = item >|= Soup.attribute "value" |> require
+  let to_string item = item >|= value |> Soup.require
 end
 
 module Menu = struct
-  type item = element node 
+  type item = elt
 
-  let current_selection f id = 
+  let current_selection f id =
     try
-      Some (Hashtbl.find f.data id)
-    with Not_found -> None
+      StringMap.find id f.data
+    with Not_found -> []
 
   let items menu = Soup.select "[type=option]" menu |> to_list
 
-  let is_selected f menu item = 
-    (Soup.id menu, Soup.attribute "value" item) >>>
-      (fun id value ->
-        current_selection f id >|= List.mem value |? false) |? false
+  let is_selected f menu item =
+    (name menu, value item) >>>
+    (fun id value -> current_selection f id |> List.mem value)
+    |? false
 
   let select f menu item =
-    if not (is_selected f menu item) then
-      (Soup.id menu, Soup.attribute "value" item) >>>
-        (fun id value ->
-          current_selection f id |? [] |> ladd value
-          |> Hashtbl.replace f.data id)
-      |> ignore
+    match is_selected f menu item with
+    | false ->
+      (name menu, value item) >>>
+      (fun name value ->
+        current_selection f name |> ladd value |> radd f.data name)
+      |> update_form f
+    | true -> f
 
-  let unselect f menu item = 
-    (Soup.id menu, Soup.attribute "value" item) >>>
-      (fun id value ->
-        current_selection f id >|= List.filter ((!=) value) >|=
-          Hashtbl.replace f.data id)
+  let unselect f menu item =
+    (name menu, value item) >>>
+    (fun id value ->
+      current_selection f id |> List.filter ((!=) value) 
+      |> radd f.data id)
+    |> update_form f
 
-  let to_string item = item >|= Soup.attribute "value" |> require
+  let to_string item = item >|= value |> Soup.require
 end
 
 module Field = struct
-  let set f fd value =
-    Soup.id fd >|= (fun id -> value |> singleton |> Hashtbl.replace f.data id)
+  let set f fd v =
+    Soup.id fd >|= (fun id -> v |> singleton |> radd f.data id)
+    |> update_form f
 
-  let get f fd = 
+  let get f fd =
     try
-      Soup.id fd >|= Hashtbl.find f.data >|= List.hd
+      Soup.id fd >|= rfind f.data >|= List.hd
     with _ -> None
 end
 
 module FileUpload = struct
   let select f fu path =
-    Soup.id fu >|= (fun id -> Hashtbl.replace f.data id [path])
+    name fu >|= (fun id -> radd f.data id [path]) |> update_form f
 
   let which_selected f fu =
     try
-      Soup.id fu >|= Hashtbl.find f.data >|= List.hd
+      name fu >|= rfind f.data >|= List.hd
     with _ -> None
 end

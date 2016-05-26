@@ -10,17 +10,21 @@ type file_upload
 type _ input
 type _ inputs
 
-val to_node : _ input -> element node
-val to_nodes : _ inputs -> element nodes
+val to_node : _ input -> Soup.element Soup.node
+val to_nodes : _ inputs -> Soup.element Soup.nodes
 
 val to_list : 'a inputs -> 'a input list
-val iter : 'a inputs -> unit
-val fold = ('a -> 'b input -> 'a) -> 'a -> 'b inputs -> 'a
+val iter : 'a inputs -> t
+val fold : ('a -> 'b input -> 'a) -> 'a -> 'b inputs -> 'a
 val filter : 'a inputs -> ('a input -> bool) -> 'a inputs
 
-val raw_set : t -> string -> string list -> unit
-val raw_unset : t -> string -> t -> unit
+val raw_set : t -> string -> string list -> t
+val raw_get : t -> string -> string list
+val raw_unset : t -> string -> t -> t
 val raw_values : t -> string * (string list) list
+
+let name : _ input -> string option
+let value : _ input -> string option
 
 val checkbox_with : t -> string -> checkbox inputs option
 val checkboxes : t -> checkbox inputs
@@ -66,19 +70,18 @@ val file_upload_with : t -> string -> file_upload input option
 val file_uploads : t -> file_upload inputs
 val file_uploads_with : t -> string -> file_upload inputs
 
-val submit : t -> Agent.t
-val reset : t -> unit
+val reset : t -> t
 
 module Checkbox = sig
-  val check : t -> checkbox input -> unit
-  val uncheck : t -> checkbox input -> unit
+  val check : t -> checkbox input -> t
+  val uncheck : t -> checkbox input -> t
   val is_checked : t -> checkbox input -> bool
 end
 
 module RadioButton = sig
   val value : radio_button -> string
   val values : t -> radio_button input -> radio_button list 
-  val select : t -> radio_button input -> unit
+  val select : t -> radio_button input -> t
   val is_selected : t -> radio_button -> bool
 end
 
@@ -87,8 +90,8 @@ module SelectList = sig
 
   val items : select_list input -> item list
 
-  val select : t -> select_list input -> item -> unit
-  val unselect : t -> select_list input -> item -> unit
+  val select : t -> select_list input -> item -> t
+  val unselect : t -> select_list input -> item -> t
 
   val is_selected : t -> select_list input -> item -> bool
 
@@ -100,8 +103,8 @@ module Menu = sig
 
   val items : menu input -> item list
 
-  val select : t -> menu input -> item -> unit
-  val unselect : t -> menu input -> item -> unit
+  val select : t -> menu input -> item -> t
+  val unselect : t -> menu input -> item -> t
 
   val is_selected : t -> select_list input -> item -> bool
 
@@ -109,12 +112,12 @@ module Menu = sig
 end
 
 module Field = sig
-  val set : t -> field input -> string -> unit
+  val set : t -> field input -> string -> t
   val get : t -> field input -> string option
 end
 
 module FileUpload = sig
-  val select : t -> file_upload input -> string -> unit
+  val select : t -> file_upload input -> string -> t
   val which_selected : file_upload input -> string option
 end
 
