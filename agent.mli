@@ -18,25 +18,32 @@
   }}}*)
 
 type t
-
-type config = {
+type http_status_code = Cohttp.Code.status_code
+type http_headers = Cohttp.Header.t
 
 val init : unit -> t
 
-val get : t -> Uri.t -> Response.t * t
-val post : t -> Uri.t -> string -> Response.t * t
-val submit : t -> Form.t -> Response.t * t
+val get : Uri.t -> t -> t
+val post : Uri.t -> string -> t -> t
+val submit : Form.t -> t -> t
 
-val page : t -> Page.t
-val previous : t -> t
-val next : t -> t
-val history : _
+val page : t -> Page.t option
+val content : t -> string option
+val server_headers : t -> http_headers 
+val status_code : t -> http_status_code
+val code_of_status : http_status_code -> int
 
-val cookies : t -> CookieJar.t
-val add_default_cookie : t -> CookieJar.Cookie.t -> t
-val remove_default_cookie : t -> CookieJar.Cookie.t -> t
+val set_proxy : ?user:string -> ?password:string
+                -> ~host:string -> ~port:int
+                -> t -> t
+val disable_proxy : t -> t
 
-val set_default_header : t -> string -> string -> t
-val set_default_headers : t -> Cohttp.Header.t -> t
-val remove_default_header : t -> string -> t
-val reset_default_headers : t -> t
+val cookie_jar : t -> CookieJar.t
+val set_cookie_jar : CookieJar.t -> t -> t
+val add_cookie : CookieJar.Cookie.t -> t -> t
+val remove_cookie : CookieJar.Cookie.t -> t -> t
+
+val client_headers : t -> Cohttp.Header.t
+val set_client_headers : Cohttp.Header.t -> t -> t
+val add_client_header : string -> string -> t -> t
+val remove_client_header : string -> t -> t
