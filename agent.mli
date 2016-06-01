@@ -24,8 +24,10 @@ type http_headers = Cohttp.Header.t
 val init : unit -> t
 
 val get : Uri.t -> t -> t
+val click : Page.Link.t -> t -> t
 val post : Uri.t -> string -> t -> t
 val submit : Form.t -> t -> t
+val load : Page.Image.t -> t -> t 
 
 val page : t -> Page.t option
 val content : t -> string option

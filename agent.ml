@@ -63,6 +63,14 @@ let get uri agent =
   Client.get ~headers:agent.client_headers uri
   >|= update_agent uri agent |> Lwt_main.run
 
+let load image agent = 
+  let page = agent.last_page in
+  let agent = Client.get ~headers:agent.client_headrs uri
+  >|= update_agent uri agent |> Lwt_main.run in
+  {agent with last_page = page}
+
+let click link = link |> Page.Link.uri |> get
+
 let post uri agent content =
   Client.post ~headers:agent.client_headers
     ~body:(Cohttp_lwt_body.of_string content) uri

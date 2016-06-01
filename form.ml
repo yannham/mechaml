@@ -135,7 +135,7 @@ module RadioButton = struct
       |> List.exists (fun x -> (value x |? "") = v))
     |? false
 
-  let to_string item = item >|= Soup.attribute "value" |> Soup.require
+  let to_string item = item >|= value |> Soup.require
 end
 
 module SelectList = struct
