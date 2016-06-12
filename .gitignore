@@ -1,0 +1,10 @@
+header
+headerize.sh
+
+_build
+*.native
+*.byte
+*.docdir
+
+setup.data
+setuop.log

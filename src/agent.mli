@@ -26,24 +26,27 @@ val init : unit -> t
 val get : Uri.t -> t -> t
 val click : Page.Link.t -> t -> t
 val post : Uri.t -> string -> t -> t
-val submit : Form.t -> t -> t
+val submit : Page.Form.t -> t -> t
 val load : Page.Image.t -> t -> t 
 
 val page : t -> Page.t option
-val content : t -> string option
+val content : t -> string
 val server_headers : t -> http_headers 
 val status_code : t -> http_status_code
 val code_of_status : http_status_code -> int
 
-val set_proxy : ?user:string -> ?password:string
-                -> ~host:string -> ~port:int
-                -> t -> t
+val set_proxy : ?user:string
+  -> ?password:string
+  -> host:string
+  -> port:int
+  -> t -> t
+
 val disable_proxy : t -> t
 
-val cookie_jar : t -> CookieJar.t
-val set_cookie_jar : CookieJar.t -> t -> t
-val add_cookie : CookieJar.Cookie.t -> t -> t
-val remove_cookie : CookieJar.Cookie.t -> t -> t
+val cookie_jar : t -> Cookiejar.t
+val set_cookie_jar : Cookiejar.t -> t -> t
+val add_cookie : Cookiejar.Cookie.t -> t -> t
+val remove_cookie : Cookiejar.Cookie.t -> t -> t
 
 val client_headers : t -> Cohttp.Header.t
 val set_client_headers : Cohttp.Header.t -> t -> t

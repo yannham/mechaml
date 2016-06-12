@@ -29,7 +29,7 @@ module Cookie : sig
   val value : t -> string
   val expiration : t -> expiration
   val domain : t -> string
-  val path : t -> string option
+  val path : t -> string
   val secure : t -> bool
 
   (* Given an uri and a cookie, return true if the
@@ -38,10 +38,12 @@ module Cookie : sig
   val match_uri : Uri.t -> t -> bool
 
   val make :
-    ?expiration:expiration ->
-    ?path:string ->
-    ?secure:bool -> ~domain:string
-    ~name:string -> ~value:string -> t
+    ?expiration:expiration
+    -> ?path:string
+    -> ?secure:bool
+    -> domain:string
+    -> name:string
+    -> value:string -> t
 end
 
 type t
@@ -58,12 +60,12 @@ val remove : Cookie.t -> t -> t
  * update the jar according
  * to set-cookie HTTP header
  *)
-val add_from_headers : Uri.t -> Header.t -> t -> t
+val add_from_headers : Uri.t -> Cohttp.Header.t -> t -> t
 
 (* Given an URI, update the HTTP headers parameter
  * with corresponding cookies before sending it
  * to the server *)
-val add_to_headers : Uri.t -> Header.t -> t -> Header.t
+val add_to_headers : Uri.t -> Cohttp.Header.t -> t -> Cohttp.Header.t
 
 val map : (Cookie.t -> Cookie.t) -> t -> t
 val iter : (Cookie.t -> unit) -> t -> unit

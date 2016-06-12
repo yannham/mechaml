@@ -98,7 +98,7 @@ module JarMap = Map.Make(Key)
 
 type t = Cookie.t JarMap.t
 
-let map f = JarMap.map
+let map = JarMap.map
 let iter f = JarMap.iter (fun x -> f)
 let fold f = JarMap.fold (fun x -> f)
 

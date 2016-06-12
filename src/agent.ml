@@ -22,19 +22,19 @@ open Cohttp
 open Cohttp_lwt_unix
 
 type http_status_code = Cohttp.Code.status_code
-type http_header = Cohttp.Header.t
+type http_headers = Cohttp.Header.t
 
 type proxy = {
   user : string option;
   password : string option;
   host : string;
-  port : string}
+  port : int}
 
 type t = {
   last_page : Page.t option;
   last_headers : Header.t;
   last_status_code : http_status_code;
-  last_body : Cohttp_lwt_body.t;
+  last_body : string;
   proxy : proxy option;
   cookie_jar : Cookiejar.t;
   client_headers : Header.t}
@@ -43,47 +43,51 @@ let init _ =
   { last_page = None;
     last_headers = Cohttp.Header.init ();
     last_status_code = `Code (-1);
-    last_body = Cohttp_lwt_body.of_string "";
+    last_body = "";
     proxy = None;
     cookie_jar = Cookiejar.empty;
     client_headers = Header.init ()}
 
 let update_agent uri agent (response,body) =
+  Cohttp_lwt_body.to_string body >|= function body_str ->
   let code = response |> Response.status in
   let headers = response |> Response.headers in
-  let page = Page.from_body body in
+  let page = try
+    Some (body_str |> Soup.parse |> Page.from_soup)
+  with _ -> None in
   {agent with
-    last_page = Some page;
+    last_page = page;
     last_headers = headers;
     last_status_code = code;
-    last_body = body;
+    last_body = body_str;
     cookie_jar = Cookiejar.add_from_headers uri headers agent.cookie_jar}
 
 let get uri agent =
   Client.get ~headers:agent.client_headers uri
-  >|= update_agent uri agent |> Lwt_main.run
+  >>= update_agent uri agent |> Lwt_main.run
 
-let load image agent = 
+let load image agent =
   let page = agent.last_page in
-  let agent = Client.get ~headers:agent.client_headrs uri
-  >|= update_agent uri agent |> Lwt_main.run in
+  let uri = image |> Page.Image.uri in
+  let agent = uri |> Client.get ~headers:agent.client_headers
+  >>= update_agent uri agent |> Lwt_main.run in
   {agent with last_page = page}
 
 let click link = link |> Page.Link.uri |> get
 
-let post uri agent content =
+let post uri content agent =
   Client.post ~headers:agent.client_headers
     ~body:(Cohttp_lwt_body.of_string content) uri
-  >|= update_agent uri agent |> Lwt_main.run
+  >>= update_agent uri agent |> Lwt_main.run
 
 let submit form agent =
   let uri = raise (Failure "not implemented") in
-  let params = Form.raw_values form in
+  let params = Page.Form.raw_values form in
   Client.post_form ~headers:agent.client_headers ~params:params uri
-  >|= update_agent uri agent |> Lwt_main.run
+  >>= update_agent uri agent |> Lwt_main.run
 
 let page agent = agent.last_page
-let content agent = agent.last_body |> Cohttp_lwt_body.to_string
+let content agent = agent.last_body
 let server_headers agent = agent.last_headers
 let status_code agent = agent.last_status_code
 let code_of_status = Code.code_of_status

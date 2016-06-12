@@ -1,0 +1,27 @@
+Name: Mechaml
+Version: 0.1
+Synopsis: A web browing library built on top of Lambdasoup and Cohttp. Inspired by WWW::Mechanize
+Authors: Yann Hamdaoui <yann.hamdaoui@centraliens.net>
+License: WTFPL
+
+Description: Mechaml provides an HTTP agent to interact with websites through an OCaml
+  program. It uses cohttp to parse and build HTTP requests/responses, and
+  Lambdasoup to parse HTML pages. Mechaml automatically manages cookies, HTTP
+  headers, allows to follow links and to analyze and submit forms.
+Homepage: https://github.com/yannham/mechaml
+
+OASISFormat: 0.4
+BuildTools: ocamlbuild
+Plugins: META (0.4), DevFiles (0.4)
+
+Library "mechaml"
+  Path: src
+  Modules: Agent, Page, Cookiejar
+  InternalModules: Infix
+  BuildDepends: lambdasoup, lwt, cohttp, cohttp.lwt, uri
+
+SourceRepository master
+  Type: git
+  Location: https://github.com/yannham/mechaml.git/
+  Branch: master
+  Browser: https://github.com/yannham/mechaml

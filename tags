@@ -1,0 +1,466 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+:	src/cookiejar.mli	/^    -> value:string -> t$/;"	f
+>>	src/infix.ml	/^  let (>>) x f = match x,f with Some x, Some f -> Some (f x) | _ -> None$/;"	f	Module:Option
+>>>	src/infix.ml	/^  let (>>>) (x,y) f = match x,y with Some x, Some y -> Some (f x y) | _ -> None$/;"	f	Module:Option
+>|=	src/infix.ml	/^  let (>|=) x f = match x with Some x -> Some (f x) | _ -> None$/;"	f	Module:Option
+Agent	_build/src/agent.ml	1;"	M
+Agent	_build/src/agent.mli	1;"	M
+Agent	src/agent.ml	1;"	M
+Agent	src/agent.mli	1;"	M
+BaseEnvLight	_build/myocamlbuild.ml	1;"	M
+C	_build/src/cookiejar.ml	1;"	M
+C	src/cookiejar.ml	1;"	M
+Checkbox	_build/src/form.mli	1;"	M
+Checkbox	src/page.ml	1;"	M
+Cookie	_build/src/cookiejar.mli	1;"	M
+Cookie	src/cookiejar.ml	1;"	M
+Cookie	src/cookiejar.mli	1;"	M
+Cookiejar	_build/src/cookiejar.ml	1;"	M
+Cookiejar	_build/src/cookiejar.mli	1;"	M
+Cookiejar	src/cookiejar.ml	1;"	M
+Cookiejar	src/cookiejar.mli	1;"	M
+Field	_build/src/form.mli	1;"	M
+Field	_build/src/page.ml	1;"	M
+Field	_build/src/page.mli	1;"	M
+Field	src/page.mli	1;"	M
+FileUpload	_build/src/form.mli	1;"	M
+FileUpload	_build/src/page.ml	1;"	M
+FileUpload	_build/src/page.mli	1;"	M
+FileUpload	src/page.ml	1;"	M
+FileUpload	src/page.mli	1;"	M
+Form	_build/src/form.ml	1;"	M
+Form	_build/src/form.mli	1;"	M
+Form	_build/src/page.ml	1;"	M
+Form	_build/src/page.mli	1;"	M
+Form	src/form.ml	1;"	M
+Form	src/page.ml	1;"	M
+Form	src/page.mli	1;"	M
+Frame	_build/src/page.ml	1;"	M
+Frame	_build/src/page.mli	1;"	M
+Frame	src/page.ml	1;"	M
+Frame	src/page.mli	1;"	M
+Image	_build/src/page.ml	1;"	M
+Image	_build/src/page.mli	1;"	M
+Image	src/page.ml	1;"	M
+Image	src/page.mli	1;"	M
+Infix	_build/src/infix.ml	1;"	M
+Infix	_build/src/infix.mli	1;"	M
+Infix	src/infix.ml	1;"	M
+Infix	src/infix.mli	1;"	M
+JarMap	_build/src/cookiejar.ml	1;"	M
+JarMap	src/cookiejar.ml	1;"	M
+Key	_build/src/cookiejar.ml	1;"	M
+Key	src/cookiejar.ml	1;"	M
+Link	_build/src/page.ml	1;"	M
+Link	_build/src/page.mli	1;"	M
+Link	src/page.ml	1;"	M
+Link	src/page.mli	1;"	M
+Max_age	src/cookiejar.ml	/^    | `Max_age of int64$/;"	C	type:Cookie/expiration
+Menu	_build/src/form.mli	1;"	M
+Menu	_build/src/page.ml	1;"	M
+Menu	_build/src/page.mli	1;"	M
+Menu	src/page.mli	1;"	M
+MyOCamlbuildBase	_build/myocamlbuild.ml	1;"	M
+Myocamlbuild	_build/myocamlbuild.ml	1;"	M
+OASISExpr	_build/myocamlbuild.ml	1;"	M
+OASISGettext	_build/myocamlbuild.ml	1;"	M
+OASISString	_build/myocamlbuild.ml	1;"	M
+Option	_build/src/infix.ml	1;"	M
+Option	_build/src/infix.mli	1;"	M
+Option	src/infix.ml	1;"	M
+Option	src/infix.mli	1;"	M
+Page	_build/src/page.ml	1;"	M
+Page	_build/src/page.mli	1;"	M
+Page	src/page.ml	1;"	M
+Page	src/page.mli	1;"	M
+RadioButton	_build/src/form.mli	1;"	M
+RadioButton	_build/src/page.ml	1;"	M
+RadioButton	_build/src/page.mli	1;"	M
+RadioButton	src/page.ml	1;"	M
+RadioButton	src/page.mli	1;"	M
+SETUP	Makefile	/^SETUP = ocaml setup.ml$/;"	m
+SelectList	_build/src/form.mli	1;"	M
+SelectList	_build/src/page.ml	1;"	M
+SelectList	_build/src/page.mli	1;"	M
+SelectList	src/page.mli	1;"	M
+Session	src/cookiejar.ml	/^    | `Session$/;"	C	type:Cookie/expiration
+Setup	setup.ml	1;"	M
+StringMap	src/page.ml	1;"	M	Module:Form
+add	_build/src/cookiejar.mli	/^val add : Cookie.t -> t -> t$/;"	v
+add	src/cookiejar.mli	/^val add : Cookie.t -> t -> t$/;"	v	function::
+add_client_header	_build/src/agent.mli	/^val add_client_header : string -> string -> t -> t$/;"	v
+add_client_header	src/agent.ml	/^let add_client_header header value agent =$/;"	v
+add_client_header	src/agent.mli	/^val add_client_header : string -> string -> t -> t$/;"	v
+add_cookie	_build/src/agent.mli	/^val add_cookie : Cookiejar.Cookie.t -> t -> t$/;"	v
+add_cookie	src/agent.ml	/^let add_cookie cookie agent =$/;"	v
+add_cookie	src/agent.mli	/^val add_cookie : Cookiejar.Cookie.t -> t -> t$/;"	v
+add_from_headers	_build/src/cookiejar.mli	/^val add_from_headers : Uri.t -> Cohttp.Header.t -> t -> t$/;"	v
+add_from_headers	src/cookiejar.ml	/^let add_from_headers uri headers jar =$/;"	v
+add_from_headers	src/cookiejar.mli	/^val add_from_headers : Uri.t -> Cohttp.Header.t -> t -> t$/;"	v	function::
+add_to_headers	_build/src/cookiejar.mli	/^val add_to_headers : Uri.t -> Cohttp.Header.t -> t -> Cohttp.Header.t$/;"	v
+add_to_headers	src/cookiejar.ml	/^let add_to_headers uri headers jar =$/;"	v
+add_to_headers	src/cookiejar.mli	/^val add_to_headers : Uri.t -> Cohttp.Header.t -> t -> Cohttp.Header.t$/;"	v	function::
+args	_build/myocamlbuild.ml	/^                let (args, pargs) =$/;"	v
+attributes	src/page.ml	/^    let attributes = [("href",href)] in$/;"	v
+before_space	_build/myocamlbuild.ml	/^  let before_space s =$/;"	v
+c	src/cookiejar.ml	/^      Printf.bprintf buffer "%s%s=%s" sep (Cookie.name c) (Cookie.value c);$/;"	v
+cb	src/page.ml	/^      (name cb, value cb >|= singleton) >>> radd f.data$/;"	v	Module:Checkbox
+check	src/page.ml	/^    let check f cb =$/;"	v	Module:Checkbox
+checkbox	_build/src/form.mli	/^type checkbox$/;"	t
+checkbox	src/page.ml	/^  type checkbox$/;"	t	Module:Form
+checkbox_with	_build/src/form.mli	/^val checkbox_with : t -> string -> checkbox inputs option$/;"	v
+checkbox_with	src/page.ml	/^  let checkbox_with selector f =$/;"	v
+checkboxes	_build/src/form.mli	/^val checkboxes : t -> checkbox inputs$/;"	v
+checkboxes	src/page.ml	/^  let checkboxes = checkboxes_with ""$/;"	v
+checkboxes_with	_build/src/form.mli	/^val checkboxes_with : t -> string -> checkbox inputs$/;"	v
+checkboxes_with	src/page.ml	/^  let checkboxes_with selector f =$/;"	v
+click	_build/src/agent.mli	/^val click : Page.Link.t -> t -> t$/;"	v
+click	src/agent.ml	/^let click link = link |> Page.Link.uri |> get$/;"	v
+click	src/agent.mli	/^val click : Page.Link.t -> t -> t$/;"	v
+client_headers	_build/src/agent.ml	/^  client_headers : Header.t}$/;"	r	type:t
+client_headers	_build/src/agent.mli	/^val client_headers : t -> Cohttp.Header.t$/;"	v
+client_headers	src/agent.ml	/^  client_headers : Header.t}$/;"	r	type:t
+client_headers	src/agent.ml	/^let client_headers agent = agent.client_headers$/;"	v
+client_headers	src/agent.mli	/^val client_headers : t -> Cohttp.Header.t$/;"	v
+code_of_status	_build/src/agent.mli	/^val code_of_status : http_status_code -> int$/;"	v
+code_of_status	src/agent.ml	/^let code_of_status = Code.code_of_status$/;"	v
+code_of_status	src/agent.mli	/^val code_of_status : http_status_code -> int$/;"	v
+compare	src/cookiejar.ml	/^  let compare k k' = String.compare (to_string k) (to_string k')$/;"	v	Module:Key
+content	_build/src/agent.mli	/^val content : t -> string$/;"	v
+content	src/agent.ml	/^let content agent = agent.last_body$/;"	v
+content	src/agent.mli	/^val content : t -> string$/;"	v
+cookie_jar	_build/src/agent.ml	/^  cookie_jar : Cookiejar.t;$/;"	r	type:t
+cookie_jar	_build/src/agent.mli	/^val cookie_jar : t -> Cookiejar.t$/;"	v
+cookie_jar	src/agent.ml	/^  cookie_jar : Cookiejar.t;$/;"	r	type:t
+cookie_jar	src/agent.ml	/^let cookie_jar agent = agent.cookie_jar$/;"	v
+cookie_jar	src/agent.mli	/^val cookie_jar : t -> Cookiejar.t$/;"	v
+current_selection	src/page.ml	/^    let current_selection f id =$/;"	v
+data	src/page.ml	/^  type t = {form : elt; data : (string list) StringMap.t}$/;"	r	type:Form/t
+disable_proxy	_build/src/agent.mli	/^val disable_proxy : t -> t$/;"	v
+disable_proxy	src/agent.ml	/^let disable_proxy agent = {agent with proxy = None}$/;"	v
+disable_proxy	src/agent.mli	/^val disable_proxy : t -> t$/;"	v
+domain	src/cookiejar.ml	/^    domain : string;$/;"	r	type:Cookie/t
+domain	src/cookiejar.ml	/^  let domain c = c.domain$/;"	v	Module:Cookie
+domain	src/cookiejar.ml	/^  type t = {name: string; domain : string; path : string}$/;"	r	type:Key/t
+domain	src/cookiejar.mli	/^  val domain : t -> string$/;"	v
+domain_match	src/cookiejar.ml	/^  let domain_match host dom =$/;"	v	Module:Cookie
+elt	_build/src/page.ml	/^type elt = Soup.element Soup.node$/;"	t
+elt	src/page.ml	/^type elt = Soup.element Soup.node$/;"	t
+empty	_build/src/cookiejar.mli	/^val empty : t$/;"	v
+env	_build/myocamlbuild.ml	/^      let env = BaseEnvLight.load ~filename:env_filename ~allow_empty:true () in$/;"	v
+expiration	src/cookiejar.ml	/^    expiration : expiration;$/;"	r	type:Cookie/t
+expiration	src/cookiejar.ml	/^  type expiration = [$/;"	t	Module:Cookie
+expiration	src/cookiejar.mli	/^  val expiration : t -> expiration$/;"	v
+field	_build/src/form.mli	/^type field$/;"	t
+field	src/page.ml	/^  type field$/;"	t	Module:Form
+field_with	_build/src/form.mli	/^val field_with : t -> string -> field input option$/;"	v
+field_with	src/page.ml	/^  let field_with selector f =$/;"	v
+fields	_build/src/form.mli	/^val fields : t -> field inputs$/;"	v
+fields	src/page.ml	/^  let fields = fields_with ""$/;"	v
+fields_with	_build/src/form.mli	/^val fields_with : t -> string -> field inputs$/;"	v
+fields_with	src/page.ml	/^  let fields_with selector f =$/;"	v
+file_upload	_build/src/form.mli	/^type file_upload$/;"	t
+file_upload	src/page.ml	/^  type file_upload$/;"	t	Module:Form
+file_upload_with	_build/src/form.mli	/^val file_upload_with : t -> string -> file_upload input option$/;"	v
+file_upload_with	src/page.ml	/^  let file_upload_with selector f =$/;"	v
+file_uploads	_build/src/form.mli	/^val file_uploads : t -> file_upload inputs$/;"	v
+file_uploads	src/page.ml	/^  let file_uploads = file_uploads_with ""$/;"	v
+file_uploads_with	_build/src/form.mli	/^val file_uploads_with : t -> string -> file_upload inputs$/;"	v
+file_uploads_with	src/page.ml	/^  let file_uploads_with selector f =$/;"	v
+filter	_build/src/form.mli	/^val filter : 'a inputs -> ('a input -> bool) -> 'a inputs$/;"	v
+filter	src/page.ml	/^  let filter = Soup.filter$/;"	v	Module:Form
+fix_win32	_build/myocamlbuild.ml	/^    let fix_win32 str =$/;"	v
+fold	_build/src/cookiejar.mli	/^val fold : (Cookie.t -> 'a -> 'a) -> t -> 'a -> 'a$/;"	v
+fold	_build/src/form.mli	/^val fold : ('a -> 'b input -> 'a) -> 'a -> 'b inputs -> 'a$/;"	v
+fold	src/cookiejar.mli	/^val fold : (Cookie.t -> 'a -> 'a) -> t -> 'a -> 'a$/;"	v	function::
+fold	src/page.ml	/^  let fold = Soup.fold$/;"	v	Module:Form
+form	src/page.ml	/^  type t = {form : elt; data : (string list) StringMap.t}$/;"	r	type:Form/t
+form_with	_build/src/page.mli	/^val form_with : string -> t -> Form.t option$/;"	v
+form_with	src/page.mli	/^val form_with : string -> t -> Form.t option$/;"	v
+forms	_build/src/page.mli	/^val forms : t -> Form.t list$/;"	v
+forms	src/page.mli	/^val forms : t -> Form.t list$/;"	v
+forms_with	_build/src/page.ml	/^let forms_with selector p =$/;"	v
+forms_with	_build/src/page.mli	/^val forms_with : string -> t -> Form.t list$/;"	v
+forms_with	src/page.ml	/^let forms_with selector p =$/;"	v
+forms_with	src/page.mli	/^val forms_with : string -> t -> Form.t list$/;"	v
+frame_with	_build/src/page.mli	/^val frame_with : string -> t -> Image.t option$/;"	v
+frame_with	src/page.mli	/^val frame_with : string -> t -> Image.t option$/;"	v
+frames	_build/src/page.mli	/^val frames : t -> Image.t list$/;"	v
+frames	src/page.mli	/^val frames : t -> Image.t list$/;"	v
+frames_with	_build/src/page.mli	/^val frames_with : string -> t -> Image.t list$/;"	v
+frames_with	src/page.mli	/^val frames_with : string -> t -> Image.t list$/;"	v
+from_hdr	src/cookiejar.ml	/^  let from_hdr uri c =$/;"	v	Module:Cookie
+from_soup	_build/src/page.mli	/^val from_soup : Soup.soup Soup.node -> t$/;"	v
+from_soup	src/page.mli	/^val from_soup : Soup.soup Soup.node -> t$/;"	v
+get	_build/src/agent.mli	/^val get : Uri.t -> t -> t$/;"	v
+get	src/agent.ml	/^let get uri agent =$/;"	v
+get	src/agent.mli	/^val get : Uri.t -> t -> t$/;"	v
+has_value	src/page.ml	/^  let has_value m k v =$/;"	v
+hd_opt	_build/src/page.ml	/^let hd_opt = function$/;"	v
+hd_opt	src/page.ml	/^let hd_opt = function$/;"	v
+hidden_with	_build/src/form.mli	/^val hidden_with : t -> string -> field inputs option$/;"	v
+hidden_with	src/page.ml	/^  let hidden_with selector f =$/;"	v
+hiddens	_build/src/form.mli	/^val hiddens : t -> field inputs$/;"	v
+hiddens	src/page.ml	/^  let hiddens = hiddens_with ""$/;"	v
+hiddens_with	_build/src/form.mli	/^val hiddens_with : t -> string -> field inputs$/;"	v
+hiddens_with	src/page.ml	/^  let hiddens_with selector f =$/;"	v
+host	_build/src/agent.ml	/^  host : string;$/;"	r	type:proxy
+host	src/agent.ml	/^  host : string;$/;"	r	type:proxy
+href	src/page.ml	/^  let href link = link |> Soup.attribute "href" |> Soup.require$/;"	v	Module:Link
+http_headers	_build/src/agent.ml	/^type http_headers = Cohttp.Header.t$/;"	t
+http_headers	_build/src/agent.mli	/^type http_headers = Cohttp.Header.t$/;"	t
+http_headers	src/agent.ml	/^type http_headers = Cohttp.Header.t$/;"	t
+http_headers	src/agent.mli	/^type http_headers = Cohttp.Header.t$/;"	t
+http_status_code	_build/src/agent.ml	/^type http_status_code = Cohttp.Code.status_code$/;"	t
+http_status_code	_build/src/agent.mli	/^type http_status_code = Cohttp.Code.status_code$/;"	t
+http_status_code	src/agent.ml	/^type http_status_code = Cohttp.Code.status_code$/;"	t
+http_status_code	src/agent.mli	/^type http_status_code = Cohttp.Code.status_code$/;"	t
+image_with	_build/src/page.mli	/^val image_with : string -> t -> Image.t option$/;"	v
+image_with	src/page.mli	/^val image_with : string -> t -> Image.t option$/;"	v
+images	_build/src/page.mli	/^val images : t -> Image.t list$/;"	v
+images	src/page.mli	/^val images : t -> Image.t list$/;"	v
+images_with	_build/src/page.mli	/^val images_with : string -> t -> Image.t list$/;"	v
+images_with	src/page.mli	/^val images_with : string -> t -> Image.t list$/;"	v
+init	_build/src/agent.ml	/^let init _ =$/;"	v
+init	_build/src/agent.mli	/^val init : unit -> t$/;"	v
+init	src/agent.ml	/^let init _ =$/;"	v
+init	src/agent.mli	/^val init : unit -> t$/;"	v
+input	_build/src/form.mli	/^type _ input$/;"	t
+input	src/page.ml	/^  type _ input = elt$/;"	t	Module:Form
+input_filter	_build/src/page.ml	/^let input_filter input_type node =$/;"	v
+input_filter	src/page.ml	/^let input_filter input_type node =$/;"	v
+inputs	_build/src/form.mli	/^type _ inputs$/;"	t
+inputs	src/page.ml	/^  type _ inputs = Soup.element Soup.nodes$/;"	t	Module:Form
+int_with	src/page.ml	/^  let int_with selector f =$/;"	v
+ints	_build/src/form.mli	/^val ints : t -> field inputs$/;"	v
+ints	_build/src/form.mli	/^val ints : t -> string -> field inputs option$/;"	v
+ints	_build/src/form.mli	/^val ints : t -> string -> field inputs$/;"	v
+ints	src/page.ml	/^  let ints = ints_with ""$/;"	v
+ints_with	src/page.ml	/^  let ints_with selector f =$/;"	v
+is_checked	src/page.ml	/^    let is_checked f cb =$/;"	v	Module:Checkbox
+is_identifier_char	_build/src/page.ml	/^let is_identifier_char c =$/;"	v
+is_identifier_char	src/page.ml	/^let is_identifier_char c =$/;"	v
+is_selected	src/page.ml	/^    let is_selected f menu item =$/;"	v
+is_selected	src/page.ml	/^    let is_selected f sl item =$/;"	v
+item	src/page.ml	/^        (name menu, value item) >>>$/;"	v
+item	src/page.ml	/^      (Soup.id sl, value item >|= singleton) >>> radd f.data$/;"	v
+item	src/page.ml	/^      (name menu, value item) >>>$/;"	v
+item	src/page.ml	/^    type item = elt$/;"	t
+items	src/page.ml	/^    let items menu = Soup.select "[type=option]" menu |> to_list$/;"	v
+items	src/page.ml	/^    let items sl = Soup.select "[type=option]" sl |> to_list$/;"	v
+iter	_build/src/cookiejar.mli	/^val iter : (Cookie.t -> unit) -> t -> unit$/;"	v
+iter	_build/src/form.mli	/^val iter : ('a input -> unit) -> 'a inputs -> t$/;"	v
+iter	src/cookiejar.ml	/^let iter f = JarMap.iter (fun x -> f)$/;"	v
+iter	src/cookiejar.mli	/^val iter : (Cookie.t -> unit) -> t -> unit$/;"	v	function::
+iter	src/page.ml	/^  let iter = Soup.iter$/;"	v	Module:Form
+key	src/cookiejar.ml	/^  let key c =$/;"	v	Module:Key
+keygen_with	_build/src/form.mli	/^val keygen_with : t -> string -> field inputs option$/;"	v
+keygen_with	src/page.ml	/^  let keygen_with selector f =$/;"	v
+keygens	_build/src/form.mli	/^val keygens : t -> field inputs$/;"	v
+keygens	src/page.ml	/^  let keygens = keygens_with ""$/;"	v
+keygens_with	_build/src/form.mli	/^val keygens_with : string -> t -> field inputs$/;"	v
+keygens_with	src/page.ml	/^  let keygens_with selector f =$/;"	v
+l	src/page.ml	/^  let raw_values f = StringMap.fold (fun id value l -> (id,value)::l) f.data []$/;"	v
+ladd	src/page.ml	/^  let ladd x l = x::l$/;"	v
+last_body	_build/src/agent.ml	/^  last_body : string;$/;"	r	type:t
+last_body	src/agent.ml	/^  last_body : string;$/;"	r	type:t
+last_headers	_build/src/agent.ml	/^  last_headers : Header.t;$/;"	r	type:t
+last_headers	src/agent.ml	/^  last_headers : Header.t;$/;"	r	type:t
+last_page	_build/src/agent.ml	/^  last_page : Page.t option;$/;"	r	type:t
+last_page	src/agent.ml	/^  last_page : Page.t option;$/;"	r	type:t
+last_status_code	_build/src/agent.ml	/^  last_status_code : http_status_code;$/;"	r	type:t
+last_status_code	src/agent.ml	/^  last_status_code : http_status_code;$/;"	r	type:t
+link_with	_build/src/page.mli	/^val link_with : string -> t -> Image.t option$/;"	v
+link_with	src/page.mli	/^val link_with : string -> t -> Image.t option$/;"	v
+links	_build/src/page.mli	/^val links : t -> Image.t list$/;"	v
+links	src/page.mli	/^val links : t -> Image.t list$/;"	v
+links_with	_build/src/page.mli	/^val links_with : string -> t -> Image.t list$/;"	v
+links_with	src/page.mli	/^val links_with : string -> t -> Image.t list$/;"	v
+load	_build/src/agent.mli	/^val load : Page.Image.t -> t -> t $/;"	v
+load	src/agent.ml	/^let load image agent =$/;"	v
+load	src/agent.mli	/^val load : Page.Image.t -> t -> t $/;"	v
+make	src/cookiejar.ml	/^  let make ?expiration ?path ?secure ~domain ~name ~value =$/;"	v	Module:Cookie
+make	src/cookiejar.mli	/^  val make :$/;"	v
+make	src/page.ml	/^  let make ?name ?text ~source = failwith "Not implemented"$/;"	v	Module:Frame
+make	src/page.ml	/^  let make ?text:(text="") ~href =$/;"	v	Module:Link
+make	src/page.ml	/^  let make ~source =$/;"	v	Module:Image
+map	_build/src/cookiejar.mli	/^val map : (Cookie.t -> Cookie.t) -> t -> t$/;"	v
+map	src/cookiejar.ml	/^let map = JarMap.map$/;"	v
+map	src/cookiejar.mli	/^val map : (Cookie.t -> Cookie.t) -> t -> t$/;"	v	function::
+match_uri	src/cookiejar.ml	/^  let match_uri uri cookie =$/;"	v	Module:Cookie
+match_uri	src/cookiejar.mli	/^  val match_uri : Uri.t -> t -> bool$/;"	v
+menu	_build/src/form.mli	/^type menu$/;"	t
+menu	src/page.ml	/^  type menu$/;"	t	Module:Form
+name	_build/src/form.mli	/^val name : (_ input) -> string option$/;"	v
+name	src/cookiejar.ml	/^  let name c = c.name$/;"	v	Module:Cookie
+name	src/cookiejar.ml	/^  type t = { name : string;$/;"	r	type:Cookie/t
+name	src/cookiejar.ml	/^  type t = {name: string; domain : string; path : string}$/;"	r	type:Key/t
+name	src/cookiejar.mli	/^  val name : t -> string$/;"	v
+name	src/page.ml	/^  let name frame = frame |> Soup.attribute "name"$/;"	v	Module:Frame
+name	src/page.ml	/^  let name input = Soup.attribute "name" input$/;"	v
+package_default	_build/myocamlbuild.ml	/^let package_default =$/;"	v
+page	_build/src/agent.mli	/^val page : t -> Page.t option$/;"	v
+page	src/agent.ml	/^let page agent = agent.last_page$/;"	v
+page	src/agent.mli	/^val page : t -> Page.t option$/;"	v
+password	_build/src/agent.ml	/^  password : string option;$/;"	r	type:proxy
+password	src/agent.ml	/^  password : string option;$/;"	r	type:proxy
+password_with	_build/src/form.mli	/^val password_with : t -> string -> field inputs option$/;"	v
+password_with	src/page.ml	/^  let password_with selector f =$/;"	v
+passwords	_build/src/form.mli	/^val passwords : t -> field inputs$/;"	v
+passwords	src/page.ml	/^  let passwords = passwords_with ""$/;"	v
+passwords_with	_build/src/form.mli	/^val passwords_with : t -> string -> field inputs$/;"	v
+passwords_with	src/page.ml	/^  let passwords_with selector f =$/;"	v
+path	src/cookiejar.ml	/^    path : string;$/;"	r	type:Cookie/t
+path	src/cookiejar.ml	/^  let path c = c.path$/;"	v	Module:Cookie
+path	src/cookiejar.ml	/^  type t = {name: string; domain : string; path : string}$/;"	r	type:Key/t
+path	src/cookiejar.mli	/^  val path : t -> string$/;"	v
+path_match	src/cookiejar.ml	/^  let path_match uri_path cookie_path =$/;"	v	Module:Cookie
+port	_build/src/agent.ml	/^  port : int}$/;"	r	type:proxy
+port	src/agent.ml	/^  port : int}$/;"	r	type:proxy
+post	_build/src/agent.mli	/^val post : Uri.t -> string -> t -> t$/;"	v
+post	src/agent.ml	/^let post uri content agent =$/;"	v
+post	src/agent.mli	/^val post : Uri.t -> string -> t -> t$/;"	v
+proxy	_build/src/agent.ml	/^  proxy : proxy option;$/;"	r	type:t
+proxy	_build/src/agent.ml	/^type proxy = {$/;"	t
+proxy	src/agent.ml	/^  proxy : proxy option;$/;"	r	type:t
+proxy	src/agent.ml	/^type proxy = {$/;"	t
+radd	src/page.ml	/^  let radd m k v = StringMap.add k v m$/;"	v
+radio_button	_build/src/form.mli	/^type radio_button$/;"	t
+radio_button	src/page.ml	/^  type radio_button$/;"	t	Module:Form
+radio_button_with	_build/src/form.mli	/^val radio_button_with : t -> string -> radio_button input option$/;"	v
+radio_button_with	src/page.ml	/^  let radio_button_with selector f =$/;"	v
+radio_buttons	_build/src/form.mli	/^val radio_buttons : t -> radio_button inputs$/;"	v
+radio_buttons	src/page.ml	/^  let radio_buttons = radio_buttons_with ""$/;"	v
+radio_buttons_with	_build/src/form.mli	/^val radio_buttons_with : t -> string -> radio_button inputs$/;"	v
+radio_buttons_with	src/page.ml	/^  let radio_buttons_with selector f =$/;"	v
+raw_get	_build/src/form.mli	/^val raw_get : t -> string -> string list$/;"	v
+raw_get	src/page.ml	/^  let raw_get key f = StringMap.find key f.data$/;"	v	Module:Form
+raw_set	_build/src/form.mli	/^val raw_set : t -> string -> string list -> t$/;"	v
+raw_set	src/page.ml	/^  let raw_set key value f = $/;"	v	Module:Form
+raw_unset	_build/src/form.mli	/^val raw_unset : t -> string -> t -> t$/;"	v
+raw_unset	src/page.ml	/^  let raw_unset key f = $/;"	v	Module:Form
+raw_values	_build/src/form.mli	/^val raw_values : t -> (string * string list) list$/;"	v
+raw_values	src/page.ml	/^  let raw_values f = StringMap.fold (fun id value l -> (id,value)::l) f.data []$/;"	v	Module:Form
+rb	src/page.ml	/^      (name rb, _value rb >|= singleton) >>> radd f.data$/;"	v
+rb	src/page.ml	/^      _value rb >|=$/;"	v
+rb	src/page.ml	/^    let value rb = _value rb |> Soup.require$/;"	v	Module:RadioButton
+rb_selector	src/page.ml	/^    let rb_selector id = Printf.sprintf "[type=radio]#%s" id$/;"	v	Module:RadioButton
+remove	_build/src/cookiejar.mli	/^val remove : Cookie.t -> t -> t$/;"	v
+remove	src/cookiejar.ml	/^let remove c jar = JarMap.remove (Key.key c) jar$/;"	v
+remove	src/cookiejar.mli	/^val remove : Cookie.t -> t -> t$/;"	v	function::
+remove_client_header	_build/src/agent.mli	/^val remove_client_header : string -> t -> t$/;"	v
+remove_client_header	src/agent.ml	/^let remove_client_header header agent =$/;"	v
+remove_client_header	src/agent.mli	/^val remove_client_header : string -> t -> t$/;"	v
+remove_cookie	_build/src/agent.mli	/^val remove_cookie : Cookiejar.Cookie.t -> t -> t$/;"	v
+remove_cookie	src/agent.ml	/^let remove_cookie cookie agent =$/;"	v
+remove_cookie	src/agent.mli	/^val remove_cookie : Cookiejar.Cookie.t -> t -> t$/;"	v
+reset	_build/src/form.mli	/^val reset : t -> t$/;"	v
+reset	src/page.ml	/^  let reset f = {f with data = StringMap.empty}$/;"	v
+rfind	src/page.ml	/^  let rfind m k = StringMap.find k m$/;"	v
+rmem	src/page.ml	/^  let rmem m k = StringMap.mem k m$/;"	v
+rrem	src/page.ml	/^  let rrem m k = StringMap.remove k m$/;"	v
+secure	src/cookiejar.ml	/^    secure : bool }$/;"	r	type:Cookie/t
+secure	src/cookiejar.ml	/^  let secure c = c.secure$/;"	v	Module:Cookie
+secure	src/cookiejar.mli	/^  val secure : t -> bool$/;"	v
+select	src/page.ml	/^    let select f fu path =$/;"	v	Module:FileUpload
+select	src/page.ml	/^    let select f sl item =$/;"	v
+select_list	_build/src/form.mli	/^type select_list$/;"	t
+select_list	src/page.ml	/^  type select_list$/;"	t	Module:Form
+select_list_with	_build/src/form.mli	/^val select_list_with : t -> string -> select_list input option$/;"	v
+select_list_with	src/page.ml	/^  let select_list_with selector f =$/;"	v
+select_lists	_build/src/form.mli	/^val select_lists : t -> select_list inputs$/;"	v
+select_lists	src/page.ml	/^  let select_lists = select_lists_with ""$/;"	v
+select_lists_with	_build/src/form.mli	/^val select_lists_with : t -> string -> select_list inputs$/;"	v
+select_lists_with	src/page.ml	/^  let select_lists_with selector f =$/;"	v
+server_headers	_build/src/agent.mli	/^val server_headers : t -> http_headers $/;"	v
+server_headers	src/agent.ml	/^let server_headers agent = agent.last_headers$/;"	v
+server_headers	src/agent.mli	/^val server_headers : t -> http_headers $/;"	v
+set	src/page.ml	/^    let set f fd v =$/;"	v
+set_client_headers	_build/src/agent.mli	/^val set_client_headers : Cohttp.Header.t -> t -> t$/;"	v
+set_client_headers	src/agent.ml	/^let set_client_headers headers agent = {agent with client_headers = headers}$/;"	v
+set_client_headers	src/agent.mli	/^val set_client_headers : Cohttp.Header.t -> t -> t$/;"	v
+set_cookie_jar	_build/src/agent.mli	/^val set_cookie_jar : Cookiejar.t -> t -> t$/;"	v
+set_cookie_jar	src/agent.ml	/^let set_cookie_jar cookie_jar agent = {agent with cookie_jar = cookie_jar}$/;"	v
+set_cookie_jar	src/agent.mli	/^val set_cookie_jar : Cookiejar.t -> t -> t$/;"	v
+set_proxy	_build/src/agent.mli	/^val set_proxy : ?user:string$/;"	v
+set_proxy	src/agent.ml	/^let set_proxy ?user ?password ~host ~port agent =$/;"	v
+set_proxy	src/agent.mli	/^val set_proxy : ?user:string$/;"	v
+singleton	src/page.ml	/^  let singleton x = [x]$/;"	v
+sl	src/page.ml	/^      (Soup.id sl, value sl) >>>$/;"	v
+source	src/page.ml	/^  let source frame = frame |> Soup.attribute "src" |> Soup.require$/;"	v	Module:Frame
+source	src/page.ml	/^  let source image = image |> Soup.attribute "src" |> Soup.require$/;"	v	Module:Image
+split	_build/myocamlbuild.ml	/^  let split s ch =$/;"	v
+split_nl	_build/myocamlbuild.ml	/^  let split_nl s = split s '\\n'$/;"	v
+status_code	_build/src/agent.mli	/^val status_code : t -> http_status_code$/;"	v
+status_code	src/agent.ml	/^let status_code agent = agent.last_status_code$/;"	v
+status_code	src/agent.mli	/^val status_code : t -> http_status_code$/;"	v
+string	src/cookiejar.ml	/^    value : string;$/;"	r	type:Cookie/t
+submit	_build/src/agent.mli	/^val submit : Form.t -> t -> t$/;"	v
+submit	src/agent.ml	/^let submit form agent =$/;"	v
+submit	src/agent.mli	/^val submit : Form.t -> t -> t$/;"	v
+t	_build/src/agent.ml	/^type t = {$/;"	t
+t	_build/src/agent.mli	/^type t$/;"	t
+t	_build/src/cookiejar.mli	/^type t$/;"	t
+t	_build/src/form.mli	/^type t$/;"	t
+t	_build/src/page.ml	/^type t = Soup.soup Soup.node$/;"	t
+t	_build/src/page.mli	/^type t$/;"	t
+t	src/agent.ml	/^type t = {$/;"	t
+t	src/agent.mli	/^type t$/;"	t
+t	src/cookiejar.ml	/^  type t = { name : string;$/;"	t	Module:Cookie
+t	src/cookiejar.ml	/^  type t = {name: string; domain : string; path : string}$/;"	t	Module:Key
+t	src/cookiejar.ml	/^type t = Cookie.t JarMap.t$/;"	t
+t	src/page.ml	/^  type t = elt$/;"	t	Module:Frame
+t	src/page.ml	/^  type t = elt$/;"	t	Module:Image
+t	src/page.ml	/^  type t = elt$/;"	t	Module:Link
+t	src/page.ml	/^  type t = {form : elt; data : (string list) StringMap.t}$/;"	t	Module:Form
+t	src/page.ml	/^type t = Soup.soup Soup.node$/;"	t
+t	src/page.mli	/^type t$/;"	t
+tag_filter	_build/src/page.ml	/^let tag_filter tag node =$/;"	v
+tag_filter	src/page.ml	/^let tag_filter tag node =$/;"	v
+tag_selector	_build/src/page.ml	/^let tag_selector tag = function$/;"	v
+tag_selector	src/page.ml	/^let tag_selector tag = function$/;"	v
+text	src/page.ml	/^  let text = Soup.leaf_text$/;"	v	Module:Frame
+text	src/page.ml	/^  let text = Soup.leaf_text$/;"	v	Module:Link
+text_with	_build/src/form.mli	/^val text_with : t -> string -> field inputs option$/;"	v
+text_with	src/page.ml	/^  let text_with selector f =$/;"	v
+textarea_with	_build/src/form.mli	/^val textarea_with : t -> string -> field inputs option$/;"	v
+textarea_with	src/page.ml	/^  let textarea_with selector f =$/;"	v
+textareas	_build/src/form.mli	/^val textareas : t -> field inputs$/;"	v
+textareas	src/page.ml	/^  let textareas = textareas_with ""$/;"	v
+textareas_with	_build/src/form.mli	/^val textareas_with : t -> string -> field inputs$/;"	v
+textareas_with	src/page.ml	/^  let textareas_with selector f =$/;"	v
+texts	_build/src/form.mli	/^val texts : t -> field inputs$/;"	v
+texts	src/page.ml	/^  let texts = texts_with ""$/;"	v
+texts_with	_build/src/form.mli	/^val texts_with : t -> string -> field inputs$/;"	v
+texts_with	src/page.ml	/^  let texts_with selector f =$/;"	v
+to_list	_build/src/form.mli	/^val to_list : 'a inputs -> 'a input list$/;"	v
+to_list	src/page.ml	/^  let to_list = Soup.to_list$/;"	v	Module:Form
+to_node	_build/src/form.mli	/^val to_node : _ input -> Soup.element Soup.node$/;"	v
+to_node	src/page.ml	/^  let to_node frame = frame$/;"	v	Module:Frame
+to_node	src/page.ml	/^  let to_node image = image$/;"	v	Module:Image
+to_node	src/page.ml	/^  let to_node link = link$/;"	v
+to_node	src/page.ml	/^  let to_node n = n$/;"	v	Module:Form
+to_nodes	_build/src/form.mli	/^val to_nodes : _ inputs -> Soup.element Soup.nodes$/;"	v
+to_nodes	src/page.ml	/^  let to_nodes n = n$/;"	v	Module:Form
+to_soup	_build/src/page.mli	/^val to_soup : t -> Soup.soup Soup.node$/;"	v
+to_soup	src/page.mli	/^val to_soup : t -> Soup.soup Soup.node$/;"	v
+to_string	src/cookiejar.ml	/^  let to_string k = k.name ^ k.domain ^ k.path$/;"	v	Module:Key
+to_string	src/page.ml	/^    let to_string item = item >|= _value |> Soup.require$/;"	v
+update_agent	src/agent.ml	/^let update_agent uri agent (response,body) =$/;"	v
+update_form	src/page.ml	/^  let update_form f data = {f with data = data |? f.data}$/;"	v
+uri	src/page.ml	/^  let uri frame = frame |> source |> Uri.of_string$/;"	v	Module:Frame
+uri	src/page.ml	/^  let uri image = image |> source |> Uri.of_string$/;"	v	Module:Image
+uri	src/page.ml	/^  let uri link = link |> href |> Uri.of_string$/;"	v	Module:Link
+user	_build/src/agent.ml	/^  user : string option;$/;"	r	type:proxy
+user	src/agent.ml	/^  user : string option;$/;"	r	type:proxy
+var_expand	_build/myocamlbuild.ml	/^  let rec var_expand str env =$/;"	v
+|>	src/page.ml	/^    let to_string item = item >|= _value |> Soup.require$/;"	f
+|>	src/page.ml	/^    let to_string item = item |> value |> Soup.require$/;"	f
+|?	_build/src/cookiejar.ml	/^let (|?) = Infix.Option.(|?)$/;"	f
+|?	src/cookiejar.ml	/^let (|?) = Infix.Option.(|?)$/;"	f
+|?	src/infix.ml	/^  let (|?) x default = match x with Some x -> x | None -> default$/;"	f	Module:Option
