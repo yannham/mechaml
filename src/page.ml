@@ -36,8 +36,17 @@ let input_filter input_type node =
   && (Soup.attribute "type" node >|= fun t ->
     t=input_type) |? false
 
+let field_filter node =
+    match Soup.name node with
+      | "textarea" -> true
+      | "input" ->
+        Soup.attribute "type" node >|= (fun t ->
+          t="text" || t="password") |? false
+      | _ -> false
+
 let tag_selector tag = function
   | "" -> tag
+  | s when s.[0]='*' -> s
   | s when is_identifier_char s.[0] -> s
   | s -> tag^s
 
@@ -59,8 +68,22 @@ module Form = struct
   type _ input = elt
   type _ inputs = Soup.element Soup.nodes
 
-  let to_node n = n
-  let to_nodes n = n
+  let name f = Soup.attribute "name" f.form
+  let action f =
+    f.form |> Soup.attribute "action"
+    >|= Uri.of_string
+    |> Soup.require
+  let meth f = 
+    let m = f.form |> Soup.attribute "method"
+      >|= String.lowercase_ascii
+      >|= String.trim in
+    match m with
+      | Some "post" -> `POST
+      | _ -> `GET
+
+  let to_node f = f.form
+  let input_to_node i = i 
+  let input_to_nodes is = is 
 
   let to_list = Soup.to_list
   let iter = Soup.iter
@@ -84,8 +107,8 @@ module Form = struct
   let checkboxes = checkboxes_with ""
 
   let radio_buttons_with selector f =
-    f.form |> Soup.select (tag_selector "input[type=radio_button]" selector)
-    |> Soup.filter (input_filter "radio_button")
+    f.form |> Soup.select (tag_selector "input[type=radio]" selector)
+    |> Soup.filter (input_filter "radio")
 
   let radio_button_with selector f =
     f |> radio_buttons_with selector |> Soup.first
@@ -93,8 +116,8 @@ module Form = struct
   let radio_buttons = radio_buttons_with ""
 
   let select_lists_with selector f =
-    f.form |> Soup.select (tag_selector "input[type=select_list]" selector)
-    |> Soup.filter (input_filter "select_list")
+    f.form |> Soup.select (tag_selector "select" selector)
+    |> Soup.filter (tag_filter "select")
 
   let select_list_with selector f =
     f |> select_lists_with selector |> Soup.first
@@ -102,8 +125,8 @@ module Form = struct
   let select_lists = select_lists_with ""
 
   let fields_with selector f =
-    f.form |> Soup.select (tag_selector "input[type=fields_list]" selector)
-    |> Soup.filter (input_filter "field")
+    f.form |> Soup.select (tag_selector "*" selector)
+    |> Soup.filter field_filter
 
   let field_with selector f =
     f |> fields_with selector |> Soup.first
@@ -148,13 +171,13 @@ module Form = struct
 
   let textareas_with selector f =
     f.form |> Soup.select (tag_selector "textarea" selector)
-    |> Soup.filter (input_filter "textarea")
+    |> Soup.filter (fun node -> Soup.name node = "textarea")
 
   let textarea_with selector f =
     f |> textareas_with selector |> Soup.first
 
   let textareas = textareas_with ""
-
+  
   let keygens_with selector f =
     f.form |> Soup.select (tag_selector "input[type=keygen]" selector)
     |> Soup.filter (input_filter "keygen")
@@ -175,134 +198,142 @@ module Form = struct
 
   let reset f = {f with data = StringMap.empty}
 
-  let name input = Soup.attribute "name" input
-  let value input = Soup.attribute "value" input
+  let iname input = Soup.attribute "name" input
+  let ivalue input = Soup.attribute "value" input
 
   open Infix.Option
 
   let singleton x = [x]
   let ladd x l = x::l
+  let flip_right f x y z = f y z x
   let radd m k v = StringMap.add k v m
   let rrem m k = StringMap.remove k m
   let rmem m k = StringMap.mem k m
   let rfind m k = StringMap.find k m
 
-  let update_form f data = {f with data = data |? f.data}
+  let update_form f newdata = {f with data = newdata |? f.data}
 
   let has_value m k v =
     try
-      List.mem v (StringMap.find k m)
+      rfind m k
+      |> List.mem v
     with Not_found -> false
 
+  let current_values m k =
+    try
+      rfind m k
+    with Not_found -> []
+
+  let add_value m k v =
+    v::(current_values m k)
+    |> radd m k
+
+  let rem_value m k v = 
+    current_values m k
+    |> List.filter ((<>) v)
+    |> radd m k
+
+  let current_value m k =
+    match rfind m k with
+      | exception Not_found -> None
+      | [x] -> Some x
+      | _ -> None
+
   module Checkbox = struct
+    let cb_selector name = Printf.sprintf "[type=checkbox][name=%s]" name
+
+    let value cb = ivalue cb |> Soup.require
+
+    let choices f cb =
+      iname cb >|= cb_selector >|= (fun s ->
+        Soup.select s f.form) |> Soup.require
+
+    let values f cb =
+      choices f cb |> fold (fun l cb ->
+        match ivalue cb with
+          | Some v -> v::l
+          | None -> l) []
+
+    let checked f cb =
+      iname cb >|= current_values f.data |? []
+
     let check f cb =
-      (name cb, value cb >|= singleton) >>> radd f.data
+      (iname cb, ivalue cb) >>> add_value f.data 
       |> update_form f
 
     let uncheck f cb =
-      name cb >|= rrem f.data |> update_form f
+      (iname cb, ivalue cb) >>> rem_value f.data
+      |> update_form f
 
     let is_checked f cb =
-      name cb >|= rmem f.data |? false
+      (iname cb, ivalue cb) >>> has_value f.data |? false
   end
 
   module RadioButton = struct
-    let rb_selector id = Printf.sprintf "[type=radio]#%s" id
+    let rb_selector name = Printf.sprintf "[type=radio][name=%s]" name
 
-    let _value = value
+    let value rb = ivalue rb |> Soup.require
 
-    let value rb = _value rb |> Soup.require
+    let choices f rb =
+      iname rb >|= rb_selector >|= (fun s ->
+        Soup.select s f.form) |> Soup.require
 
     let values f rb =
-      name rb >|= rb_selector >|=
-      (fun s -> Soup.select s f.form
-        |> to_list) |? []
+      choices f rb |> fold (fun l cb ->
+        match ivalue cb with
+          | Some v -> v::l
+          | None -> l) []
+
+    let selected f rb =
+      iname rb >>= current_value f.data
 
     let select f rb =
-      (name rb, _value rb >|= singleton) >>> radd f.data
+      (iname rb, ivalue rb >|= singleton) >>> radd f.data
       |> update_form f
 
-    let is_selected f rb =
-      _value rb >|=
-      (fun v -> values f rb
-        |> List.exists (fun x -> (_value x |? "") = v))
-      |? false
-
-    let to_string item = item >|= _value |> Soup.require
+    let is_selected f rb = 
+      (iname rb, ivalue rb) >>> has_value f.data |? false
+ 
+    let to_string item = item >|= ivalue |> Soup.require
   end
 
   module SelectList = struct
     type item = elt
 
-    let items sl = Soup.select "[type=option]" sl |> to_list
+    let items sl = Soup.select "option" sl |> to_list
+
+    let selected f sl =
+      iname sl >>= current_value f.data
 
     let select f sl item =
-      (Soup.id sl, value item >|= singleton) >>> radd f.data
+      (iname sl, ivalue item >|= singleton) >>> radd f.data
       |> update_form f
 
     let unselect f sl item =
-      Soup.id sl >|= rrem f.data |> update_form f
+      iname sl >|= rrem f.data |> update_form f
 
     let is_selected f sl item =
-      (Soup.id sl, value sl) >>>
-      has_value f.data |? false
+      (iname sl, ivalue item) >>> has_value f.data |? false
 
-    let to_string item = item |> value |> Soup.require
-  end
-
-  module Menu = struct
-    type item = elt
-
-    let current_selection f id =
-      try
-        StringMap.find id f.data
-      with Not_found -> []
-
-    let items menu = Soup.select "[type=option]" menu |> to_list
-
-    let is_selected f menu item =
-      (name menu, value item) >>>
-      (fun id value -> current_selection f id |> List.mem value)
-      |? false
-
-    let select f menu item =
-      match is_selected f menu item with
-      | false ->
-        (name menu, value item) >>>
-        (fun name value ->
-          current_selection f name |> ladd value |> radd f.data name)
-        |> update_form f
-      | true -> f
-
-    let unselect f menu item =
-      (name menu, value item) >>>
-      (fun id value ->
-        current_selection f id |> List.filter ((!=) value)
-        |> radd f.data id)
-      |> update_form f
-
-    let to_string item = item |> value |> Soup.require
+    let to_string item = item |> ivalue |> Soup.require
   end
 
   module Field = struct
     let set f fd v =
-      Soup.id fd >|= (fun id -> v |> singleton |> radd f.data id)
+      iname fd >|= (fun name -> radd f.data name [v])
       |> update_form f
 
     let get f fd =
-      try
-        Soup.id fd >|= rfind f.data >|= List.hd
-      with _ -> None
+      iname fd >>= current_value f.data
   end
 
   module FileUpload = struct
     let select f fu path =
-      name fu >|= (fun id -> radd f.data id [path]) |> update_form f
+      iname fu >|= (fun name -> radd f.data name [path])
+      |> update_form f
 
     let which_selected f fu =
-      try
-        name fu >|= rfind f.data >|= List.hd
-      with _ -> None
+      iname fu >>= current_value f.data
   end
 end
 
@@ -333,18 +364,18 @@ module Image = struct
   let to_node image = image
 end
 
-module Frame = struct
-  type t = elt
-
-  let source frame = frame |> Soup.attribute "src" |> Soup.require
-  let uri frame = frame |> source |> Uri.of_string
-  let name frame = frame |> Soup.attribute "name"
-  let text = Soup.leaf_text
-
-  let make ?name ?text ~source = failwith "Not implemented"
-
-  let to_node frame = frame
-end
+(* module Frame = struct *)
+(*   type t = elt *)
+(*  *)
+(*   let source frame = frame |> Soup.attribute "src" |> Soup.require *)
+(*   let uri frame = frame |> source |> Uri.of_string *)
+(*   let name frame = frame |> Soup.attribute "name" *)
+(*   let text = Soup.leaf_text *)
+(*  *)
+(*   let make ?name ?text ~source = failwith "Not implemented" *)
+(*  *)
+(*   let to_node frame = frame *)
+(* end *)
 
 let forms_with selector p =
   p |> Soup.select (tag_selector "form" selector)
@@ -375,14 +406,14 @@ let images = images_with ""
 let image_with selector p =
   p |> images_with selector |> hd_opt
 
-let frames_with selector p =
-  p |> Soup.select (tag_selector "frame" selector)
-  |> Soup.filter (tag_filter "frame") |> Soup.to_list
-
-let frames = frames_with ""
-
-let frame_with selector p =
-  p |> frames_with selector |> hd_opt
+(* let frames_with selector p = *)
+(*   p |> Soup.select (tag_selector "frame" selector) *)
+(*   |> Soup.filter (tag_filter "frame") |> Soup.to_list *)
+(*  *)
+(* let frames = frames_with "" *)
+(*  *)
+(* let frame_with selector p = *)
+(*   p |> frames_with selector |> hd_opt *)
 
 let to_soup p = p
 let from_soup p = p

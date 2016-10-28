@@ -63,28 +63,35 @@ let update_agent uri agent (response,body) =
     cookie_jar = Cookiejar.add_from_headers uri headers agent.cookie_jar}
 
 let get uri agent =
-  Client.get ~headers:agent.client_headers uri
-  >>= update_agent uri agent |> Lwt_main.run
+  let headers = agent.cookie_jar 
+    |> Cookiejar.add_to_headers uri agent.client_headers in
+  Client.get ~headers:headers uri
+  >>= update_agent uri agent
 
 let load image agent =
   let page = agent.last_page in
   let uri = image |> Page.Image.uri in
-  let agent = uri |> Client.get ~headers:agent.client_headers
-  >>= update_agent uri agent |> Lwt_main.run in
-  {agent with last_page = page}
+  let headers = agent.cookie_jar 
+    |> Cookiejar.add_to_headers uri agent.client_headers in
+  Client.get ~headers:headers uri
+  >>= update_agent uri agent
+  >|= fun agent -> {agent with last_page = page}
 
 let click link = link |> Page.Link.uri |> get
 
 let post uri content agent =
-  Client.post ~headers:agent.client_headers
-    ~body:(Cohttp_lwt_body.of_string content) uri
-  >>= update_agent uri agent |> Lwt_main.run
+  let headers = agent.cookie_jar 
+    |> Cookiejar.add_to_headers uri agent.client_headers in
+  Client.post ~headers:headers ~body:(Cohttp_lwt_body.of_string content) uri
+  >>= update_agent uri agent
 
 let submit form agent =
-  let uri = raise (Failure "not implemented") in
+  let uri = Page.Form.action form in
   let params = Page.Form.raw_values form in
-  Client.post_form ~headers:agent.client_headers ~params:params uri
-  >>= update_agent uri agent |> Lwt_main.run
+  let headers = agent.cookie_jar 
+    |> Cookiejar.add_to_headers uri agent.client_headers in
+  Client.post_form ~headers:headers ~params:params uri
+  >>= update_agent uri agent
 
 let page agent = agent.last_page
 let content agent = agent.last_body

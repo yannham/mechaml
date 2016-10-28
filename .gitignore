@@ -5,6 +5,7 @@ _build
 *.native
 *.byte
 *.docdir
+tags
 
 setup.data
-setuop.log
+setup.log

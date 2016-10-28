@@ -1,6 +1,6 @@
 Name: Mechaml
 Version: 0.1
-Synopsis: A web browing library built on top of Lambdasoup and Cohttp. Inspired by WWW::Mechanize
+Synopsis: A web browsing library built on top of Lambdasoup and Cohttp. Inspired by WWW::Mechanize
 Authors: Yann Hamdaoui <yann.hamdaoui@centraliens.net>
 License: WTFPL
 
@@ -16,11 +16,22 @@ Plugins: META (0.4), DevFiles (0.4)
 
 Library "mechaml"
   Path: src
+  Pack: true
   Modules: Agent, Page, Cookiejar
   InternalModules: Infix
   BuildDepends: lambdasoup, lwt, cohttp, cohttp.lwt, uri
 
-SourceRepository master
+Executable "unit_tests"
+  Build$: flag(tests)
+  Path: test
+  MainIs: test.ml
+  BuildDepends: alcotest, mechaml
+
+Test "unit"
+  Command: $unit_tests
+  WorkingDirectory: test
+
+SourceRepository "master"
   Type: git
   Location: https://github.com/yannham/mechaml.git/
   Branch: master

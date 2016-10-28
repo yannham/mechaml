@@ -4,19 +4,38 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-:	src/cookiejar.mli	/^    -> value:string -> t$/;"	f
+*	setup.ml	/^    let ( * ) lst1 lst2 =$/;"	f
 >>	src/infix.ml	/^  let (>>) x f = match x,f with Some x, Some f -> Some (f x) | _ -> None$/;"	f	Module:Option
+>>=	src/infix.ml	/^  let (>>=) x f = match x with Some x -> f x | None -> None$/;"	f	Module:Option
 >>>	src/infix.ml	/^  let (>>>) (x,y) f = match x,y with Some x, Some y -> Some (f x y) | _ -> None$/;"	f	Module:Option
->|=	src/infix.ml	/^  let (>|=) x f = match x with Some x -> Some (f x) | _ -> None$/;"	f	Module:Option
+>|=	src/infix.ml	/^  let (>|=) x f = match x with Some x -> Some (f x) | None -> None$/;"	f	Module:Option
 Agent	_build/src/agent.ml	1;"	M
 Agent	_build/src/agent.mli	1;"	M
 Agent	src/agent.ml	1;"	M
 Agent	src/agent.mli	1;"	M
+BaseArgExt	setup.ml	1;"	M
+BaseCheck	setup.ml	1;"	M
+BaseCompat	setup.ml	1;"	M
+BaseCustom	setup.ml	1;"	M
+BaseDoc	setup.ml	1;"	M
+BaseDynVar	setup.ml	1;"	M
 BaseEnvLight	_build/myocamlbuild.ml	1;"	M
+BaseEnvLight	myocamlbuild.ml	1;"	M
+BaseLog	setup.ml	1;"	M
+BaseOCamlcConfig	setup.ml	1;"	M
+BaseSetup	setup.ml	1;"	M
+BaseSetup	setup.ml	1;"	M	Module:BaseCompat/Compat_0_4
+BaseStandardVar	setup.ml	1;"	M
+BaseTest	setup.ml	1;"	M
+BlankLine	setup.ml	/^    | BlankLine$/;"	C	type:OASISText/elt
+Build	setup.ml	1;"	M
 C	_build/src/cookiejar.ml	1;"	M
 C	src/cookiejar.ml	1;"	M
-Checkbox	_build/src/form.mli	1;"	M
+Call	setup.ml	/^      | Call of string * expr$/;"	C	type:OASISSourcePatterns/Templater/expr
 Checkbox	src/page.ml	1;"	M
+Compat_0_3	setup.ml	1;"	M
+Compat_0_4	setup.ml	1;"	M	Module:BaseCompat
+Container	setup.ml	/^    | Container of findlib_name * group_t list$/;"	C	type:OASISFindlib/group_t
 Cookie	_build/src/cookiejar.mli	1;"	M
 Cookie	src/cookiejar.ml	1;"	M
 Cookie	src/cookiejar.mli	1;"	M
@@ -24,75 +43,179 @@ Cookiejar	_build/src/cookiejar.ml	1;"	M
 Cookiejar	_build/src/cookiejar.mli	1;"	M
 Cookiejar	src/cookiejar.ml	1;"	M
 Cookiejar	src/cookiejar.mli	1;"	M
-Field	_build/src/form.mli	1;"	M
+CustomPlugin	setup.ml	1;"	M
+DEP5And	setup.ml	/^    | DEP5And of license_dep_5 list$/;"	C	type:license_dep_5
+DEP5License	setup.ml	/^    | DEP5License of license_dep_5$/;"	C	type:t
+DEP5Or	setup.ml	/^    | DEP5Or of license_dep_5 list$/;"	C	type:license_dep_5
+DEP5Unit	setup.ml	/^    | DEP5Unit of license_dep_5_unit$/;"	C	type:license_dep_5
+Data	setup.ml	1;"	M	Module:PropList
+Debug	setup.ml	/^    [ `Debug$/;"	C	type:OASISContext/level
+Doc	setup.ml	1;"	M
+EAnd	setup.ml	/^    | EAnd of t * t$/;"	C	type:OASISExpr/t
+EBool	setup.ml	/^    | EBool of bool$/;"	C	type:OASISExpr/t
+EFlag	setup.ml	/^    | EFlag of flag$/;"	C	type:OASISExpr/t
+ENot	setup.ml	/^    | ENot of t$/;"	C	type:OASISExpr/t
+EOr	setup.ml	/^    | EOr of t * t$/;"	C	type:OASISExpr/t
+ETest	setup.ml	/^    | ETest of test * string$/;"	C	type:OASISExpr/t
+Error	setup.ml	/^    | `Error]$/;"	C	type:OASISContext/level
+Exit	_build/test/test.ml	/^    | exception Exit -> true$/;"	e
+Exit	test/test.ml	/^    | exception Exit -> true$/;"	e
+Expr	setup.ml	/^      | Expr of expr$/;"	C	type:OASISSourcePatterns/Templater/atom
 Field	_build/src/page.ml	1;"	M
 Field	_build/src/page.mli	1;"	M
 Field	src/page.mli	1;"	M
-FileUpload	_build/src/form.mli	1;"	M
+FieldRO	setup.ml	1;"	M
 FileUpload	_build/src/page.ml	1;"	M
 FileUpload	_build/src/page.mli	1;"	M
-FileUpload	src/page.ml	1;"	M
 FileUpload	src/page.mli	1;"	M
-Form	_build/src/form.ml	1;"	M
-Form	_build/src/form.mli	1;"	M
+FindlibPackageNotFound	setup.ml	/^  exception FindlibPackageNotFound of findlib_name$/;"	e	Module:OASISFindlib
 Form	_build/src/page.ml	1;"	M
 Form	_build/src/page.mli	1;"	M
-Form	src/form.ml	1;"	M
 Form	src/page.ml	1;"	M
 Form	src/page.mli	1;"	M
-Frame	_build/src/page.ml	1;"	M
-Frame	_build/src/page.mli	1;"	M
-Frame	src/page.ml	1;"	M
-Frame	src/page.mli	1;"	M
+HashStringCsl	myocamlbuild.ml	1;"	M
+HashStringCsl	setup.ml	1;"	M
+Ident	setup.ml	/^      | Ident of string$/;"	C	type:OASISSourcePatterns/Templater/expr
 Image	_build/src/page.ml	1;"	M
 Image	_build/src/page.mli	1;"	M
 Image	src/page.ml	1;"	M
 Image	src/page.mli	1;"	M
+InDev	setup.ml	/^  type publication = InDev of stage | SinceVersion of OASISVersion.t$/;"	C	type:publication
 Infix	_build/src/infix.ml	1;"	M
 Infix	_build/src/infix.mli	1;"	M
 Infix	src/infix.ml	1;"	M
 Infix	src/infix.mli	1;"	M
+Info	setup.ml	/^    | `Info$/;"	C	type:OASISContext/level
+InternalConfigurePlugin	setup.ml	1;"	M
+InternalInstallPlugin	setup.ml	1;"	M
+InternalLibraryNotFound	setup.ml	/^  exception InternalLibraryNotFound of library_name$/;"	e	Module:OASISFindlib
 JarMap	_build/src/cookiejar.ml	1;"	M
 JarMap	src/cookiejar.ml	1;"	M
 Key	_build/src/cookiejar.ml	1;"	M
 Key	src/cookiejar.ml	1;"	M
+Leaf	setup.ml	/^    | Leaf of data$/;"	C	type:OASISFindlib/tree
 Link	_build/src/page.ml	1;"	M
 Link	_build/src/page.mli	1;"	M
-Link	src/page.ml	1;"	M
 Link	src/page.mli	1;"	M
+Make	_build/myocamlbuild.ml	1;"	M
+Make	myocamlbuild.ml	1;"	M	Module:OASISUtils
+Make	myocamlbuild.ml	1;"	M	Module:OASISUtils/MapExt
+Make	setup.ml	1;"	M	Module:OASISUtils
+Make	setup.ml	1;"	M	Module:OASISUtils/MapExt
+MapExt	myocamlbuild.ml	1;"	M	Module:OASISUtils
+MapExt	setup.ml	1;"	M	Module:OASISUtils
+MapString	_build/myocamlbuild.ml	1;"	M
+MapString	myocamlbuild.ml	1;"	M	Module:BaseEnvLight
 Max_age	src/cookiejar.ml	/^    | `Max_age of int64$/;"	C	type:Cookie/expiration
-Menu	_build/src/form.mli	1;"	M
-Menu	_build/src/page.ml	1;"	M
-Menu	_build/src/page.mli	1;"	M
-Menu	src/page.mli	1;"	M
+Mode	setup.ml	1;"	M	method:OASISFileSystem/fs#string_of_filename/open_out/open_in
 MyOCamlbuildBase	_build/myocamlbuild.ml	1;"	M
+MyOCamlbuildBase	myocamlbuild.ml	1;"	M
 Myocamlbuild	_build/myocamlbuild.ml	1;"	M
-OASISExpr	_build/myocamlbuild.ml	1;"	M
+Myocamlbuild	myocamlbuild.ml	1;"	M
+NoVersion	setup.ml	/^    | NoVersion$/;"	C	type:OASISLicense/license_version
+No_printer	setup.ml	/^  exception No_printer of name$/;"	e	Module:PropList
+Node	setup.ml	/^    | Node of (data option) * (tree MapString.t)$/;"	C	type:OASISFindlib/tree
+Not_set	setup.ml	/^  exception Not_set of name * string option$/;"	e	Module:PropList
+OASISContext	setup.ml	1;"	M
+OASISDocument	setup.ml	1;"	M
+OASISExec	setup.ml	1;"	M
+OASISExecutable	setup.ml	1;"	M
+OASISExpr	setup.ml	1;"	M
+OASISFileSystem	setup.ml	1;"	M
+OASISFileUtil	setup.ml	1;"	M
+OASISFindlib	setup.ml	1;"	M
+OASISFlag	setup.ml	1;"	M
 OASISGettext	_build/myocamlbuild.ml	1;"	M
+OASISGettext	myocamlbuild.ml	1;"	M
+OASISGettext	setup.ml	1;"	M
+OASISHostPath	setup.ml	1;"	M
+OASISLibrary	setup.ml	1;"	M
+OASISLicense	setup.ml	1;"	M
+OASISMessage	setup.ml	1;"	M
+OASISObject	setup.ml	1;"	M
+OASISPackage	setup.ml	1;"	M
+OASISSourcePatterns	setup.ml	1;"	M
+OASISSourceRepository	setup.ml	1;"	M
 OASISString	_build/myocamlbuild.ml	1;"	M
+OASISString	myocamlbuild.ml	1;"	M
+OASISString	setup.ml	1;"	M
+OASISTest	setup.ml	1;"	M
+OASISText	setup.ml	1;"	M
+OASISUtils	_build/myocamlbuild.ml	1;"	M
+OASISUtils	myocamlbuild.ml	1;"	M
+OASISUtils	setup.ml	1;"	M
+OASISVersion	setup.ml	1;"	M
+OC	myocamlbuild.ml	1;"	M	Module:MyOCamlbuildBase
+OCamlbuildCommon	setup.ml	1;"	M
+OCamlbuildPlugin	setup.ml	1;"	M
+Object	setup.ml	/^                  [`Library of library | `Object of object_] *$/;"	C	type:OASISFindlib/group_t
+Object	setup.ml	/^      [`Library of library | `Object of object_]$/;"	C	type:OASISFindlib/data
 Option	_build/src/infix.ml	1;"	M
 Option	_build/src/infix.mli	1;"	M
 Option	src/infix.ml	1;"	M
 Option	src/infix.mli	1;"	M
+Original	setup.ml	1;"	M	Module:BaseCompat/Compat_0_4/BaseSetup
+OtherLicense	setup.ml	/^    | OtherLicense of string (* URL *)$/;"	C	type:t
+Package	setup.ml	/^    | Package of (findlib_name *$/;"	C	type:OASISFindlib/group_t
 Page	_build/src/page.ml	1;"	M
 Page	_build/src/page.mli	1;"	M
 Page	src/page.ml	1;"	M
 Page	src/page.mli	1;"	M
-RadioButton	_build/src/form.mli	1;"	M
+PageElement	_build/test/test.ml	1;"	M
+PageElement	test/test.ml	1;"	M
+Para	setup.ml	/^    | Para of string$/;"	C	type:OASISText/elt
+Parser	src/S.mli	1;"	M
+PropList	setup.ml	1;"	M
 RadioButton	_build/src/page.ml	1;"	M
 RadioButton	_build/src/page.mli	1;"	M
-RadioButton	src/page.ml	1;"	M
 RadioButton	src/page.mli	1;"	M
+S	myocamlbuild.ml	1;"	M	Module:OASISUtils/MapExt
+S	setup.ml	1;"	M	Module:OASISUtils/MapExt
+S	src/S.mli	1;"	M
 SETUP	Makefile	/^SETUP = ocaml setup.ml$/;"	m
-SelectList	_build/src/form.mli	1;"	M
+SMap	setup.ml	1;"	M	Module:BaseOCamlcConfig
+Schema	setup.ml	1;"	M	Module:PropList
 SelectList	_build/src/page.ml	1;"	M
 SelectList	_build/src/page.mli	1;"	M
 SelectList	src/page.mli	1;"	M
 Session	src/cookiejar.ml	/^    | `Session$/;"	C	type:Cookie/expiration
+SetString	_build/myocamlbuild.ml	1;"	M
+SetString	myocamlbuild.ml	1;"	M
+SetString	setup.ml	1;"	M
+SetStringCsl	_build/myocamlbuild.ml	1;"	M
+SetStringCsl	myocamlbuild.ml	1;"	M
+SetStringCsl	setup.ml	1;"	M
 Setup	setup.ml	1;"	M
+SinceVersion	setup.ml	/^  type publication = InDev of stage | SinceVersion of OASISVersion.t$/;"	C	type:publication
+String	setup.ml	/^      | String of string$/;"	C	type:OASISSourcePatterns/Templater/expr
 StringMap	src/page.ml	1;"	M	Module:Form
+Templater	setup.ml	1;"	M	Module:OASISSourcePatterns
+Test	_build/test/test.ml	1;"	M
+Test	test.ml	1;"	M
+Test	test/test.ml	1;"	M
+Text	setup.ml	/^      | Text of string$/;"	C	type:OASISSourcePatterns/Templater/atom
+Unix	setup.ml	1;"	M	Module:OASISHostPath
+Unknown_field	setup.ml	/^  exception Unknown_field of name * name$/;"	e	Module:PropList
+VAnd	setup.ml	/^    | VAnd of comparator * comparator$/;"	C	type:OASISVersion/comparator
+VEqual	setup.ml	/^    | VEqual of t$/;"	C	type:OASISVersion/comparator
+VGreater	setup.ml	/^    | VGreater of t$/;"	C	type:OASISVersion/comparator
+VGreaterEqual	setup.ml	/^    | VGreaterEqual of t$/;"	C	type:OASISVersion/comparator
+VLesser	setup.ml	/^    | VLesser of t$/;"	C	type:OASISVersion/comparator
+VLesserEqual	setup.ml	/^    | VLesserEqual of t$/;"	C	type:OASISVersion/comparator
+VOr	setup.ml	/^    | VOr of  comparator * comparator$/;"	C	type:OASISVersion/comparator
+Verbatim	setup.ml	/^    | Verbatim of string$/;"	C	type:OASISText/elt
+Version	setup.ml	/^    | Version of OASISVersion.t$/;"	C	type:OASISLicense/license_version
+VersionOrLater	setup.ml	/^    | VersionOrLater of OASISVersion.t$/;"	C	type:OASISLicense/license_version
+Warning	setup.ml	/^    | `Warning$/;"	C	type:OASISContext/level
+acc	setup.ml	/^                   let acc =$/;"	v
+acc	setup.ml	/^          let acc = (dn, new_files) :: acc in$/;"	v
+acc_nopath	setup.ml	/^    let acc_nopath =$/;"	v
+action	src/page.ml	/^  let action f =$/;"	v	Module:Form
+adapt_setup_t	setup.ml	/^    let adapt_setup_t setup_t =$/;"	v
 add	_build/src/cookiejar.mli	/^val add : Cookie.t -> t -> t$/;"	v
-add	src/cookiejar.mli	/^val add : Cookie.t -> t -> t$/;"	v	function::
+add	setup.ml	/^    let add sct mp =$/;"	v
+add	setup.ml	/^    let add t nm set get extra help =$/;"	v	Module:PropList/Schema
+add	src/cookiejar.mli	/^val add : Cookie.t -> t -> t$/;"	v
 add_client_header	_build/src/agent.mli	/^val add_client_header : string -> string -> t -> t$/;"	v
 add_client_header	src/agent.ml	/^let add_client_header header value agent =$/;"	v
 add_client_header	src/agent.mli	/^val add_client_header : string -> string -> t -> t$/;"	v
@@ -101,85 +224,306 @@ add_cookie	src/agent.ml	/^let add_cookie cookie agent =$/;"	v
 add_cookie	src/agent.mli	/^val add_cookie : Cookiejar.Cookie.t -> t -> t$/;"	v
 add_from_headers	_build/src/cookiejar.mli	/^val add_from_headers : Uri.t -> Cohttp.Header.t -> t -> t$/;"	v
 add_from_headers	src/cookiejar.ml	/^let add_from_headers uri headers jar =$/;"	v
-add_from_headers	src/cookiejar.mli	/^val add_from_headers : Uri.t -> Cohttp.Header.t -> t -> t$/;"	v	function::
+add_from_headers	src/cookiejar.mli	/^val add_from_headers : Uri.t -> Cohttp.Header.t -> t -> t$/;"	v
+add_list	myocamlbuild.ml	/^      let rec add_list t =$/;"	v	Module:OASISUtils/Make
+add_list	myocamlbuild.ml	/^      let rec add_list t =$/;"	v	Module:OASISUtils/MapExt/Make
+add_list	myocamlbuild.ml	/^      val add_list: 'a t -> (key * 'a) list -> 'a t$/;"	v	Module:OASISUtils/MapExt/S
+add_list	setup.ml	/^      let rec add_list t =$/;"	v	Module:OASISUtils/Make
+add_list	setup.ml	/^      let rec add_list t =$/;"	v	Module:OASISUtils/MapExt/Make
+add_list	setup.ml	/^      val add_list: 'a t -> (key * 'a) list -> 'a t$/;"	v	Module:OASISUtils/MapExt/S
+add_pack_header	setup.ml	/^      let add_pack_header acc =$/;"	v
 add_to_headers	_build/src/cookiejar.mli	/^val add_to_headers : Uri.t -> Cohttp.Header.t -> t -> Cohttp.Header.t$/;"	v
 add_to_headers	src/cookiejar.ml	/^let add_to_headers uri headers jar =$/;"	v
-add_to_headers	src/cookiejar.mli	/^val add_to_headers : Uri.t -> Cohttp.Header.t -> t -> Cohttp.Header.t$/;"	v	function::
-args	_build/myocamlbuild.ml	/^                let (args, pargs) =$/;"	v
-attributes	src/page.ml	/^    let attributes = [("href",href)] in$/;"	v
+add_to_headers	src/cookiejar.mli	/^val add_to_headers : Uri.t -> Cohttp.Header.t -> t -> Cohttp.Header.t$/;"	v
+add_value	src/page.ml	/^  let add_value m k v =$/;"	v
+all_features	setup.ml	/^  let all_features = Hashtbl.create 13$/;"	v
+all_possible_files	setup.ml	/^  let all_possible_files lst ~path ~modul =$/;"	v
+alpha	setup.ml	/^  let alpha = InDev Alpha$/;"	v
+alternatives	setup.ml	/^    let alternatives =$/;"	v
+apply	setup.ml	/^              let apply ?short_desc () =$/;"	v
+arg_rest	setup.ml	/^    let arg_rest = ref [] in$/;"	v
+args	_build/myocamlbuild.ml	/^            let (args, pargs) =$/;"	v
+args	myocamlbuild.ml	/^            let (args, pargs) =$/;"	v
+args	setup.ml	/^  let args () =$/;"	v
+atom	setup.ml	/^    and atom =$/;"	t	Module:OASISSourcePatterns/Templater
+atoms	setup.ml	/^        atoms: atom list;$/;"	r	type:OASISSourcePatterns/Templater/t
+avlbl_config_get	setup.ml	/^    let avlbl_config_get () =$/;"	v
+back_cwd	setup.ml	/^          let back_cwd =$/;"	v
+base	setup.ml	/^              let base = String.sub s 0 dot in$/;"	v
+basename	setup.ml	/^  let basename f =$/;"	v
 before_space	_build/myocamlbuild.ml	/^  let before_space s =$/;"	v
+before_space	myocamlbuild.ml	/^  let before_space s =$/;"	v
+beta	setup.ml	/^  let beta = InDev Beta$/;"	v
+binary_in	setup.ml	/^    let binary_in = Open_binary :: default_in$/;"	v	Module:OASISFileSystem/fs#string_of_filename/open_out/open_in/Mode
+binary_in	setup.ml	/^  let binary_in = Mode.binary_in$/;"	v	method:OASISFileSystem/fs#string_of_filename
+binary_out	setup.ml	/^    let binary_out = Open_binary :: default_out$/;"	v	Module:OASISFileSystem/fs#string_of_filename/open_out/open_in/Mode
+binary_out	setup.ml	/^  let binary_out = Mode.binary_out$/;"	v	method:OASISFileSystem/fs#string_of_filename
+body	test.ml	/^let body =$/;"	v
+buf	setup.ml	/^        let buf = Buffer.create 13 in$/;"	v
+buf	setup.ml	/^    let buf = Buffer.create 13 in$/;"	v
+build	setup.ml	/^          build:            std_args_fun;$/;"	r	type:BaseCompat/Compat_0_4/BaseSetup/t
+build	setup.ml	/^      build:            std_args_fun;$/;"	r	type:BaseSetup/t
+build	setup.ml	/^  let build ~ctxt t args =$/;"	v
+build_checks	setup.ml	/^    let build_checks sct bs =$/;"	v
+build_dir	setup.ml	/^  let build_dir extra_argv =$/;"	v
+byte	setup.ml	/^      let byte acc =$/;"	v
 c	src/cookiejar.ml	/^      Printf.bprintf buffer "%s%s=%s" sep (Cookie.name c) (Cookie.value c);$/;"	v
-cb	src/page.ml	/^      (name cb, value cb >|= singleton) >>> radd f.data$/;"	v	Module:Checkbox
-check	src/page.ml	/^    let check f cb =$/;"	v	Module:Checkbox
-checkbox	_build/src/form.mli	/^type checkbox$/;"	t
+capitalize_ascii	myocamlbuild.ml	/^  let capitalize_ascii s =$/;"	v
+capitalize_ascii	setup.ml	/^  let capitalize_ascii s =$/;"	v
+capitalize_file	setup.ml	/^  let capitalize_file f =$/;"	v
+cb_selector	src/page.ml	/^    let cb_selector name = Printf.sprintf "[type=checkbox][name=%s]" name$/;"	v	Module:Checkbox
+check_and_register	setup.ml	/^    let check_and_register (bt, bnm, lst) =$/;"	v
+check_feature	setup.ml	/^    let check_feature features stage =$/;"	v
+check_int	_build/test/test.ml	/^let check_int = Alcotest.(check int)$/;"	v
+check_int	test/test.ml	/^let check_int = Alcotest.(check int)$/;"	v
+check_string	_build/test/test.ml	/^let check_string = Alcotest.(check string)$/;"	v
+check_string	test/test.ml	/^let check_string = Alcotest.(check string)$/;"	v
+check_tools	setup.ml	/^    let check_tools lst =$/;"	v
+check_true	_build/test/test.ml	/^let check_true msg = Alcotest.(check bool) msg true$/;"	v
+check_true	test/test.ml	/^let check_true msg = Alcotest.(check bool) msg true$/;"	v
 checkbox	src/page.ml	/^  type checkbox$/;"	t	Module:Form
-checkbox_with	_build/src/form.mli	/^val checkbox_with : t -> string -> checkbox inputs option$/;"	v
 checkbox_with	src/page.ml	/^  let checkbox_with selector f =$/;"	v
-checkboxes	_build/src/form.mli	/^val checkboxes : t -> checkbox inputs$/;"	v
 checkboxes	src/page.ml	/^  let checkboxes = checkboxes_with ""$/;"	v
-checkboxes_with	_build/src/form.mli	/^val checkboxes_with : t -> string -> checkbox inputs$/;"	v
 checkboxes_with	src/page.ml	/^  let checkboxes_with selector f =$/;"	v
-click	_build/src/agent.mli	/^val click : Page.Link.t -> t -> t$/;"	v
+chn	setup.ml	/^        let chn = open_in_gen mode perm (self#host_filename fn) in$/;"	v	class:OASISFileSystem/fs#host_fs
+choices	setup.ml	/^  type 'a choices = (t * 'a) list$/;"	t	Module:OASISExpr
+choices	src/page.ml	/^    let choices f cb =$/;"	v	Module:Checkbox
+choices	src/page.ml	/^    let choices f rb =$/;"	v
+choose	_build/myocamlbuild.ml	/^  let choose ?printer ?name var_get lst =$/;"	v
+choose	myocamlbuild.ml	/^  let choose ?printer ?name var_get lst =$/;"	v
+choose	setup.ml	/^  let choose ?printer ?name var_get lst =$/;"	v	Module:OASISExpr
+chop	setup.ml	/^  let chop t =$/;"	v
+chop_extension	setup.ml	/^  let chop_extension f =$/;"	v
+chop_version_suffix	setup.ml	/^    let chop_version_suffix s =$/;"	v
+clean	setup.ml	/^          clean:            std_args_fun list;$/;"	r	type:BaseCompat/Compat_0_4/BaseSetup/t
+clean	setup.ml	/^      clean:            std_args_fun list;$/;"	r	type:BaseSetup/t
+clean	setup.ml	/^    let clean ~ctxt t pkg (cs, _) extra_args =$/;"	v	Module:Doc
+clean	setup.ml	/^    let clean ~ctxt t pkg _ extra_args = clean ~ctxt t pkg extra_args$/;"	v	Module:Build
+clean	setup.ml	/^  let clean ~ctxt pkg extra_args  =$/;"	v
+clean	setup.ml	/^  let clean ~ctxt:_ t _ extra_args =$/;"	v
+clean	setup.ml	/^  let clean, distclean =$/;"	v
+clean_doc	setup.ml	/^          clean_doc:        (doc, unit) section_args_fun list;$/;"	r	type:BaseCompat/Compat_0_4/BaseSetup/t
+clean_doc	setup.ml	/^      clean_doc:        (doc, unit) section_args_fun list;$/;"	r	type:BaseSetup/t
+clean_test	setup.ml	/^          clean_test:       (test, unit) section_args_fun list;$/;"	r	type:BaseCompat/Compat_0_4/BaseSetup/t
+clean_test	setup.ml	/^      clean_test:       (test, unit) section_args_fun list;$/;"	r	type:BaseSetup/t
+clear	setup.ml	/^    let clear t =$/;"	v	Module:PropList/Data
+click	_build/src/agent.mli	/^val click : Page.Link.t -> t -> t Lwt.t$/;"	v
 click	src/agent.ml	/^let click link = link |> Page.Link.uri |> get$/;"	v
-click	src/agent.mli	/^val click : Page.Link.t -> t -> t$/;"	v
+click	src/agent.mli	/^val click : Page.Link.t -> t -> t Lwt.t$/;"	v
 client_headers	_build/src/agent.ml	/^  client_headers : Header.t}$/;"	r	type:t
 client_headers	_build/src/agent.mli	/^val client_headers : t -> Cohttp.Header.t$/;"	v
 client_headers	src/agent.ml	/^  client_headers : Header.t}$/;"	r	type:t
 client_headers	src/agent.ml	/^let client_headers agent = agent.client_headers$/;"	v
 client_headers	src/agent.mli	/^val client_headers : t -> Cohttp.Header.t$/;"	v
+close	setup.ml	/^          method close = close_in chn$/;"	m	Module:OASISFileSystem
+close	setup.ml	/^          method close = close_out chn$/;"	m	method:OASISFileSystem/fs#host_fs#open_out
+close	setup.ml	/^      method close: unit$/;"	m	class:OASISFileSystem/closer
+closer	setup.ml	/^  class type closer =$/;"	c	Module:OASISFileSystem
+cmd	setup.ml	/^                    let cmd = args @ firsts in$/;"	v
+cmd_clean	setup.ml	/^      cmd_clean:     (command_line option) conditional;$/;"	r	type:CustomPlugin/t
+cmd_distclean	setup.ml	/^      cmd_distclean: (command_line option) conditional;$/;"	r	type:CustomPlugin/t
+cmd_main	setup.ml	/^      cmd_main:      command_line conditional;$/;"	r	type:CustomPlugin/t
+cmdline	setup.ml	/^    let cmdline =$/;"	v
+cmds	setup.ml	/^                    let cmds = split other_args others in$/;"	v
+cmis	myocamlbuild.ml	/^                     let cmis =$/;"	v
+cmxs	setup.ml	/^    let cmxs =$/;"	v
 code_of_status	_build/src/agent.mli	/^val code_of_status : http_status_code -> int$/;"	v
 code_of_status	src/agent.ml	/^let code_of_status = Code.code_of_status$/;"	v
 code_of_status	src/agent.mli	/^val code_of_status : http_status_code -> int$/;"	v
+combined_paths	setup.ml	/^    let rec combined_paths lst =$/;"	v
+comparator	setup.ml	/^  type comparator =$/;"	t	Module:OASISVersion
+comparator_apply	setup.ml	/^  let rec comparator_apply v op =$/;"	v
+compare	myocamlbuild.ml	/^         let compare = compare_csl$/;"	v
+compare	setup.ml	/^          let compare (s11, s12) (s21, s22) =$/;"	v	Module:BaseLog
+compare	setup.ml	/^         let compare = compare_csl$/;"	v
 compare	src/cookiejar.ml	/^  let compare k k' = String.compare (to_string k) (to_string k')$/;"	v	Module:Key
+compare_csl	myocamlbuild.ml	/^  let compare_csl s1 s2 =$/;"	v
+compare_csl	setup.ml	/^  let compare_csl s1 s2 =$/;"	v
+compare_digit	setup.ml	/^        let compare_digit () =$/;"	v
+compare_vascii	setup.ml	/^        let compare_vascii () =$/;"	v
+cond_targets	setup.ml	/^    let cond_targets = !cond_targets_hook cond_targets in$/;"	v
+cond_targets	setup.ml	/^    let cond_targets =$/;"	v
+cond_targets_hook	setup.ml	/^  let cond_targets_hook = ref (fun lst -> lst)$/;"	v	Module:OCamlbuildPlugin
+configure	setup.ml	/^          configure:        std_args_fun;$/;"	r	type:BaseCompat/Compat_0_4/BaseSetup/t
+configure	setup.ml	/^      configure:        std_args_fun;$/;"	r	type:BaseSetup/t
+configure	setup.ml	/^  let configure ~ctxt t args =$/;"	v
+configure	setup.ml	/^  let configure ~ctxt:_ pkg argv =$/;"	v	Module:InternalConfigurePlugin
 content	_build/src/agent.mli	/^val content : t -> string$/;"	v
 content	src/agent.ml	/^let content agent = agent.last_body$/;"	v
 content	src/agent.mli	/^val content : t -> string$/;"	v
+cookie	_build/test/test.ml	/^    let cookie = random_cookie (Uri.host uri |? "dunno.com") in$/;"	v
+cookie	_build/test/test.ml	/^    let value = Cookiejar.Cookie.value cookie in$/;"	v
+cookie	_build/test/test.ml	/^  let value = Cookiejar.Cookie.value cookie in$/;"	v
+cookie	test/test.ml	/^    let cookie = random_cookie (Uri.host uri |? "dunno.com") in$/;"	v
+cookie	test/test.ml	/^    let value = Cookiejar.Cookie.value cookie in$/;"	v
+cookie	test/test.ml	/^  let value = Cookiejar.Cookie.value cookie in$/;"	v
 cookie_jar	_build/src/agent.ml	/^  cookie_jar : Cookiejar.t;$/;"	r	type:t
 cookie_jar	_build/src/agent.mli	/^val cookie_jar : t -> Cookiejar.t$/;"	v
 cookie_jar	src/agent.ml	/^  cookie_jar : Cookiejar.t;$/;"	r	type:t
 cookie_jar	src/agent.ml	/^let cookie_jar agent = agent.cookie_jar$/;"	v
 cookie_jar	src/agent.mli	/^val cookie_jar : t -> Cookiejar.t$/;"	v
-current_selection	src/page.ml	/^    let current_selection f id =$/;"	v
+cookie_uri	_build/test/test.ml	/^    let cookie_uri = Printf.sprintf "http:\/\/%s\/a.php" domain$/;"	v
+cookie_uri	test/test.ml	/^    let cookie_uri = Printf.sprintf "http:\/\/%s\/a.php" domain$/;"	v
+cp	setup.ml	/^  let cp ~ctxt ?(recurse=false) src tgt =$/;"	v
+create	setup.ml	/^    let create () =$/;"	v	Module:PropList/Data
+create	setup.ml	/^    let create ?(case_insensitive=false) nm =$/;"	v	Module:PropList/Schema
+create	setup.ml	/^    let create ?schema ?name ?parse ?print ?default ?update ?help extra =$/;"	v
+create	setup.ml	/^    let create ?schema ?name ?parse ?print ?default ?update ?help extra =$/;"	v	Module:FieldRO
+create	setup.ml	/^  let create ?plugin name publication description =$/;"	v
+current	setup.ml	/^    let current =$/;"	v
+current_value	src/page.ml	/^  let current_value m k =$/;"	v
+current_values	src/page.ml	/^  let current_values m k =$/;"	v
+cutpoint	setup.ml	/^                let cutpoint =$/;"	v
+data	setup.ml	/^  type data = common_section *$/;"	t	Module:OASISFindlib
 data	src/page.ml	/^  type t = {form : elt; data : (string list) StringMap.t}$/;"	r	type:Form/t
+data_assert	setup.ml	/^  let data_assert t data origin =$/;"	v
+data_test	setup.ml	/^  let data_test t data =$/;"	v
+debug	setup.ml	/^      debug:                 bool;$/;"	r	type:t
+debug	setup.ml	/^  let debug ~ctxt fmt =$/;"	v
+default	setup.ml	/^      let default () =$/;"	v
+default	setup.ml	/^  let default =$/;"	v
+default_filename	myocamlbuild.ml	/^  let default_filename = Filename.concat (Sys.getcwd ()) "setup.data"$/;"	v	Module:BaseEnvLight
+default_filename	setup.ml	/^  let default_filename = in_srcdir "setup.data"$/;"	v
+default_filename	setup.ml	/^  let default_filename = in_srcdir "setup.log"$/;"	v	Module:BaseLog
+default_in	setup.ml	/^    let default_in = [Open_rdonly]$/;"	v	Module:OASISFileSystem/fs#string_of_filename/open_out/open_in/Mode
+default_oasis_fn	setup.ml	/^  let default_oasis_fn = "_oasis"$/;"	v
+default_out	setup.ml	/^    let default_out = [Open_wronly; Open_creat; Open_trunc]$/;"	v	Module:OASISFileSystem/fs#string_of_filename/open_out/open_in/Mode
+defer_close	setup.ml	/^  let defer_close o f =$/;"	v	method:OASISFileSystem/fs#string_of_filename
+description	setup.ml	/^      description: unit -> string;$/;"	r	type:t
+dir	myocamlbuild.ml	/^  type dir = string$/;"	t	Module:MyOCamlbuildBase
+dirname	setup.ml	/^  let dirname f =$/;"	v
 disable_proxy	_build/src/agent.mli	/^val disable_proxy : t -> t$/;"	v
 disable_proxy	src/agent.ml	/^let disable_proxy agent = {agent with proxy = None}$/;"	v
 disable_proxy	src/agent.mli	/^val disable_proxy : t -> t$/;"	v
+dispatch_combine	myocamlbuild.ml	/^  let dispatch_combine lst =$/;"	v
+dispatch_default	myocamlbuild.ml	/^  let dispatch_default conf t =$/;"	v
+dispatch_default	myocamlbuild.ml	/^let dispatch_default = MyOCamlbuildBase.dispatch_default conf package_default;;$/;"	v
+distclean	setup.ml	/^          distclean:        std_args_fun list;$/;"	r	type:BaseCompat/Compat_0_4/BaseSetup/t
+distclean	setup.ml	/^      distclean:        std_args_fun list;$/;"	r	type:BaseSetup/t
+distclean	setup.ml	/^    let distclean ~ctxt t pkg _ extra_args = distclean ~ctxt t pkg extra_args$/;"	v	Module:Build
+distclean	setup.ml	/^    let distclean ~ctxt t pkg _ extra_args = distclean ~ctxt t pkg extra_args$/;"	v	Module:Doc
+distclean	setup.ml	/^  let distclean ~ctxt:_ t _ extra_args =$/;"	v
+distclean_doc	setup.ml	/^          distclean_doc:    (doc, unit) section_args_fun list;$/;"	r	type:BaseCompat/Compat_0_4/BaseSetup/t
+distclean_doc	setup.ml	/^      distclean_doc:    (doc, unit) section_args_fun list;$/;"	r	type:BaseSetup/t
+distclean_test	setup.ml	/^          distclean_test:   (test, unit) section_args_fun list;$/;"	r	type:BaseCompat/Compat_0_4/BaseSetup/t
+distclean_test	setup.ml	/^      distclean_test:   (test, unit) section_args_fun list;$/;"	r	type:BaseSetup/t
+do_update	setup.ml	/^    let do_update () =$/;"	v
+doc	setup.ml	/^          doc:              ((doc, unit)  section_args_fun) list;$/;"	r	type:BaseCompat/Compat_0_4/BaseSetup/t
+doc	setup.ml	/^      doc:              ((doc, unit)  section_args_fun) list;$/;"	r	type:BaseSetup/t
+doc	setup.ml	/^  let doc ~ctxt lst pkg extra_args =$/;"	v	Module:BaseDoc
+doc	setup.ml	/^  let doc ~ctxt t args =$/;"	v
+doc_clean	setup.ml	/^  let doc_clean ~ctxt _ _ (cs, _) argv =$/;"	v
+domain	_build/test/test.ml	/^  Printf.sprintf "%s=%s; Domain=%s" name value domain$/;"	v
 domain	src/cookiejar.ml	/^    domain : string;$/;"	r	type:Cookie/t
 domain	src/cookiejar.ml	/^  let domain c = c.domain$/;"	v	Module:Cookie
 domain	src/cookiejar.ml	/^  type t = {name: string; domain : string; path : string}$/;"	r	type:Key/t
 domain	src/cookiejar.mli	/^  val domain : t -> string$/;"	v
+domain	test/test.ml	/^  Printf.sprintf "%s=%s; Domain=%s" name value domain$/;"	v
+domain_from_uri	src/cookiejar.ml	/^let domain_from_uri uri =$/;"	v
 domain_match	src/cookiejar.ml	/^  let domain_match host dom =$/;"	v	Module:Cookie
+dot	setup.ml	/^              let dot = String.rindex s '.' in$/;"	v
+dot_pad	setup.ml	/^    let dot_pad str = String.make ((max_length - (String.length str)) + 3) '.' in$/;"	v
+dump	setup.ml	/^  let dump ~ctxt ?(filename=default_filename) () =$/;"	v
 elt	_build/src/page.ml	/^type elt = Soup.element Soup.node$/;"	t
+elt	setup.ml	/^  type elt =$/;"	t	Module:OASISText
 elt	src/page.ml	/^type elt = Soup.element Soup.node$/;"	t
 empty	_build/src/cookiejar.mli	/^val empty : t$/;"	v
-env	_build/myocamlbuild.ml	/^      let env = BaseEnvLight.load ~filename:env_filename ~allow_empty:true () in$/;"	v
+empty	src/cookiejar.mli	/^val empty : t$/;"	v
+ends_with	myocamlbuild.ml	/^  let ends_with ~what ?(offset=0) str =$/;"	v
+ends_with	setup.ml	/^  let ends_with ~what ?(offset=0) str =$/;"	v
+env	setup.ml	/^    type env =$/;"	t	Module:OASISSourcePatterns/Templater
+env	setup.ml	/^  let env ~modul () =$/;"	v
+env_filename	myocamlbuild.ml	/^  let env_filename = Pathname.basename BaseEnvLight.default_filename$/;"	v
+equal	myocamlbuild.ml	/^         let equal s1 s2 = (compare_csl s1 s2) = 0$/;"	v
+equal	setup.ml	/^         let equal s1 s2 = (compare_csl s1 s2) = 0$/;"	v
+error	setup.ml	/^  let error ~ctxt fmt =$/;"	v
+eval	setup.ml	/^    let eval env t =$/;"	v	Module:OASISSourcePatterns
+eval	setup.ml	/^  let eval var_get t =$/;"	v	Module:OASISExpr
+eval_specs	myocamlbuild.ml	/^                 let rec eval_specs =$/;"	v
+evs	setup.ml	/^    let evs =$/;"	v
+excption	setup.ml	/^      excption:  license_exception option;$/;"	r	type:license_dep_5_unit
+exec_hook	setup.ml	/^  let exec_hook = ref (fun (cs, bs, exec) -> cs, bs, exec)$/;"	v	Module:InternalInstallPlugin
 expiration	src/cookiejar.ml	/^    expiration : expiration;$/;"	r	type:Cookie/t
 expiration	src/cookiejar.ml	/^  type expiration = [$/;"	t	Module:Cookie
 expiration	src/cookiejar.mli	/^  val expiration : t -> expiration$/;"	v
-field	_build/src/form.mli	/^type field$/;"	t
+expr	setup.ml	/^    and expr =$/;"	t	Module:OASISSourcePatterns/Templater
+ext	_build/test/test.ml	/^  let ext = random_string 2 in$/;"	v
+ext	test/test.ml	/^  let ext = random_string 2 in$/;"	v
+extra	setup.ml	/^    let extra =$/;"	v
+extra_args	setup.ml	/^  type extra_args = string list$/;"	t	Module:OCamlbuildCommon
+f	setup.ml	/^      let f dir file =$/;"	v
+f_	myocamlbuild.ml	/^  let f_ (str: ('a, 'b, 'c, 'd) format4) = str$/;"	v	Module:OASISGettext
+f_	setup.ml	/^  let f_ (str: ('a, 'b, 'c, 'd) format4) = str$/;"	v	Module:OASISGettext
+f_data	setup.ml	/^          let f_data () =$/;"	v
+f_data	setup.ml	/^        let f_data, files = install_group_lib_aux (ignore, []) grp in$/;"	v
+fail	_build/test/test.ml	/^let fail = Alcotest.fail$/;"	v
+fail	test/test.ml	/^let fail = Alcotest.fail$/;"	v
+failed	setup.ml	/^    let failed, n = List.fold_left one_test (0.0, 0) lst in$/;"	v
+failure_percent	setup.ml	/^            let failure_percent =$/;"	v
+failure_percent	setup.ml	/^    let failure_percent = if n = 0 then 0.0 else failed \/. (float_of_int n) in$/;"	v
+failwithf	_build/myocamlbuild.ml	/^  let failwithf fmt = Printf.ksprintf failwith fmt$/;"	v
+failwithf	myocamlbuild.ml	/^  let failwithf fmt = Printf.ksprintf failwith fmt$/;"	v
+failwithf	setup.ml	/^  let failwithf fmt = Printf.ksprintf failwith fmt$/;"	v
+failwithpf	_build/myocamlbuild.ml	/^  let failwithpf ?pos1 ?pos2 ?lexbuf fmt =$/;"	v
+failwithpf	myocamlbuild.ml	/^  let failwithpf ?pos1 ?pos2 ?lexbuf fmt =$/;"	v
+failwithpf	setup.ml	/^  let failwithpf ?pos1 ?pos2 ?lexbuf fmt =$/;"	v
+fget	setup.ml	/^    let fget data t =$/;"	v
+fgets	setup.ml	/^    let fgets data t =$/;"	v
 field	src/page.ml	/^  type field$/;"	t	Module:Form
-field_with	_build/src/form.mli	/^val field_with : t -> string -> field input option$/;"	v
+field_filter	_build/src/page.ml	/^let field_filter node =$/;"	v
+field_filter	src/page.ml	/^let field_filter node =$/;"	v
+field_of_stage	setup.ml	/^  let field_of_stage =$/;"	v
 field_with	src/page.ml	/^  let field_with selector f =$/;"	v
-fields	_build/src/form.mli	/^val fields : t -> field inputs$/;"	v
+fields	setup.ml	/^        fields:    (name, ('ctxt, 'extra) value) Hashtbl.t;$/;"	r	type:PropList/Schema/t
 fields	src/page.ml	/^  let fields = fields_with ""$/;"	v
-fields_with	_build/src/form.mli	/^val fields_with : t -> string -> field inputs$/;"	v
 fields_with	src/page.ml	/^  let fields_with selector f =$/;"	v
-file_upload	_build/src/form.mli	/^type file_upload$/;"	t
+file	myocamlbuild.ml	/^  type file = string$/;"	t	Module:MyOCamlbuildBase
+file_exists	setup.ml	/^      method file_exists fn = Sys.file_exists (self#host_filename fn)$/;"	m
+file_exists	setup.ml	/^      method file_exists: 'a filename -> bool$/;"	m	method:OASISFileSystem/fs#string_of_filename/open_out/open_in
+file_exists_case	setup.ml	/^  let file_exists_case fn =$/;"	v	Module:OASISFileUtil
+file_location	_build/myocamlbuild.ml	/^  let rec file_location ?pos1 ?pos2 ?lexbuf () =$/;"	v
+file_location	myocamlbuild.ml	/^  let rec file_location ?pos1 ?pos2 ?lexbuf () =$/;"	v
+file_location	setup.ml	/^  let rec file_location ?pos1 ?pos2 ?lexbuf () =$/;"	v
 file_upload	src/page.ml	/^  type file_upload$/;"	t	Module:Form
-file_upload_with	_build/src/form.mli	/^val file_upload_with : t -> string -> file_upload input option$/;"	v
-file_upload_with	src/page.ml	/^  let file_upload_with selector f =$/;"	v
-file_uploads	_build/src/form.mli	/^val file_uploads : t -> file_upload inputs$/;"	v
-file_uploads	src/page.ml	/^  let file_uploads = file_uploads_with ""$/;"	v
-file_uploads_with	_build/src/form.mli	/^val file_uploads_with : t -> string -> file_upload inputs$/;"	v
-file_uploads_with	src/page.ml	/^  let file_uploads_with selector f =$/;"	v
-filter	_build/src/form.mli	/^val filter : 'a inputs -> ('a input -> bool) -> 'a inputs$/;"	v
+filename	setup.ml	/^  type 'a filename = string$/;"	t	Module:OASISFileSystem
+files	setup.ml	/^          let files =$/;"	v
+files_of_build_section	setup.ml	/^      let files_of_build_section (f_data, new_files) typ cs bs =$/;"	v
+files_of_library	setup.ml	/^      let files_of_library (f_data, acc) data_lib =$/;"	v
+files_of_object	setup.ml	/^      and files_of_object (f_data, acc) data_obj =$/;"	v
+filter	setup.ml	/^  let filter ~ctxt events =$/;"	v
 filter	src/page.ml	/^  let filter = Soup.filter$/;"	v	Module:Form
+find	myocamlbuild.ml	/^  let find ~what ?(offset=0) str =$/;"	v
+find	setup.ml	/^    let find t nm =$/;"	v	Module:PropList
+find	setup.ml	/^  let find ~what ?(offset=0) str =$/;"	v
+find_file	setup.ml	/^  let find_file ?(case_sensitive=true) paths exts =$/;"	v
+find_module	setup.ml	/^  let find_module ~ctxt source_file_exists cs bs modul =$/;"	v	Module:OASISLibrary
+find_module	setup.ml	/^  let find_module ~ctxt source_file_exists cs bs modul =$/;"	v	Module:OASISObject
+findlib_extra_files	setup.ml	/^  let findlib_extra_files =$/;"	v
+findlib_full_name	setup.ml	/^                 let findlib_full_name = match obj.obj_findlib_fullname with$/;"	v
+findlib_ge_132	setup.ml	/^                      let findlib_ge_132 =$/;"	v
+findlib_lt132	setup.ml	/^        let findlib_lt132 =$/;"	v
+findlib_mapping	setup.ml	/^  let findlib_mapping pkg =$/;"	v	Module:OASISFindlib
+findlib_name	setup.ml	/^        let findlib_name = findlib_of_group grp in$/;"	v
+findlib_name_of_library_name	setup.ml	/^    let findlib_name_of_library_name lib_nm =$/;"	v
+findlib_of_group	setup.ml	/^  let findlib_of_group =$/;"	v
+findlib_part_name	setup.ml	/^  type findlib_part_name = name$/;"	t	Module:OASISFindlib
+fix_dir	setup.ml	/^  let rec fix_dir dn =$/;"	v
 fix_win32	_build/myocamlbuild.ml	/^    let fix_win32 str =$/;"	v
+fix_win32	myocamlbuild.ml	/^    let fix_win32 str =$/;"	v
+flag	setup.ml	/^  type flag = string$/;"	t	Module:OASISExpr
+flags	myocamlbuild.ml	/^        flags:     (tag list * (spec OASISExpr.choices)) list;$/;"	r	type:MyOCamlbuildBase/t
+fn_	myocamlbuild.ml	/^  let fn_ fmt1 fmt2 n =$/;"	v	Module:OASISGettext
+fn_	setup.ml	/^  let fn_ fmt1 fmt2 n =$/;"	v	Module:OASISGettext
+fn_opt	setup.ml	/^                    let fn_opt =$/;"	v
+fndlb_name_of_lib_name	setup.ml	/^    let fndlb_name_of_lib_name =$/;"	v
+fndlb_nm	setup.ml	/^              let fndlb_nm = pre_fndlb_nm^"."^post_fndlb_nm in$/;"	v
+fndlb_parts_of_lib_name	setup.ml	/^    let fndlb_parts_of_lib_name =$/;"	v
 fold	_build/src/cookiejar.mli	/^val fold : (Cookie.t -> 'a -> 'a) -> t -> 'a -> 'a$/;"	v
-fold	_build/src/form.mli	/^val fold : ('a -> 'b input -> 'a) -> 'a -> 'b inputs -> 'a$/;"	v
-fold	src/cookiejar.mli	/^val fold : (Cookie.t -> 'a -> 'a) -> t -> 'a -> 'a$/;"	v	function::
+fold	setup.ml	/^    let fold f acc t =$/;"	v	Module:PropList
+fold	src/cookiejar.mli	/^val fold : (Cookie.t -> 'a -> 'a) -> t -> 'a -> 'a$/;"	v
 fold	src/page.ml	/^  let fold = Soup.fold$/;"	v	Module:Form
 form	src/page.ml	/^  type t = {form : elt; data : (string list) StringMap.t}$/;"	r	type:Form/t
+form	test.ml	/^let form =$/;"	v
 form_with	_build/src/page.mli	/^val form_with : string -> t -> Form.t option$/;"	v
 form_with	src/page.mli	/^val form_with : string -> t -> Form.t option$/;"	v
 forms	_build/src/page.mli	/^val forms : t -> Form.t list$/;"	v
@@ -188,30 +532,47 @@ forms_with	_build/src/page.ml	/^let forms_with selector p =$/;"	v
 forms_with	_build/src/page.mli	/^val forms_with : string -> t -> Form.t list$/;"	v
 forms_with	src/page.ml	/^let forms_with selector p =$/;"	v
 forms_with	src/page.mli	/^val forms_with : string -> t -> Form.t list$/;"	v
-frame_with	_build/src/page.mli	/^val frame_with : string -> t -> Image.t option$/;"	v
-frame_with	src/page.mli	/^val frame_with : string -> t -> Image.t option$/;"	v
-frames	_build/src/page.mli	/^val frames : t -> Image.t list$/;"	v
-frames	src/page.mli	/^val frames : t -> Image.t list$/;"	v
-frames_with	_build/src/page.mli	/^val frames_with : string -> t -> Image.t list$/;"	v
-frames_with	src/page.mli	/^val frames_with : string -> t -> Image.t list$/;"	v
 from_hdr	src/cookiejar.ml	/^  let from_hdr uri c =$/;"	v	Module:Cookie
 from_soup	_build/src/page.mli	/^val from_soup : Soup.soup Soup.node -> t$/;"	v
 from_soup	src/page.mli	/^val from_soup : Soup.soup Soup.node -> t$/;"	v
-get	_build/src/agent.mli	/^val get : Uri.t -> t -> t$/;"	v
+fs	setup.ml	/^  class type ['a] fs =$/;"	c	Module:OASISFileSystem
+fset	setup.ml	/^    let fset data t ?context x =$/;"	v
+fsets	setup.ml	/^    let fsets data t ?context s =$/;"	v
+fspecs	setup.ml	/^  let fspecs () =$/;"	v
+functions	setup.ml	/^        functions: (string -> string) MapString.t;$/;"	r	type:OASISSourcePatterns/Templater/env
+generic_message	setup.ml	/^  let generic_message ~ctxt lvl fmt =$/;"	v	Module:OASISMessage
+get	_build/src/agent.mli	/^val get : Uri.t -> t -> t Lwt.t$/;"	v
+get	setup.ml	/^      let get data =$/;"	v
+get	setup.ml	/^    let get t data nm =$/;"	v	Module:PropList
 get	src/agent.ml	/^let get uri agent =$/;"	v
-get	src/agent.mli	/^val get : Uri.t -> t -> t$/;"	v
-has_value	src/page.ml	/^  let has_value m k v =$/;"	v
+get	src/agent.mli	/^val get : Uri.t -> t -> t Lwt.t$/;"	v
+get_files	setup.ml	/^      let rec get_files len acc files =$/;"	v
+get_stage	setup.ml	/^  let get_stage name =$/;"	v
+gets	setup.ml	/^      let gets data =$/;"	v
+group_libs	setup.ml	/^      let group_libs, _, _ = findlib_mapping pkg in$/;"	v
+group_mp	setup.ml	/^    let group_mp =$/;"	v
+group_of_tree	setup.ml	/^    let rec group_of_tree dn mp =$/;"	v
+group_t	setup.ml	/^  type group_t =$/;"	t	Module:OASISFindlib
+groups	setup.ml	/^    let groups = group_of_tree None group_mp in$/;"	v
+has_cmxa	setup.ml	/^      let has_cmxa =$/;"	v
+hash	myocamlbuild.ml	/^         let hash s = Hashtbl.hash (OASISString.lowercase_ascii s)$/;"	v
+hash	setup.ml	/^         let hash s = Hashtbl.hash (OASISString.lowercase_ascii s)$/;"	v
 hd_opt	_build/src/page.ml	/^let hd_opt = function$/;"	v
 hd_opt	src/page.ml	/^let hd_opt = function$/;"	v
-hidden_with	_build/src/form.mli	/^val hidden_with : t -> string -> field inputs option$/;"	v
+header	setup.ml	/^    let header, byte, native, c_object, f =$/;"	v
+header_nodomain	_build/test/test.ml	/^    let header_nodomain =$/;"	v
+header_nodomain	test/test.ml	/^    let header_nodomain =$/;"	v
+headers	setup.ml	/^    let headers =$/;"	v
+headers_mult	_build/test/test.ml	/^    let headers_mult =$/;"	v
+headers_mult	test/test.ml	/^    let headers_mult =$/;"	v
+help	setup.ml	/^    let help =$/;"	v
 hidden_with	src/page.ml	/^  let hidden_with selector f =$/;"	v
-hiddens	_build/src/form.mli	/^val hiddens : t -> field inputs$/;"	v
 hiddens	src/page.ml	/^  let hiddens = hiddens_with ""$/;"	v
-hiddens_with	_build/src/form.mli	/^val hiddens_with : t -> string -> field inputs$/;"	v
 hiddens_with	src/page.ml	/^  let hiddens_with selector f =$/;"	v
+hook	setup.ml	/^  let hook ?(failsafe=false) cstm f e =$/;"	v	Module:BaseCustom
 host	_build/src/agent.ml	/^  host : string;$/;"	r	type:proxy
 host	src/agent.ml	/^  host : string;$/;"	r	type:proxy
-href	src/page.ml	/^  let href link = link |> Soup.attribute "href" |> Soup.require$/;"	v	Module:Link
+host_fs	setup.ml	/^  class ['a] host_fs rootdir : ['a] fs =$/;"	c	class:OASISFileSystem/fs
 http_headers	_build/src/agent.ml	/^type http_headers = Cohttp.Header.t$/;"	t
 http_headers	_build/src/agent.mli	/^type http_headers = Cohttp.Header.t$/;"	t
 http_headers	src/agent.ml	/^type http_headers = Cohttp.Header.t$/;"	t
@@ -220,53 +581,72 @@ http_status_code	_build/src/agent.ml	/^type http_status_code = Cohttp.Code.statu
 http_status_code	_build/src/agent.mli	/^type http_status_code = Cohttp.Code.status_code$/;"	t
 http_status_code	src/agent.ml	/^type http_status_code = Cohttp.Code.status_code$/;"	t
 http_status_code	src/agent.mli	/^type http_status_code = Cohttp.Code.status_code$/;"	t
+ibuf	setup.ml	/^    let ibuf, obuf = Buffer.create 13, Buffer.create 13 in$/;"	v
+ignore_plugins	setup.ml	/^      ignore_plugins:        bool;$/;"	r	type:t
+ignore_plugins	setup.ml	/^    let ignore_plugins = ref false in$/;"	v
+ignore_unknown_fields	setup.ml	/^      ignore_unknown_fields: bool;$/;"	r	type:t
 image_with	_build/src/page.mli	/^val image_with : string -> t -> Image.t option$/;"	v
 image_with	src/page.mli	/^val image_with : string -> t -> Image.t option$/;"	v
 images	_build/src/page.mli	/^val images : t -> Image.t list$/;"	v
 images	src/page.mli	/^val images : t -> Image.t list$/;"	v
 images_with	_build/src/page.mli	/^val images_with : string -> t -> Image.t list$/;"	v
 images_with	src/page.mli	/^val images_with : string -> t -> Image.t list$/;"	v
+in_build_dir_of_unix	setup.ml	/^    let in_build_dir_of_unix fn =$/;"	v
+in_srcdir	setup.ml	/^  let in_srcdir ufn = OASISFileSystem.of_unix_filename ufn$/;"	v
+includes	myocamlbuild.ml	/^        includes:  (dir * dir list) list;$/;"	r	type:MyOCamlbuildBase/t
+info	setup.ml	/^      info:                  bool;$/;"	r	type:t
+info	setup.ml	/^  let info ~ctxt fmt =$/;"	v
 init	_build/src/agent.ml	/^let init _ =$/;"	v
 init	_build/src/agent.mli	/^val init : unit -> t$/;"	v
+init	myocamlbuild.ml	/^  let init = []$/;"	v
+init	setup.ml	/^  let init = []$/;"	v
+init	setup.ml	/^  let init pkg =$/;"	v
+init	setup.ml	/^  let init ~ctxt pkg =$/;"	v	Module:BaseDynVar
 init	src/agent.ml	/^let init _ =$/;"	v
 init	src/agent.mli	/^val init : unit -> t$/;"	v
-input	_build/src/form.mli	/^type _ input$/;"	t
+input	setup.ml	/^          method input buf len =$/;"	m	Module:OASISFileSystem
+input	setup.ml	/^      method input: Buffer.t -> int -> unit$/;"	m	class:OASISFileSystem/reader
 input	src/page.ml	/^  type _ input = elt$/;"	t	Module:Form
 input_filter	_build/src/page.ml	/^let input_filter input_type node =$/;"	v
 input_filter	src/page.ml	/^let input_filter input_type node =$/;"	v
-inputs	_build/src/form.mli	/^type _ inputs$/;"	t
+input_to_node	src/page.ml	/^  let input_to_node i = i $/;"	v	Module:Form
+input_to_nodes	src/page.ml	/^  let input_to_nodes is = is $/;"	v	Module:Form
 inputs	src/page.ml	/^  type _ inputs = Soup.element Soup.nodes$/;"	t	Module:Form
+install	setup.ml	/^          install:          std_args_fun;$/;"	r	type:BaseCompat/Compat_0_4/BaseSetup/t
+install	setup.ml	/^      install:          std_args_fun;$/;"	r	type:BaseSetup/t
+install	setup.ml	/^  let install =$/;"	v
+install	setup.ml	/^  let install ~ctxt t args =$/;"	v
+install_data	setup.ml	/^    let install_data ~ctxt srcdir lst tgtdir =$/;"	v
+install_docs	setup.ml	/^    let install_docs ~ctxt pkg =$/;"	v
+install_execs	setup.ml	/^    let install_execs ~ctxt pkg =$/;"	v
+install_group_lib	setup.ml	/^      let install_group_lib grp =$/;"	v
+install_group_lib_aux	setup.ml	/^        let rec install_group_lib_aux data_and_files grp =$/;"	v
+install_lib_files	setup.ml	/^    let install_lib_files ~ctxt findlib_name files =$/;"	v
+install_libs	setup.ml	/^    let install_libs ~ctxt pkg =$/;"	v
 int_with	src/page.ml	/^  let int_with selector f =$/;"	v
-ints	_build/src/form.mli	/^val ints : t -> field inputs$/;"	v
-ints	_build/src/form.mli	/^val ints : t -> string -> field inputs option$/;"	v
-ints	_build/src/form.mli	/^val ints : t -> string -> field inputs$/;"	v
 ints	src/page.ml	/^  let ints = ints_with ""$/;"	v
 ints_with	src/page.ml	/^  let ints_with selector f =$/;"	v
-is_checked	src/page.ml	/^    let is_checked f cb =$/;"	v	Module:Checkbox
+is_alpha	setup.ml	/^  let is_alpha c = ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z')$/;"	v	Module:OASISVersion
+is_digit	setup.ml	/^  let is_digit c = '0' <= c && c <= '9'$/;"	v	Module:OASISVersion
+is_empty	_build/src/cookiejar.mli	/^val is_empty : t -> bool $/;"	v
+is_empty	src/cookiejar.mli	/^val is_empty : t -> bool $/;"	v
 is_identifier_char	_build/src/page.ml	/^let is_identifier_char c =$/;"	v
 is_identifier_char	src/page.ml	/^let is_identifier_char c =$/;"	v
-is_selected	src/page.ml	/^    let is_selected f menu item =$/;"	v
-is_selected	src/page.ml	/^    let is_selected f sl item =$/;"	v
-item	src/page.ml	/^        (name menu, value item) >>>$/;"	v
-item	src/page.ml	/^      (Soup.id sl, value item >|= singleton) >>> radd f.data$/;"	v
-item	src/page.ml	/^      (name menu, value item) >>>$/;"	v
-item	src/page.ml	/^    type item = elt$/;"	t
-items	src/page.ml	/^    let items menu = Soup.select "[type=option]" menu |> to_list$/;"	v
-items	src/page.ml	/^    let items sl = Soup.select "[type=option]" sl |> to_list$/;"	v
+is_special	setup.ml	/^  let is_special = function | '.' | '+' | '-' | '~' -> true | _ -> false$/;"	v	Module:OASISVersion
+is_varname	_build/myocamlbuild.ml	/^  let is_varname str =$/;"	v
+is_varname	myocamlbuild.ml	/^  let is_varname str =$/;"	v
+is_varname	setup.ml	/^  let is_varname str =$/;"	v
 iter	_build/src/cookiejar.mli	/^val iter : (Cookie.t -> unit) -> t -> unit$/;"	v
-iter	_build/src/form.mli	/^val iter : ('a input -> unit) -> 'a inputs -> t$/;"	v
 iter	src/cookiejar.ml	/^let iter f = JarMap.iter (fun x -> f)$/;"	v
-iter	src/cookiejar.mli	/^val iter : (Cookie.t -> unit) -> t -> unit$/;"	v	function::
+iter	src/cookiejar.mli	/^val iter : (Cookie.t -> unit) -> t -> unit$/;"	v
 iter	src/page.ml	/^  let iter = Soup.iter$/;"	v	Module:Form
+jar_eq	_build/test/test.ml	/^let rec jar_eq cookies jar =$/;"	v
+jar_eq	test/test.ml	/^let rec jar_eq cookies jar =$/;"	v
+jar_from	_build/test/test.ml	/^let jar_from =$/;"	v
+jar_from	test/test.ml	/^let jar_from =$/;"	v
+join_plugin_sections	setup.ml	/^  let join_plugin_sections filter_map lst =$/;"	v
 key	src/cookiejar.ml	/^  let key c =$/;"	v	Module:Key
-keygen_with	_build/src/form.mli	/^val keygen_with : t -> string -> field inputs option$/;"	v
-keygen_with	src/page.ml	/^  let keygen_with selector f =$/;"	v
-keygens	_build/src/form.mli	/^val keygens : t -> field inputs$/;"	v
-keygens	src/page.ml	/^  let keygens = keygens_with ""$/;"	v
-keygens_with	_build/src/form.mli	/^val keygens_with : string -> t -> field inputs$/;"	v
-keygens_with	src/page.ml	/^  let keygens_with selector f =$/;"	v
 l	src/page.ml	/^  let raw_values f = StringMap.fold (fun id value l -> (id,value)::l) f.data []$/;"	v
-ladd	src/page.ml	/^  let ladd x l = x::l$/;"	v
 last_body	_build/src/agent.ml	/^  last_body : string;$/;"	r	type:t
 last_body	src/agent.ml	/^  last_body : string;$/;"	r	type:t
 last_headers	_build/src/agent.ml	/^  last_headers : Header.t;$/;"	r	type:t
@@ -275,112 +655,261 @@ last_page	_build/src/agent.ml	/^  last_page : Page.t option;$/;"	r	type:t
 last_page	src/agent.ml	/^  last_page : Page.t option;$/;"	r	type:t
 last_status_code	_build/src/agent.ml	/^  last_status_code : http_status_code;$/;"	r	type:t
 last_status_code	src/agent.ml	/^  last_status_code : http_status_code;$/;"	r	type:t
-link_with	_build/src/page.mli	/^val link_with : string -> t -> Image.t option$/;"	v
-link_with	src/page.mli	/^val link_with : string -> t -> Image.t option$/;"	v
-links	_build/src/page.mli	/^val links : t -> Image.t list$/;"	v
-links	src/page.mli	/^val links : t -> Image.t list$/;"	v
-links_with	_build/src/page.mli	/^val links_with : string -> t -> Image.t list$/;"	v
-links_with	src/page.mli	/^val links_with : string -> t -> Image.t list$/;"	v
-load	_build/src/agent.mli	/^val load : Page.Image.t -> t -> t $/;"	v
+len1	setup.ml	/^        let len1 = String.length v1 in$/;"	v
+len2	setup.ml	/^        let len2 = String.length v2 in$/;"	v
+level	setup.ml	/^  type level =$/;"	t	Module:OASISContext
+lexer	setup.ml	/^    let lexer st =$/;"	v
+lib_c	myocamlbuild.ml	/^        lib_c:     (name * dir * file list) list;$/;"	r	type:MyOCamlbuildBase/t
+lib_ocaml	myocamlbuild.ml	/^        lib_ocaml: (name * dir list * string list) list;$/;"	r	type:MyOCamlbuildBase/t
+library_name	setup.ml	/^  type library_name = name$/;"	t	Module:OASISFindlib
+library_name_of_findlib_name	setup.ml	/^    let library_name_of_findlib_name =$/;"	v
+library_name_of_findlib_name	setup.ml	/^    let library_name_of_findlib_name fndlb_nm =$/;"	v
+license	setup.ml	/^      license:   license;$/;"	r	type:license_dep_5_unit
+license	setup.ml	/^  type license = string$/;"	t	Module:OASISLicense
+license_dep_5	setup.ml	/^  type license_dep_5 =$/;"	t
+license_dep_5_unit	setup.ml	/^  type license_dep_5_unit =$/;"	t
+license_exception	setup.ml	/^  type license_exception = string$/;"	t	Module:OASISLicense
+license_version	setup.ml	/^  type license_version =$/;"	t	Module:OASISLicense
+line	setup.ml	/^           let line = ref 1 in$/;"	v
+link_with	_build/src/page.mli	/^val link_with : string -> t -> Link.t option$/;"	v
+link_with	src/page.mli	/^val link_with : string -> t -> Link.t option$/;"	v
+links	_build/src/page.mli	/^val links : t -> Link.t list$/;"	v
+links	src/page.mli	/^val links : t -> Link.t list$/;"	v
+links_with	_build/src/page.mli	/^val links_with : string -> t -> Link.t list$/;"	v
+links_with	src/page.mli	/^val links_with : string -> t -> Link.t list$/;"	v
+list	setup.ml	/^  let list () =$/;"	v
+ln	setup.ml	/^    let ln =$/;"	v
+load	_build/src/agent.mli	/^val load : Page.Image.t -> t -> t Lwt.t $/;"	v
+load	myocamlbuild.ml	/^  let load ?(allow_empty=false) ?(filename=default_filename) ?stream () =$/;"	v	Module:BaseEnvLight
+load	setup.ml	/^  let load ~ctxt () =$/;"	v	Module:BaseLog
+load	setup.ml	/^  let load ~ctxt ?(allow_empty=false) ?(filename=default_filename) () =$/;"	v
 load	src/agent.ml	/^let load image agent =$/;"	v
-load	src/agent.mli	/^val load : Page.Image.t -> t -> t $/;"	v
-make	src/cookiejar.ml	/^  let make ?expiration ?path ?secure ~domain ~name ~value =$/;"	v	Module:Cookie
+load	src/agent.mli	/^val load : Page.Image.t -> t -> t Lwt.t $/;"	v
+load_oasis_plugin	setup.ml	/^      load_oasis_plugin:     string -> bool;$/;"	r	type:t
+lxr	setup.ml	/^           let lxr = Genlex.make_lexer [] (stream_of_reader rdr) in$/;"	v
+main	setup.ml	/^    let main ~ctxt t pkg (cs, _) extra_args =$/;"	v	Module:Doc
+main	setup.ml	/^    let main ~ctxt t pkg extra_args =$/;"	v	Module:Build
+main	setup.ml	/^  let main ~ctxt:_ t _ extra_args =$/;"	v
+make	setup.ml	/^  let make =$/;"	v
+make	setup.ml	/^  let make =$/;"	v	Module:OASISHostPath
+make	src/cookiejar.ml	/^  let make ?(expiration = `Session) ?(path = "")  ?(secure = false) ~domain name value =$/;"	v	Module:Cookie
 make	src/cookiejar.mli	/^  val make :$/;"	v
-make	src/page.ml	/^  let make ?name ?text ~source = failwith "Not implemented"$/;"	v	Module:Frame
-make	src/page.ml	/^  let make ?text:(text="") ~href =$/;"	v	Module:Link
 make	src/page.ml	/^  let make ~source =$/;"	v	Module:Image
+make_fnames	setup.ml	/^    let make_fnames modul sufx =$/;"	v
 map	_build/src/cookiejar.mli	/^val map : (Cookie.t -> Cookie.t) -> t -> t$/;"	v
+map	setup.ml	/^           let map =$/;"	v
 map	src/cookiejar.ml	/^let map = JarMap.map$/;"	v
-map	src/cookiejar.mli	/^val map : (Cookie.t -> Cookie.t) -> t -> t$/;"	v	function::
+map	src/cookiejar.mli	/^val map : (Cookie.t -> Cookie.t) -> t -> t$/;"	v
+map_of_findlib_part_name	setup.ml	/^  type 'a map_of_findlib_part_name = 'a OASISUtils.MapString.t$/;"	t	Module:OASISFindlib
 match_uri	src/cookiejar.ml	/^  let match_uri uri cookie =$/;"	v	Module:Cookie
 match_uri	src/cookiejar.mli	/^  val match_uri : Uri.t -> t -> bool$/;"	v
-menu	_build/src/form.mli	/^type menu$/;"	t
+max_length	setup.ml	/^    let max_length =$/;"	v
+mem	setup.ml	/^    let mem t nm =$/;"	v	Module:PropList
 menu	src/page.ml	/^  type menu$/;"	t	Module:Form
-name	_build/src/form.mli	/^val name : (_ input) -> string option$/;"	v
+meta	setup.ml	/^          let meta =$/;"	v
+meth	src/page.ml	/^  let meth f = $/;"	v	Module:Form
+mk_section_args_fun	setup.ml	/^      let mk_section_args_fun l =$/;"	v
+mk_std_args_fun	setup.ml	/^      let mk_std_args_fun f = fun pkg args -> f ~ctxt:!rctxt pkg args in$/;"	v
+mp	myocamlbuild.ml	/^          let mp = read_file (lexer st) MapString.empty in$/;"	v
+mp	myocamlbuild.ml	/^        read_file lxr (MapString.add nm value mp)$/;"	v	Module:BaseEnvLight
+mp	setup.ml	/^                  SMap.add name value mp$/;"	v
+mp	setup.ml	/^          let mp = read_file (lexer st) MapString.empty in$/;"	v
+mp	setup.ml	/^        read_file lxr (MapString.add nm value mp)$/;"	v
+mp	setup.ml	/^      let mp =$/;"	v
+mp_todo	setup.ml	/^         let mp_todo =$/;"	v
+msg	_build/test/test.ml	/^  let msg c = Printf.sprintf "%s [%d\/%d]" (prefix^selector) c expected_count in$/;"	v
+msg	setup.ml	/^    let msg =$/;"	v
+msg	test/test.ml	/^  let msg c = Printf.sprintf "%s [%d\/%d]" (prefix^selector) c expected_count in$/;"	v
+name	_build/test/test.ml	/^    let name = Cookiejar.Cookie.name cookie in$/;"	v
+name	myocamlbuild.ml	/^  type name = string$/;"	t	Module:MyOCamlbuildBase
+name	setup.ml	/^        name:      name;$/;"	r	type:PropList/Schema/t
+name	setup.ml	/^      name: string;$/;"	r	type:t
+name	setup.ml	/^  type name = string$/;"	t	Module:PropList
 name	src/cookiejar.ml	/^  let name c = c.name$/;"	v	Module:Cookie
 name	src/cookiejar.ml	/^  type t = { name : string;$/;"	r	type:Cookie/t
 name	src/cookiejar.ml	/^  type t = {name: string; domain : string; path : string}$/;"	r	type:Key/t
 name	src/cookiejar.mli	/^  val name : t -> string$/;"	v
-name	src/page.ml	/^  let name frame = frame |> Soup.attribute "name"$/;"	v	Module:Frame
-name	src/page.ml	/^  let name input = Soup.attribute "name" input$/;"	v
+name	src/page.ml	/^  let name f = Soup.attribute "name" f.form$/;"	v	Module:Form
+name	test/test.ml	/^    let name = Cookiejar.Cookie.name cookie in$/;"	v
+native	setup.ml	/^      let native acc =$/;"	v
+new_id	setup.ml	/^    let new_id =$/;"	v
+new_node	setup.ml	/^      and new_node =$/;"	v
+nm	setup.ml	/^      let nm =$/;"	v
+nm_config	setup.ml	/^    let nm_config, value_config =$/;"	v
+no_automatic_syntax	setup.ml	/^  let no_automatic_syntax =$/;"	v
+no_trailing_dot	myocamlbuild.ml	/^            let no_trailing_dot s =$/;"	v
+no_update_setup_ml_cli	setup.ml	/^    let no_update_setup_ml_cli, _, _ = no_update_setup_ml_cli in$/;"	v
+nodes	_build/test/test.ml	/^  let nodes = f selector page in$/;"	v
+nodes	test/test.ml	/^  let nodes = f selector page in$/;"	v
+nodir_files	setup.ml	/^          let nodir_files, dir_files =$/;"	v
+ns_	myocamlbuild.ml	/^  let ns_ str = str$/;"	v	Module:OASISGettext
+ns_	setup.ml	/^  let ns_ str = str$/;"	v	Module:OASISGettext
+nsplit	myocamlbuild.ml	/^  let nsplit str c =$/;"	v
+nsplit	setup.ml	/^  let nsplit str c =$/;"	v
+nsplitf	myocamlbuild.ml	/^  let nsplitf str f =$/;"	v	Module:OASISString
+nsplitf	setup.ml	/^  let nsplitf str f =$/;"	v	Module:OASISString
+oasis_digest	setup.ml	/^          oasis_digest:     Digest.t option;$/;"	r	type:BaseCompat/Compat_0_4/BaseSetup/t
+oasis_digest	setup.ml	/^      oasis_digest:     Digest.t option;$/;"	r	type:BaseSetup/t
+oasis_exec	setup.ml	/^          oasis_exec:       string option;$/;"	r	type:BaseCompat/Compat_0_4/BaseSetup/t
+oasis_exec	setup.ml	/^      oasis_exec:       string option;$/;"	r	type:BaseSetup/t
+oasis_fn	setup.ml	/^          oasis_fn:         string option;$/;"	r	type:BaseCompat/Compat_0_4/BaseSetup/t
+oasis_fn	setup.ml	/^      oasis_fn:         string option;$/;"	r	type:BaseSetup/t
+oasis_setup_args	setup.ml	/^          oasis_setup_args: string list;$/;"	r	type:BaseCompat/Compat_0_4/BaseSetup/t
+oasis_setup_args	setup.ml	/^      oasis_setup_args: string list;$/;"	r	type:BaseSetup/t
+oasis_version	setup.ml	/^          oasis_version:    string;$/;"	r	type:BaseCompat/Compat_0_4/BaseSetup/t
+oasis_version	setup.ml	/^      oasis_version:    string;$/;"	r	type:BaseSetup/t
+obj_name	setup.ml	/^                 let obj_name = cs.cs_name in$/;"	v
+ocaml_ge4	setup.ml	/^      let ocaml_ge4 =$/;"	v
+ocamlbuild	setup.ml	/^  let ocamlbuild = prog "ocamlbuild"$/;"	v	Module:BaseStandardVar
+ocamlbuild_clean_ev	setup.ml	/^  let ocamlbuild_clean_ev = "ocamlbuild-clean"$/;"	v	Module:OCamlbuildCommon
+ocamlbuildflags	setup.ml	/^  let ocamlbuildflags =$/;"	v	Module:OCamlbuildCommon
+ocamlc	setup.ml	/^  let ocamlc     = BaseOCamlcConfig.ocamlc$/;"	v	Module:BaseStandardVar
+ocamlc	setup.ml	/^  let ocamlc =$/;"	v	Module:BaseOCamlcConfig
+ocamlc_config_map	setup.ml	/^  let ocamlc_config_map =$/;"	v	Module:BaseOCamlcConfig
+ocamlfind	setup.ml	/^          let ocamlfind = ocamlfind () in$/;"	v
+ocamlfind	setup.ml	/^  let ocamlfind  = BaseCheck.ocamlfind$/;"	v	Module:BaseStandardVar
+ocamlopt	setup.ml	/^  let ocamlopt   = prog_opt "ocamlopt"$/;"	v	Module:BaseStandardVar
+of_library	setup.ml	/^  let of_library ffn (cs, bs, lib) =$/;"	v
+of_list	myocamlbuild.ml	/^      let of_list lst = add_list empty lst$/;"	v	Module:OASISUtils/Make
+of_list	myocamlbuild.ml	/^      let of_list lst = add_list empty lst$/;"	v	Module:OASISUtils/MapExt/Make
+of_list	myocamlbuild.ml	/^      val of_list: (key * 'a) list -> 'a t$/;"	v	Module:OASISUtils/MapExt/S
+of_list	setup.ml	/^      let of_list lst = add_list empty lst$/;"	v	Module:OASISUtils/Make
+of_list	setup.ml	/^      let of_list lst = add_list empty lst$/;"	v	Module:OASISUtils/MapExt/Make
+of_list	setup.ml	/^      val of_list: (key * 'a) list -> 'a t$/;"	v	Module:OASISUtils/MapExt/S
+of_object	setup.ml	/^  let of_object ffn (cs, bs, obj) =$/;"	v
+of_unix	setup.ml	/^  let of_unix ufn =$/;"	v	Module:OASISHostPath
+of_unix_filename	setup.ml	/^  let of_unix_filename ufn = (ufn: 'a filename)$/;"	v	method:OASISFileSystem/fs#string_of_filename
+open	setup.ml	/^      let open OASISUtils in$/;"	v
+open_in	setup.ml	/^      method open_in ?(mode=Mode.text_in) ?(perm=0o666) fn =$/;"	m	class:OASISFileSystem/fs#host_fs
+open_in	setup.ml	/^      method open_in: ?mode:(open_flag list) -> ?perm:int -> 'a filename -> reader$/;"	m	method:OASISFileSystem/fs#string_of_filename/open_out
+open_out	setup.ml	/^      method open_out ?(mode=Mode.text_out)  ?(perm=0o666) fn =$/;"	m	class:OASISFileSystem/fs#host_fs
+open_out	setup.ml	/^      method open_out: ?mode:(open_flag list) -> ?perm:int -> 'a filename -> writer$/;"	m	method:OASISFileSystem/fs#string_of_filename
+origin	setup.ml	/^        origin: string$/;"	r	type:OASISSourcePatterns/Templater/t
+other_args	setup.ml	/^      let other_args = ["install"; findlib_name; "-add"] in$/;"	v
+output	setup.ml	/^          method output buf = Buffer.output_buffer chn buf$/;"	m	method:OASISFileSystem/fs#host_fs#open_out
+output	setup.ml	/^      method output: Buffer.t -> unit$/;"	m	class:OASISFileSystem/writer
+p	setup.ml	/^        let p = ref 0 in$/;"	v
+package	setup.ml	/^          package:          package;$/;"	r	type:BaseCompat/Compat_0_4/BaseSetup/t
+package	setup.ml	/^      package:          package;$/;"	r	type:BaseSetup/t
+package	setup.ml	/^  let package ?version_comparator pkg () =$/;"	v
 package_default	_build/myocamlbuild.ml	/^let package_default =$/;"	v
+package_default	myocamlbuild.ml	/^let package_default =$/;"	v
+package_test	setup.ml	/^  let package_test t pkg =$/;"	v
+package_version	setup.ml	/^  let package_version pkg =$/;"	v
 page	_build/src/agent.mli	/^val page : t -> Page.t option$/;"	v
 page	src/agent.ml	/^let page agent = agent.last_page$/;"	v
 page	src/agent.mli	/^val page : t -> Page.t option$/;"	v
+parse	setup.ml	/^      let parse =$/;"	v
+parse	setup.ml	/^      let parse s =$/;"	v
+parse	setup.ml	/^  let parse argv args =$/;"	v	Module:BaseArgExt
+parse_cookie	test.ml	/^let parse_cookie () = $/;"	v
+parse_expr	setup.ml	/^      let parse_expr s =$/;"	v
 password	_build/src/agent.ml	/^  password : string option;$/;"	r	type:proxy
 password	src/agent.ml	/^  password : string option;$/;"	r	type:proxy
-password_with	_build/src/form.mli	/^val password_with : t -> string -> field inputs option$/;"	v
 password_with	src/page.ml	/^  let password_with selector f =$/;"	v
-passwords	_build/src/form.mli	/^val passwords : t -> field inputs$/;"	v
 passwords	src/page.ml	/^  let passwords = passwords_with ""$/;"	v
-passwords_with	_build/src/form.mli	/^val passwords_with : t -> string -> field inputs$/;"	v
 passwords_with	src/page.ml	/^  let passwords_with selector f =$/;"	v
+path	_build/test/test.ml	/^  let path = random_string (between 5 10) in$/;"	v
 path	src/cookiejar.ml	/^    path : string;$/;"	r	type:Cookie/t
 path	src/cookiejar.ml	/^  let path c = c.path$/;"	v	Module:Cookie
 path	src/cookiejar.ml	/^  type t = {name: string; domain : string; path : string}$/;"	r	type:Key/t
 path	src/cookiejar.mli	/^  val path : t -> string$/;"	v
+path	test/test.ml	/^  let path = random_string (between 5 10) in$/;"	v
 path_match	src/cookiejar.ml	/^  let path_match uri_path cookie_path =$/;"	v	Module:Cookie
+pkg_get	setup.ml	/^  let pkg_get () =$/;"	v
+plugin	setup.ml	/^      plugin: all_plugin option;$/;"	r	type:t
+plugin_version_current	setup.ml	/^          let plugin_version_current =$/;"	v
 port	_build/src/agent.ml	/^  port : int}$/;"	r	type:proxy
 port	src/agent.ml	/^  port : int}$/;"	r	type:proxy
-post	_build/src/agent.mli	/^val post : Uri.t -> string -> t -> t$/;"	v
+post	_build/src/agent.mli	/^val post : Uri.t -> string -> t -> t Lwt.t$/;"	v
 post	src/agent.ml	/^let post uri content agent =$/;"	v
-post	src/agent.mli	/^val post : Uri.t -> string -> t -> t$/;"	v
+post	src/agent.mli	/^val post : Uri.t -> string -> t -> t Lwt.t$/;"	v
+pre_fndlb_nm	setup.ml	/^              let pre_fndlb_nm, mp =$/;"	v
+print	setup.ml	/^      let print =$/;"	v
+print	setup.ml	/^  let print () =$/;"	v
+print_hidden	setup.ml	/^  let print_hidden =$/;"	v
+printf	setup.ml	/^      printf:                level -> string -> unit;$/;"	r	type:t
+printf	setup.ml	/^  let printf lvl str =$/;"	v
+private	setup.ml	/^      method private host_filename fn = Filename.concat rootdir fn$/;"	m	class:OASISFileSystem/fs#host_fs
+prog_best	setup.ml	/^  let prog_best prg prg_lst =$/;"	v	Module:BaseCheck
 proxy	_build/src/agent.ml	/^  proxy : proxy option;$/;"	r	type:t
 proxy	_build/src/agent.ml	/^type proxy = {$/;"	t
 proxy	src/agent.ml	/^  proxy : proxy option;$/;"	r	type:t
 proxy	src/agent.ml	/^type proxy = {$/;"	t
-radd	src/page.ml	/^  let radd m k v = StringMap.add k v m$/;"	v
-radio_button	_build/src/form.mli	/^type radio_button$/;"	t
+publication	setup.ml	/^      publication: publication;$/;"	r	type:t
+publication	setup.ml	/^  type publication = InDev of stage | SinceVersion of OASISVersion.t$/;"	t
+q	setup.ml	/^  let q = Filename.quote$/;"	v
+quiet	setup.ml	/^      quiet:                 bool;$/;"	r	type:t
+quiet	setup.ml	/^  let quiet =$/;"	v
 radio_button	src/page.ml	/^  type radio_button$/;"	t	Module:Form
-radio_button_with	_build/src/form.mli	/^val radio_button_with : t -> string -> radio_button input option$/;"	v
 radio_button_with	src/page.ml	/^  let radio_button_with selector f =$/;"	v
-radio_buttons	_build/src/form.mli	/^val radio_buttons : t -> radio_button inputs$/;"	v
 radio_buttons	src/page.ml	/^  let radio_buttons = radio_buttons_with ""$/;"	v
-radio_buttons_with	_build/src/form.mli	/^val radio_buttons_with : t -> string -> radio_button inputs$/;"	v
 radio_buttons_with	src/page.ml	/^  let radio_buttons_with selector f =$/;"	v
-raw_get	_build/src/form.mli	/^val raw_get : t -> string -> string list$/;"	v
+random_char	_build/test/test.ml	/^let random_char () =$/;"	v
+random_char	test/test.ml	/^let random_char () =$/;"	v
+random_cookie	_build/test/test.ml	/^let random_cookie domain =$/;"	v
+random_cookie	test/test.ml	/^let random_cookie domain =$/;"	v
+random_string	_build/test/test.ml	/^let random_string n =$/;"	v
+random_string	test/test.ml	/^let random_string n =$/;"	v
 raw_get	src/page.ml	/^  let raw_get key f = StringMap.find key f.data$/;"	v	Module:Form
-raw_set	_build/src/form.mli	/^val raw_set : t -> string -> string list -> t$/;"	v
 raw_set	src/page.ml	/^  let raw_set key value f = $/;"	v	Module:Form
-raw_unset	_build/src/form.mli	/^val raw_unset : t -> string -> t -> t$/;"	v
 raw_unset	src/page.ml	/^  let raw_unset key f = $/;"	v	Module:Form
-raw_values	_build/src/form.mli	/^val raw_values : t -> (string * string list) list$/;"	v
 raw_values	src/page.ml	/^  let raw_values f = StringMap.fold (fun id value l -> (id,value)::l) f.data []$/;"	v	Module:Form
-rb	src/page.ml	/^      (name rb, _value rb >|= singleton) >>> radd f.data$/;"	v
-rb	src/page.ml	/^      _value rb >|=$/;"	v
-rb	src/page.ml	/^    let value rb = _value rb |> Soup.require$/;"	v	Module:RadioButton
-rb_selector	src/page.ml	/^    let rb_selector id = Printf.sprintf "[type=radio]#%s" id$/;"	v	Module:RadioButton
+rb	src/page.ml	/^    let value rb = ivalue rb |> Soup.require$/;"	v
+rctxt	setup.ml	/^    let rctxt = ref !BaseContext.default$/;"	v	Module:BaseCompat/Compat_0_4
+read_all	setup.ml	/^  let read_all buf rdr =$/;"	v	class:OASISFileSystem/fs
+read_aux	setup.ml	/^           let rec read_aux (st, lst) =$/;"	v
+reader	setup.ml	/^  class type reader =$/;"	c	Module:OASISFileSystem
+register	setup.ml	/^  let register ~ctxt event data =$/;"	v
+reinstall	setup.ml	/^  let reinstall ~ctxt t args =$/;"	v
+rem_value	src/page.ml	/^  let rem_value m k v = $/;"	v
 remove	_build/src/cookiejar.mli	/^val remove : Cookie.t -> t -> t$/;"	v
+remove	setup.ml	/^      method remove fn = Sys.remove (self#host_filename fn)$/;"	m
+remove	setup.ml	/^      method remove: 'a filename -> unit$/;"	m	method:OASISFileSystem/fs#string_of_filename/open_out/open_in/file_exists
 remove	src/cookiejar.ml	/^let remove c jar = JarMap.remove (Key.key c) jar$/;"	v
-remove	src/cookiejar.mli	/^val remove : Cookie.t -> t -> t$/;"	v	function::
+remove	src/cookiejar.mli	/^val remove : Cookie.t -> t -> t$/;"	v
 remove_client_header	_build/src/agent.mli	/^val remove_client_header : string -> t -> t$/;"	v
 remove_client_header	src/agent.ml	/^let remove_client_header header agent =$/;"	v
 remove_client_header	src/agent.mli	/^val remove_client_header : string -> t -> t$/;"	v
 remove_cookie	_build/src/agent.mli	/^val remove_cookie : Cookiejar.Cookie.t -> t -> t$/;"	v
 remove_cookie	src/agent.ml	/^let remove_cookie cookie agent =$/;"	v
 remove_cookie	src/agent.mli	/^val remove_cookie : Cookiejar.Cookie.t -> t -> t$/;"	v
-reset	_build/src/form.mli	/^val reset : t -> t$/;"	v
-reset	src/page.ml	/^  let reset f = {f with data = StringMap.empty}$/;"	v
-rfind	src/page.ml	/^  let rfind m k = StringMap.find k m$/;"	v
-rmem	src/page.ml	/^  let rmem m k = StringMap.mem k m$/;"	v
-rrem	src/page.ml	/^  let rrem m k = StringMap.remove k m$/;"	v
+remove_prefix	setup.ml	/^            let remove_prefix p n =$/;"	v
+replace_chars	myocamlbuild.ml	/^  let replace_chars f s =$/;"	v
+replace_chars	setup.ml	/^  let replace_chars f s =$/;"	v
+repr_filename	setup.ml	/^      let repr_filename = ctxt.srcfs#string_of_filename filename in$/;"	v
+res	setup.ml	/^            let res = Filename.concat bs.bs_path "META" in$/;"	v
+rmdir	setup.ml	/^  let rmdir ~ctxt tgt =$/;"	v
+rno_test	setup.ml	/^    let rno_test = ref false in$/;"	v
+root_lib	setup.ml	/^        let root_lib = root_of_group grp in$/;"	v
+root_of_group	setup.ml	/^  let root_of_group grp =$/;"	v
+routput	setup.ml	/^        let routput =$/;"	v
+rpkg	setup.ml	/^  let rpkg =$/;"	v
+run	setup.ml	/^  let run  = BaseCustom.run$/;"	v
+run	setup.ml	/^  let run cmd args extra_args =$/;"	v	Module:BaseCustom
+run	setup.ml	/^  let run ~ctxt ?f_exit_code ?(quote=true) cmd args =$/;"	v	Module:OASISExec
+run_ocamlbuild	setup.ml	/^  let run_ocamlbuild ~ctxt args extra_argv =$/;"	v
+run_read_one_line	setup.ml	/^  let run_read_one_line ~ctxt ?f_exit_code cmd args =$/;"	v
+run_read_output	setup.ml	/^  let run_read_output ~ctxt ?f_exit_code cmd args =$/;"	v
+s_	myocamlbuild.ml	/^  let s_ str = str$/;"	v	Module:OASISGettext
+s_	setup.ml	/^  let s_ str = str$/;"	v	Module:OASISGettext
+section_args_fun	setup.ml	/^      type ('a, 'b) section_args_fun =$/;"	t	Module:BaseCompat/Compat_0_4/BaseSetup
+section_args_fun	setup.ml	/^  type ('a, 'b) section_args_fun =$/;"	t	Module:BaseSetup
+section_common	setup.ml	/^  let section_common sct =$/;"	v
+section_common_set	setup.ml	/^  let section_common_set cs =$/;"	v
+section_find	setup.ml	/^  let section_find id scts =$/;"	v
 secure	src/cookiejar.ml	/^    secure : bool }$/;"	r	type:Cookie/t
 secure	src/cookiejar.ml	/^  let secure c = c.secure$/;"	v	Module:Cookie
 secure	src/cookiejar.mli	/^  val secure : t -> bool$/;"	v
-select	src/page.ml	/^    let select f fu path =$/;"	v	Module:FileUpload
-select	src/page.ml	/^    let select f sl item =$/;"	v
-select_list	_build/src/form.mli	/^type select_list$/;"	t
 select_list	src/page.ml	/^  type select_list$/;"	t	Module:Form
-select_list_with	_build/src/form.mli	/^val select_list_with : t -> string -> select_list input option$/;"	v
 select_list_with	src/page.ml	/^  let select_list_with selector f =$/;"	v
-select_lists	_build/src/form.mli	/^val select_lists : t -> select_list inputs$/;"	v
 select_lists	src/page.ml	/^  let select_lists = select_lists_with ""$/;"	v
-select_lists_with	_build/src/form.mli	/^val select_lists_with : t -> string -> select_list inputs$/;"	v
 select_lists_with	src/page.ml	/^  let select_lists_with selector f =$/;"	v
 server_headers	_build/src/agent.mli	/^val server_headers : t -> http_headers $/;"	v
 server_headers	src/agent.ml	/^let server_headers agent = agent.last_headers$/;"	v
 server_headers	src/agent.mli	/^val server_headers : t -> http_headers $/;"	v
-set	src/page.ml	/^    let set f fd v =$/;"	v
+set	setup.ml	/^      let set data ?context x =$/;"	v
+set	setup.ml	/^    let set t data nm ?context x =$/;"	v	Module:PropList
 set_client_headers	_build/src/agent.mli	/^val set_client_headers : Cohttp.Header.t -> t -> t$/;"	v
 set_client_headers	src/agent.ml	/^let set_client_headers headers agent = {agent with client_headers = headers}$/;"	v
 set_client_headers	src/agent.mli	/^val set_client_headers : Cohttp.Header.t -> t -> t$/;"	v
@@ -390,77 +919,185 @@ set_cookie_jar	src/agent.mli	/^val set_cookie_jar : Cookiejar.t -> t -> t$/;"	v
 set_proxy	_build/src/agent.mli	/^val set_proxy : ?user:string$/;"	v
 set_proxy	src/agent.ml	/^let set_proxy ?user ?password ~host ~port agent =$/;"	v
 set_proxy	src/agent.mli	/^val set_proxy : ?user:string$/;"	v
-singleton	src/page.ml	/^  let singleton x = [x]$/;"	v
-sl	src/page.ml	/^      (Soup.id sl, value sl) >>>$/;"	v
-source	src/page.ml	/^  let source frame = frame |> Soup.attribute "src" |> Soup.require$/;"	v	Module:Frame
+sets	setup.ml	/^      let sets data ?context s =$/;"	v
+setup	setup.ml	/^      let setup t =$/;"	v	Module:BaseCompat/Compat_0_4
+setup	setup.ml	/^  let setup t =$/;"	v
+setup_t	setup.ml	/^let setup_t = BaseCompat.Compat_0_4.adapt_setup_t setup_t$/;"	v
+setup_t	setup.ml	/^let setup_t =$/;"	v
+setup_update	setup.ml	/^          setup_update:     bool;$/;"	r	type:BaseCompat/Compat_0_4/BaseSetup/t
+setup_update	setup.ml	/^      setup_update:     bool;$/;"	r	type:BaseSetup/t
+since_version	setup.ml	/^  let since_version ver_str = SinceVersion (version_of_string ver_str)$/;"	v
+soup_index	_build/test/test.ml	/^let soup_index =$/;"	v
+soup_index	test/test.ml	/^let soup_index =$/;"	v
+source	setup.ml	/^  type source$/;"	t
 source	src/page.ml	/^  let source image = image |> Soup.attribute "src" |> Soup.require$/;"	v	Module:Image
+source_filename	setup.ml	/^  type source_filename = source OASISFileSystem.filename$/;"	t
+spec	myocamlbuild.ml	/^                 let spec = BaseEnvLight.var_choose cond_specs env in$/;"	v
 split	_build/myocamlbuild.ml	/^  let split s ch =$/;"	v
+split	myocamlbuild.ml	/^  let split s ch =$/;"	v
+split	setup.ml	/^      let rec split args files =$/;"	v
+split_field	setup.ml	/^    let rec split_field mp lst =$/;"	v
 split_nl	_build/myocamlbuild.ml	/^  let split_nl s = split s '\\n'$/;"	v
+split_nl	myocamlbuild.ml	/^  let split_nl s = split s '\\n'$/;"	v
+srcfs	setup.ml	/^      srcfs:                 source OASISFileSystem.fs;$/;"	r	type:t
+st	myocamlbuild.ml	/^        let st = Stream.of_channel chn in$/;"	v
+st	setup.ml	/^           let st =$/;"	v
+st	setup.ml	/^        let st = Stream.of_channel chn in$/;"	v
+starts_with	myocamlbuild.ml	/^  let starts_with ~what ?(offset=0) str =$/;"	v
+starts_with	setup.ml	/^  let starts_with ~what ?(offset=0) str =$/;"	v
 status_code	_build/src/agent.mli	/^val status_code : t -> http_status_code$/;"	v
 status_code	src/agent.ml	/^let status_code agent = agent.last_status_code$/;"	v
 status_code	src/agent.mli	/^val status_code : t -> http_status_code$/;"	v
+std_args_fun	setup.ml	/^      type std_args_fun = package -> string array -> unit$/;"	t	Module:BaseCompat/Compat_0_4/BaseSetup
+std_args_fun	setup.ml	/^  type std_args_fun =$/;"	t	Module:BaseSetup
+std_length	setup.ml	/^  let std_length = 4096 (* Standard buffer\/read length. *)$/;"	v	method:OASISFileSystem/fs#string_of_filename/open_out
+str_lst	_build/myocamlbuild.ml	/^            let str_lst =$/;"	v
+str_lst	myocamlbuild.ml	/^            let str_lst =$/;"	v
+str_lst	setup.ml	/^            let str_lst =$/;"	v	Module:OASISExpr
+stream_of_reader	setup.ml	/^  let stream_of_reader rdr =$/;"	v	method:OASISFileSystem/fs#string_of_filename
 string	src/cookiejar.ml	/^    value : string;$/;"	r	type:Cookie/t
-submit	_build/src/agent.mli	/^val submit : Form.t -> t -> t$/;"	v
+string_of_comparator	setup.ml	/^  let rec string_of_comparator =$/;"	v
+string_of_filename	setup.ml	/^      method string_of_filename = self#host_filename$/;"	m	class:OASISFileSystem/fs#host_fs
+string_of_filename	setup.ml	/^      method string_of_filename: 'a filename -> string$/;"	m	class:OASISFileSystem/fs
+string_of_section	setup.ml	/^  let string_of_section sct =$/;"	v
+string_of_section_kind	setup.ml	/^  let string_of_section_kind =$/;"	v
+string_of_version	setup.ml	/^  let string_of_version t = t$/;"	v
+strip_ends_with	myocamlbuild.ml	/^  let strip_ends_with ~what str =$/;"	v
+strip_ends_with	setup.ml	/^  let strip_ends_with ~what str =$/;"	v
+strip_starts_with	myocamlbuild.ml	/^  let strip_starts_with ~what str =$/;"	v
+strip_starts_with	setup.ml	/^  let strip_starts_with ~what str =$/;"	v
+strm	setup.ml	/^        let strm = Stream.of_channel chn in$/;"	v	class:OASISFileSystem/fs
+sub_end	myocamlbuild.ml	/^  let sub_end ?(offset=0) str len =$/;"	v
+sub_end	setup.ml	/^  let sub_end ?(offset=0) str len =$/;"	v
+sub_start	myocamlbuild.ml	/^  let sub_start str len =$/;"	v
+sub_start	setup.ml	/^  let sub_start str len =$/;"	v
+submit	_build/src/agent.mli	/^val submit : Page.Form.t -> t -> t Lwt.t$/;"	v
 submit	src/agent.ml	/^let submit form agent =$/;"	v
-submit	src/agent.mli	/^val submit : Form.t -> t -> t$/;"	v
+submit	src/agent.mli	/^val submit : Page.Form.t -> t -> t Lwt.t$/;"	v
 t	_build/src/agent.ml	/^type t = {$/;"	t
 t	_build/src/agent.mli	/^type t$/;"	t
 t	_build/src/cookiejar.mli	/^type t$/;"	t
-t	_build/src/form.mli	/^type t$/;"	t
 t	_build/src/page.ml	/^type t = Soup.soup Soup.node$/;"	t
 t	_build/src/page.mli	/^type t$/;"	t
+t	_build/test/test.ml	/^let test_selector (type s) page f (module M : PageElement with type t = s) node prefix selector expected_count =$/;"	t
+t	myocamlbuild.ml	/^         type t = string$/;"	t
+t	myocamlbuild.ml	/^  type t = string MapString.t$/;"	t	Module:BaseEnvLight
+t	myocamlbuild.ml	/^  type t =$/;"	t	Module:MyOCamlbuildBase
+t	setup.ml	/^          type t = string * string$/;"	t	Module:BaseLog
+t	setup.ml	/^         type t = string$/;"	t
+t	setup.ml	/^      let t = {atoms = parse s; origin = s} in$/;"	v
+t	setup.ml	/^      type t =$/;"	t	Module:BaseCompat/Compat_0_4/BaseSetup
+t	setup.ml	/^    let t =$/;"	v
+t	setup.ml	/^    type ('ctxt, 'extra) t =$/;"	t	Module:PropList/Schema
+t	setup.ml	/^    type t =$/;"	t	Module:OASISSourcePatterns/Templater
+t	setup.ml	/^    type t =$/;"	t	Module:PropList/Data
+t	setup.ml	/^  type t = Templater.t$/;"	t
+t	setup.ml	/^  type t = elt list$/;"	t
+t	setup.ml	/^  type t = string$/;"	t	Module:OASISVersion
+t	setup.ml	/^  type t =$/;"	t
+t	setup.ml	/^  type t =$/;"	t	Module:BaseSetup
+t	setup.ml	/^  type t =$/;"	t	Module:CustomPlugin
+t	setup.ml	/^  type t =$/;"	t	Module:OASISExpr
 t	src/agent.ml	/^type t = {$/;"	t
 t	src/agent.mli	/^type t$/;"	t
 t	src/cookiejar.ml	/^  type t = { name : string;$/;"	t	Module:Cookie
 t	src/cookiejar.ml	/^  type t = {name: string; domain : string; path : string}$/;"	t	Module:Key
 t	src/cookiejar.ml	/^type t = Cookie.t JarMap.t$/;"	t
-t	src/page.ml	/^  type t = elt$/;"	t	Module:Frame
+t	src/cookiejar.mli	/^type t$/;"	t
 t	src/page.ml	/^  type t = elt$/;"	t	Module:Image
-t	src/page.ml	/^  type t = elt$/;"	t	Module:Link
 t	src/page.ml	/^  type t = {form : elt; data : (string list) StringMap.t}$/;"	t	Module:Form
 t	src/page.ml	/^type t = Soup.soup Soup.node$/;"	t
 t	src/page.mli	/^type t$/;"	t
+t	test/test.ml	/^let test_selector (type s) page f (module M : PageElement with type t = s) node prefix selector expected_count =$/;"	t
+tag	myocamlbuild.ml	/^  type tag = string$/;"	t	Module:MyOCamlbuildBase
 tag_filter	_build/src/page.ml	/^let tag_filter tag node =$/;"	v
 tag_filter	src/page.ml	/^let tag_filter tag node =$/;"	v
 tag_selector	_build/src/page.ml	/^let tag_selector tag = function$/;"	v
 tag_selector	src/page.ml	/^let tag_selector tag = function$/;"	v
-text	src/page.ml	/^  let text = Soup.leaf_text$/;"	v	Module:Frame
-text	src/page.ml	/^  let text = Soup.leaf_text$/;"	v	Module:Link
-text_with	_build/src/form.mli	/^val text_with : t -> string -> field inputs option$/;"	v
+test	setup.ml	/^          test:             ((test, float) section_args_fun) list;$/;"	r	type:BaseCompat/Compat_0_4/BaseSetup/t
+test	setup.ml	/^      test:             ((test, float) section_args_fun) list;$/;"	r	type:BaseSetup/t
+test	setup.ml	/^  let test ~ctxt lst pkg extra_args =$/;"	v	Module:BaseTest
+test	setup.ml	/^  type test = string$/;"	t	Module:OASISExpr
+test_form	test.ml	/^let test_form = $/;"	v
+test_selector	_build/test/test.ml	/^let test_selector (type s) page f (module M : PageElement with type t = s) node prefix selector expected_count =$/;"	v
+test_selector	test/test.ml	/^let test_selector (type s) page f (module M : PageElement with type t = s) node prefix selector expected_count =$/;"	v
+test_selector_inputs	_build/test/test.ml	/^let test_selector_inputs form f input prefix selector expected_count =$/;"	v
+test_selector_inputs	test/test.ml	/^let test_selector_inputs form f input prefix selector expected_count =$/;"	v
+text_in	setup.ml	/^    let text_in = Open_text :: default_in$/;"	v	Module:OASISFileSystem/fs#string_of_filename/open_out/open_in/Mode
+text_out	setup.ml	/^    let text_out = Open_text :: default_out$/;"	v	Module:OASISFileSystem/fs#string_of_filename/open_out/open_in/Mode
 text_with	src/page.ml	/^  let text_with selector f =$/;"	v
-textarea_with	_build/src/form.mli	/^val textarea_with : t -> string -> field inputs option$/;"	v
-textarea_with	src/page.ml	/^  let textarea_with selector f =$/;"	v
-textareas	_build/src/form.mli	/^val textareas : t -> field inputs$/;"	v
-textareas	src/page.ml	/^  let textareas = textareas_with ""$/;"	v
-textareas_with	_build/src/form.mli	/^val textareas_with : t -> string -> field inputs$/;"	v
 textareas_with	src/page.ml	/^  let textareas_with selector f =$/;"	v
-texts	_build/src/form.mli	/^val texts : t -> field inputs$/;"	v
 texts	src/page.ml	/^  let texts = texts_with ""$/;"	v
-texts_with	_build/src/form.mli	/^val texts_with : t -> string -> field inputs$/;"	v
 texts_with	src/page.ml	/^  let texts_with selector f =$/;"	v
-to_list	_build/src/form.mli	/^val to_list : 'a inputs -> 'a input list$/;"	v
+tgt_dir	setup.ml	/^    let tgt_dir =$/;"	v
+to_list	myocamlbuild.ml	/^      let to_list = elements$/;"	v	Module:OASISUtils/Make
+to_list	myocamlbuild.ml	/^      let to_list t = fold (fun k v acc -> (k, v) :: acc) t []$/;"	v	Module:OASISUtils/MapExt/Make
+to_list	myocamlbuild.ml	/^      val to_list: 'a t -> (key * 'a) list$/;"	v	Module:OASISUtils/MapExt/S
+to_list	setup.ml	/^      let to_list = elements$/;"	v	Module:OASISUtils/Make
+to_list	setup.ml	/^      let to_list t = fold (fun k v acc -> (k, v) :: acc) t []$/;"	v	Module:OASISUtils/MapExt/Make
+to_list	setup.ml	/^      val to_list: 'a t -> (key * 'a) list$/;"	v	Module:OASISUtils/MapExt/S
 to_list	src/page.ml	/^  let to_list = Soup.to_list$/;"	v	Module:Form
-to_node	_build/src/form.mli	/^val to_node : _ input -> Soup.element Soup.node$/;"	v
-to_node	src/page.ml	/^  let to_node frame = frame$/;"	v	Module:Frame
+to_node	src/page.ml	/^  let to_node f = f.form$/;"	v	Module:Form
 to_node	src/page.ml	/^  let to_node image = image$/;"	v	Module:Image
 to_node	src/page.ml	/^  let to_node link = link$/;"	v
-to_node	src/page.ml	/^  let to_node n = n$/;"	v	Module:Form
-to_nodes	_build/src/form.mli	/^val to_nodes : _ inputs -> Soup.element Soup.nodes$/;"	v
-to_nodes	src/page.ml	/^  let to_nodes n = n$/;"	v	Module:Form
 to_soup	_build/src/page.mli	/^val to_soup : t -> Soup.soup Soup.node$/;"	v
 to_soup	src/page.mli	/^val to_soup : t -> Soup.soup Soup.node$/;"	v
+to_string	setup.ml	/^  let to_string t =$/;"	v
 to_string	src/cookiejar.ml	/^  let to_string k = k.name ^ k.domain ^ k.path$/;"	v	Module:Key
-to_string	src/page.ml	/^    let to_string item = item >|= _value |> Soup.require$/;"	v
+to_unix_filename	setup.ml	/^  let to_unix_filename fn = (fn: string)$/;"	v	method:OASISFileSystem/fs#string_of_filename
+tree	setup.ml	/^  type tree =$/;"	t	Module:OASISFindlib
+uncapitalize_ascii	myocamlbuild.ml	/^  let uncapitalize_ascii s =$/;"	v
+uncapitalize_ascii	setup.ml	/^  let uncapitalize_ascii s =$/;"	v
+uncapitalize_file	setup.ml	/^  let uncapitalize_file f =$/;"	v
+uninstall	setup.ml	/^          uninstall:        std_args_fun;$/;"	r	type:BaseCompat/Compat_0_4/BaseSetup/t
+uninstall	setup.ml	/^      uninstall:        std_args_fun;$/;"	r	type:BaseSetup/t
+uninstall	setup.ml	/^  let uninstall ~ctxt _ _ =$/;"	v
+uninstall	setup.ml	/^  let uninstall ~ctxt t args =$/;"	v
+unix_directory	setup.ml	/^    let unix_directory dn lib =$/;"	v
+unix_exec_is	setup.ml	/^  let unix_exec_is (cs, bs, exec) is_native ext_dll suffix_program =$/;"	v	Module:OASISExecutable
+unload	setup.ml	/^  let unload () =$/;"	v
+unregister	setup.ml	/^  let unregister ~ctxt t nm =$/;"	v
 update_agent	src/agent.ml	/^let update_agent uri agent (response,body) =$/;"	v
-update_form	src/page.ml	/^  let update_form f data = {f with data = data |? f.data}$/;"	v
-uri	src/page.ml	/^  let uri frame = frame |> source |> Uri.of_string$/;"	v	Module:Frame
+update_setup_ml	setup.ml	/^  let update_setup_ml t =$/;"	v
+update_setup_ml	setup.ml	/^  let update_setup_ml, no_update_setup_ml_cli =$/;"	v
+uppercase_ascii	myocamlbuild.ml	/^  let uppercase_ascii =$/;"	v
+uppercase_ascii	setup.ml	/^  let uppercase_ascii =$/;"	v
 uri	src/page.ml	/^  let uri image = image |> source |> Uri.of_string$/;"	v	Module:Image
-uri	src/page.ml	/^  let uri link = link |> href |> Uri.of_string$/;"	v	Module:Link
 user	_build/src/agent.ml	/^  user : string option;$/;"	r	type:proxy
 user	src/agent.ml	/^  user : string option;$/;"	r	type:proxy
+v	setup.ml	/^      let v =$/;"	v
+var_choose	setup.ml	/^  let var_choose ?printer ?name lst =$/;"	v
+var_cond	setup.ml	/^  let var_cond = ref []$/;"	v
+var_define	setup.ml	/^  let var_define nm =$/;"	v
+var_define_cond	setup.ml	/^  let var_define_cond ~since_version f dflt =$/;"	v
 var_expand	_build/myocamlbuild.ml	/^  let rec var_expand str env =$/;"	v
-|>	src/page.ml	/^    let to_string item = item >|= _value |> Soup.require$/;"	f
-|>	src/page.ml	/^    let to_string item = item |> value |> Soup.require$/;"	f
+var_expand	myocamlbuild.ml	/^  let rec var_expand str env =$/;"	v
+var_expand	setup.ml	/^  let rec var_expand str env =$/;"	v
+var_get	setup.ml	/^  and var_get name =$/;"	v
+var_get_low	setup.ml	/^    let var_get_low lst =$/;"	v
+var_get_lst	setup.ml	/^    let var_get_lst =$/;"	v
+var_ignore	setup.ml	/^  let var_ignore (_: unit -> string) = ()$/;"	v
+var_protect	setup.ml	/^  let var_protect vl =$/;"	v
+var_redefine	setup.ml	/^  let var_redefine$/;"	v
+variables	setup.ml	/^        variables: string MapString.t;$/;"	r	type:OASISSourcePatterns/Templater/env
+varname_concat	_build/myocamlbuild.ml	/^  let varname_concat ?(hyphen='_') p s =$/;"	v
+varname_concat	myocamlbuild.ml	/^  let varname_concat ?(hyphen='_') p s =$/;"	v
+varname_concat	setup.ml	/^  let varname_concat ?(hyphen='_') p s =$/;"	v
+varname_of_comparator	setup.ml	/^  let rec varname_of_comparator =$/;"	v
+varname_of_string	_build/myocamlbuild.ml	/^  let varname_of_string ?(hyphen='_') s =$/;"	v
+varname_of_string	myocamlbuild.ml	/^  let varname_of_string ?(hyphen='_') s =$/;"	v
+varname_of_string	setup.ml	/^  let varname_of_string ?(hyphen='_') s =$/;"	v
+version	setup.ml	/^         let version =$/;"	v
+version	setup.ml	/^      version:   license_version;$/;"	r	type:license_dep_5_unit
+version	setup.ml	/^  let version ~ctxt:_ (t: t) _ = print_endline t.oasis_version$/;"	v
+version_compare	setup.ml	/^  let rec version_compare v1 v2 =$/;"	v	Module:OASISVersion
+version_is_good	setup.ml	/^    let version_is_good ~min_version version fmt =$/;"	v
+version_of_string	setup.ml	/^  let version_of_string str = str$/;"	v
+version_str	setup.ml	/^         let version_str =$/;"	v
+vl	setup.ml	/^    let vl =$/;"	v
+warning	setup.ml	/^  let warning ~ctxt fmt =$/;"	v
+which	setup.ml	/^  let which ~ctxt prg =$/;"	v
+writer	setup.ml	/^  class type writer =$/;"	c	Module:OASISFileSystem
 |?	_build/src/cookiejar.ml	/^let (|?) = Infix.Option.(|?)$/;"	f
 |?	src/cookiejar.ml	/^let (|?) = Infix.Option.(|?)$/;"	f
 |?	src/infix.ml	/^  let (|?) x default = match x with Some x -> x | None -> default$/;"	f	Module:Option

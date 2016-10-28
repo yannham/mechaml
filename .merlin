@@ -1,0 +1,4 @@
+S src
+S test
+B _build/src
+PKG lwt lwt.unix lambdasoup cohttp uri

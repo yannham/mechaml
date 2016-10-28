@@ -33,8 +33,13 @@ module Form : sig
   type _ input
   type _ inputs
 
-  val to_node : _ input -> Soup.element Soup.node
-  val to_nodes : _ inputs -> Soup.element Soup.nodes
+  val name : t -> string option
+  val action : t -> Uri.t
+  val meth : t -> [`POST | `GET]
+
+  val to_node : t -> Soup.element Soup.node
+  val input_to_node : _ input -> Soup.element Soup.node
+  val input_to_nodes : _ inputs -> Soup.element Soup.nodes
 
   val to_list : 'a inputs -> 'a input list
   val iter : ('a input -> unit) -> 'a inputs -> unit
@@ -42,12 +47,11 @@ module Form : sig
   val filter : ('a input -> bool) -> 'a inputs -> 'a inputs
 
   val raw_set : string -> string list -> t -> t
-  val raw_get : string -> t ->string list
+  val raw_get : string -> t -> string list
   val raw_unset : string -> t -> t
   val raw_values : t -> (string * string list) list
 
-  val name : (_ input) -> string option
-  val value : (_ input) -> string option
+  val iname : (_ input) -> string option
 
   val checkbox_with : string -> t -> checkbox input option
   val checkboxes : t -> checkbox inputs
@@ -96,6 +100,11 @@ module Form : sig
   val reset : t -> t
 
   module Checkbox : sig
+    val value : checkbox input -> string
+    val values : t -> checkbox input -> string list
+    val choices : t -> checkbox input -> checkbox inputs
+
+    val checked : t -> checkbox input -> string list
     val check : t -> checkbox input -> t
     val uncheck : t -> checkbox input -> t
     val is_checked : t -> checkbox input -> bool
@@ -103,7 +112,10 @@ module Form : sig
 
   module RadioButton : sig
     val value : radio_button input -> string
-    val values : t -> radio_button input -> radio_button input list 
+    val values : t -> radio_button input -> string list
+    val choices : t -> radio_button input -> radio_button inputs 
+
+    val selected : t -> checkbox input -> string option
     val select : t -> radio_button input -> t
     val is_selected : t -> radio_button input -> bool
   end
@@ -112,19 +124,12 @@ module Form : sig
     type item
 
     val items : select_list input -> item list
+
+    val selected : t -> select_list input -> string option
     val select : t -> select_list input -> item -> t
     val unselect : t -> select_list input -> item -> t
     val is_selected : t -> select_list input -> item -> bool
-    val to_string : item -> string
-  end
 
-  module Menu : sig
-    type item
-
-    val items : menu input -> item list
-    val select : t -> menu input -> item -> t
-    val unselect : t -> menu input -> item -> t
-    val is_selected : t -> select_list input -> item -> bool
     val to_string : item -> string
   end
 
@@ -162,34 +167,34 @@ module Image : sig
   val to_node : t -> Soup.element Soup.node
 end
 
-module Frame : sig
-  type t
-
-  val source : t -> string
-  val uri : t -> Uri.t
-  val name : t -> string option
-  val text : t -> string option
-
-  val make : ?name:string -> ?text:string -> source:string -> t
-
-  val to_node : t -> Soup.element Soup.node
-end
+(* module Frame : sig *)
+(*   type t *)
+(*  *)
+(*   val source : t -> string *)
+(*   val uri : t -> Uri.t *)
+(*   val name : t -> string option *)
+(*   val text : t -> string option *)
+(*  *)
+(*   val make : ?name:string -> ?text:string -> source:string -> t *)
+(*  *)
+(*   val to_node : t -> Soup.element Soup.node *)
+(* end *)
 
 val form_with : string -> t -> Form.t option
 val forms_with : string -> t -> Form.t list
 val forms : t -> Form.t list
 
-val link_with : string -> t -> Image.t option
-val links_with : string -> t -> Image.t list
-val links : t -> Image.t list
+val link_with : string -> t -> Link.t option
+val links_with : string -> t -> Link.t list
+val links : t -> Link.t list
 
 val image_with : string -> t -> Image.t option
 val images_with : string -> t -> Image.t list
 val images : t -> Image.t list
 
-val frame_with : string -> t -> Image.t option
-val frames_with : string -> t -> Image.t list
-val frames : t -> Image.t list
+(* val frame_with : string -> t -> Frame.t option *)
+(* val frames_with : string -> t -> Frame.t list *)
+(* val frames : t -> Frame.t list *)
 
 val to_soup : t -> Soup.soup Soup.node
 val from_soup : Soup.soup Soup.node -> t

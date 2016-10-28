@@ -21,6 +21,9 @@ let (|?) = Infix.Option.(|?)
 
 module C = Cohttp.Cookie.Set_cookie_hdr
 
+let domain_from_uri uri =
+  Uri.host uri |? "zboub.com"
+
 module Cookie = struct
   type expiration = [
     | `Session
@@ -40,13 +43,21 @@ module Cookie = struct
   let path c = c.path
   let secure c = c.secure
 
+  (* let domain_match host dom = *)
+  (*   let host_length,dom_length = String.length host, String.length dom in *)
+  (*   let delta = host_length - dom_length in *)
+  (*   host=dom *)
+  (*   || (dom_length > 0 && dom.[0]='.' && delta >= 0 *)
+  (*     && String.sub host delta (host_length-delta) = dom *)
+  (*     && (String.sub host 0 (delta-1) |> String.contains) '.' |> not) *)
+
   let domain_match host dom =
     let host_length,dom_length = String.length host, String.length dom in
     let delta = host_length - dom_length in
     host=dom
-    || (dom_length > 0 && dom.[0]='.' && delta >= 0
+    || (delta > 0
       && String.sub host delta (host_length-delta) = dom
-      && (String.sub host 0 (delta-1) |> String.contains) '.' |> not)
+      && host.[delta-1] = '.')
 
   let path_match uri_path cookie_path =
     let u_length, c_length = String.length uri_path,
@@ -61,24 +72,21 @@ module Cookie = struct
     | _ -> false
 
 
-  let make ?expiration ?path ?secure ~domain ~name ~value =
-    { name=name;
-      value=value;
-      expiration=expiration |? `Session;
-      domain=domain;
-      path=path |? "";
-      secure=secure |? false}
+  let make ?(expiration = `Session) ?(path = "")  ?(secure = false) ~domain name value =
+    { name = name;
+      value = value;
+      expiration = expiration;
+      domain = domain;
+      path = path;
+      secure = secure}
 
   let from_hdr uri c =
-    match C.domain c with
-    | Some domain ->
-      Some { name = C.cookie c |> fst;
-        value = C.cookie c |> snd;
-        expiration = C.expiration c;
-        domain = domain;
-        path = C.path c |? "";
-        secure = C.secure c }
-    | None -> None
+    { name = C.cookie c |> fst;
+      value = C.cookie c |> snd;
+      expiration = C.expiration c;
+      domain = C.domain c |? domain_from_uri uri;
+      path = C.path c |? "";
+      secure = C.secure c }
 end
 
 module Key = struct
@@ -101,6 +109,7 @@ type t = Cookie.t JarMap.t
 let map = JarMap.map
 let iter f = JarMap.iter (fun x -> f)
 let fold f = JarMap.fold (fun x -> f)
+let is_empty = JarMap.is_empty
 
 let empty = JarMap.empty
 
@@ -112,11 +121,7 @@ let add c jar =
 let remove c jar = JarMap.remove (Key.key c) jar
 
 let add_from_headers uri headers jar =
-  let add_to_jar jar c =
-    match Cookie.from_hdr uri c with
-    | Some c' -> add c' jar
-    | None -> jar
-  in
+  let add_to_jar jar c = add (Cookie.from_hdr uri c) jar in
   C.extract headers
   |> List.map snd
   |> List.fold_left add_to_jar jar
@@ -135,4 +140,4 @@ let add_to_headers uri headers jar =
     | false -> first
   in
   fold to_header jar true |> ignore;
-  Cohttp.Header.add headers "cookie" (Buffer.contents buffer)
+  Cohttp.Header.add headers "Cookie" (Buffer.contents buffer)

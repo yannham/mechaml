@@ -1,0 +1,52 @@
+<html>
+  <title>Test</title>
+  <head>This is a nice test page for Mechaml</head>
+  <body>
+    <div>
+      <form id="form-one" class="formclass" action="/action-one">
+        This a form with :
+        <ul>
+          <li>Checkboxes</li>
+            <input type="checkbox" name="check1" value="choice1"/>
+            <input type="checkbox" name="check1" value="choice2"/>
+            <input type="checkbox" name="check1" value="choice3"/>
+            <input type="checkbox" name="check2" value="choice1"/>
+            <input type="checkbox" name="check2" value="choice2"/>
+            <input type="checkbox" name="check2" value="choice3"/>
+          <li>Radio buttons</li>
+            <input type="radio" name="radio1" value="choice1"/>
+            <input type="radio" name="radio1" value="choice2"/>
+            <input type="radio" name="radio1" value="choice3"/>
+            <input type="radio" name="radio2" value="choice1"/>
+            <input type="radio" name="radio2" value="choice2"/>
+            <input type="radio" name="radio2" value="choice3"/>
+        </ul>
+        <input type="submit" value="Submit"/>
+          
+      </form>
+    </div>
+    <ul>
+      <li>An item</li>
+      <form id="form-two" class="formclass" action="/action-two">
+        This a form with :
+        <input type="submit" value="Submit"/>
+      </form>
+      <li>Another item</li>
+    </ul>
+    <a id="a-one" href="https://www.mysecurecenter.com">First link</a>
+    <div>
+      <a class="aclass" id="a-two" href="http://www.awebsite/index.html">Second link</a>
+    </div>
+    <img id="img1" class="imgclass" src="https://verysecure.wow.much/"/>
+    <a class="aclass" href="http://www.lambda-the-ultimate.org/">Third link</a>
+    <table>
+      <img id="img2" src="http://www.im.age.fr/image.jpg" />
+      <frames>
+        <frame id="fone" class="frameclass" src="https://www.suchsafe.very/" />
+      </frames>
+    </table>
+    <img class="imgclass" src="http://www.anothersite.it" />
+    <div></div>
+    <frame id="ftwo" class="frameclass" src="http://aweb.page/page.html" />
+  </body>
+</html>

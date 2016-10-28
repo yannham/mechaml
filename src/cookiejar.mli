@@ -5,8 +5,7 @@
   copies.
   THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
   WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
-  WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
-  AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR
+  WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR
   CONSEQUENTIAL
   DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE,
   DATA
@@ -42,8 +41,8 @@ module Cookie : sig
     -> ?path:string
     -> ?secure:bool
     -> domain:string
-    -> name:string
-    -> value:string -> t
+    -> string
+    -> string -> t
 end
 
 type t
@@ -70,3 +69,4 @@ val add_to_headers : Uri.t -> Cohttp.Header.t -> t -> Cohttp.Header.t
 val map : (Cookie.t -> Cookie.t) -> t -> t
 val iter : (Cookie.t -> unit) -> t -> unit
 val fold : (Cookie.t -> 'a -> 'a) -> t -> 'a -> 'a
+val is_empty : t -> bool 
