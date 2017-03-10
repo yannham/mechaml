@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="next" href="Page.Form.RadioButton.html">
+<link rel="Up" href="Page.Form.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Agent" rel="Chapter" href="Agent.html">
+<link title="Page" rel="Chapter" href="Page.html">
+<link title="Cookiejar" rel="Chapter" href="Cookiejar.html"><title>Page.Form.Checkbox</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a class="up" href="Page.Form.html" title="Page.Form">Up</a>
+&nbsp;<a class="post" href="Page.Form.RadioButton.html" title="Page.Form.RadioButton">Next</a>
+</div>
+<h1>Module <a href="type_Page.Form.Checkbox.html">Page.Form.Checkbox</a></h1>
+
+<pre><span class="keyword">module</span> Checkbox: <code class="code">sig</code> <a href="Page.Form.Checkbox.html">..</a> <code class="code">end</code></pre><div class="info module top">
+Operation on Checkboxes<br>
+</div>
+<hr width="100%">
+
+<pre><span id="VALvalue"><span class="keyword">val</span> value</span> : <code class="type"><a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string</code></pre><div class="info ">
+Return the value (the label) of a checkbox<br>
+</div>
+
+<pre><span id="VALvalues"><span class="keyword">val</span> values</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string list</code></pre><div class="info ">
+Return the values of all the checkboxes with the same name that the
+       given one<br>
+</div>
+
+<pre><span id="VALchoices"><span class="keyword">val</span> choices</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -><br>       <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinputs">Page.Form.inputs</a></code></pre><div class="info ">
+Return all the checkboxes with the same name that the given one<br>
+</div>
+
+<pre><span id="VALchecked"><span class="keyword">val</span> checked</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string list</code></pre><div class="info ">
+Return the list of all checked checkboxes with the same name that the
+       given one<br>
+</div>
+
+<pre><span id="VALcheck"><span class="keyword">val</span> check</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> <a href="Page.Form.html#TYPEt">Page.Form.t</a></code></pre>
+<pre><span id="VALuncheck"><span class="keyword">val</span> uncheck</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> <a href="Page.Form.html#TYPEt">Page.Form.t</a></code></pre>
+<pre><span id="VALis_checked"><span class="keyword">val</span> is_checked</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> bool</code></pre></body></html>

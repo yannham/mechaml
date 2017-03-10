@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Page.Form.Checkbox.html">
+<link rel="next" href="Page.Form.SelectList.html">
+<link rel="Up" href="Page.Form.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Agent" rel="Chapter" href="Agent.html">
+<link title="Page" rel="Chapter" href="Page.html">
+<link title="Cookiejar" rel="Chapter" href="Cookiejar.html"><title>Page.Form.RadioButton</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Page.Form.Checkbox.html" title="Page.Form.Checkbox">Previous</a>
+&nbsp;<a class="up" href="Page.Form.html" title="Page.Form">Up</a>
+&nbsp;<a class="post" href="Page.Form.SelectList.html" title="Page.Form.SelectList">Next</a>
+</div>
+<h1>Module <a href="type_Page.Form.RadioButton.html">Page.Form.RadioButton</a></h1>
+
+<pre><span class="keyword">module</span> RadioButton: <code class="code">sig</code> <a href="Page.Form.RadioButton.html">..</a> <code class="code">end</code></pre><div class="info module top">
+Operations on Radio Buttons<br>
+</div>
+<hr width="100%">
+<br>
+Similar to checkboxes, except that selecting one radio button in group
+       automatically unselect the others<br>
+
+<pre><span id="VALvalue"><span class="keyword">val</span> value</span> : <code class="type"><a href="Page.Form.html#TYPEradio_button">Page.Form.radio_button</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string</code></pre>
+<pre><span id="VALvalues"><span class="keyword">val</span> values</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEradio_button">Page.Form.radio_button</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string list</code></pre>
+<pre><span id="VALchoices"><span class="keyword">val</span> choices</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -><br>       <a href="Page.Form.html#TYPEradio_button">Page.Form.radio_button</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -><br>       <a href="Page.Form.html#TYPEradio_button">Page.Form.radio_button</a> <a href="Page.Form.html#TYPEinputs">Page.Form.inputs</a></code></pre>
+<pre><span id="VALselected"><span class="keyword">val</span> selected</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string option</code></pre><div class="info ">
+Return the possibly selected radio button<br>
+</div>
+
+<pre><span id="VALselect"><span class="keyword">val</span> select</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEradio_button">Page.Form.radio_button</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> <a href="Page.Form.html#TYPEt">Page.Form.t</a></code></pre>
+<pre><span id="VALis_selected"><span class="keyword">val</span> is_selected</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEradio_button">Page.Form.radio_button</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> bool</code></pre></body></html>

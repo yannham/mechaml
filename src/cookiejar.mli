@@ -16,7 +16,20 @@
   PERFORMANCE OF THIS SOFTWARE.
   }}}*)
 
-(* Internal representation of a cookie *)
+(** Cookies management
+
+    Cookiejar is the module that stores and manages cookies. A Cookiejar stores the
+    list of all cookies created by the [Set-Cookie] headers sent by the server.
+    It is able to automatically extract cookies from server headers (see
+    {!add_from_headers}), or to select and add relevant
+    coookies to the [Cookie] client header before a request (see
+    {!add_to_headers}).
+
+    It is mainly used by the {!module:Agent} module internally, but can be manipulated if
+    one need to programmatically the cookies sent by the agent. *)
+
+
+(** Representation of a cookie *)
 module Cookie : sig
   type t
   type expiration = [
@@ -31,11 +44,12 @@ module Cookie : sig
   val path : t -> string
   val secure : t -> bool
 
-  (* Given an uri and a cookie, return true if the
-   * cookie's domain and path matches the uri's one.
+  (** Given an uri and a cookie, return true if the
+     cookie's domain and path match the uri's one.
    *)
   val match_uri : Uri.t -> t -> bool
 
+  (** Create a cookie *)
   val make :
     ?expiration:expiration
     -> ?path:string
@@ -47,26 +61,26 @@ end
 
 type t
 
-(* The emtpy cookie jar*)
+(** The emtpy cookie jar*)
 val empty : t
 
-(* Add a plain cookie to the jar *)
+(** Add a cookie to the jar *)
 val add : Cookie.t -> t -> t
-(* Remove a plain cookie from the jar *)
+
+(** Remove a cookie from the jar *)
 val remove : Cookie.t -> t -> t
 
-(* Given a header received from a server,
- * update the jar according
- * to set-cookie HTTP header
+(** Given a header received from a server, update the jar according to 
+    possible [Set-Cookie] HTTP header
  *)
 val add_from_headers : Uri.t -> Cohttp.Header.t -> t -> t
 
-(* Given an URI, update the HTTP headers parameter
- * with corresponding cookies before sending it
- * to the server *)
+(** Given an URI to request, update the client HTTP headers with relevant
+   cookies before sending it to the server *)
 val add_to_headers : Uri.t -> Cohttp.Header.t -> t -> Cohttp.Header.t
 
 val map : (Cookie.t -> Cookie.t) -> t -> t
 val iter : (Cookie.t -> unit) -> t -> unit
 val fold : (Cookie.t -> 'a -> 'a) -> t -> 'a -> 'a
-val is_empty : t -> bool 
+
+val is_empty : t -> bool

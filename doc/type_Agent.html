@@ -1,0 +1,47 @@
+<html><head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Agent" rel="Chapter" href="Agent.html">
+<link title="Page" rel="Chapter" href="Page.html">
+<link title="Cookiejar" rel="Chapter" href="Cookiejar.html"><title>Agent</title>
+</head>
+<body>
+<code class="code"><span class="keyword">sig</span>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;t
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;http_status_code&nbsp;=&nbsp;<span class="constructor">Cohttp</span>.<span class="constructor">Code</span>.status_code
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;http_headers&nbsp;=&nbsp;<span class="constructor">Cohttp</span>.<span class="constructor">Header</span>.t
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;http_meth&nbsp;=&nbsp;<span class="constructor">Cohttp</span>.<span class="constructor">Code</span>.meth
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;init&nbsp;:&nbsp;?max_redirect:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;get&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="constructor">Lwt</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;get_uri&nbsp;:&nbsp;<span class="constructor">Uri</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="constructor">Lwt</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;click&nbsp;:&nbsp;<span class="constructor">Page</span>.<span class="constructor">Link</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="constructor">Lwt</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;post&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="constructor">Lwt</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;post_uri&nbsp;:&nbsp;<span class="constructor">Uri</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="constructor">Lwt</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;submit&nbsp;:&nbsp;<span class="constructor">Page</span>.<span class="constructor">Form</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="constructor">Lwt</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;load&nbsp;:&nbsp;<span class="constructor">Page</span>.<span class="constructor">Image</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="constructor">Lwt</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;uri&nbsp;:&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Uri</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;meth&nbsp;:&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.http_meth
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;page&nbsp;:&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Page</span>.t&nbsp;option
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;content&nbsp;:&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;server_headers&nbsp;:&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.http_headers
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;status_code&nbsp;:&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.http_status_code
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;code_of_status&nbsp;:&nbsp;<span class="constructor">Agent</span>.http_status_code&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_proxy&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;?user:string&nbsp;<span class="keywordsign">-&gt;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;?password:string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;host:string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;port:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;disable_proxy&nbsp;:&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;cookie_jar&nbsp;:&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cookiejar</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_cookie_jar&nbsp;:&nbsp;<span class="constructor">Cookiejar</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;add_cookie&nbsp;:&nbsp;<span class="constructor">Cookiejar</span>.<span class="constructor">Cookie</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;remove_cookie&nbsp;:&nbsp;<span class="constructor">Cookiejar</span>.<span class="constructor">Cookie</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;client_headers&nbsp;:&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cohttp</span>.<span class="constructor">Header</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_client_headers&nbsp;:&nbsp;<span class="constructor">Cohttp</span>.<span class="constructor">Header</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;add_client_header&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;remove_client_header&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_max_redirect&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Agent</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;default_max_redirect&nbsp;:&nbsp;int
+<span class="keyword">end</span></code></body></html>

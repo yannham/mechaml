@@ -17,10 +17,22 @@
   PERFORMANCE OF THIS SOFTWARE.
   }}}*)
 
+(** Some infix operators for the option Monad *)
 module Option : sig
-  val (>>>) : 'a option * 'b option-> ('a -> 'b -> 'c) -> 'c option
-  val (>|=) : 'a option -> ('a -> 'b) -> 'b option
+  (** The monadic bind operator *)
   val (>>=) : 'a option -> ('a -> 'b option) -> 'b option
-  val (>>) : 'a option -> ('a -> 'b) option -> 'b option
+
+  (** The usual [map] + application : [None >|= f] is [None] and [Some x >|= f] is
+     [Some (f x)] *)
+  val (>|=) : 'a option -> ('a -> 'b) -> 'b option
+
+  (** Apply a two argument function to a pair of optionals : if one of the
+     component is [None], then return [None], otherwise [(Some x, Some y) >>> f] is
+     [Some (f x y)] *)
+  val (>>>) : 'a option * 'b option-> ('a -> 'b -> 'c) -> 'c option
+
+  (** Return the content of an optional, or the given default value if the first
+     argument is [None]. Id est [Some x |? def] is [x] and [None |? def] is
+     [def]. *) 
   val (|?) : 'a option -> 'a -> 'a
 end

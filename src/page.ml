@@ -73,7 +73,7 @@ module Form = struct
     f.form |> Soup.attribute "action"
     >|= Uri.of_string
     |> Soup.require
-  let meth f = 
+  let meth f =
     let m = f.form |> Soup.attribute "method"
       >|= String.lowercase_ascii
       >|= String.trim in
@@ -82,20 +82,20 @@ module Form = struct
       | _ -> `GET
 
   let to_node f = f.form
-  let input_to_node i = i 
-  let input_to_nodes is = is 
+  let input_to_node i = i
+  let input_to_nodes is = is
 
   let to_list = Soup.to_list
   let iter = Soup.iter
   let fold = Soup.fold
   let filter = Soup.filter
 
-  let raw_set key value f = 
+  let set key value f =
     {f with data = f.data |> StringMap.add key value}
-  let raw_get key f = StringMap.find key f.data
-  let raw_unset key f = 
+  let get key f = StringMap.find key f.data
+  let unset key f =
     {f with data = f.data |> StringMap.remove key}
-  let raw_values f = StringMap.fold (fun id value l -> (id,value)::l) f.data []
+  let values f = StringMap.fold (fun id value l -> (id,value)::l) f.data []
 
   let checkboxes_with selector f =
     f.form |> Soup.select (tag_selector "input[type=checkbox]" selector)
@@ -177,7 +177,7 @@ module Form = struct
     f |> textareas_with selector |> Soup.first
 
   let textareas = textareas_with ""
-  
+
   let keygens_with selector f =
     f.form |> Soup.select (tag_selector "input[type=keygen]" selector)
     |> Soup.filter (input_filter "keygen")
@@ -204,8 +204,8 @@ module Form = struct
   open Infix.Option
 
   let singleton x = [x]
-  let ladd x l = x::l
-  let flip_right f x y z = f y z x
+  let cons x l = x::l
+  let uncurry f (x,y) = f x y
   let radd m k v = StringMap.add k v m
   let rrem m k = StringMap.remove k m
   let rmem m k = StringMap.mem k m
@@ -228,7 +228,7 @@ module Form = struct
     v::(current_values m k)
     |> radd m k
 
-  let rem_value m k v = 
+  let rem_value m k v =
     current_values m k
     |> List.filter ((<>) v)
     |> radd m k
@@ -258,7 +258,7 @@ module Form = struct
       iname cb >|= current_values f.data |? []
 
     let check f cb =
-      (iname cb, ivalue cb) >>> add_value f.data 
+      (iname cb, ivalue cb) >>> add_value f.data
       |> update_form f
 
     let uncheck f cb =
@@ -275,7 +275,9 @@ module Form = struct
     let value rb = ivalue rb |> Soup.require
 
     let choices f rb =
-      iname rb >|= rb_selector >|= (fun s ->
+      iname rb
+      >|= rb_selector
+      >|= (fun s ->
         Soup.select s f.form) |> Soup.require
 
     let values f rb =
@@ -288,12 +290,13 @@ module Form = struct
       iname rb >>= current_value f.data
 
     let select f rb =
-      (iname rb, ivalue rb >|= singleton) >>> radd f.data
+      (iname rb, ivalue rb >|= singleton)
+      >>> radd f.data
       |> update_form f
 
-    let is_selected f rb = 
+    let is_selected f rb =
       (iname rb, ivalue rb) >>> has_value f.data |? false
- 
+
     let to_string item = item >|= ivalue |> Soup.require
   end
 
@@ -306,7 +309,8 @@ module Form = struct
       iname sl >>= current_value f.data
 
     let select f sl item =
-      (iname sl, ivalue item >|= singleton) >>> radd f.data
+      (iname sl, ivalue item >|= singleton)
+      >>> radd f.data
       |> update_form f
 
     let unselect f sl item =
@@ -320,7 +324,9 @@ module Form = struct
 
   module Field = struct
     let set f fd v =
-      iname fd >|= (fun name -> radd f.data name [v])
+      iname fd
+      >|= (fun name -> 
+        radd f.data name [v])
       |> update_form f
 
     let get f fd =
@@ -329,7 +335,8 @@ module Form = struct
 
   module FileUpload = struct
     let select f fu path =
-      iname fu >|= (fun name -> radd f.data name [path])
+      iname fu
+      >|= (fun name -> radd f.data name [path])
       |> update_form f
 
     let which_selected f fu =

@@ -1,0 +1,44 @@
+<html><head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Agent" rel="Chapter" href="Agent.html">
+<link title="Page" rel="Chapter" href="Page.html">
+<link title="Cookiejar" rel="Chapter" href="Cookiejar.html"><title>Cookiejar</title>
+</head>
+<body>
+<code class="code"><span class="keyword">sig</span>
+&nbsp;&nbsp;<span class="keyword">module</span>&nbsp;<span class="constructor">Cookie</span>&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">sig</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;expiration&nbsp;=&nbsp;[&nbsp;<span class="keywordsign">`</span><span class="constructor">Max_age</span>&nbsp;<span class="keyword">of</span>&nbsp;int64&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Session</span>&nbsp;]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;name&nbsp;:&nbsp;<span class="constructor">Cookiejar</span>.<span class="constructor">Cookie</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;value&nbsp;:&nbsp;<span class="constructor">Cookiejar</span>.<span class="constructor">Cookie</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;expiration&nbsp;:&nbsp;<span class="constructor">Cookiejar</span>.<span class="constructor">Cookie</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cookiejar</span>.<span class="constructor">Cookie</span>.expiration
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;domain&nbsp;:&nbsp;<span class="constructor">Cookiejar</span>.<span class="constructor">Cookie</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;path&nbsp;:&nbsp;<span class="constructor">Cookiejar</span>.<span class="constructor">Cookie</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;secure&nbsp;:&nbsp;<span class="constructor">Cookiejar</span>.<span class="constructor">Cookie</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;match_uri&nbsp;:&nbsp;<span class="constructor">Uri</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cookiejar</span>.<span class="constructor">Cookie</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;make&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?expiration:<span class="constructor">Cookiejar</span>.<span class="constructor">Cookie</span>.expiration&nbsp;<span class="keywordsign">-&gt;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?path:string&nbsp;<span class="keywordsign">-&gt;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?secure:bool&nbsp;<span class="keywordsign">-&gt;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;domain:string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cookiejar</span>.<span class="constructor">Cookie</span>.t
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">end</span>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;empty&nbsp;:&nbsp;<span class="constructor">Cookiejar</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;add&nbsp;:&nbsp;<span class="constructor">Cookiejar</span>.<span class="constructor">Cookie</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cookiejar</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cookiejar</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;remove&nbsp;:&nbsp;<span class="constructor">Cookiejar</span>.<span class="constructor">Cookie</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cookiejar</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cookiejar</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;add_from_headers&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Uri</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cohttp</span>.<span class="constructor">Header</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cookiejar</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cookiejar</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;add_to_headers&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Uri</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cohttp</span>.<span class="constructor">Header</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cookiejar</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cohttp</span>.<span class="constructor">Header</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;map&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="constructor">Cookiejar</span>.<span class="constructor">Cookie</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cookiejar</span>.<span class="constructor">Cookie</span>.t)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cookiejar</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cookiejar</span>.t
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;iter&nbsp;:&nbsp;(<span class="constructor">Cookiejar</span>.<span class="constructor">Cookie</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cookiejar</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fold&nbsp;:&nbsp;(<span class="constructor">Cookiejar</span>.<span class="constructor">Cookie</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cookiejar</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_empty&nbsp;:&nbsp;<span class="constructor">Cookiejar</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool
+<span class="keyword">end</span></code></body></html>

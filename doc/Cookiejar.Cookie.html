@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="Up" href="Cookiejar.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Agent" rel="Chapter" href="Agent.html">
+<link title="Page" rel="Chapter" href="Page.html">
+<link title="Cookiejar" rel="Chapter" href="Cookiejar.html"><title>Cookiejar.Cookie</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a class="up" href="Cookiejar.html" title="Cookiejar">Up</a>
+&nbsp;</div>
+<h1>Module <a href="type_Cookiejar.Cookie.html">Cookiejar.Cookie</a></h1>
+
+<pre><span class="keyword">module</span> Cookie: <code class="code">sig</code> <a href="Cookiejar.Cookie.html">..</a> <code class="code">end</code></pre><div class="info module top">
+Representation of a cookie<br>
+</div>
+<hr width="100%">
+
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type"></code>t</span> </pre>
+
+
+<pre><span id="TYPEexpiration"><span class="keyword">type</span> <code class="type"></code>expiration</span> = <code class="type">[ `Max_age of int64 | `Session ]</code> </pre>
+
+
+<pre><span id="VALname"><span class="keyword">val</span> name</span> : <code class="type"><a href="Cookiejar.Cookie.html#TYPEt">t</a> -> string</code></pre>
+<pre><span id="VALvalue"><span class="keyword">val</span> value</span> : <code class="type"><a href="Cookiejar.Cookie.html#TYPEt">t</a> -> string</code></pre>
+<pre><span id="VALexpiration"><span class="keyword">val</span> expiration</span> : <code class="type"><a href="Cookiejar.Cookie.html#TYPEt">t</a> -> <a href="Cookiejar.Cookie.html#TYPEexpiration">expiration</a></code></pre>
+<pre><span id="VALdomain"><span class="keyword">val</span> domain</span> : <code class="type"><a href="Cookiejar.Cookie.html#TYPEt">t</a> -> string</code></pre>
+<pre><span id="VALpath"><span class="keyword">val</span> path</span> : <code class="type"><a href="Cookiejar.Cookie.html#TYPEt">t</a> -> string</code></pre>
+<pre><span id="VALsecure"><span class="keyword">val</span> secure</span> : <code class="type"><a href="Cookiejar.Cookie.html#TYPEt">t</a> -> bool</code></pre>
+<pre><span id="VALmatch_uri"><span class="keyword">val</span> match_uri</span> : <code class="type">Uri.t -> <a href="Cookiejar.Cookie.html#TYPEt">t</a> -> bool</code></pre><div class="info ">
+Given an uri and a cookie, return true if the
+     cookie's domain and path match the uri's one.<br>
+</div>
+
+<pre><span id="VALmake"><span class="keyword">val</span> make</span> : <code class="type">?expiration:<a href="Cookiejar.Cookie.html#TYPEexpiration">expiration</a> -><br>       ?path:string -><br>       ?secure:bool -> domain:string -> string -> string -> <a href="Cookiejar.Cookie.html#TYPEt">t</a></code></pre><div class="info ">
+Create a cookie<br>
+</div>
+</body></html>

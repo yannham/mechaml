@@ -17,12 +17,23 @@
   PERFORMANCE OF THIS SOFTWARE.
   }}}*)
 
+(** Page
+
+    This module contains all the functions used to analyze a page, select specific
+    elements, and manage forms.
+
+*)
+
+(** The type of an html page *)
 type t
 
+(** {2 Form} *)
+
+(** Operations on form and inputs *)
 module Form : sig
   type t
 
-  (* field types *)
+  (** Phantom types for inputs *)
   type checkbox
   type radio_button
   type select_list
@@ -30,28 +41,64 @@ module Form : sig
   type field
   type file_upload
 
+  (** A form input *)
   type _ input
+  (** A (possibly lazy) list of form inputs *)
   type _ inputs
 
+  (** Return the name of the form *)
   val name : t -> string option
+
+  (** Return the action attribute of the form *)
   val action : t -> Uri.t
+
+  (** Return the method attribute of the form *)
   val meth : t -> [`POST | `GET]
 
+  (** Convert a form to a Soup node *)
   val to_node : t -> Soup.element Soup.node
+
+  (** Convert an input to a Soup node *)
   val input_to_node : _ input -> Soup.element Soup.node
+
+  (** Convert an input list to a Soup nodes list *)
   val input_to_nodes : _ inputs -> Soup.element Soup.nodes
 
+  (** Convert the lazy input list to a native OCaml list *)
   val to_list : 'a inputs -> 'a input list
+
+  (** Operations on a lazy input list *)
   val iter : ('a input -> unit) -> 'a inputs -> unit
   val fold : ('a -> 'b input -> 'a) -> 'a -> 'b inputs -> 'a
   val filter : ('a input -> bool) -> 'a inputs -> 'a inputs
 
-  val raw_set : string -> string list -> t -> t
-  val raw_get : string -> t -> string list
-  val raw_unset : string -> t -> t
-  val raw_values : t -> (string * string list) list
+  (** Set directly the values of a field *)
+  val set : string -> string list -> t -> t
 
+  (** Get the value of a field *)
+  val get : string -> t -> string list
+
+  (** Delete the value of a field *)
+  val unset : string -> t -> t
+
+  (** Return all set values as a list *)
+  val values : t -> (string * string list) list
+
+  (** Return the name of an input *)
   val iname : (_ input) -> string option
+
+  (** All the following function are build using the same pattern.
+
+      - xxxs (eg {!checkboxes}) return all the input of a certain type.
+      For example, [checkboxes myform] will return all the checkboxes of the form
+      - xxx_with take a CSS selector as parameter, and return the first input that
+      matches the selector, or [None] if there isn't any. Eg, [fields_with myform
+      "\[name$=text2\]"] will try to find any text field which name ends with {v text2
+      v}
+      - xxxs_with proceed as the previous form, but return all inputs matching the
+      selector.
+
+  *)
 
   val checkbox_with : string -> t -> checkbox input option
   val checkboxes : t -> checkbox inputs
@@ -99,30 +146,50 @@ module Form : sig
 
   val reset : t -> t
 
+  (** Operation on Checkboxes *)
   module Checkbox : sig
+    (** Return the value (the label) of a checkbox *)
     val value : checkbox input -> string
+
+    (** Return the values of all the checkboxes with the same name that the
+       given one *)
     val values : t -> checkbox input -> string list
+
+    (** Return all the checkboxes with the same name that the given one *)
     val choices : t -> checkbox input -> checkbox inputs
 
+    (** Return the list of all checked checkboxes with the same name that the
+       given one *)
     val checked : t -> checkbox input -> string list
+
     val check : t -> checkbox input -> t
     val uncheck : t -> checkbox input -> t
     val is_checked : t -> checkbox input -> bool
   end
 
+  (** Operations on Radio Buttons *)
   module RadioButton : sig
+
+    (** Similar to checkboxes, except that selecting one radio button in group
+       automatically unselect the others *)
+
     val value : radio_button input -> string
     val values : t -> radio_button input -> string list
-    val choices : t -> radio_button input -> radio_button inputs 
+    val choices : t -> radio_button input -> radio_button inputs
 
+    (** Return the possibly selected radio button *)
     val selected : t -> checkbox input -> string option
+
     val select : t -> radio_button input -> t
     val is_selected : t -> radio_button input -> bool
   end
 
+  (** Operations on Menu (select lists) *)
   module SelectList : sig
+    (** Represent an item of the list *)
     type item
 
+    (** Return a list of all items of a given list *)
     val items : select_list input -> item list
 
     val selected : t -> select_list input -> string option
@@ -130,20 +197,24 @@ module Form : sig
     val unselect : t -> select_list input -> item -> t
     val is_selected : t -> select_list input -> item -> bool
 
+    (** Label of an item *)
     val to_string : item -> string
   end
 
+  (** Operations on text fields : textarea, text/password type input, etc. *)
   module Field : sig
     val set : t -> field input -> string -> t
     val get : t -> field input -> string option
   end
 
+  (** Operation on file upload fields *)
   module FileUpload : sig
     val select : t -> file_upload input -> string -> t
     val which_selected : t -> file_upload input -> string option
   end
 end
 
+(** Operations on hypertext links *)
 module Link : sig
   type t
 
@@ -156,6 +227,7 @@ module Link : sig
   val to_node : t -> Soup.element Soup.node
 end
 
+(** Operations on images *)
 module Image : sig
   type t
 
@@ -180,6 +252,18 @@ end
 (*   val to_node : t -> Soup.element Soup.node *)
 (* end *)
 
+(** All the following function are build using the same pattern.
+
+    - xxxs (eg {!forms}) return all the element of a certain type.
+    For example, [forms mypage] will return all the checkboxes of the form
+    - xxx_with take a CSS selector as parameter, and return the first element that
+    matches the selector, or [None] if there isn't any. Eg, [link_with myform
+    "\[href$=.jpg\]"] will try to find a link that point to a JPEG image
+    - xxxs_with proceed as the previous one, but return all elements matching the
+    selector.
+
+*)
+
 val form_with : string -> t -> Form.t option
 val forms_with : string -> t -> Form.t list
 val forms : t -> Form.t list
@@ -195,6 +279,8 @@ val images : t -> Image.t list
 (* val frame_with : string -> t -> Frame.t option *)
 (* val frames_with : string -> t -> Frame.t list *)
 (* val frames : t -> Frame.t list *)
+
+(** Convert to and from Lambdasoup *)
 
 val to_soup : t -> Soup.soup Soup.node
 val from_soup : Soup.soup Soup.node -> t

@@ -21,6 +21,14 @@ Library "mechaml"
   InternalModules: Infix
   BuildDepends: lambdasoup, lwt, cohttp, cohttp.lwt, uri
 
+Document "mechaml"
+  Title: Mechaml docs
+  Type: ocamlbuild (0.4)
+  BuildTools+: ocamldoc
+  Install: true
+  XOCamlbuildLibraries : mechaml
+  XOcamlbuildPath : .
+
 Executable "unit_tests"
   Build$: flag(tests)
   Path: test

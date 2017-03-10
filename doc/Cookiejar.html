@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Page.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Agent" rel="Chapter" href="Agent.html">
+<link title="Page" rel="Chapter" href="Page.html">
+<link title="Cookiejar" rel="Chapter" href="Cookiejar.html"><title>Cookiejar</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Page.html" title="Page">Previous</a>
+&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;</div>
+<h1>Module <a href="type_Cookiejar.html">Cookiejar</a></h1>
+
+<pre><span class="keyword">module</span> Cookiejar: <code class="code">sig</code> <a href="Cookiejar.html">..</a> <code class="code">end</code></pre><div class="info module top">
+Cookies management
+<p>
+
+    Cookiejar is the module that stores and manages cookies. A Cookiejar stores the
+    list of all cookies created by the <code class="code">Set-Cookie</code> headers sent by the server.
+    It is able to automatically extract cookies from server headers (see
+    <a href="Cookiejar.html#VALadd_from_headers"><code class="code">Cookiejar.add_from_headers</code></a>), or to select and add relevant
+    coookies to the <code class="code">Cookie</code> client header before a request (see
+    <a href="Cookiejar.html#VALadd_to_headers"><code class="code">Cookiejar.add_to_headers</code></a>).
+<p>
+
+    It is mainly used by the <a href="Agent.html"><code class="code">Agent</code></a> module internally, but can be manipulated if
+    one need to programmatically the cookies sent by the agent.<br>
+</div>
+<hr width="100%">
+
+<pre><span class="keyword">module</span> <a href="Cookiejar.Cookie.html">Cookie</a>: <code class="code">sig</code> <a href="Cookiejar.Cookie.html">..</a> <code class="code">end</code></pre><div class="info">
+Representation of a cookie
+</div>
+
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type"></code>t</span> </pre>
+
+
+<pre><span id="VALempty"><span class="keyword">val</span> empty</span> : <code class="type"><a href="Cookiejar.html#TYPEt">t</a></code></pre><div class="info ">
+The emtpy cookie jar<br>
+</div>
+
+<pre><span id="VALadd"><span class="keyword">val</span> add</span> : <code class="type"><a href="Cookiejar.Cookie.html#TYPEt">Cookie.t</a> -> <a href="Cookiejar.html#TYPEt">t</a> -> <a href="Cookiejar.html#TYPEt">t</a></code></pre><div class="info ">
+Add a cookie to the jar<br>
+</div>
+
+<pre><span id="VALremove"><span class="keyword">val</span> remove</span> : <code class="type"><a href="Cookiejar.Cookie.html#TYPEt">Cookie.t</a> -> <a href="Cookiejar.html#TYPEt">t</a> -> <a href="Cookiejar.html#TYPEt">t</a></code></pre><div class="info ">
+Remove a cookie from the jar<br>
+</div>
+
+<pre><span id="VALadd_from_headers"><span class="keyword">val</span> add_from_headers</span> : <code class="type">Uri.t -> Cohttp.Header.t -> <a href="Cookiejar.html#TYPEt">t</a> -> <a href="Cookiejar.html#TYPEt">t</a></code></pre><div class="info ">
+Given a header received from a server, update the jar according to 
+    possible <code class="code">Set-Cookie</code> HTTP header<br>
+</div>
+
+<pre><span id="VALadd_to_headers"><span class="keyword">val</span> add_to_headers</span> : <code class="type">Uri.t -> Cohttp.Header.t -> <a href="Cookiejar.html#TYPEt">t</a> -> Cohttp.Header.t</code></pre><div class="info ">
+Given an URI to request, update the client HTTP headers with relevant
+   cookies before sending it to the server<br>
+</div>
+
+<pre><span id="VALmap"><span class="keyword">val</span> map</span> : <code class="type">(<a href="Cookiejar.Cookie.html#TYPEt">Cookie.t</a> -> <a href="Cookiejar.Cookie.html#TYPEt">Cookie.t</a>) -> <a href="Cookiejar.html#TYPEt">t</a> -> <a href="Cookiejar.html#TYPEt">t</a></code></pre>
+<pre><span id="VALiter"><span class="keyword">val</span> iter</span> : <code class="type">(<a href="Cookiejar.Cookie.html#TYPEt">Cookie.t</a> -> unit) -> <a href="Cookiejar.html#TYPEt">t</a> -> unit</code></pre>
+<pre><span id="VALfold"><span class="keyword">val</span> fold</span> : <code class="type">(<a href="Cookiejar.Cookie.html#TYPEt">Cookie.t</a> -> 'a -> 'a) -> <a href="Cookiejar.html#TYPEt">t</a> -> 'a -> 'a</code></pre>
+<pre><span id="VALis_empty"><span class="keyword">val</span> is_empty</span> : <code class="type"><a href="Cookiejar.html#TYPEt">t</a> -> bool</code></pre></body></html>

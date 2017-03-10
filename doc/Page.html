@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Agent.html">
+<link rel="next" href="Cookiejar.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Agent" rel="Chapter" href="Agent.html">
+<link title="Page" rel="Chapter" href="Page.html">
+<link title="Cookiejar" rel="Chapter" href="Cookiejar.html"><link title="Form" rel="Section" href="#2_Form">
+<title>Page</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Agent.html" title="Agent">Previous</a>
+&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;<a class="post" href="Cookiejar.html" title="Cookiejar">Next</a>
+</div>
+<h1>Module <a href="type_Page.html">Page</a></h1>
+
+<pre><span class="keyword">module</span> Page: <code class="code">sig</code> <a href="Page.html">..</a> <code class="code">end</code></pre><div class="info module top">
+Page
+<p>
+
+    This module contains all the functions used to analyze a page, select specific
+    elements, and manage forms.<br>
+</div>
+<hr width="100%">
+
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type"></code>t</span> </pre>
+<div class="info ">
+The type of an html page<br>
+</div>
+
+<br>
+<h2 id="2_Form">Form</h2><br>
+
+<pre><span class="keyword">module</span> <a href="Page.Form.html">Form</a>: <code class="code">sig</code> <a href="Page.Form.html">..</a> <code class="code">end</code></pre><div class="info">
+Operations on form and inputs
+</div>
+
+<pre><span class="keyword">module</span> <a href="Page.Link.html">Link</a>: <code class="code">sig</code> <a href="Page.Link.html">..</a> <code class="code">end</code></pre><div class="info">
+Operations on hypertext links
+</div>
+
+<pre><span class="keyword">module</span> <a href="Page.Image.html">Image</a>: <code class="code">sig</code> <a href="Page.Image.html">..</a> <code class="code">end</code></pre><div class="info">
+Operations on images
+</div>
+<br>
+All the following function are build using the same pattern.
+<p>
+<ul>
+<li>xxxs (eg <a href="Page.html#VALforms"><code class="code">Page.forms</code></a>) return all the element of a certain type.
+    For example, <code class="code">forms mypage</code> will return all the checkboxes of the form</li>
+<li>xxx_with take a CSS selector as parameter, and return the first element that
+    matches the selector, or <code class="code">None</code> if there isn't any. Eg, <code class="code">link_with myform
+    "[href$=.jpg]"</code> will try to find a link that point to a JPEG image</li>
+<li>xxxs_with proceed as the previous one, but return all elements matching the
+    selector.</li>
+</ul>
+<br>
+
+<pre><span id="VALform_with"><span class="keyword">val</span> form_with</span> : <code class="type">string -> <a href="Page.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEt">Form.t</a> option</code></pre>
+<pre><span id="VALforms_with"><span class="keyword">val</span> forms_with</span> : <code class="type">string -> <a href="Page.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEt">Form.t</a> list</code></pre>
+<pre><span id="VALforms"><span class="keyword">val</span> forms</span> : <code class="type"><a href="Page.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEt">Form.t</a> list</code></pre>
+<pre><span id="VALlink_with"><span class="keyword">val</span> link_with</span> : <code class="type">string -> <a href="Page.html#TYPEt">t</a> -> <a href="Page.Link.html#TYPEt">Link.t</a> option</code></pre>
+<pre><span id="VALlinks_with"><span class="keyword">val</span> links_with</span> : <code class="type">string -> <a href="Page.html#TYPEt">t</a> -> <a href="Page.Link.html#TYPEt">Link.t</a> list</code></pre>
+<pre><span id="VALlinks"><span class="keyword">val</span> links</span> : <code class="type"><a href="Page.html#TYPEt">t</a> -> <a href="Page.Link.html#TYPEt">Link.t</a> list</code></pre>
+<pre><span id="VALimage_with"><span class="keyword">val</span> image_with</span> : <code class="type">string -> <a href="Page.html#TYPEt">t</a> -> <a href="Page.Image.html#TYPEt">Image.t</a> option</code></pre>
+<pre><span id="VALimages_with"><span class="keyword">val</span> images_with</span> : <code class="type">string -> <a href="Page.html#TYPEt">t</a> -> <a href="Page.Image.html#TYPEt">Image.t</a> list</code></pre>
+<pre><span id="VALimages"><span class="keyword">val</span> images</span> : <code class="type"><a href="Page.html#TYPEt">t</a> -> <a href="Page.Image.html#TYPEt">Image.t</a> list</code></pre><br>
+Convert to and from Lambdasoup<br>
+
+<pre><span id="VALto_soup"><span class="keyword">val</span> to_soup</span> : <code class="type"><a href="Page.html#TYPEt">t</a> -> Soup.soup Soup.node</code></pre>
+<pre><span id="VALfrom_soup"><span class="keyword">val</span> from_soup</span> : <code class="type">Soup.soup Soup.node -> <a href="Page.html#TYPEt">t</a></code></pre></body></html>

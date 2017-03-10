@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="next" href="Page.Link.html">
+<link rel="Up" href="Page.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Agent" rel="Chapter" href="Agent.html">
+<link title="Page" rel="Chapter" href="Page.html">
+<link title="Cookiejar" rel="Chapter" href="Cookiejar.html"><title>Page.Form</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a class="up" href="Page.html" title="Page">Up</a>
+&nbsp;<a class="post" href="Page.Link.html" title="Page.Link">Next</a>
+</div>
+<h1>Module <a href="type_Page.Form.html">Page.Form</a></h1>
+
+<pre><span class="keyword">module</span> Form: <code class="code">sig</code> <a href="Page.Form.html">..</a> <code class="code">end</code></pre><div class="info module top">
+Operations on form and inputs<br>
+</div>
+<hr width="100%">
+
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type"></code>t</span> </pre>
+
+
+<pre><span id="TYPEcheckbox"><span class="keyword">type</span> <code class="type"></code>checkbox</span> </pre>
+<div class="info ">
+Phantom types for inputs<br>
+</div>
+
+
+<pre><span id="TYPEradio_button"><span class="keyword">type</span> <code class="type"></code>radio_button</span> </pre>
+
+
+<pre><span id="TYPEselect_list"><span class="keyword">type</span> <code class="type"></code>select_list</span> </pre>
+
+
+<pre><span id="TYPEmenu"><span class="keyword">type</span> <code class="type"></code>menu</span> </pre>
+
+
+<pre><span id="TYPEfield"><span class="keyword">type</span> <code class="type"></code>field</span> </pre>
+
+
+<pre><span id="TYPEfile_upload"><span class="keyword">type</span> <code class="type"></code>file_upload</span> </pre>
+
+
+<pre><span id="TYPEinput"><span class="keyword">type</span> <code class="type">'_</code> input</span> </pre>
+<div class="info ">
+A form input
+<p>
+A (possibly lazy) list of form inputs<br>
+</div>
+
+
+<pre><span id="TYPEinputs"><span class="keyword">type</span> <code class="type">'_</code> inputs</span> </pre>
+
+
+<pre><span id="VALname"><span class="keyword">val</span> name</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> string option</code></pre><div class="info ">
+Return the name of the form<br>
+</div>
+
+<pre><span id="VALaction"><span class="keyword">val</span> action</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> Uri.t</code></pre><div class="info ">
+Return the action attribute of the form<br>
+</div>
+
+<pre><span id="VALmeth"><span class="keyword">val</span> meth</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> [ `GET | `POST ]</code></pre><div class="info ">
+Return the method attribute of the form<br>
+</div>
+
+<pre><span id="VALto_node"><span class="keyword">val</span> to_node</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> Soup.element Soup.node</code></pre><div class="info ">
+Convert a form to a Soup node<br>
+</div>
+
+<pre><span id="VALinput_to_node"><span class="keyword">val</span> input_to_node</span> : <code class="type">'a <a href="Page.Form.html#TYPEinput">input</a> -> Soup.element Soup.node</code></pre><div class="info ">
+Convert an input to a Soup node<br>
+</div>
+
+<pre><span id="VALinput_to_nodes"><span class="keyword">val</span> input_to_nodes</span> : <code class="type">'a <a href="Page.Form.html#TYPEinputs">inputs</a> -> Soup.element Soup.nodes</code></pre><div class="info ">
+Convert an input list to a Soup nodes list<br>
+</div>
+
+<pre><span id="VALto_list"><span class="keyword">val</span> to_list</span> : <code class="type">'a <a href="Page.Form.html#TYPEinputs">inputs</a> -> 'a <a href="Page.Form.html#TYPEinput">input</a> list</code></pre><div class="info ">
+Convert the lazy input list to a native OCaml list<br>
+</div>
+
+<pre><span id="VALiter"><span class="keyword">val</span> iter</span> : <code class="type">('a <a href="Page.Form.html#TYPEinput">input</a> -> unit) -> 'a <a href="Page.Form.html#TYPEinputs">inputs</a> -> unit</code></pre><div class="info ">
+Operations on a lazy input list<br>
+</div>
+
+<pre><span id="VALfold"><span class="keyword">val</span> fold</span> : <code class="type">('a -> 'b <a href="Page.Form.html#TYPEinput">input</a> -> 'a) -> 'a -> 'b <a href="Page.Form.html#TYPEinputs">inputs</a> -> 'a</code></pre>
+<pre><span id="VALfilter"><span class="keyword">val</span> filter</span> : <code class="type">('a <a href="Page.Form.html#TYPEinput">input</a> -> bool) -> 'a <a href="Page.Form.html#TYPEinputs">inputs</a> -> 'a <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALset"><span class="keyword">val</span> set</span> : <code class="type">string -> string list -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEt">t</a></code></pre><div class="info ">
+Set directly the values of a field<br>
+</div>
+
+<pre><span id="VALget"><span class="keyword">val</span> get</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> string list</code></pre><div class="info ">
+Get the value of a field<br>
+</div>
+
+<pre><span id="VALunset"><span class="keyword">val</span> unset</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEt">t</a></code></pre><div class="info ">
+Delete the value of a field<br>
+</div>
+
+<pre><span id="VALvalues"><span class="keyword">val</span> values</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> (string * string list) list</code></pre><div class="info ">
+Return all set values as a list<br>
+</div>
+
+<pre><span id="VALiname"><span class="keyword">val</span> iname</span> : <code class="type">'a <a href="Page.Form.html#TYPEinput">input</a> -> string option</code></pre><div class="info ">
+Return the name of an input<br>
+</div>
+<br>
+All the following function are build using the same pattern.
+<p>
+<ul>
+<li>xxxs (eg <a href="Page.Form.html#VALcheckboxes"><code class="code">Page.Form.checkboxes</code></a>) return all the input of a certain type.
+      For example, <code class="code">checkboxes myform</code> will return all the checkboxes of the form</li>
+<li>xxx_with take a CSS selector as parameter, and return the first input that
+      matches the selector, or <code class="code">None</code> if there isn't any. Eg, <code class="code">fields_with myform
+      "[name$=text2]"</code> will try to find any text field which name ends with <pre class="verbatim">text2
+     </pre></li>
+<li>xxxs_with proceed as the previous form, but return all inputs matching the
+      selector.</li>
+</ul>
+<br>
+
+<pre><span id="VALcheckbox_with"><span class="keyword">val</span> checkbox_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEcheckbox">checkbox</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALcheckboxes"><span class="keyword">val</span> checkboxes</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEcheckbox">checkbox</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALcheckboxes_with"><span class="keyword">val</span> checkboxes_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEcheckbox">checkbox</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALradio_button_with"><span class="keyword">val</span> radio_button_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEradio_button">radio_button</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALradio_buttons"><span class="keyword">val</span> radio_buttons</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEradio_button">radio_button</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALradio_buttons_with"><span class="keyword">val</span> radio_buttons_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEradio_button">radio_button</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALselect_list_with"><span class="keyword">val</span> select_list_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEselect_list">select_list</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALselect_lists"><span class="keyword">val</span> select_lists</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEselect_list">select_list</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALselect_lists_with"><span class="keyword">val</span> select_lists_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEselect_list">select_list</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALfield_with"><span class="keyword">val</span> field_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALfields"><span class="keyword">val</span> fields</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALfields_with"><span class="keyword">val</span> fields_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALtext_with"><span class="keyword">val</span> text_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALtexts"><span class="keyword">val</span> texts</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALtexts_with"><span class="keyword">val</span> texts_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALpassword_with"><span class="keyword">val</span> password_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALpasswords"><span class="keyword">val</span> passwords</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALpasswords_with"><span class="keyword">val</span> passwords_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALhidden_with"><span class="keyword">val</span> hidden_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALhiddens"><span class="keyword">val</span> hiddens</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALhiddens_with"><span class="keyword">val</span> hiddens_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALint_with"><span class="keyword">val</span> int_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALints"><span class="keyword">val</span> ints</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALints_with"><span class="keyword">val</span> ints_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALtextarea_with"><span class="keyword">val</span> textarea_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALtextareas"><span class="keyword">val</span> textareas</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALtextareas_with"><span class="keyword">val</span> textareas_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALkeygen_with"><span class="keyword">val</span> keygen_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALkeygens"><span class="keyword">val</span> keygens</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALkeygens_with"><span class="keyword">val</span> keygens_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALfile_upload_with"><span class="keyword">val</span> file_upload_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfile_upload">file_upload</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALfile_uploads"><span class="keyword">val</span> file_uploads</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfile_upload">file_upload</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALfile_uploads_with"><span class="keyword">val</span> file_uploads_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfile_upload">file_upload</a> <a href="Page.Form.html#TYPEinputs">inputs</a></code></pre>
+<pre><span id="VALreset"><span class="keyword">val</span> reset</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEt">t</a></code></pre>
+<pre><span class="keyword">module</span> <a href="Page.Form.Checkbox.html">Checkbox</a>: <code class="code">sig</code> <a href="Page.Form.Checkbox.html">..</a> <code class="code">end</code></pre><div class="info">
+Operation on Checkboxes
+</div>
+
+<pre><span class="keyword">module</span> <a href="Page.Form.RadioButton.html">RadioButton</a>: <code class="code">sig</code> <a href="Page.Form.RadioButton.html">..</a> <code class="code">end</code></pre><div class="info">
+Operations on Radio Buttons
+</div>
+
+<pre><span class="keyword">module</span> <a href="Page.Form.SelectList.html">SelectList</a>: <code class="code">sig</code> <a href="Page.Form.SelectList.html">..</a> <code class="code">end</code></pre><div class="info">
+Operations on Menu (select lists)
+</div>
+
+<pre><span class="keyword">module</span> <a href="Page.Form.Field.html">Field</a>: <code class="code">sig</code> <a href="Page.Form.Field.html">..</a> <code class="code">end</code></pre><div class="info">
+Operations on text fields : textarea, text/password type input, etc.
+</div>
+
+<pre><span class="keyword">module</span> <a href="Page.Form.FileUpload.html">FileUpload</a>: <code class="code">sig</code> <a href="Page.Form.FileUpload.html">..</a> <code class="code">end</code></pre><div class="info">
+Operation on file upload fields
+</div>
+</body></html>

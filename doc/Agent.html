@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="next" href="Page.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Agent" rel="Chapter" href="Agent.html">
+<link title="Page" rel="Chapter" href="Page.html">
+<link title="Cookiejar" rel="Chapter" href="Cookiejar.html"><link title="Main operations " rel="Section" href="#2_Mainoperations">
+<link title="Response" rel="Subsection" href="#3_Response">
+<title>Agent</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;<a class="post" href="Page.html" title="Page">Next</a>
+</div>
+<h1>Module <a href="type_Agent.html">Agent</a></h1>
+
+<pre><span class="keyword">module</span> Agent: <code class="code">sig</code> <a href="Agent.html">..</a> <code class="code">end</code></pre><div class="info module top">
+Scraping agent
+<p>
+
+    Mechaml is a web agent that allows to :
+<p>
+<ul>
+<li>Fetch and parse HTML pages</li>
+<li>Analyze, fill and submit HTML forms</li>
+<li>Manages cookies, headers and redirections</li>
+<li>Use a proxy (soon to be implemented)</li>
+</ul>
+
+    It is build on top of Cohttp, Lwt and Lambdasoup.<br>
+</div>
+<hr width="100%">
+
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type"></code>t</span> </pre>
+
+
+<pre><span id="TYPEhttp_status_code"><span class="keyword">type</span> <code class="type"></code>http_status_code</span> = <code class="type">Cohttp.Code.status_code</code> </pre>
+
+
+<pre><span id="TYPEhttp_headers"><span class="keyword">type</span> <code class="type"></code>http_headers</span> = <code class="type">Cohttp.Header.t</code> </pre>
+
+
+<pre><span id="TYPEhttp_meth"><span class="keyword">type</span> <code class="type"></code>http_meth</span> = <code class="type">Cohttp.Code.meth</code> </pre>
+
+<br>
+<h2 id="2_Mainoperations">Main operations </h2><br>
+
+<pre><span id="VALinit"><span class="keyword">val</span> init</span> : <code class="type">?max_redirect:int -> unit -> <a href="Agent.html#TYPEt">t</a></code></pre><div class="info ">
+Create a new empty agent. <code class="code">~max_redirect</code> indicates how many times the agent
+   will automatically and consecutively follow the <code class="code">Location</code> header in case of
+   HTTP 302 or 303 response codes to avoid a redirect loop. Set
+   to <code class="code">0</code> to disable any automatic redirection.<br>
+</div>
+<br>
+Perform a get request to the specified URI<br>
+
+<pre><span id="VALget"><span class="keyword">val</span> get</span> : <code class="type">string -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a> Lwt.t</code></pre>
+<pre><span id="VALget_uri"><span class="keyword">val</span> get_uri</span> : <code class="type">Uri.t -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a> Lwt.t</code></pre>
+<pre><span id="VALclick"><span class="keyword">val</span> click</span> : <code class="type"><a href="Page.Link.html#TYPEt">Page.Link.t</a> -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a> Lwt.t</code></pre><div class="info ">
+Same as get, but work directly with links instead of URIs<br>
+</div>
+<br>
+Send a raw post requet to the specified URI<br>
+
+<pre><span id="VALpost"><span class="keyword">val</span> post</span> : <code class="type">string -> string -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a> Lwt.t</code></pre>
+<pre><span id="VALpost_uri"><span class="keyword">val</span> post_uri</span> : <code class="type">Uri.t -> string -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a> Lwt.t</code></pre>
+<pre><span id="VALsubmit"><span class="keyword">val</span> submit</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a> Lwt.t</code></pre><div class="info ">
+Submit a filled form<br>
+</div>
+
+<pre><span id="VALload"><span class="keyword">val</span> load</span> : <code class="type"><a href="Page.Image.html#TYPEt">Page.Image.t</a> -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a> Lwt.t</code></pre><div class="info ">
+Send a get request to retrieve an image, but discard the content<br>
+</div>
+<br>
+<h3 id="3_Response">Response</h3><br>
+
+<pre><span id="VALuri"><span class="keyword">val</span> uri</span> : <code class="type"><a href="Agent.html#TYPEt">t</a> -> Uri.t</code></pre><div class="info ">
+Return the last URI requested, or an empty one if none<br>
+</div>
+
+<pre><span id="VALmeth"><span class="keyword">val</span> meth</span> : <code class="type"><a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEhttp_meth">http_meth</a></code></pre><div class="info ">
+Return the method used to retrieve the content, or <code class="code">`Other "None"</code> if none<br>
+</div>
+
+<pre><span id="VALpage"><span class="keyword">val</span> page</span> : <code class="type"><a href="Agent.html#TYPEt">t</a> -> <a href="Page.html#TYPEt">Page.t</a> option</code></pre><div class="info ">
+Return the last page, or None if none or any error ocurred during HTML
+   parsing<br>
+</div>
+
+<pre><span id="VALcontent"><span class="keyword">val</span> content</span> : <code class="type"><a href="Agent.html#TYPEt">t</a> -> string</code></pre><div class="info ">
+Return the raw content of the last response as a string, or an empty string
+   if none<br>
+</div>
+
+<pre><span id="VALserver_headers"><span class="keyword">val</span> server_headers</span> : <code class="type"><a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEhttp_headers">http_headers</a></code></pre><div class="info ">
+Return the headers sent by the last response, or empty headers if none<br>
+</div>
+
+<pre><span id="VALstatus_code"><span class="keyword">val</span> status_code</span> : <code class="type"><a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEhttp_status_code">http_status_code</a></code></pre><div class="info ">
+Return the HTTP code of the last reponse, or <code class="code">`Code (-1)</code> if none<br>
+</div>
+
+<pre><span id="VALcode_of_status"><span class="keyword">val</span> code_of_status</span> : <code class="type"><a href="Agent.html#TYPEhttp_status_code">http_status_code</a> -> int</code></pre><div class="info ">
+Convert a code to the corresponding int code<br>
+</div>
+<br>
+<h4 id="4_Proxy">Proxy</h4><br>
+<br>
+Proxy are currently NOT SUPPORTED YET<br>
+
+<pre><span id="VALset_proxy"><span class="keyword">val</span> set_proxy</span> : <code class="type">?user:string -><br>       ?password:string -> host:string -> port:int -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a></code></pre>
+<pre><span id="VALdisable_proxy"><span class="keyword">val</span> disable_proxy</span> : <code class="type"><a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a></code></pre><br>
+<h5 id="5_Cookies">Cookies</h5> (see <a href="Cookiejar.html"><code class="code">Cookiejar</code></a>)<br>
+
+<pre><span id="VALcookie_jar"><span class="keyword">val</span> cookie_jar</span> : <code class="type"><a href="Agent.html#TYPEt">t</a> -> <a href="Cookiejar.html#TYPEt">Cookiejar.t</a></code></pre><div class="info ">
+Return the current Cookiejar<br>
+</div>
+
+<pre><span id="VALset_cookie_jar"><span class="keyword">val</span> set_cookie_jar</span> : <code class="type"><a href="Cookiejar.html#TYPEt">Cookiejar.t</a> -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a></code></pre><div class="info ">
+Change the current Cookiejar<br>
+</div>
+
+<pre><span id="VALadd_cookie"><span class="keyword">val</span> add_cookie</span> : <code class="type"><a href="Cookiejar.Cookie.html#TYPEt">Cookiejar.Cookie.t</a> -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a></code></pre><div class="info ">
+Add a single cookie to the current Cookiejar<br>
+</div>
+
+<pre><span id="VALremove_cookie"><span class="keyword">val</span> remove_cookie</span> : <code class="type"><a href="Cookiejar.Cookie.html#TYPEt">Cookiejar.Cookie.t</a> -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a></code></pre><div class="info ">
+Remove a single cookie from the Cookiejar<br>
+</div>
+<br>
+<h6 id="6_Headers">Headers</h6><br>
+
+<pre><span id="VALclient_headers"><span class="keyword">val</span> client_headers</span> : <code class="type"><a href="Agent.html#TYPEt">t</a> -> Cohttp.Header.t</code></pre><div class="info ">
+Return the default headers sent when performing HTTP requests<br>
+</div>
+
+<pre><span id="VALset_client_headers"><span class="keyword">val</span> set_client_headers</span> : <code class="type">Cohttp.Header.t -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a></code></pre><div class="info ">
+Use the specified headers as new default headers<br>
+</div>
+
+<pre><span id="VALadd_client_header"><span class="keyword">val</span> add_client_header</span> : <code class="type">string -> string -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a></code></pre><div class="info ">
+Add a single pair key/value to the default headers<br>
+</div>
+
+<pre><span id="VALremove_client_header"><span class="keyword">val</span> remove_client_header</span> : <code class="type">string -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a></code></pre><div class="info ">
+Remove a single pair key/value from the default headers<br>
+</div>
+<br>
+<div class="h7" id="7_Redirection">Redirection</div><br>
+
+<pre><span id="VALset_max_redirect"><span class="keyword">val</span> set_max_redirect</span> : <code class="type">int -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a></code></pre><div class="info ">
+Max redirection to avoid infinite loops (use 0 to disable automatic
+   redirection)<br>
+</div>
+
+<pre><span id="VALdefault_max_redirect"><span class="keyword">val</span> default_max_redirect</span> : <code class="type">int</code></pre><div class="info ">
+The default maximum consecutive redirections. Used to avoid redirect loops<br>
+</div>
+</body></html>

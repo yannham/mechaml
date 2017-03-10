@@ -1,11 +1,30 @@
 header
 headerize.sh
 
-_build
-*.native
-*.byte
-*.docdir
 tags
+_tags
+.vim-last-repl
 
+/test.ml
+
+*.annot
+*.cmo
+*.cma
+*.cmi
+*.a
+*.o
+*.cmx
+*.cmxs
+*.cmxa
+*.docdir
+
+# ocamlbuild working directory
+_build/
+
+# ocamlbuild targets
+*.byte
+*.native
+
+# oasis generated files
 setup.data
 setup.log
