@@ -73,7 +73,8 @@ let rec redirect agent =
     | _ -> Lwt.return { agent with redirect = 0 }
 
 and update_agent uri meth agent (response,body) =
-  Cohttp_lwt_body.to_string body >|= (function body_str ->
+  Cohttp_lwt_body.to_string body
+  >|= (function body_str ->
     let code = Response.status response in
     let headers = Response.headers response in
     let page = try
@@ -109,7 +110,8 @@ let load image agent =
     |> Cookiejar.add_to_headers uri agent.client_headers in
   Client.get ~headers:headers uri
   >>= update_agent uri `GET agent
-  >|= fun agent -> {agent with last_page = page}
+  >|= fun agent -> 
+    {agent with last_page = page}
 
 let click link = link |> Page.Link.uri |> get_uri
 
@@ -129,6 +131,19 @@ let submit form agent =
     |> Cookiejar.add_to_headers uri agent.client_headers in
   Client.post_form ~headers:headers ~params:params uri
   >>= update_agent uri `POST agent
+
+let save_content file agent =
+  Lwt_io.open_file Lwt_io.output file
+  >>= (fun out ->
+    Lwt_io.write out agent.last_body
+    |> ignore;
+    Lwt_io.close out)
+
+let save_image image file agent =
+  let uri = Page.Image.uri image in
+  agent
+  |> get_uri uri
+  >>= save_content file
 
 let uri agent = agent.last_uri
 let meth agent = agent.last_meth

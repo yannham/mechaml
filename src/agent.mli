@@ -60,8 +60,17 @@ val post_uri : Uri.t -> string -> t -> t Lwt.t
 (** Submit a filled form *)
 val submit : Page.Form.t -> t -> t Lwt.t
 
-(** Send a get request to retrieve an image, but discard the content *)
-val load : Page.Image.t -> t -> t Lwt.t
+(** Save the downloaded content in a file *)
+
+(** [save_image image "myfile.jpg" agent] load the image using [get], open
+   [myfile.jpg] and write the received content.
+   *)
+val save_image : Page.Image.t -> string -> t -> unit Lwt.t
+
+(** [save_content ~mode:`Binary "myfile.html" agent] write the current content of the agent in
+   a file. By default, the file is opened in text mode : use the optionnal
+   parameter mode to write binary content *)
+val save_content : string -> t -> unit Lwt.t
 
 (** {3 Response} *)
 
