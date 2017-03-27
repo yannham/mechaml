@@ -33,6 +33,6 @@ module Option : sig
 
   (** Return the content of an optional, or the given default value if the first
      argument is [None]. Id est [Some x |? def] is [x] and [None |? def] is
-     [def]. *) 
+     [def]. *)
   val (|?) : 'a option -> 'a -> 'a
 end

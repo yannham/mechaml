@@ -229,11 +229,6 @@ Operations on a lazy input list
 <td></td></tr>
 <tr><td><a href="Page.html#VALlinks_with">links_with</a> [<a href="Page.html">Page</a>]</td>
 <td></td></tr>
-<tr><td><a href="Agent.html#VALload">load</a> [<a href="Agent.html">Agent</a>]</td>
-<td><div class="info">
-Send a get request to retrieve an image, but discard the content
-</div>
-</td></tr>
 <tr><td align="left"><br>M</td></tr>
 <tr><td><a href="Cookiejar.Cookie.html#VALmake">make</a> [<a href="Cookiejar.Cookie.html">Cookiejar.Cookie</a>]</td>
 <td><div class="info">
@@ -314,6 +309,18 @@ Remove a single cookie from the Cookiejar
 <tr><td><a href="Page.Form.html#VALreset">reset</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td></td></tr>
 <tr><td align="left"><br>S</td></tr>
+<tr><td><a href="Agent.html#VALsave_content">save_content</a> [<a href="Agent.html">Agent</a>]</td>
+<td><div class="info">
+<code class="code">save_content ~mode:`Binary "myfile.html" agent</code> write the current content of the agent in
+   a file.
+</div>
+</td></tr>
+<tr><td><a href="Agent.html#VALsave_image">save_image</a> [<a href="Agent.html">Agent</a>]</td>
+<td><div class="info">
+<code class="code">save_image image "myfile.jpg" agent</code> load the image using <code class="code">get</code>, open
+   <code class="code">myfile.jpg</code> and write the received content.
+</div>
+</td></tr>
 <tr><td><a href="Cookiejar.Cookie.html#VALsecure">secure</a> [<a href="Cookiejar.Cookie.html">Cookiejar.Cookie</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.Form.FileUpload.html#VALselect">select</a> [<a href="Page.Form.FileUpload.html">Page.Form.FileUpload</a>]</td>

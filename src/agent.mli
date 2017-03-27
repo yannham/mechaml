@@ -63,8 +63,7 @@ val submit : Page.Form.t -> t -> t Lwt.t
 (** Save the downloaded content in a file *)
 
 (** [save_image image "myfile.jpg" agent] load the image using [get], open
-   [myfile.jpg] and write the received content.
-   *)
+   [myfile.jpg] and write the received content.  *)
 val save_image : Page.Image.t -> string -> t -> unit Lwt.t
 
 (** [save_content ~mode:`Binary "myfile.html" agent] write the current content of the agent in

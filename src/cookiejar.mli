@@ -70,7 +70,7 @@ val add : Cookie.t -> t -> t
 (** Remove a cookie from the jar *)
 val remove : Cookie.t -> t -> t
 
-(** Given a header received from a server, update the jar according to 
+(** Given a header received from a server, update the jar according to
     possible [Set-Cookie] HTTP header
  *)
 val add_from_headers : Uri.t -> Cohttp.Header.t -> t -> t

@@ -110,7 +110,7 @@ let load image agent =
     |> Cookiejar.add_to_headers uri agent.client_headers in
   Client.get ~headers:headers uri
   >>= update_agent uri `GET agent
-  >|= fun agent -> 
+  >|= fun agent ->
     {agent with last_page = page}
 
 let click link = link |> Page.Link.uri |> get_uri
