@@ -87,7 +87,7 @@ module Form : sig
   (** Return the name of an input *)
   val iname : (_ input) -> string option
 
-  (** All the following function are build using the same pattern.
+  (** All the following function are built using the same pattern.
 
       - xxxs (eg {!checkboxes}) return all the input of a certain type.
       For example, [checkboxes myform] will return all the checkboxes of the form
@@ -252,7 +252,7 @@ end
 (*   val to_node : t -> Soup.element Soup.node *)
 (* end *)
 
-(** All the following function are build using the same pattern.
+(** All the following function are built using the same pattern.
 
     - xxxs (eg {!forms}) return all the element of a certain type.
     For example, [forms mypage] will return all the checkboxes of the form
