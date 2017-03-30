@@ -2,7 +2,6 @@ header
 headerize.sh
 
 tags
-_tags
 .vim-last-repl
 
 /test.ml

@@ -67,8 +67,7 @@ val submit : Page.Form.t -> t -> t Lwt.t
 val save_image : Page.Image.t -> string -> t -> unit Lwt.t
 
 (** [save_content ~mode:`Binary "myfile.html" agent] write the current content of the agent in
-   a file. By default, the file is opened in text mode : use the optionnal
-   parameter mode to write binary content *)
+   a file. *)
 val save_content : string -> t -> unit Lwt.t
 
 (** {3 Response} *)

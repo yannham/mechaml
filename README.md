@@ -22,7 +22,7 @@ The library is divided into 3 main modules :
 * Cookiejar : Cookies handling
 * Page : HTML and forms parsing & handling
 
-For more details, see the [documentation](https://github.com/yannham/mechaml/tree/master/doc)
+For more details, see the [documentation](https://yannham.github.io/mechaml/)
 
 ## Usage
 

@@ -40,7 +40,7 @@ The type of an html page<br>
 <h2 id="2_Form">Form</h2><br>
 
 <pre><span class="keyword">module</span> <a href="Page.Form.html">Form</a>: <code class="code">sig</code> <a href="Page.Form.html">..</a> <code class="code">end</code></pre><div class="info">
-Operations on form and inputs
+Operations on forms and inputs
 </div>
 
 <pre><span class="keyword">module</span> <a href="Page.Link.html">Link</a>: <code class="code">sig</code> <a href="Page.Link.html">..</a> <code class="code">end</code></pre><div class="info">
@@ -55,10 +55,10 @@ All the following function are built using the same pattern.
 <p>
 <ul>
 <li>xxxs (eg <a href="Page.html#VALforms"><code class="code">Page.forms</code></a>) return all the element of a certain type.
-    For example, <code class="code">forms mypage</code> will return all the checkboxes of the form</li>
+    For example, <code class="code">forms mypage</code> will return all the form in the page </li>
 <li>xxx_with take a CSS selector as parameter, and return the first element that
-    matches the selector, or <code class="code">None</code> if there isn't any. Eg, <code class="code">link_with myform
-    "[href$=.jpg]"</code> will try to find a link that point to a JPEG image</li>
+    matches the selector, or <code class="code">None</code> if there isn't any. Eg, <code class="code">link_with
+    "[href$=.jpg]" mypage</code> will try to find a link that point to a JPEG image</li>
 <li>xxxs_with proceed as the previous one, but return all elements matching the
     selector.</li>
 </ul>
