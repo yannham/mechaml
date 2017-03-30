@@ -8,11 +8,11 @@ Mechaml is a simple web scraping library that allows to :
 * Handle cookies, headers and redirections
 * Use a web proxy **(soon to be implemented)**
 
-Mechaml is built on top of existing libraries that alreay provides most of the
+Mechaml is built on top of existing libraries that alreay provide most of the
 interesting features : [Cohttp](https://github.com/mirage/ocaml-cohttp) and
-[Lwt](https://github.com/ocsigen/lwt) for asynchronous I/O and HTTP handling and
+[Lwt](https://github.com/ocsigen/lwt) for asynchronous I/O and HTTP handling, and
 [Lambdasoup](https://github.com/aantron/lambda-soup) to parse HTML. It provides
-a simple interface that handles the interactions between these and add a few
+an interface that handles the interactions between these and add a few
 other features.
 
 ## Overview
