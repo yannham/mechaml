@@ -27,3 +27,4 @@ depends: [
   "lambdasoup" {< "0.7.0"}
   "alcotest" {test}
 ]
+available: [ ocaml-version >= "4.02.0" ]

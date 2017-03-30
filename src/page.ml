@@ -23,7 +23,7 @@ type elt = Soup.element Soup.node
 open Infix.Option
 
 let is_identifier_char c =
-  let code = c |> Char.lowercase_ascii |> Char.code in
+  let code = c |> Char.lowercase |> Char.code in
   (code >= (Char.code 'a') && code <= (Char.code 'z')) ||
   (code >= (Char.code '0') && code <= (Char.code '9')) ||
   (c == '-') || (c == '_')
@@ -75,7 +75,7 @@ module Form = struct
     |> Soup.require
   let meth f =
     let m = f.form |> Soup.attribute "method"
-      >|= String.lowercase_ascii
+      >|= String.lowercase
       >|= String.trim in
     match m with
       | Some "post" -> `POST
