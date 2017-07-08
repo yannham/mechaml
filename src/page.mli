@@ -27,6 +27,15 @@
 (** The type of an html page *)
 type t
 
+val from_soup : ?location:Uri.t -> Soup.soup Soup.node -> t
+val from_string : ?location:Uri.t -> string -> t
+
+val base_uri : t -> Uri.t
+val resolver : t -> Uri.t -> Uri.t
+
+(** Convert to Lambdasoup *)
+val soup : t -> Soup.soup Soup.node
+
 (** {2 Form} *)
 
 (** Operations on forms and inputs *)
@@ -51,6 +60,9 @@ module Form : sig
 
   (** Return the action attribute of the form *)
   val action : t -> Uri.t
+
+  (** Return the absolute (resolved) uri corresponding to the action attribute *)
+  val uri : t -> Uri.t
 
   (** Return the method attribute of the form *)
   val meth : t -> [`POST | `GET]
@@ -222,7 +234,7 @@ module Link : sig
   val text : t -> string option
   val uri : t -> Uri.t
 
-  val make : ?text:string -> href:string -> t
+  val make : ?resolver:(Uri.t -> Uri.t) -> ?text:string -> href:string -> t
 
   val to_node : t -> Soup.element Soup.node
 end
@@ -234,7 +246,7 @@ module Image : sig
   val source : t -> string
   val uri : t -> Uri.t
 
-  val make : source:string -> t
+  val make : ?resolver:(Uri.t -> Uri.t) -> source:string -> t
 
   val to_node : t -> Soup.element Soup.node
 end
@@ -279,8 +291,3 @@ val images : t -> Image.t list
 (* val frame_with : string -> t -> Frame.t option *)
 (* val frames_with : string -> t -> Frame.t list *)
 (* val frames : t -> Frame.t list *)
-
-(** Convert to and from Lambdasoup *)
-
-val to_soup : t -> Soup.soup Soup.node
-val from_soup : Soup.soup Soup.node -> t

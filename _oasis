@@ -1,5 +1,5 @@
 Name: Mechaml
-Version: 0.1
+Version: 0.2
 Synopsis: A web browsing library built on top of Lambdasoup and Cohttp. Inspired by WWW::Mechanize
 Authors: Yann Hamdaoui <yann.hamdaoui@centraliens.net>
 License: WTFPL
@@ -19,7 +19,7 @@ Library "mechaml"
   Pack: true
   Modules: Agent, Page, Cookiejar
   InternalModules: Infix
-  BuildDepends: lambdasoup, lwt, cohttp, cohttp.lwt, uri
+  BuildDepends: lambdasoup, lwt, cohttp, cohttp-lwt, cohttp-lwt-unix, uri
 
 Document "mechaml"
   Title: Mechaml docs

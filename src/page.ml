@@ -17,10 +17,13 @@
   PERFORMANCE OF THIS SOFTWARE.
   }}}*)
 
-type t = Soup.soup Soup.node
+type t = { base_uri : Uri.t; soup : Soup.soup Soup.node }
+
 type elt = Soup.element Soup.node
 
 open Infix.Option
+
+let id x = x
 
 let is_identifier_char c =
   let code = c |> Char.lowercase |> Char.code in
@@ -54,10 +57,29 @@ let hd_opt = function
   | [] -> None
   | x::xs -> Some x
 
+
+let from_soup ?(location=Uri.empty) soup =
+  let base_uri =
+    Soup.select_one "base[href]" soup
+    >>= Soup.attribute "href"
+    >|= Uri.of_string |? location in
+  {base_uri; soup}
+
+let from_string ?(location=Uri.empty) s =
+  s
+  |> Soup.parse
+  |> from_soup ~location
+
+let base_uri p = p.base_uri
+
+let resolver p = Uri.resolve "" p.base_uri
+
+let soup p = p.soup
+
 module Form = struct
   module StringMap = Map.Make(String)
 
-  type t = {form : elt; data : (string list) StringMap.t}
+  type t = {resolver : Uri.t -> Uri.t; elt : elt; data : (string list) StringMap.t}
 
   type checkbox
   type radio_button
@@ -68,20 +90,26 @@ module Form = struct
   type _ input = elt
   type _ inputs = Soup.element Soup.nodes
 
-  let name f = Soup.attribute "name" f.form
+  let name f = Soup.attribute "name" f.elt
+
   let action f =
-    f.form |> Soup.attribute "action"
+    f.elt |> Soup.attribute "action"
     >|= Uri.of_string
     |> Soup.require
+
+  let uri f =
+    f |> action
+    |> f.resolver
+
   let meth f =
-    let m = f.form |> Soup.attribute "method"
+    let m = f.elt |> Soup.attribute "method"
       >|= String.lowercase
       >|= String.trim in
     match m with
       | Some "post" -> `POST
       | _ -> `GET
 
-  let to_node f = f.form
+  let to_node f = f.elt
   let input_to_node i = i
   let input_to_nodes is = is
 
@@ -98,7 +126,7 @@ module Form = struct
   let values f = StringMap.fold (fun id value l -> (id,value)::l) f.data []
 
   let checkboxes_with selector f =
-    f.form |> Soup.select (tag_selector "input[type=checkbox]" selector)
+    f.elt |> Soup.select (tag_selector "input[type=checkbox]" selector)
     |> Soup.filter (input_filter "checkbox")
 
   let checkbox_with selector f =
@@ -107,7 +135,7 @@ module Form = struct
   let checkboxes = checkboxes_with ""
 
   let radio_buttons_with selector f =
-    f.form |> Soup.select (tag_selector "input[type=radio]" selector)
+    f.elt |> Soup.select (tag_selector "input[type=radio]" selector)
     |> Soup.filter (input_filter "radio")
 
   let radio_button_with selector f =
@@ -116,7 +144,7 @@ module Form = struct
   let radio_buttons = radio_buttons_with ""
 
   let select_lists_with selector f =
-    f.form |> Soup.select (tag_selector "select" selector)
+    f.elt |> Soup.select (tag_selector "select" selector)
     |> Soup.filter (tag_filter "select")
 
   let select_list_with selector f =
@@ -125,7 +153,7 @@ module Form = struct
   let select_lists = select_lists_with ""
 
   let fields_with selector f =
-    f.form |> Soup.select (tag_selector "*" selector)
+    f.elt |> Soup.select (tag_selector "*" selector)
     |> Soup.filter field_filter
 
   let field_with selector f =
@@ -134,7 +162,7 @@ module Form = struct
   let fields = fields_with ""
 
   let texts_with selector f =
-    f.form |> Soup.select (tag_selector "input[type=text]" selector)
+    f.elt |> Soup.select (tag_selector "input[type=text]" selector)
     |> Soup.filter (input_filter "text")
 
   let text_with selector f =
@@ -143,7 +171,7 @@ module Form = struct
   let texts = texts_with ""
 
   let passwords_with selector f =
-    f.form |> Soup.select (tag_selector "input[type=password]" selector)
+    f.elt |> Soup.select (tag_selector "input[type=password]" selector)
     |> Soup.filter (input_filter "password")
 
   let password_with selector f =
@@ -152,7 +180,7 @@ module Form = struct
   let passwords = passwords_with ""
 
   let hiddens_with selector f =
-    f.form |> Soup.select (tag_selector "input[type=hidden]" selector)
+    f.elt |> Soup.select (tag_selector "input[type=hidden]" selector)
     |> Soup.filter (input_filter "hidden")
 
   let hidden_with selector f =
@@ -161,7 +189,7 @@ module Form = struct
   let hiddens = hiddens_with ""
 
   let ints_with selector f =
-    f.form |> Soup.select (tag_selector "input[type=int]" selector)
+    f.elt |> Soup.select (tag_selector "input[type=int]" selector)
     |> Soup.filter (input_filter "int")
 
   let int_with selector f =
@@ -170,7 +198,7 @@ module Form = struct
   let ints = ints_with ""
 
   let textareas_with selector f =
-    f.form |> Soup.select (tag_selector "textarea" selector)
+    f.elt |> Soup.select (tag_selector "textarea" selector)
     |> Soup.filter (fun node -> Soup.name node = "textarea")
 
   let textarea_with selector f =
@@ -179,7 +207,7 @@ module Form = struct
   let textareas = textareas_with ""
 
   let keygens_with selector f =
-    f.form |> Soup.select (tag_selector "input[type=keygen]" selector)
+    f.elt |> Soup.select (tag_selector "input[type=keygen]" selector)
     |> Soup.filter (input_filter "keygen")
 
   let keygen_with selector f =
@@ -188,7 +216,7 @@ module Form = struct
   let keygens = keygens_with ""
 
   let file_uploads_with selector f =
-    f.form |> Soup.select (tag_selector "input[type=file_upload]" selector)
+    f.elt |> Soup.select (tag_selector "input[type=file_upload]" selector)
     |> Soup.filter (input_filter "file_upload")
 
   let file_upload_with selector f =
@@ -200,8 +228,6 @@ module Form = struct
 
   let iname input = Soup.attribute "name" input
   let ivalue input = Soup.attribute "value" input
-
-  open Infix.Option
 
   let singleton x = [x]
   let cons x l = x::l
@@ -239,6 +265,8 @@ module Form = struct
       | [x] -> Some x
       | _ -> None
 
+  open Infix.Option
+
   module Checkbox = struct
     let cb_selector name = Printf.sprintf "[type=checkbox][name=%s]" name
 
@@ -246,7 +274,7 @@ module Form = struct
 
     let choices f cb =
       iname cb >|= cb_selector >|= (fun s ->
-        Soup.select s f.form) |> Soup.require
+        Soup.select s f.elt) |> Soup.require
 
     let values f cb =
       choices f cb |> fold (fun l cb ->
@@ -278,7 +306,7 @@ module Form = struct
       iname rb
       >|= rb_selector
       >|= (fun s ->
-        Soup.select s f.form) |> Soup.require
+        Soup.select s f.elt) |> Soup.require
 
     let values f rb =
       choices f rb |> fold (fun l cb ->
@@ -345,30 +373,34 @@ module Form = struct
 end
 
 module Link = struct
-  type t = elt
+  type t = { resolver : Uri.t -> Uri.t ; elt : elt }
 
-  let href link = link |> Soup.attribute "href" |> Soup.require
-  let text = Soup.leaf_text
-  let uri link = link |> href |> Uri.of_string
+  let href link = link.elt |> Soup.attribute "href" |> Soup.require
+  let text link = Soup.leaf_text link.elt
+  let uri link = link |> href
+    |> Uri.of_string
+    |> link.resolver
 
-  let make ?text:(text="") ~href =
+  let make ?resolver:(resolver=id) ?text:(text="") ~href =
     let attributes = [("href",href)] in
-    Soup.create_element ~attributes ~inner_text:text "a"
+    { resolver; elt = Soup.create_element ~attributes ~inner_text:text "a" }
 
-  let to_node link = link
+  let to_node link = link.elt
 end
 
 module Image = struct
-  type t = elt
+  type t = {resolver : Uri.t -> Uri.t ; elt : elt}
 
-  let source image = image |> Soup.attribute "src" |> Soup.require
-  let uri image = image |> source |> Uri.of_string
+  let source image = image.elt |> Soup.attribute "src" |> Soup.require
+  let uri image = image |> source
+    |> Uri.of_string
+    |> image.resolver
 
-  let make ~source =
+  let make ?(resolver=id) ~source =
     let attributes = [("src",source)] in
-    Soup.create_element ~attributes "img"
+    {resolver; elt = Soup.create_element ~attributes "img"}
 
-  let to_node image = image
+  let to_node image = image.elt
 end
 
 (* module Frame = struct *)
@@ -385,10 +417,12 @@ end
 (* end *)
 
 let forms_with selector p =
-  p |> Soup.select (tag_selector "form" selector)
+  p.soup
+  |> Soup.select (tag_selector "form" selector)
   |> Soup.filter (tag_filter "form")
   |> Soup.to_list
-  |> List.map (fun node -> {Form.form = node; data = Form.StringMap.empty})
+  |> List.map (fun node -> Form.( {resolver = resolver p; elt = node;
+    data = StringMap.empty} ))
 
 let forms = forms_with ""
 
@@ -396,8 +430,11 @@ let form_with selector p =
   p |> forms_with selector |> hd_opt
 
 let links_with selector p =
-  p |> Soup.select (tag_selector "a" selector)
-  |> Soup.filter (tag_filter "a") |> Soup.to_list
+  p.soup
+  |> Soup.select (tag_selector "a" selector)
+  |> Soup.filter (tag_filter "a")
+  |> Soup.to_list
+  |> List.map (fun elt -> Link.( {resolver = resolver p; elt} ))
 
 let links = links_with ""
 
@@ -405,8 +442,11 @@ let link_with selector p =
   p |> links_with selector |> hd_opt
 
 let images_with selector p =
-  p |> Soup.select (tag_selector "img" selector)
-  |> Soup.filter (tag_filter "img") |> Soup.to_list
+  p.soup
+  |> Soup.select (tag_selector "img" selector)
+  |> Soup.filter (tag_filter "img")
+  |> Soup.to_list
+  |> List.map (fun elt -> Image.( {resolver = resolver p; elt} ))
 
 let images = images_with ""
 
@@ -421,6 +461,3 @@ let image_with selector p =
 (*  *)
 (* let frame_with selector p = *)
 (*   p |> frames_with selector |> hd_opt *)
-
-let to_soup p = p
-let from_soup p = p

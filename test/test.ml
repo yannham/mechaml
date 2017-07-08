@@ -148,7 +148,7 @@ let test_selector_inputs form f input prefix selector expected_count =
             fail (prefix^":input node without type attribute")
         ))
 
-let tests_cookiejar : Alcotest.test_case list = [
+let tests_cookiejar = [
   "add", `Quick, (fun _ ->
     jar
     |> jar_eq cookies
@@ -203,7 +203,7 @@ let tests_cookiejar : Alcotest.test_case list = [
       using headers")*)
 ]
 
-let tests_page : Alcotest.test_case list = [
+let tests_page = [
   "forms", `Quick, (fun _ ->
     let page = soup_index |> Page.from_soup in
     let forms_with =

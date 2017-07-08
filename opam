@@ -1,6 +1,6 @@
 opam-version: "1.2"
 name: "mechaml"
-version: "0.1"
+version: "0.2"
 maintainer: "Yann Hamdaoui <yann.hamdaoui@gmail.com>"
 authors: "Yann Hamdaoui <yann.hamdaoui@gmail.com>"
 homepage: "https://github.com/yannham/mechaml"
@@ -21,10 +21,12 @@ remove: ["ocamlfind" "remove" "mechaml"]
 depends: [
   "ocamlbuild" {build}
   "ocamlfind" {build}
-  "cohttp"
+  "cohttp" {>= "0.21.0"}
+  "cohttp-lwt"
+  "cohttp-lwt-unix"
   "lwt"
   "uri"
   "lambdasoup" {< "0.7.0"}
-  "alcotest" {test}
+  "alcotest" {test & >= "0.8.0"}
 ]
 available: [ ocaml-version >= "4.02.0" ]
