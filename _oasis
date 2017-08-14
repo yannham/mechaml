@@ -14,6 +14,10 @@ OASISFormat: 0.4
 BuildTools: ocamlbuild
 Plugins: META (0.4), DevFiles (0.4)
 
+Flag "examples"
+  Description: Compile examples
+  Default: false
+
 Library "mechaml"
   Path: src
   Pack: true
@@ -28,6 +32,18 @@ Document "mechaml"
   Install: true
   XOCamlbuildLibraries : mechaml
   XOcamlbuildPath : .
+
+Executable "example_github_form"
+  Build$: flag(examples)
+  Path: examples
+  MainIs: github_form.ml
+  BuildDepends: mechaml, uri, lwt, lwt_ssl
+
+Executable "example_download_images"
+  Build$: flag(examples)
+  Path: examples
+  MainIs: download_images.ml
+  BuildDepends: mechaml, uri, lwt, lwt_ssl
 
 Executable "unit_tests"
   Build$: flag(tests)

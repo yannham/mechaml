@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: a71b9afde2ead80e9db63e8bb3fe7c0a)
+# DO NOT EDIT (digest: 9b45cd024c34453c6083784bd08faced)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -26,6 +26,32 @@ true: annot, bin_annot
 <src/*.ml{,i,y}>: pkg_lambdasoup
 <src/*.ml{,i,y}>: pkg_lwt
 <src/*.ml{,i,y}>: pkg_uri
+# Executable example_github_form
+"examples/github_form.byte": pkg_cohttp
+"examples/github_form.byte": pkg_cohttp-lwt
+"examples/github_form.byte": pkg_cohttp-lwt-unix
+"examples/github_form.byte": pkg_lambdasoup
+"examples/github_form.byte": pkg_lwt
+"examples/github_form.byte": pkg_lwt_ssl
+"examples/github_form.byte": pkg_uri
+"examples/github_form.byte": use_mechaml
+# Executable example_download_images
+"examples/download_images.byte": pkg_cohttp
+"examples/download_images.byte": pkg_cohttp-lwt
+"examples/download_images.byte": pkg_cohttp-lwt-unix
+"examples/download_images.byte": pkg_lambdasoup
+"examples/download_images.byte": pkg_lwt
+"examples/download_images.byte": pkg_lwt_ssl
+"examples/download_images.byte": pkg_uri
+"examples/download_images.byte": use_mechaml
+<examples/*.ml{,i,y}>: pkg_cohttp
+<examples/*.ml{,i,y}>: pkg_cohttp-lwt
+<examples/*.ml{,i,y}>: pkg_cohttp-lwt-unix
+<examples/*.ml{,i,y}>: pkg_lambdasoup
+<examples/*.ml{,i,y}>: pkg_lwt
+<examples/*.ml{,i,y}>: pkg_lwt_ssl
+<examples/*.ml{,i,y}>: pkg_uri
+<examples/*.ml{,i,y}>: use_mechaml
 # Executable unit_tests
 "test/test.byte": pkg_alcotest
 "test/test.byte": pkg_cohttp

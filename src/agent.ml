@@ -27,7 +27,7 @@ type http_status_code = Code.status_code
 type http_headers = Header.t
 
 module HttpResponse = struct
-  type t = { 
+  type t = {
     location : Uri.t;
     cohttp_response : Response.t;
     content : string
@@ -135,8 +135,13 @@ let submit form agent =
   let params = Page.Form.values form in
   let headers = agent.cookie_jar
     |> Cookiejar.add_to_headers uri agent.client_headers in
-  Client.post_form ~headers:headers ~params:params uri
-  >>= update_agent uri agent
+  match Page.Form.meth form with
+    | `POST ->
+      Client.post_form ~headers:headers ~params:params uri
+      >>= update_agent uri agent
+    | `GET ->
+      let target = Uri.with_query uri params in
+      get_uri target agent
 
 let save_content file data =
   Lwt_io.open_file Lwt_io.output file
@@ -145,12 +150,12 @@ let save_content file data =
     |> ignore;
     Lwt_io.close out)
 
-let save_image image file agent =
+let save_image file image agent =
   let uri = Page.Image.uri image in
   agent
   |> get_uri uri
   >>= (function (agent,response) ->
-    save_content file (HttpResponse.content response) 
+    save_content file (HttpResponse.content response)
     >|= fun _ -> (agent,response))
 
 let code_of_status = Code.code_of_status
@@ -200,6 +205,19 @@ module Monad = struct
 
   let run (agent : t) (x : 'a m) =
     Lwt_main.run (x agent)
+
+  let fail e = Lwt.fail e |> return_from_lwt
+
+  let fail_with s = Lwt.fail_with s |> return_from_lwt
+
+  let catch x c =
+    fun agent ->
+      let try_lwt = fun _ -> x () agent in
+      let catch_lwt = fun e -> c e agent in
+      Lwt.catch try_lwt catch_lwt
+
+  let try_bind x f c =
+    catch (fun _ -> bind (x ()) f) c
 
   module Infix = struct
     let (>>=) = bind

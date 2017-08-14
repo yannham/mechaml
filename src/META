@@ -1,6 +1,6 @@
 # OASIS_START
-# DO NOT EDIT (digest: 5822d8bf61ae63860ea80e44d1a7ce90)
-version = "0.1"
+# DO NOT EDIT (digest: 57daf3cfa986a4f29669749422f19530)
+version = "0.2"
 description =
 "A web browsing library built on top of Lambdasoup and Cohttp. Inspired by WWW::Mechanize"
 requires = "lambdasoup lwt cohttp cohttp-lwt cohttp-lwt-unix uri"
