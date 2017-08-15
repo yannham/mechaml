@@ -26,60 +26,33 @@ For more details, see the [documentation](https://yannham.github.io/mechaml/)
 
 ## Usage
 
-Here is sample of code that fetches a web page, fills a login form and submits it:
+Here is sample of code that fetches a web page, fills a login form and submits it in the monadic style:
 
 ```ocaml
-let agent =
-  Agent.init ()
-  |> Agent.get "https://www.mywebsite.com"
-  |> Lwt_main.run in
+open Mechaml
+module M = Agent.Monad
+open M.Infix
 
-let form =
-  Agent.page agent
-  |> (function
-    | Some page -> Page.form_with "[name=loginForm]" page
-    | None -> None)
-  |> (function
-    | Some form -> form
-    | None -> failwith "unable to find the login form !")
-  |> Page.Form.set "username" ["myusername"]
-  |> Page.Form.set "password" ["mypassword"] in
+let require msg = function
+  | Some a -> a
+  | None -> failwith msg
 
-Agent.submit form agent
-|> Lwt_main.run
+let action_login =
+  Agent.get "http://www.somewebsite.com"
+  >|= Agent.HttpResponse.page
+  >|= (function page ->
+    page
+    |> Page.form_with "[name=login]"
+    |> require "Can't find the login form !"
+    |> Page.Form.set "username" ["mynick"]
+    |> Page.Form.set "password" ["@xlz43"])
+  >>= Agent.submit
+
+let _ =
+  M.run (Agent.init ()) action_login
 ```
 
-And there a function that visits the specified page, searches for all the JPG images and
-downloads them in a temporary folder
-
-
-```ocaml
-let agent =
-  Agent.init ()
-  |> Agent.get "http://www.somewebsite.com/some/page"
-  |> Lwt_main.run in
-
-let page = match Agent.page agent with
-  | Some page -> page
-  | None -> failwith "couldn't open or parse the page as html" in
-
-let image_filename src =
-  let last_slash = match String.rindex src '/' with
-    | exception Not_found -> 0
-    | i -> i+1 in
-  String.sub src last_slash (String.length src - last_slash) in
-
-Page.images_with "[src$=.jpg]" page
-|> List.map (fun img ->
-  try
-    let file = Page.Image.source img
-      |> image_filename
-      |> (^) "/tmp/" in
-    Agent.save_image img file agent
-  with _ -> Lwt.return ())
-|> Lwt.join
-|> Lwt_main.run
-```
+More examples are available in the dedicated folder.
 
 # license
 

@@ -41,4 +41,6 @@ let _ =
     | Ok file ->
       Printf.printf "Image %s successfully downloaded\n" file
     | Error (file,e) ->
-      Printf.printf "Image %s : error (%s)\n" file (Printexc.to_string e))
+      e
+      |> Printexc.to_string
+      |> Printf.printf "Image %s : error (%s)\n" file)
