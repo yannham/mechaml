@@ -267,7 +267,7 @@ end
 (** All the following function are built using the same pattern.
 
     - xxxs (eg {!forms}) return all the element of a certain type.
-    For example, [forms mypage] will return all the form in the page 
+    For example, [forms mypage] will return all the form in the page
     - xxx_with take a CSS selector as parameter, and return the first element that
     matches the selector, or [None] if there isn't any. Eg, [link_with
     "\[href$=.jpg\]" mypage] will try to find a link that point to a JPEG image

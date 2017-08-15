@@ -23,7 +23,7 @@ let action =
     Page.Form.Field.set form field "module Form"))
   >>= Agent.submit
 
-let _ = 
+let _ =
   action
   |> M.run (Agent.init ())
   |> snd

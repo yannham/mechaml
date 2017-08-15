@@ -231,7 +231,7 @@ let tests_page = [
 
   "forms_input", `Quick, (fun _ ->
     let module F = Page.Form in
-    let form = ref (soup_index 
+    let form = ref (soup_index
       |> Page.from_soup
       |> Page.form_with "[id=form-one]"
       |> Soup.require) in
@@ -303,16 +303,16 @@ let tests_page = [
     selects_with "[name=nothere]" 0;
     selects_with "" 2;
 
-    let select1 = !form |> F.select_list_with "[name=select1]" |> Soup.require in 
+    let select1 = !form |> F.select_list_with "[name=select1]" |> Soup.require in
     let items = select1 |> F.SelectList.items in
     (match items with
       | [x;y;z] ->
         form := x |> F.SelectList.select !form select1;
         form := y |> F.SelectList.select !form select1;
-        y 
+        y
         |> F.SelectList.is_selected !form select1
         |> check_true "select_list choice2 (selected ?)";
-        x 
+        x
         |> F.SelectList.is_selected !form select1
         |> not |> check_true "select_list choice1 (selected ?)";
       | _ ->
@@ -322,7 +322,7 @@ let tests_page = [
         |> fail);
 
     let fields_with t =
-      test_selector_inputs !form F.fields_with t "select_field" 
+      test_selector_inputs !form F.fields_with t "select_field"
     and texts_with =
       test_selector_inputs !form F.texts_with "text" "select_text"
     and passwords_with =
@@ -358,12 +358,12 @@ let tests_page = [
 
     let check_content selector =
       let field = !form |> F.field_with selector |> Soup.require
-      and content = random_string 20 in 
+      and content = random_string 20 in
       form := F.Field.set !form field content;
       F.Field.get !form field
       |> Soup.require
       |> (=) content
-      |> check_true ("consistency of field's content"^selector) 
+      |> check_true ("consistency of field's content"^selector)
     in
 
     check_content "[name=text1]";
