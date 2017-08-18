@@ -10,22 +10,36 @@ let image_filename src =
     | i -> i+1 in
   String.sub src last_slash (String.length src - last_slash)
 
-let save_images images agent =
+let save_images images =
   images
-  |> List.map (fun img ->
-    let file = Page.Image.source img
+  |> M.List.map_p (fun img ->
+    let path = Page.Image.source img
       |> image_filename
       |> (^) "/tmp/" in
-    (file,Agent.save_image file img agent))
-  |> Lwt_list.map_p (fun (file,thread) ->
-    let f _ =
-      thread
-      |> Lwt.map (fun _ -> Ok file) in
-    let c e =
-      Error (file,e)
-      |> Lwt.return in
-    Lwt.catch f c)
-  |> Lwt.map (fun result -> (agent,result))
+    let save _ = 
+      Agent.save_image path img
+      >> M.return (Ok path) in
+    let handler e =
+      Error (path,e)
+      |> M.return in
+    M.catch save handler)
+
+(* let save_images images agent = *)
+(*   images *)
+(*   |> List.map (fun img -> *)
+(*     let file = Page.Image.source img *)
+(*       |> image_filename *)
+(*       |> (^) "/tmp/" in *)
+(*     (file,Agent.save_image file img agent)) *)
+(*   |> Lwt_list.map_p (fun (file,thread) -> *)
+(*     let f _ = *)
+(*       thread *)
+(*       |> Lwt.map (fun _ -> Ok file) in *)
+(*     let c e = *)
+(*       Error (file,e) *)
+(*       |> Lwt.return in *)
+(*     Lwt.catch f c) *)
+(*   |> Lwt.map (fun result -> (agent,result)) *)
 
 let action =
   Agent.get "https://ocaml.org/index.fr.html"

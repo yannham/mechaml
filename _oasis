@@ -45,6 +45,12 @@ Executable "example_download_images"
   MainIs: download_images.ml
   BuildDepends: mechaml, uri, lwt, lwt_ssl
 
+Executable "example_login"
+  Build$: flag(examples)
+  Path: examples
+  MainIs: login.ml
+  BuildDepends: mechaml, uri, lwt, lwt_ssl
+
 Executable "unit_tests"
   Build$: flag(tests)
   Path: test

@@ -40,7 +40,7 @@ let require msg = function
 let action_login =
   Agent.get "http://www.somewebsite.com"
   >|= Agent.HttpResponse.page
-  >|= (function page ->
+  >|= function page -> (
     page
     |> Page.form_with "[name=login]"
     |> require "Can't find the login form !"

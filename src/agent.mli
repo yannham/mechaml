@@ -167,13 +167,37 @@ module Monad : sig
     (unit -> 'a m) ->
     ('a -> 'b m) -> (exn -> 'b m) -> 'b m
 
+  (** This module mainly wrap the Lwt_list one in the Agent monad. Function suffixed with
+     _s chains the actions sequentially, passing around the updated agent to the
+     next one. The _m ones do everything in parallel, sending a copy of the
+     initial state to every threads and returning this same unupdated state.
+     This can be useful to retrive a bunch of ressources in batch where the
+     updated state is pointless or is the same as the initial one.  *)
+
   module Infix : sig
     val (>>=) : 'a m -> ('a -> 'b m) -> 'b m
-    val (<<=) : ('a -> 'b m) -> 'a m -> 'b m
+    val (=<<) : ('a -> 'b m) -> 'a m -> 'b m
     val (>>) : 'a m -> 'b m -> 'b m
     val (<<) : 'b m -> 'a m -> 'b m
     val (>|=) : 'a m -> ('a -> 'b) -> 'b m
-    val (<|=) : ('a -> 'b) -> 'a m -> 'b m
+    val (=|<) : ('a -> 'b) -> 'a m -> 'b m
+  end
+
+  module List : sig
+    val iter_s : ('a -> unit m) -> 'a list -> unit m
+    val iter_p : ('a -> unit m) -> 'a list -> unit m
+
+    val iteri_s : (int -> 'a -> unit m) -> 'a list -> unit m
+    val iteri_p : (int -> 'a -> unit m) -> 'a list -> unit m
+
+    val map_s : ('a -> 'b m) -> 'a list -> 'b list m
+    val map_p : ('a -> 'b m) -> 'a list -> 'b list m
+
+    val mapi_s : (int -> 'a -> 'b m) -> 'a list -> 'b list m
+    val mapi_p : (int -> 'a -> 'b m) -> 'a list -> 'b list m
+
+    val fold_left_s : ('a -> 'b -> 'a m) -> 'a -> 'b list -> 'a m
+    val fold_right_s : ('a -> 'b -> 'b m) -> 'a list -> 'b -> 'b m
   end
 
 
@@ -183,13 +207,8 @@ module Monad : sig
   (*   -> port:int *)
   (*   -> unit m *)
 
-  (** To use the monad operators, one needs to fix type mismatches for function
-      defined in module {! Agent}. For example, the return type of {! Agent.get}
-      is [type result = Agent.t response * string] while it should be [(response *
-      string) m = Agent.t * (response * string)] to be usable. These types
-      trivially isomorphic but not equal in Ocaml.
-
-      For functions operating on the agent such as {! Agent.cookiejar} or {!
+  (** To use the monad operators on functions operating on the agent such as {!
+      Agent.cookiejar} or {!
       Agent.set_cookie_jar}, one needs to wrap their type to match the monad
       constraint. For example, the first one go from [Agent.t -> Cookiejar.t] to
       [Agent.t -> (Agent.t * Cookiejar.t) Lwt.t] by just returning the agent
@@ -199,6 +218,9 @@ module Monad : sig
       Note that the redefined functions have the same name as their counterpart,
       and thus will shadow or can be shadowed by them.
   *)
+
+  val get : t m
+  val set : t -> unit m
 
   val save_content : string -> string -> unit m
 

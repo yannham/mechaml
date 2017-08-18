@@ -185,25 +185,25 @@ let set_max_redirect max_redirect agent = {agent with max_redirect }
 module Monad = struct
   type 'a m = t -> (t * 'a) Lwt.t
 
-  let bind (x : 'a m) (f : 'a -> 'b m) =
+  let bind x f =
     fun agent ->
       Lwt.bind (x agent) (fun (agent,result) ->
         f result agent)
 
-  let return (x : 'a) =
+  let return x =
     fun agent -> Lwt.return (agent,x)
 
-  let map (f : 'a -> 'b) (x : 'a m) =
+  let map f x =
     bind x (function y ->
       f y
       |> return)
 
-  let return_from_lwt (x : 'a Lwt.t) =
+  let return_from_lwt x =
     fun agent ->
       Lwt.bind x (fun y ->
         Lwt.return (agent,y))
 
-  let run (agent : t) (x : 'a m) =
+  let run agent x =
     Lwt_main.run (x agent)
 
   let fail e = Lwt.fail e |> return_from_lwt
@@ -222,7 +222,7 @@ module Monad = struct
   module Infix = struct
     let (>>=) = bind
 
-    let (<<=) x f = f >>= x
+    let (=<<) x f = f >>= x
 
     let (>>) x y = x >>= (fun _ -> y)
 
@@ -230,8 +230,94 @@ module Monad = struct
 
     let (>|=) (x : 'a m) (f : 'a -> 'b) = x |> map f
 
-    let (<|=) f x = x |> map f
+    let (=|<) f x = x |> map f
   end
+
+  module List = struct
+    let iter_s f l =
+      l
+      |> List.map f
+      |> List.fold_left Infix.(>>) (return ())
+
+    let iter_p f l =
+      fun agent ->
+        let it x =
+          f x agent
+          >|= fun _ -> () in
+        l
+        |> Lwt_list.iter_p it
+        >|= fun _ -> (agent,())
+
+    let iteri_s f l =
+      l
+      |> List.mapi f
+      |> List.fold_left Infix.(>>) (return ())
+
+    let iteri_p f l =
+      fun agent ->
+        let it i x =
+          f i x agent
+          >|= fun _ -> () in
+        l
+        |> Lwt_list.iteri_p it
+        >|= fun _ -> (agent,())
+
+    let appendM listM xM =
+      let open Infix in
+      listM >>= fun l ->
+      xM >|= fun x ->
+        x::l
+
+    let map_s f l =
+      l
+      |> List.map f
+      |> List.fold_left appendM (return [])
+
+    let map_p f l =
+      fun agent ->
+        let f' x =
+          f x agent
+          >|= snd in
+        l
+        |> Lwt_list.map_p f'
+        >|= fun l ->
+          (agent,l)
+
+    let mapi_s f l =
+      l
+      |> List.mapi f
+      |> List.fold_left appendM (return [])
+
+    let mapi_p f l =
+      fun agent ->
+        let f' i x =
+          f i x agent
+          >|= snd in
+        l
+        |> Lwt_list.mapi_p f'
+        >|= fun l ->
+          (agent,l)
+
+    let fold_left_s f e l =
+      let f' accuM x =
+        let open Infix in
+        accuM >>= fun accu ->
+        f accu x in
+      List.fold_left f' (return e) l
+
+    let fold_right_s f l e =
+      let f' x accuM =
+        let open Infix in
+        accuM >>= fun accu ->
+        f x accu in
+      List.fold_right f' l (return e)
+  end
+
+  let set agent' agent =
+    Lwt.return (agent',())
+
+  let get agent =
+    Lwt.return (agent,agent)
 
   let save_content data file =
     save_content data file

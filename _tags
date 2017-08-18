@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: 9b45cd024c34453c6083784bd08faced)
+# DO NOT EDIT (digest: cb33378e203560ce0719a9af9cc21892)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -44,6 +44,15 @@ true: annot, bin_annot
 "examples/download_images.byte": pkg_lwt_ssl
 "examples/download_images.byte": pkg_uri
 "examples/download_images.byte": use_mechaml
+# Executable example_login
+"examples/login.byte": pkg_cohttp
+"examples/login.byte": pkg_cohttp-lwt
+"examples/login.byte": pkg_cohttp-lwt-unix
+"examples/login.byte": pkg_lambdasoup
+"examples/login.byte": pkg_lwt
+"examples/login.byte": pkg_lwt_ssl
+"examples/login.byte": pkg_uri
+"examples/login.byte": use_mechaml
 <examples/*.ml{,i,y}>: pkg_cohttp
 <examples/*.ml{,i,y}>: pkg_cohttp-lwt
 <examples/*.ml{,i,y}>: pkg_cohttp-lwt-unix
