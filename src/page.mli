@@ -27,22 +27,54 @@
 (** The type of an html page *)
 type t
 
+(** Make a new page from a base URI and a Lambdasoup document *)
 val from_soup : ?location:Uri.t -> Soup.soup Soup.node -> t
+(** Make a new page from a base URI and a HTML string *)
 val from_string : ?location:Uri.t -> string -> t
 
+(** Return the location of a page (or [Uri.empty] if not specified) *)
 val base_uri : t -> Uri.t
+(** Return the resolver of page, that take relative URIs to absolute ones using
+   the page base URI *)
 val resolver : t -> Uri.t -> Uri.t
 
 (** Convert to Lambdasoup *)
 val soup : t -> Soup.soup Soup.node
 
-(** {2 Form} *)
+(** {2 Lazy sequences}
+    Lambda soup provides lazy sequences to traverse only needed part of an HTML
+    document when used in combination with [with_stop]. We provide a wrapper
+    that is compatible with Mechaml types such as forms, images, inputs, etc. *)
+
+(** Lazy sequences of HTML elements. See [Soup.nodes] type *)
+type +'a seq
+
+(** [Soup.stop] type *)
+type 'a stop = 'a Soup.stop = { throw : 'b. 'a -> 'b }
+
+(** Operations on lazy sequences *)
+
+val iter : ('a -> unit) -> 'a seq -> unit
+val fold : ('a -> 'b -> 'a) -> 'a -> 'b seq -> 'a
+val filter : ('a -> bool) -> 'a seq -> 'a seq
+
+val first : 'a seq -> 'a option
+val nth : int -> 'a seq -> 'a option
+val find_first : ('a -> bool) -> 'a seq -> 'a option
+
+val to_list : 'a seq -> 'a list
+
+(** see Lambdasoup's [Soup.with_stop] *)
+val with_stop : ('a stop -> 'a) -> 'a
+
+(** {3 Form} *)
 
 (** Operations on forms and inputs *)
 module Form : sig
   type t
 
   (** Phantom types for inputs *)
+
   type checkbox
   type radio_button
   type select_list
@@ -52,8 +84,6 @@ module Form : sig
 
   (** A form input *)
   type _ input
-  (** A (possibly lazy) list of form inputs *)
-  type _ inputs
 
   (** Return the name of the form *)
   val name : t -> string option
@@ -64,7 +94,7 @@ module Form : sig
   (** Return the absolute (resolved) uri corresponding to the action attribute *)
   val uri : t -> Uri.t
 
-  (** Return the method attribute of the form *)
+  (** Return the method attribute of the form (`GET by default)*)
   val meth : t -> [`POST | `GET]
 
   (** Convert a form to a Soup node *)
@@ -73,25 +103,23 @@ module Form : sig
   (** Convert an input to a Soup node *)
   val input_to_node : _ input -> Soup.element Soup.node
 
-  (** Convert an input list to a Soup nodes list *)
-  val input_to_nodes : _ inputs -> Soup.element Soup.nodes
+  (** Set directly the value(s) of a field *)
 
-  (** Convert the lazy input list to a native OCaml list *)
-  val to_list : 'a inputs -> 'a input list
+  val set : string -> string -> t -> t
+  val set_multi : string -> string list -> t -> t
 
-  (** Operations on a lazy input list *)
-  val iter : ('a input -> unit) -> 'a inputs -> unit
-  val fold : ('a -> 'b input -> 'a) -> 'a -> 'b inputs -> 'a
-  val filter : ('a input -> bool) -> 'a inputs -> 'a inputs
+  (** Get the value(s) of a field *)
 
-  (** Set directly the values of a field *)
-  val set : string -> string list -> t -> t
+  val get : string -> t -> string option
+  val get_multi : string -> t -> string list
 
-  (** Get the value of a field *)
-  val get : string -> t -> string list
+  (** Reset the value of a field to its default (or remove it if there is no
+     default
+     value) *)
+  val reset : string -> t -> t
 
-  (** Delete the value of a field *)
-  val unset : string -> t -> t
+  (** Remove the value of a field *)
+  val clear : string -> t -> t
 
   (** Return all set values as a list *)
   val values : t -> (string * string list) list
@@ -101,76 +129,80 @@ module Form : sig
 
   (** All the following function are built using the same pattern.
 
-      - xxxs (eg {!checkboxes}) return all the input of a certain type.
+      - xxxs (eg {!checkboxes}) return all the inputs of a certain type as a lazy
+      sequence.
       For example, [checkboxes myform] will return all the checkboxes of the form
       - xxx_with take a CSS selector as parameter, and return the first input that
       matches the selector, or [None] if there isn't any. Eg, [fields_with myform
-      "\[name$=text2\]"] will try to find any text field which name ends with {v text2
-      v}
-      - xxxs_with proceed as the previous form, but return all inputs matching the
+      "\[name$=text2\]"] will try to find any text field which name ends with
+      [text2]
+      - xxxs_with proceed as the previous one, but return a lazy sequence of all inputs matching the
       selector.
 
   *)
 
   val checkbox_with : string -> t -> checkbox input option
-  val checkboxes : t -> checkbox inputs
-  val checkboxes_with : string -> t -> checkbox inputs
+  val checkboxes : t -> checkbox input seq
+  val checkboxes_with : string -> t -> checkbox input seq
 
   val radio_button_with : string -> t -> radio_button input option
-  val radio_buttons : t -> radio_button inputs
-  val radio_buttons_with : string -> t -> radio_button inputs
+  val radio_buttons : t -> radio_button input seq
+  val radio_buttons_with : string -> t -> radio_button input seq
 
   val select_list_with : string -> t -> select_list input option
-  val select_lists : t -> select_list inputs
-  val select_lists_with : string -> t -> select_list inputs
+  val select_lists : t -> select_list input seq
+  val select_lists_with : string -> t -> select_list input seq
 
   val field_with : string -> t -> field input option
-  val fields : t -> field inputs
-  val fields_with : string -> t -> field inputs
+  val fields : t -> field input seq
+  val fields_with : string -> t -> field input seq
 
   val text_with : string -> t -> field input option
-  val texts : t -> field inputs
-  val texts_with : string -> t -> field inputs
+  val texts : t -> field input seq
+  val texts_with : string -> t -> field input seq
 
   val password_with : string -> t -> field input option
-  val passwords : t -> field inputs
-  val passwords_with : string -> t -> field inputs
+  val passwords : t -> field input seq
+  val passwords_with : string -> t -> field input seq
 
   val hidden_with : string -> t -> field input option
-  val hiddens : t -> field inputs
-  val hiddens_with : string -> t -> field inputs
+  val hiddens : t -> field input seq
+  val hiddens_with : string -> t -> field input seq
 
   val int_with : string -> t -> field input option
-  val ints : t -> field inputs
-  val ints_with : string -> t -> field inputs
+  val ints : t -> field input seq
+  val ints_with : string -> t -> field input seq
 
   val textarea_with : string -> t -> field input option
-  val textareas : t -> field inputs
-  val textareas_with : string -> t -> field inputs
+  val textareas : t -> field input seq
+  val textareas_with : string -> t -> field input seq
 
   val keygen_with : string -> t -> field input option
-  val keygens : t -> field inputs
-  val keygens_with : string -> t -> field inputs
+  val keygens : t -> field input seq
+  val keygens_with : string -> t -> field input seq
 
   val file_upload_with : string -> t -> file_upload input option
-  val file_uploads : t -> file_upload inputs
-  val file_uploads_with : string -> t -> file_upload inputs
+  val file_uploads : t -> file_upload input seq
+  val file_uploads_with : string -> t -> file_upload input seq
 
-  val reset : t -> t
+  (** Reset or clear all the fields *)
+
+  val reset_all : t -> t
+  val clear_all : t -> t
 
   (** Operation on Checkboxes *)
   module Checkbox : sig
     (** Return the value (the label) of a checkbox *)
     val value : checkbox input -> string
 
-    (** Return the values of all the checkboxes with the same name that the
+    (** Return the values of all the checkboxes with the same name asthe
        given one *)
     val values : t -> checkbox input -> string list
 
-    (** Return all the checkboxes with the same name that the given one *)
-    val choices : t -> checkbox input -> checkbox inputs
+    (** Return all the checkboxes with the same name as the given one *)
+    val choices : t -> checkbox input -> checkbox input seq
 
-    (** Return the list of all checked checkboxes with the same name that the
+    (** Return the list of all checked checkboxes with the same name as the
        given one *)
     val checked : t -> checkbox input -> string list
 
@@ -187,7 +219,7 @@ module Form : sig
 
     val value : radio_button input -> string
     val values : t -> radio_button input -> string list
-    val choices : t -> radio_button input -> radio_button inputs
+    val choices : t -> radio_button input -> radio_button input seq
 
     (** Return the possibly selected radio button *)
     val selected : t -> checkbox input -> string option
@@ -226,6 +258,8 @@ module Form : sig
   end
 end
 
+(** {4 Images and links} *)
+
 (** Operations on hypertext links *)
 module Link : sig
   type t
@@ -251,43 +285,28 @@ module Image : sig
   val to_node : t -> Soup.element Soup.node
 end
 
-(* module Frame : sig *)
-(*   type t *)
-(*  *)
-(*   val source : t -> string *)
-(*   val uri : t -> Uri.t *)
-(*   val name : t -> string option *)
-(*   val text : t -> string option *)
-(*  *)
-(*   val make : ?name:string -> ?text:string -> source:string -> t *)
-(*  *)
-(*   val to_node : t -> Soup.element Soup.node *)
-(* end *)
+(** {5 Nodes selection} *)
 
 (** All the following function are built using the same pattern.
 
-    - xxxs (eg {!forms}) return all the element of a certain type.
-    For example, [forms mypage] will return all the form in the page
+    - xxxs (eg {!forms}) return all the elements of a certain type as a lazy
+    sequence.
+    For example, [forms mypage] will return all the forms in the page
     - xxx_with take a CSS selector as parameter, and return the first element that
     matches the selector, or [None] if there isn't any. Eg, [link_with
     "\[href$=.jpg\]" mypage] will try to find a link that point to a JPEG image
-    - xxxs_with proceed as the previous one, but return all elements matching the
+    - xxxs_with proceed as the previous one, but return a lazy sequence of all elements matching the
     selector.
-
 *)
 
 val form_with : string -> t -> Form.t option
-val forms_with : string -> t -> Form.t list
-val forms : t -> Form.t list
+val forms_with : string -> t -> Form.t seq
+val forms : t -> Form.t seq
 
 val link_with : string -> t -> Link.t option
-val links_with : string -> t -> Link.t list
-val links : t -> Link.t list
+val links_with : string -> t -> Link.t seq
+val links : t -> Link.t seq
 
 val image_with : string -> t -> Image.t option
-val images_with : string -> t -> Image.t list
-val images : t -> Image.t list
-
-(* val frame_with : string -> t -> Frame.t option *)
-(* val frames_with : string -> t -> Frame.t list *)
-(* val frames : t -> Frame.t list *)
+val images_with : string -> t -> Image.t seq
+val images : t -> Image.t seq

@@ -34,6 +34,9 @@ type t
 type http_status_code = Cohttp.Code.status_code
 type http_headers = Cohttp.Header.t
 
+(** {2 Operations on HTTP responses } *)
+(** The HttpResponse module defines a type and operations to extract content and
+   metadata from server response *)
 module HttpResponse : sig
   type t
 
@@ -47,17 +50,9 @@ module HttpResponse : sig
   val cohttp_response : t -> Cohttp.Response.t
 end
 
-  (* = { *)
-  (*   enconding: Cohttp.Transfer.enconding; *)
-  (*   headers: Cohttp.Header.t; *)
-  (*   version: Cohttp.Code.version; *)
-  (*   status: http_status_code; *)
-  (*   flush: bool; *)
-  (* } *)
-
 type result = t * HttpResponse.t
 
-(** {2 Main operations } *)
+(** {3 Main operations } *)
 
 (** Create a new empty agent. [~max_redirect] indicates how many times the agent
    will automatically and consecutively follow the [Location] header in case of
@@ -74,7 +69,7 @@ val get_uri : Uri.t -> t -> result Lwt.t
 (** Same as get, but work directly with links instead of URIs *)
 val click : Page.Link.t -> t -> result Lwt.t
 
-(** Send a raw post requet to the specified URI *)
+(** Send a raw post request to the specified URI *)
 
 val post : string -> string -> t -> result Lwt.t
 val post_uri : Uri.t -> string -> t -> result Lwt.t
@@ -84,17 +79,17 @@ val submit : Page.Form.t -> t -> result Lwt.t
 
 (** Save the downloaded content in a file *)
 
-(** [save_image "myfile.jpg" image agent] load the image using [get], open
-   [myfile.jpg] and write the received content.  *)
+(** [save_image "/path/to/myfile.jpg" image agent] loads the image using [get], open
+   [myfile.jpg] and write the content in.  *)
 val save_image : string -> Page.Image.t -> t -> result Lwt.t
 
-(** [save_content "myfile.html" content] write the specified content in a file
-  * using Lwt's asynchronous IO *)
+(** [save_content "/path/to/myfile.html" content] write the specified content in a file
+    using Lwt's asynchronous IO *)
 val save_content : string -> string -> unit Lwt.t
 
-(** {3 Proxy} *)
+(** {4 Proxy} *)
 
-(** Proxy are currently NOT SUPPORTED YET *)
+(** Proxy are currently NOT SUPPORTED YET  - waiting for Cohttp support first *)
 
 val set_proxy : ?user:string
   -> ?password:string
@@ -104,12 +99,12 @@ val set_proxy : ?user:string
 
 val disable_proxy : t -> t
 
-(** {4 Cookies} (see {!module:Cookiejar}) *)
+(** {5 Cookies} (see {!module:Cookiejar}) *)
 
 (** Return the current Cookiejar *)
 val cookie_jar : t -> Cookiejar.t
 
-(** Change the current Cookiejar *)
+(** Set the current Cookiejar *)
 val set_cookie_jar : Cookiejar.t -> t -> t
 
 (** Add a single cookie to the current Cookiejar *)
@@ -118,7 +113,7 @@ val add_cookie : Cookiejar.Cookie.t -> t -> t
 (** Remove a single cookie from the Cookiejar *)
 val remove_cookie : Cookiejar.Cookie.t -> t -> t
 
-(** {5 Headers} *)
+(** {6 Headers} *)
 
 (** Return the default headers sent when performing HTTP requests *)
 val client_headers : t -> Cohttp.Header.t
@@ -132,27 +127,23 @@ val add_client_header : string -> string -> t -> t
 (** Remove a single pair key/value from the default headers *)
 val remove_client_header : string -> t -> t
 
-(** {6 Redirection} *)
+(** {7 Redirection} *)
 
 (** Max redirection to avoid infinite loops (use 0 to disable automatic
    redirection) *)
 val set_max_redirect : int -> t -> t
 
-(** The default maximum consecutive redirections. Used to avoid redirect loops *)
+(** The default maximum consecutive redirections *)
 val default_max_redirect : int
 
-(** {5 Monad}
-    This module defines a monad that manages a state corresponding to the agent
-    so that it is not needed to carry it everywhere explicitely as a parameter,
-    all inside the Lwt.t monad. Morally, one can think of a state monad
-    specialized and the Lwt.t monad stacked.
-*)
+(** {8 The Agent Monad}
+    This module defines a monad that implicitely manages the state corresponding to the agent
+    inside the Lwt monad. This is basically the state monad and the Lwt one stacked *)
 
 module Monad : sig
   type 'a m = t -> (t * 'a) Lwt.t
 
   val bind : 'a m -> ('a -> 'b m) -> 'b m
-
   val return : 'a -> 'a m
   val return_from_lwt : 'a Lwt.t -> 'a m
   val map : ('a -> 'b) -> 'a m -> 'b m
@@ -162,18 +153,14 @@ module Monad : sig
   val fail : exn -> 'a m
   val fail_with : string -> 'a m
 
+  (** Wrappers of [Lwt.catch] and [Lwt.try_bind] inside this monad *)
+
   val catch : (unit -> 'a m) -> (exn -> 'a m) -> 'a m
   val try_bind :
     (unit -> 'a m) ->
     ('a -> 'b m) -> (exn -> 'b m) -> 'b m
 
-  (** This module mainly wrap the Lwt_list one in the Agent monad. Function suffixed with
-     _s chains the actions sequentially, passing around the updated agent to the
-     next one. The _m ones do everything in parallel, sending a copy of the
-     initial state to every threads and returning this same unupdated state.
-     This can be useful to retrive a bunch of ressources in batch where the
-     updated state is pointless or is the same as the initial one.  *)
-
+  (** The Infix module defines operators for common bind operations *)
   module Infix : sig
     val (>>=) : 'a m -> ('a -> 'b m) -> 'b m
     val (=<<) : ('a -> 'b m) -> 'a m -> 'b m
@@ -183,6 +170,13 @@ module Monad : sig
     val (=|<) : ('a -> 'b) -> 'a m -> 'b m
   end
 
+  (** The List module mainly wrap the Lwt_list one in the Agent monad. Functions
+     suffixed with
+     _s chains the actions sequentially, passing around the updated agent to the
+     next one. The _m ones do everything in parallel, sending a copy of the
+     initial state to every threads and returning this same unupdated state.
+     The latter can be useful to retrive a bunch of ressources in batch where
+     the updated state is not of interest (e.g images) *)
   module List : sig
     val iter_s : ('a -> unit m) -> 'a list -> unit m
     val iter_p : ('a -> unit m) -> 'a list -> unit m
@@ -207,20 +201,22 @@ module Monad : sig
   (*   -> port:int *)
   (*   -> unit m *)
 
+  (** get the current state of the agent, or set a new one *)
+
+  val get : t m
+  val set : t -> unit m
+
   (** To use the monad operators on functions operating on the agent such as {!
-      Agent.cookiejar} or {!
+      Agent.cookie_jar} or {!
       Agent.set_cookie_jar}, one needs to wrap their type to match the monad
       constraint. For example, the first one go from [Agent.t -> Cookiejar.t] to
       [Agent.t -> (Agent.t * Cookiejar.t) Lwt.t] by just returning the agent
       unmodified together with the cookie jar, the whole result being wrapped in
-      Lwt.return
+      [Lwt.return]
 
       Note that the redefined functions have the same name as their counterpart,
       and thus will shadow or can be shadowed by them.
   *)
-
-  val get : t m
-  val set : t -> unit m
 
   val save_content : string -> string -> unit m
 

@@ -111,10 +111,10 @@ let test_selector (type s) page f (module M : PageElement with type t = s) node 
   let nodes = f selector page in
   let msg c = Printf.sprintf "%s [%d/%d]" (prefix^selector) c expected_count in
   nodes
-  |> List.fold_left (fun c _ -> succ c) 0
+  |> Page.fold (fun c _ -> succ c) 0
   |> (fun c -> check_int (msg c) expected_count c);
   nodes
-  |> List.iter (fun x ->
+  |> Page.iter (fun x ->
     x
     |> M.to_node
     |> Soup.name
@@ -127,10 +127,10 @@ let test_selector_inputs form f input prefix selector expected_count =
     | "textarea" | "select" -> input
     | _ -> "input" in
   inputs
-  |> Page.Form.fold (fun c _ -> succ c) 0
+  |> Page.fold (fun c _ -> succ c) 0
   |> (fun c -> check_int (msg c) expected_count c);
   inputs
-  |> Page.Form.iter (fun x ->
+  |> Page.iter (fun x ->
     x
     |> Page.Form.input_to_node
     |> Soup.name

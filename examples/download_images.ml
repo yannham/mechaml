@@ -16,7 +16,7 @@ let save_images images =
     let path = Page.Image.source img
       |> image_filename
       |> (^) "/tmp/" in
-    let save _ = 
+    let save _ =
       Agent.save_image path img
       >> M.return (Ok path) in
     let handler e =
@@ -45,6 +45,7 @@ let action =
   Agent.get "https://ocaml.org/index.fr.html"
   >|= Agent.HttpResponse.page
   >|= Page.images_with "[src$=.png]"
+  >|= Page.to_list
   >>= save_images
 
 let _ =

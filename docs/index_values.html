@@ -2,6 +2,7 @@
 <head>
 <link rel="stylesheet" href="style.css" type="text/css">
 <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="Start" href="index.html">
 <link title="Index of types" rel=Appendix href="index_types.html">
 <link title="Index of values" rel=Appendix href="index_values.html">
@@ -15,6 +16,19 @@
 &nbsp;</div>
 <h1>Index of values</h1>
 <table>
+<tr><td align="left"><br></td></tr>
+<tr><td><a href="Agent.Monad.Infix.html#VAL(<<)">(&lt;&lt;)</a> [<a href="Agent.Monad.Infix.html">Agent.Monad.Infix</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.Infix.html#VAL(=<<)">(=&lt;&lt;)</a> [<a href="Agent.Monad.Infix.html">Agent.Monad.Infix</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.Infix.html#VAL(=|<)">(=|&lt;)</a> [<a href="Agent.Monad.Infix.html">Agent.Monad.Infix</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.Infix.html#VAL(>>)">(&gt;&gt;)</a> [<a href="Agent.Monad.Infix.html">Agent.Monad.Infix</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.Infix.html#VAL(>>=)">(&gt;&gt;=)</a> [<a href="Agent.Monad.Infix.html">Agent.Monad.Infix</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.Infix.html#VAL(>|=)">(&gt;|=)</a> [<a href="Agent.Monad.Infix.html">Agent.Monad.Infix</a>]</td>
+<td></td></tr>
 <tr><td align="left"><br>A</td></tr>
 <tr><td><a href="Page.Form.html#VALaction">action</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td><div class="info">
@@ -26,11 +40,15 @@ Return the action attribute of the form
 Add a cookie to the jar
 </div>
 </td></tr>
+<tr><td><a href="Agent.Monad.html#VALadd_client_header">add_client_header</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
+<td></td></tr>
 <tr><td><a href="Agent.html#VALadd_client_header">add_client_header</a> [<a href="Agent.html">Agent</a>]</td>
 <td><div class="info">
 Add a single pair key/value to the default headers
 </div>
 </td></tr>
+<tr><td><a href="Agent.Monad.html#VALadd_cookie">add_cookie</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
+<td></td></tr>
 <tr><td><a href="Agent.html#VALadd_cookie">add_cookie</a> [<a href="Agent.html">Agent</a>]</td>
 <td><div class="info">
 Add a single cookie to the current Cookiejar
@@ -48,7 +66,17 @@ Given an URI to request, update the client HTTP headers with relevant
    cookies before sending it to the server
 </div>
 </td></tr>
+<tr><td align="left"><br>B</td></tr>
+<tr><td><a href="Page.html#VALbase_uri">base_uri</a> [<a href="Page.html">Page</a>]</td>
+<td><div class="info">
+Return the location of a page (or <code class="code">Uri.empty</code> if not specified)
+</div>
+</td></tr>
+<tr><td><a href="Agent.Monad.html#VALbind">bind</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
+<td></td></tr>
 <tr><td align="left"><br>C</td></tr>
+<tr><td><a href="Agent.Monad.html#VALcatch">catch</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
+<td></td></tr>
 <tr><td><a href="Page.Form.Checkbox.html#VALcheck">check</a> [<a href="Page.Form.Checkbox.html">Page.Form.Checkbox</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.Form.html#VALcheckbox_with">checkbox_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
@@ -59,7 +87,7 @@ Given an URI to request, update the client HTTP headers with relevant
 <td></td></tr>
 <tr><td><a href="Page.Form.Checkbox.html#VALchecked">checked</a> [<a href="Page.Form.Checkbox.html">Page.Form.Checkbox</a>]</td>
 <td><div class="info">
-Return the list of all checked checkboxes with the same name that the
+Return the list of all checked checkboxes with the same name as the
        given one
 </div>
 </td></tr>
@@ -67,30 +95,34 @@ Return the list of all checked checkboxes with the same name that the
 <td></td></tr>
 <tr><td><a href="Page.Form.Checkbox.html#VALchoices">choices</a> [<a href="Page.Form.Checkbox.html">Page.Form.Checkbox</a>]</td>
 <td><div class="info">
-Return all the checkboxes with the same name that the given one
+Return all the checkboxes with the same name as the given one
 </div>
 </td></tr>
+<tr><td><a href="Page.Form.html#VALclear">clear</a> [<a href="Page.Form.html">Page.Form</a>]</td>
+<td><div class="info">
+Remove the value of a field
+</div>
+</td></tr>
+<tr><td><a href="Page.Form.html#VALclear_all">clear_all</a> [<a href="Page.Form.html">Page.Form</a>]</td>
+<td></td></tr>
 <tr><td><a href="Agent.html#VALclick">click</a> [<a href="Agent.html">Agent</a>]</td>
 <td><div class="info">
 Same as get, but work directly with links instead of URIs
 </div>
 </td></tr>
+<tr><td><a href="Agent.Monad.html#VALclient_headers">client_headers</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
+<td></td></tr>
 <tr><td><a href="Agent.html#VALclient_headers">client_headers</a> [<a href="Agent.html">Agent</a>]</td>
 <td><div class="info">
 Return the default headers sent when performing HTTP requests
 </div>
 </td></tr>
-<tr><td><a href="Agent.html#VALcode_of_status">code_of_status</a> [<a href="Agent.html">Agent</a>]</td>
-<td><div class="info">
-Convert a code to the corresponding int code
-</div>
-</td></tr>
-<tr><td><a href="Agent.html#VALcontent">content</a> [<a href="Agent.html">Agent</a>]</td>
-<td><div class="info">
-Return the raw content of the last response as a string, or an empty string
-   if none
-</div>
-</td></tr>
+<tr><td><a href="Agent.HttpResponse.html#VALcohttp_response">cohttp_response</a> [<a href="Agent.HttpResponse.html">Agent.HttpResponse</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.HttpResponse.html#VALcontent">content</a> [<a href="Agent.HttpResponse.html">Agent.HttpResponse</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.html#VALcookie_jar">cookie_jar</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
+<td></td></tr>
 <tr><td><a href="Agent.html#VALcookie_jar">cookie_jar</a> [<a href="Agent.html">Agent</a>]</td>
 <td><div class="info">
 Return the current Cookiejar
@@ -99,7 +131,7 @@ Return the current Cookiejar
 <tr><td align="left"><br>D</td></tr>
 <tr><td><a href="Agent.html#VALdefault_max_redirect">default_max_redirect</a> [<a href="Agent.html">Agent</a>]</td>
 <td><div class="info">
-The default maximum consecutive redirections.
+The default maximum consecutive redirections
 </div>
 </td></tr>
 <tr><td><a href="Agent.html#VALdisable_proxy">disable_proxy</a> [<a href="Agent.html">Agent</a>]</td>
@@ -115,6 +147,10 @@ The emtpy cookie jar
 <tr><td><a href="Cookiejar.Cookie.html#VALexpiration">expiration</a> [<a href="Cookiejar.Cookie.html">Cookiejar.Cookie</a>]</td>
 <td></td></tr>
 <tr><td align="left"><br>F</td></tr>
+<tr><td><a href="Agent.Monad.html#VALfail">fail</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.html#VALfail_with">fail_with</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
+<td></td></tr>
 <tr><td><a href="Page.Form.html#VALfield_with">field_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.Form.html#VALfields">fields</a> [<a href="Page.Form.html">Page.Form</a>]</td>
@@ -127,11 +163,19 @@ The emtpy cookie jar
 <td></td></tr>
 <tr><td><a href="Page.Form.html#VALfile_uploads_with">file_uploads_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td></td></tr>
-<tr><td><a href="Page.Form.html#VALfilter">filter</a> [<a href="Page.Form.html">Page.Form</a>]</td>
+<tr><td><a href="Page.html#VALfilter">filter</a> [<a href="Page.html">Page</a>]</td>
+<td></td></tr>
+<tr><td><a href="Page.html#VALfind_first">find_first</a> [<a href="Page.html">Page</a>]</td>
+<td></td></tr>
+<tr><td><a href="Page.html#VALfirst">first</a> [<a href="Page.html">Page</a>]</td>
 <td></td></tr>
 <tr><td><a href="Cookiejar.html#VALfold">fold</a> [<a href="Cookiejar.html">Cookiejar</a>]</td>
 <td></td></tr>
-<tr><td><a href="Page.Form.html#VALfold">fold</a> [<a href="Page.Form.html">Page.Form</a>]</td>
+<tr><td><a href="Page.html#VALfold">fold</a> [<a href="Page.html">Page</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.List.html#VALfold_left_s">fold_left_s</a> [<a href="Agent.Monad.List.html">Agent.Monad.List</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.List.html#VALfold_right_s">fold_right_s</a> [<a href="Agent.Monad.List.html">Agent.Monad.List</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.html#VALform_with">form_with</a> [<a href="Page.html">Page</a>]</td>
 <td></td></tr>
@@ -140,20 +184,28 @@ The emtpy cookie jar
 <tr><td><a href="Page.html#VALforms_with">forms_with</a> [<a href="Page.html">Page</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.html#VALfrom_soup">from_soup</a> [<a href="Page.html">Page</a>]</td>
+<td><div class="info">
+Make a new page from a base URI and a Lambdasoup document
+</div>
+</td></tr>
+<tr><td><a href="Page.html#VALfrom_string">from_string</a> [<a href="Page.html">Page</a>]</td>
 <td></td></tr>
 <tr><td align="left"><br>G</td></tr>
 <tr><td><a href="Page.Form.Field.html#VALget">get</a> [<a href="Page.Form.Field.html">Page.Form.Field</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.Form.html#VALget">get</a> [<a href="Page.Form.html">Page.Form</a>]</td>
-<td><div class="info">
-Get the value of a field
-</div>
-</td></tr>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.html#VALget">get</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
+<td></td></tr>
 <tr><td><a href="Agent.html#VALget">get</a> [<a href="Agent.html">Agent</a>]</td>
+<td></td></tr>
+<tr><td><a href="Page.Form.html#VALget_multi">get_multi</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td></td></tr>
 <tr><td><a href="Agent.html#VALget_uri">get_uri</a> [<a href="Agent.html">Agent</a>]</td>
 <td></td></tr>
 <tr><td align="left"><br>H</td></tr>
+<tr><td><a href="Agent.HttpResponse.html#VALheaders">headers</a> [<a href="Agent.HttpResponse.html">Agent.HttpResponse</a>]</td>
+<td></td></tr>
 <tr><td><a href="Page.Form.html#VALhidden_with">hidden_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.Form.html#VALhiddens">hiddens</a> [<a href="Page.Form.html">Page.Form</a>]</td>
@@ -184,11 +236,6 @@ Create a new empty agent.
 Convert an input to a Soup node
 </div>
 </td></tr>
-<tr><td><a href="Page.Form.html#VALinput_to_nodes">input_to_nodes</a> [<a href="Page.Form.html">Page.Form</a>]</td>
-<td><div class="info">
-Convert an input list to a Soup nodes list
-</div>
-</td></tr>
 <tr><td><a href="Page.Form.html#VALint_with">int_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.Form.html#VALints">ints</a> [<a href="Page.Form.html">Page.Form</a>]</td>
@@ -210,11 +257,16 @@ Return a list of all items of a given list
 </td></tr>
 <tr><td><a href="Cookiejar.html#VALiter">iter</a> [<a href="Cookiejar.html">Cookiejar</a>]</td>
 <td></td></tr>
-<tr><td><a href="Page.Form.html#VALiter">iter</a> [<a href="Page.Form.html">Page.Form</a>]</td>
-<td><div class="info">
-Operations on a lazy input list
-</div>
-</td></tr>
+<tr><td><a href="Page.html#VALiter">iter</a> [<a href="Page.html">Page</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.List.html#VALiter_p">iter_p</a> [<a href="Agent.Monad.List.html">Agent.Monad.List</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.List.html#VALiter_s">iter_s</a> [<a href="Agent.Monad.List.html">Agent.Monad.List</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.List.html#VALiteri_p">iteri_p</a> [<a href="Agent.Monad.List.html">Agent.Monad.List</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.List.html#VALiteri_s">iteri_s</a> [<a href="Agent.Monad.List.html">Agent.Monad.List</a>]</td>
+<td></td></tr>
 <tr><td align="left"><br>K</td></tr>
 <tr><td><a href="Page.Form.html#VALkeygen_with">keygen_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td></td></tr>
@@ -229,6 +281,8 @@ Operations on a lazy input list
 <td></td></tr>
 <tr><td><a href="Page.html#VALlinks_with">links_with</a> [<a href="Page.html">Page</a>]</td>
 <td></td></tr>
+<tr><td><a href="Agent.HttpResponse.html#VALlocation">location</a> [<a href="Agent.HttpResponse.html">Agent.HttpResponse</a>]</td>
+<td></td></tr>
 <tr><td align="left"><br>M</td></tr>
 <tr><td><a href="Cookiejar.Cookie.html#VALmake">make</a> [<a href="Cookiejar.Cookie.html">Cookiejar.Cookie</a>]</td>
 <td><div class="info">
@@ -241,6 +295,16 @@ Create a cookie
 <td></td></tr>
 <tr><td><a href="Cookiejar.html#VALmap">map</a> [<a href="Cookiejar.html">Cookiejar</a>]</td>
 <td></td></tr>
+<tr><td><a href="Agent.Monad.html#VALmap">map</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.List.html#VALmap_p">map_p</a> [<a href="Agent.Monad.List.html">Agent.Monad.List</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.List.html#VALmap_s">map_s</a> [<a href="Agent.Monad.List.html">Agent.Monad.List</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.List.html#VALmapi_p">mapi_p</a> [<a href="Agent.Monad.List.html">Agent.Monad.List</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.List.html#VALmapi_s">mapi_s</a> [<a href="Agent.Monad.List.html">Agent.Monad.List</a>]</td>
+<td></td></tr>
 <tr><td><a href="Cookiejar.Cookie.html#VALmatch_uri">match_uri</a> [<a href="Cookiejar.Cookie.html">Cookiejar.Cookie</a>]</td>
 <td><div class="info">
 Given an uri and a cookie, return true if the
@@ -249,12 +313,7 @@ Given an uri and a cookie, return true if the
 </td></tr>
 <tr><td><a href="Page.Form.html#VALmeth">meth</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td><div class="info">
-Return the method attribute of the form
-</div>
-</td></tr>
-<tr><td><a href="Agent.html#VALmeth">meth</a> [<a href="Agent.html">Agent</a>]</td>
-<td><div class="info">
-Return the method used to retrieve the content, or <code class="code">`Other "None"</code> if none
+Return the method attribute of the form (`GET by default)
 </div>
 </td></tr>
 <tr><td align="left"><br>N</td></tr>
@@ -265,13 +324,11 @@ Return the method used to retrieve the content, or <code class="code">`Other "No
 Return the name of the form
 </div>
 </td></tr>
+<tr><td><a href="Page.html#VALnth">nth</a> [<a href="Page.html">Page</a>]</td>
+<td></td></tr>
 <tr><td align="left"><br>P</td></tr>
-<tr><td><a href="Agent.html#VALpage">page</a> [<a href="Agent.html">Agent</a>]</td>
-<td><div class="info">
-Return the last page, or None if none or any error ocurred during HTML
-   parsing
-</div>
-</td></tr>
+<tr><td><a href="Agent.HttpResponse.html#VALpage">page</a> [<a href="Agent.HttpResponse.html">Agent.HttpResponse</a>]</td>
+<td></td></tr>
 <tr><td><a href="Page.Form.html#VALpassword_with">password_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.Form.html#VALpasswords">passwords</a> [<a href="Page.Form.html">Page.Form</a>]</td>
@@ -296,29 +353,50 @@ Return the last page, or None if none or any error ocurred during HTML
 Remove a cookie from the jar
 </div>
 </td></tr>
+<tr><td><a href="Agent.Monad.html#VALremove_client_header">remove_client_header</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
+<td></td></tr>
 <tr><td><a href="Agent.html#VALremove_client_header">remove_client_header</a> [<a href="Agent.html">Agent</a>]</td>
 <td><div class="info">
 Remove a single pair key/value from the default headers
 </div>
 </td></tr>
+<tr><td><a href="Agent.Monad.html#VALremove_cookie">remove_cookie</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
+<td></td></tr>
 <tr><td><a href="Agent.html#VALremove_cookie">remove_cookie</a> [<a href="Agent.html">Agent</a>]</td>
 <td><div class="info">
 Remove a single cookie from the Cookiejar
 </div>
 </td></tr>
 <tr><td><a href="Page.Form.html#VALreset">reset</a> [<a href="Page.Form.html">Page.Form</a>]</td>
+<td><div class="info">
+Reset the value of a field to its default (or remove it if there is no
+     default
+     value)
+</div>
+</td></tr>
+<tr><td><a href="Page.Form.html#VALreset_all">reset_all</a> [<a href="Page.Form.html">Page.Form</a>]</td>
+<td></td></tr>
+<tr><td><a href="Page.html#VALresolver">resolver</a> [<a href="Page.html">Page</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.html#VALreturn">return</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.html#VALreturn_from_lwt">return_from_lwt</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.html#VALrun">run</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
 <td></td></tr>
 <tr><td align="left"><br>S</td></tr>
+<tr><td><a href="Agent.Monad.html#VALsave_content">save_content</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
+<td></td></tr>
 <tr><td><a href="Agent.html#VALsave_content">save_content</a> [<a href="Agent.html">Agent</a>]</td>
 <td><div class="info">
-<code class="code">save_content ~mode:`Binary "myfile.html" agent</code> write the current content of the agent in
-   a file.
+<code class="code">save_content "/path/to/myfile.html" content</code> write the specified content in a file
+    using Lwt's asynchronous IO
 </div>
 </td></tr>
 <tr><td><a href="Agent.html#VALsave_image">save_image</a> [<a href="Agent.html">Agent</a>]</td>
 <td><div class="info">
-<code class="code">save_image image "myfile.jpg" agent</code> load the image using <code class="code">get</code>, open
-   <code class="code">myfile.jpg</code> and write the received content.
+<code class="code">save_image "/path/to/myfile.jpg" image agent</code> loads the image using <code class="code">get</code>, open
+   <code class="code">myfile.jpg</code> and write the content in.
 </div>
 </td></tr>
 <tr><td><a href="Cookiejar.Cookie.html#VALsecure">secure</a> [<a href="Cookiejar.Cookie.html">Cookiejar.Cookie</a>]</td>
@@ -342,43 +420,49 @@ Remove a single cookie from the Cookiejar
 Return the possibly selected radio button
 </div>
 </td></tr>
-<tr><td><a href="Agent.html#VALserver_headers">server_headers</a> [<a href="Agent.html">Agent</a>]</td>
-<td><div class="info">
-Return the headers sent by the last response, or empty headers if none
-</div>
-</td></tr>
 <tr><td><a href="Page.Form.Field.html#VALset">set</a> [<a href="Page.Form.Field.html">Page.Form.Field</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.Form.html#VALset">set</a> [<a href="Page.Form.html">Page.Form</a>]</td>
-<td><div class="info">
-Set directly the values of a field
-</div>
-</td></tr>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.html#VALset">set</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.Monad.html#VALset_client_headers">set_client_headers</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
+<td></td></tr>
 <tr><td><a href="Agent.html#VALset_client_headers">set_client_headers</a> [<a href="Agent.html">Agent</a>]</td>
 <td><div class="info">
 Use the specified headers as new default headers
 </div>
 </td></tr>
+<tr><td><a href="Agent.Monad.html#VALset_cookie_jar">set_cookie_jar</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
+<td></td></tr>
 <tr><td><a href="Agent.html#VALset_cookie_jar">set_cookie_jar</a> [<a href="Agent.html">Agent</a>]</td>
 <td><div class="info">
-Change the current Cookiejar
+Set the current Cookiejar
 </div>
 </td></tr>
+<tr><td><a href="Agent.Monad.html#VALset_max_redirect">set_max_redirect</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
+<td></td></tr>
 <tr><td><a href="Agent.html#VALset_max_redirect">set_max_redirect</a> [<a href="Agent.html">Agent</a>]</td>
 <td><div class="info">
 Max redirection to avoid infinite loops (use 0 to disable automatic
    redirection)
 </div>
 </td></tr>
+<tr><td><a href="Page.Form.html#VALset_multi">set_multi</a> [<a href="Page.Form.html">Page.Form</a>]</td>
+<td></td></tr>
 <tr><td><a href="Agent.html#VALset_proxy">set_proxy</a> [<a href="Agent.html">Agent</a>]</td>
 <td></td></tr>
-<tr><td><a href="Page.Image.html#VALsource">source</a> [<a href="Page.Image.html">Page.Image</a>]</td>
-<td></td></tr>
-<tr><td><a href="Agent.html#VALstatus_code">status_code</a> [<a href="Agent.html">Agent</a>]</td>
+<tr><td><a href="Page.html#VALsoup">soup</a> [<a href="Page.html">Page</a>]</td>
 <td><div class="info">
-Return the HTTP code of the last reponse, or <code class="code">`Code (-1)</code> if none
+Convert to Lambdasoup
 </div>
 </td></tr>
+<tr><td><a href="Page.Image.html#VALsource">source</a> [<a href="Page.Image.html">Page.Image</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.HttpResponse.html#VALstatus">status</a> [<a href="Agent.HttpResponse.html">Agent.HttpResponse</a>]</td>
+<td></td></tr>
+<tr><td><a href="Agent.HttpResponse.html#VALstatus_code">status_code</a> [<a href="Agent.HttpResponse.html">Agent.HttpResponse</a>]</td>
+<td></td></tr>
 <tr><td><a href="Agent.html#VALsubmit">submit</a> [<a href="Agent.html">Agent</a>]</td>
 <td><div class="info">
 Submit a filled form
@@ -399,11 +483,8 @@ Submit a filled form
 <td></td></tr>
 <tr><td><a href="Page.Form.html#VALtexts_with">texts_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td></td></tr>
-<tr><td><a href="Page.Form.html#VALto_list">to_list</a> [<a href="Page.Form.html">Page.Form</a>]</td>
-<td><div class="info">
-Convert the lazy input list to a native OCaml list
-</div>
-</td></tr>
+<tr><td><a href="Page.html#VALto_list">to_list</a> [<a href="Page.html">Page</a>]</td>
+<td></td></tr>
 <tr><td><a href="Page.Image.html#VALto_node">to_node</a> [<a href="Page.Image.html">Page.Image</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.Link.html#VALto_node">to_node</a> [<a href="Page.Link.html">Page.Link</a>]</td>
@@ -413,30 +494,25 @@ Convert the lazy input list to a native OCaml list
 Convert a form to a Soup node
 </div>
 </td></tr>
-<tr><td><a href="Page.html#VALto_soup">to_soup</a> [<a href="Page.html">Page</a>]</td>
-<td></td></tr>
 <tr><td><a href="Page.Form.SelectList.html#VALto_string">to_string</a> [<a href="Page.Form.SelectList.html">Page.Form.SelectList</a>]</td>
 <td><div class="info">
 Label of an item
 </div>
 </td></tr>
+<tr><td><a href="Agent.Monad.html#VALtry_bind">try_bind</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
+<td></td></tr>
 <tr><td align="left"><br>U</td></tr>
 <tr><td><a href="Page.Form.Checkbox.html#VALuncheck">uncheck</a> [<a href="Page.Form.Checkbox.html">Page.Form.Checkbox</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.Form.SelectList.html#VALunselect">unselect</a> [<a href="Page.Form.SelectList.html">Page.Form.SelectList</a>]</td>
 <td></td></tr>
-<tr><td><a href="Page.Form.html#VALunset">unset</a> [<a href="Page.Form.html">Page.Form</a>]</td>
-<td><div class="info">
-Delete the value of a field
-</div>
-</td></tr>
 <tr><td><a href="Page.Image.html#VALuri">uri</a> [<a href="Page.Image.html">Page.Image</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.Link.html#VALuri">uri</a> [<a href="Page.Link.html">Page.Link</a>]</td>
 <td></td></tr>
-<tr><td><a href="Agent.html#VALuri">uri</a> [<a href="Agent.html">Agent</a>]</td>
+<tr><td><a href="Page.Form.html#VALuri">uri</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td><div class="info">
-Return the last URI requested, or an empty one if none
+Return the absolute (resolved) uri corresponding to the action attribute
 </div>
 </td></tr>
 <tr><td align="left"><br>V</td></tr>
@@ -453,7 +529,7 @@ Return the value (the label) of a checkbox
 <td></td></tr>
 <tr><td><a href="Page.Form.Checkbox.html#VALvalues">values</a> [<a href="Page.Form.Checkbox.html">Page.Form.Checkbox</a>]</td>
 <td><div class="info">
-Return the values of all the checkboxes with the same name that the
+Return the values of all the checkboxes with the same name asthe
        given one
 </div>
 </td></tr>
@@ -465,6 +541,11 @@ Return all set values as a list
 <tr><td align="left"><br>W</td></tr>
 <tr><td><a href="Page.Form.FileUpload.html#VALwhich_selected">which_selected</a> [<a href="Page.Form.FileUpload.html">Page.Form.FileUpload</a>]</td>
 <td></td></tr>
+<tr><td><a href="Page.html#VALwith_stop">with_stop</a> [<a href="Page.html">Page</a>]</td>
+<td><div class="info">
+see Lambdasoup's <code class="code">Soup.with_stop</code>
+</div>
+</td></tr>
 </table>
 </body>
 </html>

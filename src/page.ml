@@ -26,7 +26,7 @@ open Infix.Option
 let id x = x
 
 let is_identifier_char c =
-  let code = c |> Char.lowercase |> Char.code in
+  let code = c |> Char.lowercase_ascii |> Char.code in
   (code >= (Char.code 'a') && code <= (Char.code 'z')) ||
   (code >= (Char.code '0') && code <= (Char.code '9')) ||
   (c == '-') || (c == '_')
@@ -53,11 +53,6 @@ let tag_selector tag = function
   | s when is_identifier_char s.[0] -> s
   | s -> tag^s
 
-let hd_opt = function
-  | [] -> None
-  | x::xs -> Some x
-
-
 let from_soup ?(location=Uri.empty) soup =
   let base_uri =
     Soup.select_one "base[href]" soup
@@ -76,6 +71,45 @@ let resolver p = Uri.resolve "" p.base_uri
 
 let soup p = p.soup
 
+type +'a seq = { eliminate : 'b. ('b -> 'a -> 'b) -> 'b -> 'b }
+type 'a stop = 'a Soup.stop = { throw : 'b. 'a -> 'b }
+
+let with_stop = Soup.with_stop
+
+let seq_from_nodes gen nodes =
+  { eliminate = fun f init ->
+      let f' acc x = f acc (gen x) in
+      Soup.fold f' init nodes }
+
+let iter it seq =
+  seq.eliminate (fun _ -> it) ()
+
+let fold f init seq = seq.eliminate f init
+
+let filter pred seq =
+  { eliminate = fun f init ->
+      let f' acc x = if pred x then f acc x else acc in
+      seq.eliminate f' init }
+
+let nth n seq =
+  with_stop (fun stop ->
+    seq.eliminate (fun i x ->
+      if i = n then Some x |> stop.throw
+      else i+1) 1
+    |> ignore;
+    None)
+
+let first seq = nth 1 seq
+
+let find_first pred seq =
+  seq
+  |> filter pred
+  |> first
+
+let to_list seq =
+  seq.eliminate (fun l x -> x::l) []
+  |> List.rev
+
 module Form = struct
   module StringMap = Map.Make(String)
 
@@ -93,17 +127,20 @@ module Form = struct
   let name f = Soup.attribute "name" f.elt
 
   let action f =
-    f.elt |> Soup.attribute "action"
+    f.elt
+    |> Soup.attribute "action"
     >|= Uri.of_string
     |> Soup.require
 
   let uri f =
-    f |> action
+    f
+    |> action
     |> f.resolver
 
   let meth f =
-    let m = f.elt |> Soup.attribute "method"
-      >|= String.lowercase
+    let m = f.elt
+      |> Soup.attribute "method"
+      >|= String.lowercase_ascii
       >|= String.trim in
     match m with
       | Some "post" -> `POST
@@ -111,120 +148,166 @@ module Form = struct
 
   let to_node f = f.elt
   let input_to_node i = i
-  let input_to_nodes is = is
 
-  let to_list = Soup.to_list
-  let iter = Soup.iter
-  let fold = Soup.fold
-  let filter = Soup.filter
+  let set_multi key values f =
+    {f with data = f.data |> StringMap.add key values}
+  let set key value f = set_multi key [value] f
 
-  let set key value f =
-    {f with data = f.data |> StringMap.add key value}
-  let get key f = StringMap.find key f.data
-  let unset key f =
+  let get_multi key f = StringMap.find key f.data
+  let get key f =
+    get_multi key f
+    |> (function
+      | [] -> None
+      | x::xs -> Some x)
+
+  let clear key f =
     {f with data = f.data |> StringMap.remove key}
+  let reset = clear
+
+  let clear_all f =
+    {f with data = StringMap.empty }
+  let reset_all = clear_all
+
   let values f = StringMap.fold (fun id value l -> (id,value)::l) f.data []
 
   let checkboxes_with selector f =
-    f.elt |> Soup.select (tag_selector "input[type=checkbox]" selector)
+    f.elt
+    |> Soup.select (tag_selector "input[type=checkbox]" selector)
     |> Soup.filter (input_filter "checkbox")
+    |> seq_from_nodes id
 
   let checkbox_with selector f =
-    f |> checkboxes_with selector |> Soup.first
+    f |> checkboxes_with selector |> first
 
   let checkboxes = checkboxes_with ""
 
   let radio_buttons_with selector f =
-    f.elt |> Soup.select (tag_selector "input[type=radio]" selector)
+    f.elt
+    |> Soup.select (tag_selector "input[type=radio]" selector)
     |> Soup.filter (input_filter "radio")
+    |> seq_from_nodes id
 
   let radio_button_with selector f =
-    f |> radio_buttons_with selector |> Soup.first
+    f
+    |> radio_buttons_with selector
+    |> first
 
   let radio_buttons = radio_buttons_with ""
 
   let select_lists_with selector f =
-    f.elt |> Soup.select (tag_selector "select" selector)
+    f.elt
+    |> Soup.select (tag_selector "select" selector)
     |> Soup.filter (tag_filter "select")
+    |> seq_from_nodes id
 
   let select_list_with selector f =
-    f |> select_lists_with selector |> Soup.first
+    f
+    |> select_lists_with selector
+    |> first
 
   let select_lists = select_lists_with ""
 
   let fields_with selector f =
-    f.elt |> Soup.select (tag_selector "*" selector)
+    f.elt
+    |> Soup.select (tag_selector "*" selector)
     |> Soup.filter field_filter
+    |> seq_from_nodes id
 
   let field_with selector f =
-    f |> fields_with selector |> Soup.first
+    f
+    |> fields_with selector
+    |> first
 
   let fields = fields_with ""
 
   let texts_with selector f =
-    f.elt |> Soup.select (tag_selector "input[type=text]" selector)
+    f.elt
+    |> Soup.select (tag_selector "input[type=text]" selector)
     |> Soup.filter (input_filter "text")
+    |> seq_from_nodes id
 
   let text_with selector f =
-    f |> texts_with selector |> Soup.first
+    f
+    |> texts_with selector
+    |> first
 
   let texts = texts_with ""
 
   let passwords_with selector f =
-    f.elt |> Soup.select (tag_selector "input[type=password]" selector)
+    f.elt
+    |> Soup.select (tag_selector "input[type=password]" selector)
     |> Soup.filter (input_filter "password")
+    |> seq_from_nodes id
 
   let password_with selector f =
-    f |> passwords_with selector |> Soup.first
+    f
+    |> passwords_with selector
+    |> first
 
   let passwords = passwords_with ""
 
   let hiddens_with selector f =
-    f.elt |> Soup.select (tag_selector "input[type=hidden]" selector)
+    f.elt
+    |> Soup.select (tag_selector "input[type=hidden]" selector)
     |> Soup.filter (input_filter "hidden")
+    |> seq_from_nodes id
 
   let hidden_with selector f =
-    f |> hiddens_with selector |> Soup.first
+    f
+    |> hiddens_with selector
+    |> first
 
   let hiddens = hiddens_with ""
 
   let ints_with selector f =
-    f.elt |> Soup.select (tag_selector "input[type=int]" selector)
+    f.elt
+    |> Soup.select (tag_selector "input[type=int]" selector)
     |> Soup.filter (input_filter "int")
+    |> seq_from_nodes id
 
   let int_with selector f =
-    f |> ints_with selector |> Soup.first
+    f
+    |> ints_with selector
+    |> first
 
   let ints = ints_with ""
 
   let textareas_with selector f =
-    f.elt |> Soup.select (tag_selector "textarea" selector)
+    f.elt
+    |> Soup.select (tag_selector "textarea" selector)
     |> Soup.filter (fun node -> Soup.name node = "textarea")
+    |> seq_from_nodes id
 
   let textarea_with selector f =
-    f |> textareas_with selector |> Soup.first
+    f |> textareas_with selector |> first
 
   let textareas = textareas_with ""
 
   let keygens_with selector f =
-    f.elt |> Soup.select (tag_selector "input[type=keygen]" selector)
+    f.elt
+    |> Soup.select (tag_selector "input[type=keygen]" selector)
     |> Soup.filter (input_filter "keygen")
+    |> seq_from_nodes id
 
   let keygen_with selector f =
-    f |> keygens_with selector |> Soup.first
+    f
+    |> keygens_with selector
+    |> first
 
   let keygens = keygens_with ""
 
   let file_uploads_with selector f =
-    f.elt |> Soup.select (tag_selector "input[type=file_upload]" selector)
+    f.elt
+    |> Soup.select (tag_selector "input[type=file_upload]" selector)
     |> Soup.filter (input_filter "file_upload")
+    |> seq_from_nodes id
 
   let file_upload_with selector f =
-    f |> file_uploads_with selector |> Soup.first
+    f
+    |> file_uploads_with selector
+    |> first
 
   let file_uploads = file_uploads_with ""
-
-  let reset f = {f with data = StringMap.empty}
 
   let iname input = Soup.attribute "name" input
   let ivalue input = Soup.attribute "value" input
@@ -273,8 +356,12 @@ module Form = struct
     let value cb = ivalue cb |> Soup.require
 
     let choices f cb =
-      iname cb >|= cb_selector >|= (fun s ->
-        Soup.select s f.elt) |> Soup.require
+      iname cb
+      >|= cb_selector
+      >|= (fun s ->
+        Soup.select s f.elt)
+      |> Soup.require
+      |> seq_from_nodes id
 
     let values f cb =
       choices f cb |> fold (fun l cb ->
@@ -306,7 +393,9 @@ module Form = struct
       iname rb
       >|= rb_selector
       >|= (fun s ->
-        Soup.select s f.elt) |> Soup.require
+        Soup.select s f.elt)
+      |> Soup.require
+      |> seq_from_nodes id
 
     let values f rb =
       choices f rb |> fold (fun l cb ->
@@ -331,7 +420,7 @@ module Form = struct
   module SelectList = struct
     type item = elt
 
-    let items sl = Soup.select "option" sl |> to_list
+    let items sl = Soup.select "option" sl |> Soup.to_list
 
     let selected f sl =
       iname sl >>= current_value f.data
@@ -420,44 +509,38 @@ let forms_with selector p =
   p.soup
   |> Soup.select (tag_selector "form" selector)
   |> Soup.filter (tag_filter "form")
-  |> Soup.to_list
-  |> List.map (fun node -> Form.( {resolver = resolver p; elt = node;
-    data = StringMap.empty} ))
+  |> seq_from_nodes (fun elt -> Form.( {resolver = resolver p; elt;
+    data = StringMap.empty} |> reset_all ))
 
 let forms = forms_with ""
 
 let form_with selector p =
-  p |> forms_with selector |> hd_opt
+  p
+  |> forms_with selector
+  |> first
 
 let links_with selector p =
   p.soup
   |> Soup.select (tag_selector "a" selector)
   |> Soup.filter (tag_filter "a")
-  |> Soup.to_list
-  |> List.map (fun elt -> Link.( {resolver = resolver p; elt} ))
+  |> seq_from_nodes (fun elt -> Link.( {resolver = resolver p; elt} ))
 
 let links = links_with ""
 
 let link_with selector p =
-  p |> links_with selector |> hd_opt
+  p
+  |> links_with selector
+  |> first
 
 let images_with selector p =
   p.soup
   |> Soup.select (tag_selector "img" selector)
   |> Soup.filter (tag_filter "img")
-  |> Soup.to_list
-  |> List.map (fun elt -> Image.( {resolver = resolver p; elt} ))
+  |> seq_from_nodes (fun elt -> Image.( {resolver = resolver p; elt} ))
 
 let images = images_with ""
 
 let image_with selector p =
-  p |> images_with selector |> hd_opt
-
-(* let frames_with selector p = *)
-(*   p |> Soup.select (tag_selector "frame" selector) *)
-(*   |> Soup.filter (tag_filter "frame") |> Soup.to_list *)
-(*  *)
-(* let frames = frames_with "" *)
-(*  *)
-(* let frame_with selector p = *)
-(*   p |> frames_with selector |> hd_opt *)
+  p
+  |> images_with selector
+  |> first

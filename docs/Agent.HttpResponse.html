@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="Start" href="index.html">
+<link rel="next" href="Agent.Monad.html">
+<link rel="Up" href="Agent.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Agent" rel="Chapter" href="Agent.html">
+<link title="Page" rel="Chapter" href="Page.html">
+<link title="Cookiejar" rel="Chapter" href="Cookiejar.html"><title>Agent.HttpResponse</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a class="up" href="Agent.html" title="Agent">Up</a>
+&nbsp;<a class="post" href="Agent.Monad.html" title="Agent.Monad">Next</a>
+</div>
+<h1>Module <a href="type_Agent.HttpResponse.html">Agent.HttpResponse</a></h1>
+
+<pre><span class="keyword">module</span> HttpResponse: <code class="code">sig</code> <a href="Agent.HttpResponse.html">..</a> <code class="code">end</code></pre><div class="info module top">
+The HttpResponse module defines a type and operations to extract content and
+   metadata from server response<br>
+</div>
+<hr width="100%">
+
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type"></code>t</span> </pre>
+
+
+<pre><span id="VALstatus"><span class="keyword">val</span> status</span> : <code class="type"><a href="Agent.HttpResponse.html#TYPEt">t</a> -> <a href="Agent.html#TYPEhttp_status_code">Agent.http_status_code</a></code></pre>
+<pre><span id="VALstatus_code"><span class="keyword">val</span> status_code</span> : <code class="type"><a href="Agent.HttpResponse.html#TYPEt">t</a> -> int</code></pre>
+<pre><span id="VALheaders"><span class="keyword">val</span> headers</span> : <code class="type"><a href="Agent.HttpResponse.html#TYPEt">t</a> -> <a href="Agent.html#TYPEhttp_headers">Agent.http_headers</a></code></pre>
+<pre><span id="VALcontent"><span class="keyword">val</span> content</span> : <code class="type"><a href="Agent.HttpResponse.html#TYPEt">t</a> -> string</code></pre>
+<pre><span id="VALpage"><span class="keyword">val</span> page</span> : <code class="type"><a href="Agent.HttpResponse.html#TYPEt">t</a> -> <a href="Page.html#TYPEt">Page.t</a></code></pre>
+<pre><span id="VALlocation"><span class="keyword">val</span> location</span> : <code class="type"><a href="Agent.HttpResponse.html#TYPEt">t</a> -> Uri.t</code></pre>
+<pre><span id="VALcohttp_response"><span class="keyword">val</span> cohttp_response</span> : <code class="type"><a href="Agent.HttpResponse.html#TYPEt">t</a> -> Cohttp.Response.t</code></pre></body></html>

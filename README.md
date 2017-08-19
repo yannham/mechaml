@@ -44,8 +44,8 @@ let action_login =
     page
     |> Page.form_with "[name=login]"
     |> require "Can't find the login form !"
-    |> Page.Form.set "username" ["mynick"]
-    |> Page.Form.set "password" ["@xlz43"])
+    |> Page.Form.set "username" "mynick"
+    |> Page.Form.set "password" "@xlz43")
   >>= Agent.submit
 
 let _ =
