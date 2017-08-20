@@ -304,23 +304,47 @@ let tests_page = [
     selects_with "[name=nothere]" 0;
     selects_with "" 2;
 
-    let select1 = !form |> F.select_list_with "[name=select1]" |> Soup.require in
-    let items = select1 |> F.SelectList.items in
-    (match items with
-      | [x;y;z] ->
-        form := x |> F.SelectList.select !form select1;
-        form := y |> F.SelectList.select !form select1;
-        y
-        |> F.SelectList.is_selected !form select1
-        |> check_true "select_list choice2 (selected ?)";
-        x
-        |> F.SelectList.is_selected !form select1
-        |> not |> check_true "select_list choice1 (selected ?)";
-      | _ ->
-        items
-        |> List.length
-        |> Printf.sprintf "select_list : select1 has %d items, expected 3"
-        |> fail);
+    let test_selection12 name results = (
+      let sl =
+        !form
+        |> F.select_list_with (Printf.sprintf "[name=%s]" name)
+        |> Soup.require in
+      let items = sl |> F.SelectList.items in
+      match items,results with
+        | [x;y;z], [res_x;res_y] ->
+          form := x |> F.SelectList.select !form sl;
+          form := y |> F.SelectList.select !form sl;
+          let msg item =
+            Printf.sprintf "%s : %s (selected ?)"
+              (F.iname sl |> Soup.require)
+              (F.SelectList.value item) in
+          x
+          |> F.SelectList.is_selected !form sl
+          |> check_bool (msg x) res_x;
+          y
+          |> F.SelectList.is_selected !form sl
+          |> check_bool (msg y) res_y;
+          z
+          |> F.SelectList.is_selected !form sl
+          |> check_bool (msg z) false
+        | _ ->
+          items
+          |> List.length
+          |> Printf.sprintf "%s : has %d items, expected 3" (F.iname sl |>
+            Soup.require)
+          |> fail) in
+
+    let check_multiple name result =
+      !form
+      |> F.select_list_with (Printf.sprintf "[name=%s]" name)
+      |> Soup.require
+      |> F.SelectList.is_multiple
+      |> check_bool (Printf.sprintf "%s : is_multiple?" name) result in
+
+    check_multiple "select1" false;
+    check_multiple "select2" true;
+    test_selection12 "select1" [false;true];
+    test_selection12 "select2" [true;true];
 
     let fields_with t =
       test_selector_inputs !form F.fields_with t "select_field"
