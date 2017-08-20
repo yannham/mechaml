@@ -8,11 +8,7 @@ let require msg = function
 
 let action_login =
   Agent.get "https://www.reddit.com"
-  >>= fun response ->
-  response
-  |> Agent.HttpResponse.content
-  |> M.save_content "reddit-accueil.html"
-  >|= (fun _ ->
+  >|= (fun response ->
     response
     |> Agent.HttpResponse.page
     |> Page.form_with "[id=login_login-main]"
