@@ -2,7 +2,7 @@ Name: Mechaml
 Version: 0.2
 Synopsis: A web browsing library built on top of Lambdasoup and Cohttp. Inspired by WWW::Mechanize
 Authors: Yann Hamdaoui <yann.hamdaoui@centraliens.net>
-License: GNU LGPL v3
+License: LGPL
 
 Description: Mechaml provides an HTTP agent to interact with websites through an OCaml
   program. It uses cohttp to parse and build HTTP requests/responses, and
