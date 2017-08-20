@@ -39,12 +39,17 @@ let input_filter input_type node =
   && (Soup.attribute "type" node >|= fun t ->
     t=input_type) |? false
 
+let is_input_field = function
+  | "text"
+  | "password"
+  | "hidden" -> true
+  | _ -> false
+
 let field_filter node =
     match Soup.name node with
       | "textarea" -> true
       | "input" ->
-        Soup.attribute "type" node >|= (fun t ->
-          t="text" || t="password") |? false
+        Soup.attribute "type" node >|= is_input_field |? false
       | _ -> false
 
 let tag_selector tag = function
@@ -166,7 +171,6 @@ module Form = struct
 
   let clear_all f =
     {f with data = StringMap.empty }
-  let reset_all = clear_all
 
   let values f = StringMap.fold (fun id value l -> (id,value)::l) f.data []
 
@@ -259,19 +263,6 @@ module Form = struct
 
   let hiddens = hiddens_with ""
 
-  let ints_with selector f =
-    f.elt
-    |> Soup.select (tag_selector "input[type=int]" selector)
-    |> Soup.filter (input_filter "int")
-    |> seq_from_nodes id
-
-  let int_with selector f =
-    f
-    |> ints_with selector
-    |> first
-
-  let ints = ints_with ""
-
   let textareas_with selector f =
     f.elt
     |> Soup.select (tag_selector "textarea" selector)
@@ -282,19 +273,6 @@ module Form = struct
     f |> textareas_with selector |> first
 
   let textareas = textareas_with ""
-
-  let keygens_with selector f =
-    f.elt
-    |> Soup.select (tag_selector "input[type=keygen]" selector)
-    |> Soup.filter (input_filter "keygen")
-    |> seq_from_nodes id
-
-  let keygen_with selector f =
-    f
-    |> keygens_with selector
-    |> first
-
-  let keygens = keygens_with ""
 
   let file_uploads_with selector f =
     f.elt
@@ -348,6 +326,18 @@ module Form = struct
       | [x] -> Some x
       | _ -> None
 
+  let reset_single f input get_default =
+    match iname input, get_default f input with
+      | None, _ -> f
+      | Some name, None -> clear name f
+      | Some name, Some value -> set name value f
+
+  let reset_multi f input get_default =
+    match iname input, get_default f input with
+      | None, _ -> f
+      | Some name, [] -> clear name f
+      | Some name, values -> set_multi name values f
+
   open Infix.Option
 
   module Checkbox = struct
@@ -382,6 +372,17 @@ module Form = struct
 
     let is_checked f cb =
       (iname cb, ivalue cb) >>> has_value f.data |? false
+
+    let checked_default f cb =
+      choices f cb
+      |> fold (fun values cb ->
+        if Soup.has_attribute "checked" cb then
+          (ivalue cb |? "on")::values
+        else
+          values) []
+      |> List.rev
+
+    let reset f cb = reset_multi f cb checked_default
   end
 
   module RadioButton = struct
@@ -414,7 +415,16 @@ module Form = struct
     let is_selected f rb =
       (iname rb, ivalue rb) >>> has_value f.data |? false
 
-    let to_string item = item >|= ivalue |> Soup.require
+    let selected_default f rb =
+      with_stop (fun stop ->
+        choices f rb
+        |> iter (fun rb' ->
+          if Soup.has_attribute "checked" rb' then
+            Some (ivalue rb' |? "on")
+            |> stop.throw);
+        None)
+
+    let reset f rb = reset_single f rb selected_default
   end
 
   module SelectList = struct
@@ -436,10 +446,28 @@ module Form = struct
     let is_selected f sl item =
       (iname sl, ivalue item) >>> has_value f.data |? false
 
-    let to_string item = item |> ivalue |> Soup.require
+    let text item =
+      item |> Soup.leaf_text |? ""
+
+    let value item =
+      item
+      |> ivalue |? text item
+
+    let selected_default f sl =
+      items sl
+      |> List.fold_left (fun values item ->
+        if Soup.has_attribute "selected" item then
+          (value item)::values
+        else
+          values) []
+      |> List.rev
+
+    let reset f sl = reset_multi f sl selected_default
   end
 
   module Field = struct
+    let fset = set
+
     let set f fd v =
       iname fd
       >|= (fun name ->
@@ -448,6 +476,13 @@ module Form = struct
 
     let get f fd =
       iname fd >>= current_value f.data
+
+    let default_value _ fd =
+      match Soup.name fd with
+        | "textarea" -> Soup.leaf_text fd
+        | _ -> ivalue fd
+
+    let reset f fd = reset_single f fd default_value
   end
 
   module FileUpload = struct
@@ -459,6 +494,19 @@ module Form = struct
     let which_selected f fu =
       iname fu >>= current_value f.data
   end
+
+  let reset_all f =
+    checkboxes f
+    |> fold Checkbox.reset f
+    |> fun newf ->
+    radio_buttons newf
+    |> fold RadioButton.reset newf
+    |> fun newf ->
+    select_lists newf
+    |> fold SelectList.reset newf
+    |> fun newf ->
+    fields newf
+    |> fold Field.reset newf
 end
 
 module Link = struct
@@ -491,19 +539,6 @@ module Image = struct
 
   let to_node image = image.elt
 end
-
-(* module Frame = struct *)
-(*   type t = elt *)
-(*  *)
-(*   let source frame = frame |> Soup.attribute "src" |> Soup.require *)
-(*   let uri frame = frame |> source |> Uri.of_string *)
-(*   let name frame = frame |> Soup.attribute "name" *)
-(*   let text = Soup.leaf_text *)
-(*  *)
-(*   let make ?name ?text ~source = failwith "Not implemented" *)
-(*  *)
-(*   let to_node frame = frame *)
-(* end *)
 
 let forms_with selector p =
   p.soup

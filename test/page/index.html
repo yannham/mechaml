@@ -54,10 +54,25 @@
       <li>Another item</li>
     </ul>
     <form id="form-two" class="formclass" action="/action-two">
-      This a form with :
-            <input type="submit" value="Submit"/>
+        This is a form with default values
+        Checkboxes
+        <input type="hidden" name="hidden" value="hidden"/>
+        <input type="checkbox" name="check3" value="choice1"/>
+        <input type="checkbox" name="check3" value="choice2" checked/>
+        <input type="checkbox" name="check3" value="choice3" checked/>
+        Radio
+        <input type="radio" name="radio3" value="choice1" checked/>
+        <input type="radio" name="radio3" value="choice2"/>
+        Select list
+        <select name="select3" multiple>
+          <option value="choice1" selected>Choice 1</option>
+          <option value="choice2" selected>Choice 2</option>
+          <option value="choice3">Choice 3</option>
+        </select>
+        <input type="text" name="text3" value="default"/>
+        <textarea name="area3" rows="4" cols="20">default</textarea>
+        <input type="submit" value="Submit"/>
     </form>
-
     <a id="a-one" href="https://www.mysecurecenter.com">First link</a>
     <div>
       <a class="aclass" id="a-two" href="http://www.awebsite/index.html">Second link</a>

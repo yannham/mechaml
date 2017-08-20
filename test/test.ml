@@ -102,7 +102,8 @@ module type PageElement = sig
   val to_node : t -> Soup.element Soup.node
 end
 
-let check_true msg = Alcotest.(check bool) msg true
+let check_bool msg = Alcotest.(check bool) msg
+let check_true msg = check_bool msg true
 let check_string = Alcotest.(check string)
 let check_int = Alcotest.(check int)
 let fail = Alcotest.fail
@@ -369,6 +370,57 @@ let tests_page = [
     check_content "[name=text1]";
     check_content "[name=password1]";
     check_content "[name=area1]");
+
+  "form_default_values", `Quick, (fun _ ->
+    let module F = Page.Form in
+    let form = soup_index
+      |> Page.from_soup
+      |> Page.form_with "[id=form-two]"
+      |> Soup.require in
+
+    let check name select checker value is_checked =
+      let selector = Printf.sprintf "[name=%s][value=%s]" name value in
+      form
+      |> select selector
+      |> Soup.require
+      |> checker form
+      |> check_bool (Printf.sprintf "%s default value" name) is_checked in
+
+    let check_cb = check "check3" F.checkbox_with F.Checkbox.is_checked in
+    check_cb "choice1" false;
+    check_cb "choice2" true;
+    check_cb "choice3" true;
+
+    let check_rb = check "radio3" F.radio_button_with F.RadioButton.is_selected
+    in
+    check_rb "choice1" true;
+    check_rb "choice2" false;
+
+    form
+    |> F.select_list_with "[name=select3]"
+    |> Soup.require
+    |> (fun sl ->
+      sl
+      |> F.SelectList.items
+      |> List.iter (fun item ->
+        let is_selected = match F.SelectList.value item with
+          | "choice1" | "choice2" -> true
+          | _ -> false in
+        item
+        |> F.SelectList.is_selected form sl
+        |> check_bool "select3 default selection" is_selected));
+
+    let check_field name value =
+      form
+      |> F.field_with (Printf.sprintf "[name=%s]" name)
+      |> Soup.require
+      |> F.Field.get form
+      |> Soup.require
+      |> check_string (Printf.sprintf "%s default value" name) value in
+
+    check_field "hidden" "hidden";
+    check_field "text3" "default";
+    check_field "area3" "default");
 
   "links", `Quick, (fun _ ->
     let page = soup_index |> Page.from_soup in

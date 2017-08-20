@@ -113,11 +113,6 @@ module Form : sig
   val get : string -> t -> string option
   val get_multi : string -> t -> string list
 
-  (** Reset the value of a field to its default (or remove it if there is no
-     default
-     value) *)
-  val reset : string -> t -> t
-
   (** Remove the value of a field *)
   val clear : string -> t -> t
 
@@ -169,17 +164,9 @@ module Form : sig
   val hiddens : t -> field input seq
   val hiddens_with : string -> t -> field input seq
 
-  val int_with : string -> t -> field input option
-  val ints : t -> field input seq
-  val ints_with : string -> t -> field input seq
-
   val textarea_with : string -> t -> field input option
   val textareas : t -> field input seq
   val textareas_with : string -> t -> field input seq
-
-  val keygen_with : string -> t -> field input option
-  val keygens : t -> field input seq
-  val keygens_with : string -> t -> field input seq
 
   val file_upload_with : string -> t -> file_upload input option
   val file_uploads : t -> file_upload input seq
@@ -209,11 +196,15 @@ module Form : sig
     val check : t -> checkbox input -> t
     val uncheck : t -> checkbox input -> t
     val is_checked : t -> checkbox input -> bool
+
+    (** Values with [checked] attribute *)
+    val checked_default : t -> checkbox input -> string list
+    (** Reset to its default value *)
+    val reset : t -> checkbox input -> t
   end
 
   (** Operations on Radio Buttons *)
   module RadioButton : sig
-
     (** Similar to checkboxes, except that selecting one radio button in group
        automatically unselect the others *)
 
@@ -226,6 +217,9 @@ module Form : sig
 
     val select : t -> radio_button input -> t
     val is_selected : t -> radio_button input -> bool
+
+    val selected_default : t -> radio_button input -> string option
+    val reset : t -> checkbox input -> t
   end
 
   (** Operations on Menu (select lists) *)
@@ -242,13 +236,20 @@ module Form : sig
     val is_selected : t -> select_list input -> item -> bool
 
     (** Label of an item *)
-    val to_string : item -> string
+    val text : item -> string
+    (** Value (as sent in form data) *)
+    val value : item -> string
+
+    val selected_default : t -> select_list input -> string list
+    val reset : t -> checkbox input -> t
   end
 
   (** Operations on text fields : textarea, text/password type input, etc. *)
   module Field : sig
     val set : t -> field input -> string -> t
     val get : t -> field input -> string option
+    val default_value : t -> field input -> string option
+    val reset : t -> checkbox input -> t
   end
 
   (** Operation on file upload fields *)
