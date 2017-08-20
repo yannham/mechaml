@@ -29,11 +29,13 @@ type t
 
 (** Make a new page from a base URI and a Lambdasoup document *)
 val from_soup : ?location:Uri.t -> Soup.soup Soup.node -> t
+
 (** Make a new page from a base URI and a HTML string *)
 val from_string : ?location:Uri.t -> string -> t
 
 (** Return the location of a page (or [Uri.empty] if not specified) *)
 val base_uri : t -> Uri.t
+
 (** Return the resolver of page, that take relative URIs to absolute ones using
    the page base URI *)
 val resolver : t -> Uri.t -> Uri.t
@@ -42,7 +44,7 @@ val resolver : t -> Uri.t -> Uri.t
 val soup : t -> Soup.soup Soup.node
 
 (** {2 Lazy sequences}
-    Lambda soup provides lazy sequences to traverse only needed part of an HTML
+    Lambdasoup provides lazy sequences to traverse only needed part of an HTML
     document when used in combination with [with_stop]. We provide a wrapper
     that is compatible with Mechaml types such as forms, images, inputs, etc. *)
 
@@ -80,7 +82,7 @@ module Form : sig
   type select_list
   type menu
   type field
-  type file_upload
+  (* type file_upload *)
 
   (** A form input *)
   type _ input
@@ -168,9 +170,9 @@ module Form : sig
   val textareas : t -> field input seq
   val textareas_with : string -> t -> field input seq
 
-  val file_upload_with : string -> t -> file_upload input option
-  val file_uploads : t -> file_upload input seq
-  val file_uploads_with : string -> t -> file_upload input seq
+  (* val file_upload_with : string -> t -> file_upload input option *)
+  (* val file_uploads : t -> file_upload input seq *)
+  (* val file_uploads_with : string -> t -> file_upload input seq *)
 
   (** Reset or clear all the fields *)
 
@@ -182,7 +184,7 @@ module Form : sig
     (** Return the value (the label) of a checkbox *)
     val value : checkbox input -> string
 
-    (** Return the values of all the checkboxes with the same name asthe
+    (** Return the values of all the checkboxes with the same name as the
        given one *)
     val values : t -> checkbox input -> string list
 
@@ -193,13 +195,20 @@ module Form : sig
        given one *)
     val checked : t -> checkbox input -> string list
 
+    (** [check form cb] return [form] where cb is checked *)
     val check : t -> checkbox input -> t
+
+    (** [uncheck form cb] return [form] where cb is unchecked *)
     val uncheck : t -> checkbox input -> t
+
+    (** Check if the specified checkbox is checked *)
     val is_checked : t -> checkbox input -> bool
 
-    (** Values with [checked] attribute *)
+    (** Values with the [checked] attribute set *)
     val checked_default : t -> checkbox input -> string list
-    (** Reset to its default value *)
+
+    (** Reset to its default value, meaning that only the checkboxes with the
+        [checked] attribute will be checked  *)
     val reset : t -> checkbox input -> t
   end
 
@@ -208,17 +217,30 @@ module Form : sig
     (** Similar to checkboxes, except that selecting one radio button in group
        automatically unselect the others *)
 
+    (** Return the value (the label) of a radio button*)
     val value : radio_button input -> string
+
+    (** Return the values of all the radio buttons with the same name as the
+       given one *)
     val values : t -> radio_button input -> string list
+
+    (** Return all the radio buttons with the same name as the given one *)
     val choices : t -> radio_button input -> radio_button input seq
 
     (** Return the possibly selected radio button *)
     val selected : t -> checkbox input -> string option
 
+    (** [select form rb] return [form] where [rb] is selected *)
     val select : t -> radio_button input -> t
+
+    (** Check if the specified radio button is selected *)
     val is_selected : t -> radio_button input -> bool
 
+    (** Values with [checked] attribute set *)
     val selected_default : t -> radio_button input -> string option
+
+    (** Reset to its default value, meaning that only the radio buttons with the
+        [checked] attribute will be selected *)
     val reset : t -> checkbox input -> t
   end
 
@@ -230,33 +252,69 @@ module Form : sig
     (** Return a list of all items of a given list *)
     val items : select_list input -> item list
 
-    val selected : t -> select_list input -> string option
+    (** Check if the select list supports multiple selection *)
+    val is_multiple : select_list input -> bool
+
+    (** Return a list of selected items as strings *)
+    val selected : t -> select_list input -> string list
+
+    (** Select a specific item. If multiple selection is not enabled,
+        this unselect any previously selected item *)
     val select : t -> select_list input -> item -> t
+
+    (** Unselect a specific item *)
     val unselect : t -> select_list input -> item -> t
+
+    (** Check if the specified item is selected *)
     val is_selected : t -> select_list input -> item -> bool
 
     (** Label of an item *)
     val text : item -> string
-    (** Value (as sent in form data) *)
+
+    (** Value (as sent in form data) of an item *)
     val value : item -> string
 
+    (** Items with the attribute [selected] set *)
     val selected_default : t -> select_list input -> string list
+
+    (** Reset the select list to its default value,
+        meaning that only the items with the
+        [selected] attribute will be selected *)
     val reset : t -> checkbox input -> t
   end
 
   (** Operations on text fields : textarea, text/password type input, etc. *)
   module Field : sig
+    (** Set the value of a text field *)
     val set : t -> field input -> string -> t
+
+    (** Return the value of a text field *)
     val get : t -> field input -> string option
+
+    (** Return the default value of a field, specified via the attribute
+       [value] *)
     val default_value : t -> field input -> string option
+
+    (** Set the value back to the default value, or just clear the field if
+        there is no default value *)
     val reset : t -> checkbox input -> t
   end
 
-  (** Operation on file upload fields *)
-  module FileUpload : sig
-    val select : t -> file_upload input -> string -> t
-    val which_selected : t -> file_upload input -> string option
-  end
+  (* (** Operation on file upload fields - NOT IMPLEMENTED YET *) *)
+  (* module FileUpload : sig *)
+  (*   (** Upload the content of a file *) *)
+  (*   val upload_content : t -> file_upload input -> string -> t *)
+  (*  *)
+  (*   (** [upload_file form "/path/to/my/file"] will send the specified file in *)
+  (*      the form data *) *)
+  (*   val upload_file : t -> file_upload input -> string -> t *)
+  (*  *)
+  (*   (** Same as {! upload_file}, but read the file asynchronously using Lwt *) *)
+  (*   val upload_file_async : t -> file_upload input -> string -> t Lwt.t *)
+  (*  *)
+  (*   (** Return the content of the currently uploaded file if any *) *)
+  (*   val selected_content : t -> file_upload input -> string option *)
+  (* end *)
 end
 
 (** {4 Images and links} *)

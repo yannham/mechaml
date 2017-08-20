@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="Start" href="index.html">
 <link rel="previous" href="Page.Form.SelectList.html">
-<link rel="next" href="Page.Form.FileUpload.html">
 <link rel="Up" href="Page.Form.html">
 <link title="Index of types" rel=Appendix href="index_types.html">
 <link title="Index of values" rel=Appendix href="index_values.html">
@@ -18,8 +17,7 @@
 <body>
 <div class="navbar"><a class="pre" href="Page.Form.SelectList.html" title="Page.Form.SelectList">Previous</a>
 &nbsp;<a class="up" href="Page.Form.html" title="Page.Form">Up</a>
-&nbsp;<a class="post" href="Page.Form.FileUpload.html" title="Page.Form.FileUpload">Next</a>
-</div>
+&nbsp;</div>
 <h1>Module <a href="type_Page.Form.Field.html">Page.Form.Field</a></h1>
 
 <pre><span class="keyword">module</span> Field: <code class="code">sig</code> <a href="Page.Form.Field.html">..</a> <code class="code">end</code></pre><div class="info module top">
@@ -27,5 +25,21 @@ Operations on text fields : textarea, text/password type input, etc.<br>
 </div>
 <hr width="100%">
 
-<pre><span id="VALset"><span class="keyword">val</span> set</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEfield">Page.Form.field</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string -> <a href="Page.Form.html#TYPEt">Page.Form.t</a></code></pre>
-<pre><span id="VALget"><span class="keyword">val</span> get</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEfield">Page.Form.field</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string option</code></pre></body></html>
+<pre><span id="VALset"><span class="keyword">val</span> set</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEfield">Page.Form.field</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string -> <a href="Page.Form.html#TYPEt">Page.Form.t</a></code></pre><div class="info ">
+Set the value of a text field<br>
+</div>
+
+<pre><span id="VALget"><span class="keyword">val</span> get</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEfield">Page.Form.field</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string option</code></pre><div class="info ">
+Return the value of a text field<br>
+</div>
+
+<pre><span id="VALdefault_value"><span class="keyword">val</span> default_value</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEfield">Page.Form.field</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string option</code></pre><div class="info ">
+Return the default value of a field, specified via the attribute
+       <code class="code">value</code><br>
+</div>
+
+<pre><span id="VALreset"><span class="keyword">val</span> reset</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> <a href="Page.Form.html#TYPEt">Page.Form.t</a></code></pre><div class="info ">
+Set the value back to the default value, or just clear the field if
+        there is no default value<br>
+</div>
+</body></html>

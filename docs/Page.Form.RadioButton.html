@@ -30,12 +30,37 @@ Operations on Radio Buttons<br>
 Similar to checkboxes, except that selecting one radio button in group
        automatically unselect the others<br>
 
-<pre><span id="VALvalue"><span class="keyword">val</span> value</span> : <code class="type"><a href="Page.Form.html#TYPEradio_button">Page.Form.radio_button</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string</code></pre>
-<pre><span id="VALvalues"><span class="keyword">val</span> values</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEradio_button">Page.Form.radio_button</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string list</code></pre>
-<pre><span id="VALchoices"><span class="keyword">val</span> choices</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -><br>       <a href="Page.Form.html#TYPEradio_button">Page.Form.radio_button</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -><br>       <a href="Page.Form.html#TYPEradio_button">Page.Form.radio_button</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALvalue"><span class="keyword">val</span> value</span> : <code class="type"><a href="Page.Form.html#TYPEradio_button">Page.Form.radio_button</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string</code></pre><div class="info ">
+Return the value (the label) of a radio button<br>
+</div>
+
+<pre><span id="VALvalues"><span class="keyword">val</span> values</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEradio_button">Page.Form.radio_button</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string list</code></pre><div class="info ">
+Return the values of all the radio buttons with the same name as the
+       given one<br>
+</div>
+
+<pre><span id="VALchoices"><span class="keyword">val</span> choices</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -><br>       <a href="Page.Form.html#TYPEradio_button">Page.Form.radio_button</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -><br>       <a href="Page.Form.html#TYPEradio_button">Page.Form.radio_button</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre><div class="info ">
+Return all the radio buttons with the same name as the given one<br>
+</div>
+
 <pre><span id="VALselected"><span class="keyword">val</span> selected</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string option</code></pre><div class="info ">
 Return the possibly selected radio button<br>
 </div>
 
-<pre><span id="VALselect"><span class="keyword">val</span> select</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEradio_button">Page.Form.radio_button</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> <a href="Page.Form.html#TYPEt">Page.Form.t</a></code></pre>
-<pre><span id="VALis_selected"><span class="keyword">val</span> is_selected</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEradio_button">Page.Form.radio_button</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> bool</code></pre></body></html>
+<pre><span id="VALselect"><span class="keyword">val</span> select</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEradio_button">Page.Form.radio_button</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> <a href="Page.Form.html#TYPEt">Page.Form.t</a></code></pre><div class="info ">
+<code class="code">select form rb</code> return <code class="code">form</code> where <code class="code">rb</code> is selected<br>
+</div>
+
+<pre><span id="VALis_selected"><span class="keyword">val</span> is_selected</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEradio_button">Page.Form.radio_button</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> bool</code></pre><div class="info ">
+Check if the specified radio button is selected<br>
+</div>
+
+<pre><span id="VALselected_default"><span class="keyword">val</span> selected_default</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEradio_button">Page.Form.radio_button</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string option</code></pre><div class="info ">
+Values with <code class="code">checked</code> attribute set<br>
+</div>
+
+<pre><span id="VALreset"><span class="keyword">val</span> reset</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> <a href="Page.Form.html#TYPEt">Page.Form.t</a></code></pre><div class="info ">
+Reset to its default value, meaning that only the radio buttons with the
+        <code class="code">checked</code> attribute will be selected<br>
+</div>
+</body></html>

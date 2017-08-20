@@ -40,26 +40,28 @@ The type of an html page<br>
 
 
 <pre><span id="VALfrom_soup"><span class="keyword">val</span> from_soup</span> : <code class="type">?location:Uri.t -> Soup.soup Soup.node -> <a href="Page.html#TYPEt">t</a></code></pre><div class="info ">
-Make a new page from a base URI and a Lambdasoup document
-<p>
+Make a new page from a base URI and a Lambdasoup document<br>
+</div>
+
+<pre><span id="VALfrom_string"><span class="keyword">val</span> from_string</span> : <code class="type">?location:Uri.t -> string -> <a href="Page.html#TYPEt">t</a></code></pre><div class="info ">
 Make a new page from a base URI and a HTML string<br>
 </div>
 
-<pre><span id="VALfrom_string"><span class="keyword">val</span> from_string</span> : <code class="type">?location:Uri.t -> string -> <a href="Page.html#TYPEt">t</a></code></pre>
 <pre><span id="VALbase_uri"><span class="keyword">val</span> base_uri</span> : <code class="type"><a href="Page.html#TYPEt">t</a> -> Uri.t</code></pre><div class="info ">
-Return the location of a page (or <code class="code">Uri.empty</code> if not specified)
-<p>
+Return the location of a page (or <code class="code">Uri.empty</code> if not specified)<br>
+</div>
+
+<pre><span id="VALresolver"><span class="keyword">val</span> resolver</span> : <code class="type"><a href="Page.html#TYPEt">t</a> -> Uri.t -> Uri.t</code></pre><div class="info ">
 Return the resolver of page, that take relative URIs to absolute ones using
    the page base URI<br>
 </div>
 
-<pre><span id="VALresolver"><span class="keyword">val</span> resolver</span> : <code class="type"><a href="Page.html#TYPEt">t</a> -> Uri.t -> Uri.t</code></pre>
 <pre><span id="VALsoup"><span class="keyword">val</span> soup</span> : <code class="type"><a href="Page.html#TYPEt">t</a> -> Soup.soup Soup.node</code></pre><div class="info ">
 Convert to Lambdasoup<br>
 </div>
 <br>
 <h2 id="2_Lazysequences">Lazy sequences</h2>
-    Lambda soup provides lazy sequences to traverse only needed part of an HTML
+    Lambdasoup provides lazy sequences to traverse only needed part of an HTML
     document when used in combination with <code class="code">with_stop</code>. We provide a wrapper
     that is compatible with Mechaml types such as forms, images, inputs, etc.<br>
 

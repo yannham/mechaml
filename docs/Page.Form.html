@@ -45,9 +45,6 @@ Phantom types for inputs<br>
 <pre><span id="TYPEfield"><span class="keyword">type</span> <code class="type"></code>field</span> </pre>
 
 
-<pre><span id="TYPEfile_upload"><span class="keyword">type</span> <code class="type"></code>file_upload</span> </pre>
-
-
 <pre><span id="TYPEinput"><span class="keyword">type</span> <code class="type">'_</code> input</span> </pre>
 <div class="info ">
 A form input<br>
@@ -86,12 +83,6 @@ Get the value(s) of a field<br>
 
 <pre><span id="VALget"><span class="keyword">val</span> get</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> string option</code></pre>
 <pre><span id="VALget_multi"><span class="keyword">val</span> get_multi</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> string list</code></pre>
-<pre><span id="VALreset"><span class="keyword">val</span> reset</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEt">t</a></code></pre><div class="info ">
-Reset the value of a field to its default (or remove it if there is no
-     default
-     value)<br>
-</div>
-
 <pre><span id="VALclear"><span class="keyword">val</span> clear</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEt">t</a></code></pre><div class="info ">
 Remove the value of a field<br>
 </div>
@@ -140,18 +131,9 @@ All the following function are built using the same pattern.
 <pre><span id="VALhidden_with"><span class="keyword">val</span> hidden_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
 <pre><span id="VALhiddens"><span class="keyword">val</span> hiddens</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
 <pre><span id="VALhiddens_with"><span class="keyword">val</span> hiddens_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
-<pre><span id="VALint_with"><span class="keyword">val</span> int_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
-<pre><span id="VALints"><span class="keyword">val</span> ints</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
-<pre><span id="VALints_with"><span class="keyword">val</span> ints_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
 <pre><span id="VALtextarea_with"><span class="keyword">val</span> textarea_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
 <pre><span id="VALtextareas"><span class="keyword">val</span> textareas</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
-<pre><span id="VALtextareas_with"><span class="keyword">val</span> textareas_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
-<pre><span id="VALkeygen_with"><span class="keyword">val</span> keygen_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
-<pre><span id="VALkeygens"><span class="keyword">val</span> keygens</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
-<pre><span id="VALkeygens_with"><span class="keyword">val</span> keygens_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
-<pre><span id="VALfile_upload_with"><span class="keyword">val</span> file_upload_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfile_upload">file_upload</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
-<pre><span id="VALfile_uploads"><span class="keyword">val</span> file_uploads</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfile_upload">file_upload</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
-<pre><span id="VALfile_uploads_with"><span class="keyword">val</span> file_uploads_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfile_upload">file_upload</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre><br>
+<pre><span id="VALtextareas_with"><span class="keyword">val</span> textareas_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre><br>
 Reset or clear all the fields<br>
 
 <pre><span id="VALreset_all"><span class="keyword">val</span> reset_all</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEt">t</a></code></pre>
@@ -170,9 +152,5 @@ Operations on Menu (select lists)
 
 <pre><span class="keyword">module</span> <a href="Page.Form.Field.html">Field</a>: <code class="code">sig</code> <a href="Page.Form.Field.html">..</a> <code class="code">end</code></pre><div class="info">
 Operations on text fields : textarea, text/password type input, etc.
-</div>
-
-<pre><span class="keyword">module</span> <a href="Page.Form.FileUpload.html">FileUpload</a>: <code class="code">sig</code> <a href="Page.Form.FileUpload.html">..</a> <code class="code">end</code></pre><div class="info">
-Operation on file upload fields
 </div>
 </body></html>

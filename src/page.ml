@@ -125,7 +125,7 @@ module Form = struct
   type select_list
   type menu
   type field
-  type file_upload
+  (* type file_upload *)
   type _ input = elt
   type _ inputs = Soup.element Soup.nodes
 
@@ -274,18 +274,18 @@ module Form = struct
 
   let textareas = textareas_with ""
 
-  let file_uploads_with selector f =
-    f.elt
-    |> Soup.select (tag_selector "input[type=file_upload]" selector)
-    |> Soup.filter (input_filter "file_upload")
-    |> seq_from_nodes id
-
-  let file_upload_with selector f =
-    f
-    |> file_uploads_with selector
-    |> first
-
-  let file_uploads = file_uploads_with ""
+  (* let file_uploads_with selector f = *)
+  (*   f.elt *)
+  (*   |> Soup.select (tag_selector "input[type=file_upload]" selector) *)
+  (*   |> Soup.filter (input_filter "file_upload") *)
+  (*   |> seq_from_nodes id *)
+  (*  *)
+  (* let file_upload_with selector f = *)
+  (*   f *)
+  (*   |> file_uploads_with selector *)
+  (*   |> first *)
+  (*  *)
+  (* let file_uploads = file_uploads_with "" *)
 
   let iname input = Soup.attribute "name" input
   let ivalue input = Soup.attribute "value" input
@@ -432,16 +432,16 @@ module Form = struct
 
     let items sl = Soup.select "option" sl |> Soup.to_list
 
-    let selected f sl =
-      iname sl >>= current_value f.data
+    let is_multiple = Soup.has_attribute "multiple"
 
-    let select f sl item =
-      (iname sl, ivalue item >|= singleton)
-      >>> radd f.data
-      |> update_form f
+    let selected f sl =
+      iname sl
+      >|= current_values f.data |? []
 
     let unselect f sl item =
-      iname sl >|= rrem f.data |> update_form f
+      iname sl
+      >|= rrem f.data
+      |> update_form f
 
     let is_selected f sl item =
       (iname sl, ivalue item) >>> has_value f.data |? false
@@ -452,6 +452,18 @@ module Form = struct
     let value item =
       item
       |> ivalue |? text item
+
+    let select f sl item =
+      iname sl
+      >|= (function name ->
+        let v = value item in
+        if is_multiple sl then
+          let vs = current_values f.data name in
+          (if has_value f.data name v then vs else v::vs)
+          |> radd f.data name
+        else
+          radd f.data name [v])
+      |> update_form f
 
     let selected_default f sl =
       items sl
@@ -485,15 +497,15 @@ module Form = struct
     let reset f fd = reset_single f fd default_value
   end
 
-  module FileUpload = struct
-    let select f fu path =
-      iname fu
-      >|= (fun name -> radd f.data name [path])
-      |> update_form f
-
-    let which_selected f fu =
-      iname fu >>= current_value f.data
-  end
+  (* module FileUpload = struct *)
+  (*   let select f fu path = *)
+  (*     iname fu *)
+  (*     >|= (fun name -> radd f.data name [path]) *)
+  (*     |> update_form f *)
+  (*  *)
+  (*   let which_selected f fu = *)
+  (*     iname fu >>= current_value f.data *)
+  (* end *)
 
   let reset_all f =
     checkboxes f

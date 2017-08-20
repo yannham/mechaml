@@ -30,7 +30,7 @@ Return the value (the label) of a checkbox<br>
 </div>
 
 <pre><span id="VALvalues"><span class="keyword">val</span> values</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string list</code></pre><div class="info ">
-Return the values of all the checkboxes with the same name asthe
+Return the values of all the checkboxes with the same name as the
        given one<br>
 </div>
 
@@ -43,6 +43,24 @@ Return the list of all checked checkboxes with the same name as the
        given one<br>
 </div>
 
-<pre><span id="VALcheck"><span class="keyword">val</span> check</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> <a href="Page.Form.html#TYPEt">Page.Form.t</a></code></pre>
-<pre><span id="VALuncheck"><span class="keyword">val</span> uncheck</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> <a href="Page.Form.html#TYPEt">Page.Form.t</a></code></pre>
-<pre><span id="VALis_checked"><span class="keyword">val</span> is_checked</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> bool</code></pre></body></html>
+<pre><span id="VALcheck"><span class="keyword">val</span> check</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> <a href="Page.Form.html#TYPEt">Page.Form.t</a></code></pre><div class="info ">
+<code class="code">check form cb</code> return <code class="code">form</code> where cb is checked<br>
+</div>
+
+<pre><span id="VALuncheck"><span class="keyword">val</span> uncheck</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> <a href="Page.Form.html#TYPEt">Page.Form.t</a></code></pre><div class="info ">
+<code class="code">uncheck form cb</code> return <code class="code">form</code> where cb is unchecked<br>
+</div>
+
+<pre><span id="VALis_checked"><span class="keyword">val</span> is_checked</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> bool</code></pre><div class="info ">
+Check if the specified checkbox is checked<br>
+</div>
+
+<pre><span id="VALchecked_default"><span class="keyword">val</span> checked_default</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string list</code></pre><div class="info ">
+Values with the <code class="code">checked</code> attribute set<br>
+</div>
+
+<pre><span id="VALreset"><span class="keyword">val</span> reset</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> <a href="Page.Form.html#TYPEt">Page.Form.t</a></code></pre><div class="info ">
+Reset to its default value, meaning that only the checkboxes with the
+        <code class="code">checked</code> attribute will be checked<br>
+</div>
+</body></html>

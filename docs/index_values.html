@@ -78,7 +78,10 @@ Return the location of a page (or <code class="code">Uri.empty</code> if not spe
 <tr><td><a href="Agent.Monad.html#VALcatch">catch</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.Form.Checkbox.html#VALcheck">check</a> [<a href="Page.Form.Checkbox.html">Page.Form.Checkbox</a>]</td>
-<td></td></tr>
+<td><div class="info">
+<code class="code">check form cb</code> return <code class="code">form</code> where cb is checked
+</div>
+</td></tr>
 <tr><td><a href="Page.Form.html#VALcheckbox_with">checkbox_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.Form.html#VALcheckboxes">checkboxes</a> [<a href="Page.Form.html">Page.Form</a>]</td>
@@ -91,8 +94,16 @@ Return the list of all checked checkboxes with the same name as the
        given one
 </div>
 </td></tr>
+<tr><td><a href="Page.Form.Checkbox.html#VALchecked_default">checked_default</a> [<a href="Page.Form.Checkbox.html">Page.Form.Checkbox</a>]</td>
+<td><div class="info">
+Values with the <code class="code">checked</code> attribute set
+</div>
+</td></tr>
 <tr><td><a href="Page.Form.RadioButton.html#VALchoices">choices</a> [<a href="Page.Form.RadioButton.html">Page.Form.RadioButton</a>]</td>
-<td></td></tr>
+<td><div class="info">
+Return all the radio buttons with the same name as the given one
+</div>
+</td></tr>
 <tr><td><a href="Page.Form.Checkbox.html#VALchoices">choices</a> [<a href="Page.Form.Checkbox.html">Page.Form.Checkbox</a>]</td>
 <td><div class="info">
 Return all the checkboxes with the same name as the given one
@@ -134,6 +145,12 @@ Return the current Cookiejar
 The default maximum consecutive redirections
 </div>
 </td></tr>
+<tr><td><a href="Page.Form.Field.html#VALdefault_value">default_value</a> [<a href="Page.Form.Field.html">Page.Form.Field</a>]</td>
+<td><div class="info">
+Return the default value of a field, specified via the attribute
+       <code class="code">value</code>
+</div>
+</td></tr>
 <tr><td><a href="Agent.html#VALdisable_proxy">disable_proxy</a> [<a href="Agent.html">Agent</a>]</td>
 <td></td></tr>
 <tr><td><a href="Cookiejar.Cookie.html#VALdomain">domain</a> [<a href="Cookiejar.Cookie.html">Cookiejar.Cookie</a>]</td>
@@ -156,12 +173,6 @@ The emtpy cookie jar
 <tr><td><a href="Page.Form.html#VALfields">fields</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.Form.html#VALfields_with">fields_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
-<td></td></tr>
-<tr><td><a href="Page.Form.html#VALfile_upload_with">file_upload_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
-<td></td></tr>
-<tr><td><a href="Page.Form.html#VALfile_uploads">file_uploads</a> [<a href="Page.Form.html">Page.Form</a>]</td>
-<td></td></tr>
-<tr><td><a href="Page.Form.html#VALfile_uploads_with">file_uploads_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.html#VALfilter">filter</a> [<a href="Page.html">Page</a>]</td>
 <td></td></tr>
@@ -189,10 +200,16 @@ Make a new page from a base URI and a Lambdasoup document
 </div>
 </td></tr>
 <tr><td><a href="Page.html#VALfrom_string">from_string</a> [<a href="Page.html">Page</a>]</td>
-<td></td></tr>
+<td><div class="info">
+Make a new page from a base URI and a HTML string
+</div>
+</td></tr>
 <tr><td align="left"><br>G</td></tr>
 <tr><td><a href="Page.Form.Field.html#VALget">get</a> [<a href="Page.Form.Field.html">Page.Form.Field</a>]</td>
-<td></td></tr>
+<td><div class="info">
+Return the value of a text field
+</div>
+</td></tr>
 <tr><td><a href="Page.Form.html#VALget">get</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td></td></tr>
 <tr><td><a href="Agent.Monad.html#VALget">get</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
@@ -236,20 +253,28 @@ Create a new empty agent.
 Convert an input to a Soup node
 </div>
 </td></tr>
-<tr><td><a href="Page.Form.html#VALint_with">int_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
-<td></td></tr>
-<tr><td><a href="Page.Form.html#VALints">ints</a> [<a href="Page.Form.html">Page.Form</a>]</td>
-<td></td></tr>
-<tr><td><a href="Page.Form.html#VALints_with">ints_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
-<td></td></tr>
 <tr><td><a href="Page.Form.Checkbox.html#VALis_checked">is_checked</a> [<a href="Page.Form.Checkbox.html">Page.Form.Checkbox</a>]</td>
-<td></td></tr>
+<td><div class="info">
+Check if the specified checkbox is checked
+</div>
+</td></tr>
 <tr><td><a href="Cookiejar.html#VALis_empty">is_empty</a> [<a href="Cookiejar.html">Cookiejar</a>]</td>
 <td></td></tr>
+<tr><td><a href="Page.Form.SelectList.html#VALis_multiple">is_multiple</a> [<a href="Page.Form.SelectList.html">Page.Form.SelectList</a>]</td>
+<td><div class="info">
+Check if the select list supports multiple selection
+</div>
+</td></tr>
 <tr><td><a href="Page.Form.SelectList.html#VALis_selected">is_selected</a> [<a href="Page.Form.SelectList.html">Page.Form.SelectList</a>]</td>
-<td></td></tr>
+<td><div class="info">
+Check if the specified item is selected
+</div>
+</td></tr>
 <tr><td><a href="Page.Form.RadioButton.html#VALis_selected">is_selected</a> [<a href="Page.Form.RadioButton.html">Page.Form.RadioButton</a>]</td>
-<td></td></tr>
+<td><div class="info">
+Check if the specified radio button is selected
+</div>
+</td></tr>
 <tr><td><a href="Page.Form.SelectList.html#VALitems">items</a> [<a href="Page.Form.SelectList.html">Page.Form.SelectList</a>]</td>
 <td><div class="info">
 Return a list of all items of a given list
@@ -266,13 +291,6 @@ Return a list of all items of a given list
 <tr><td><a href="Agent.Monad.List.html#VALiteri_p">iteri_p</a> [<a href="Agent.Monad.List.html">Agent.Monad.List</a>]</td>
 <td></td></tr>
 <tr><td><a href="Agent.Monad.List.html#VALiteri_s">iteri_s</a> [<a href="Agent.Monad.List.html">Agent.Monad.List</a>]</td>
-<td></td></tr>
-<tr><td align="left"><br>K</td></tr>
-<tr><td><a href="Page.Form.html#VALkeygen_with">keygen_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
-<td></td></tr>
-<tr><td><a href="Page.Form.html#VALkeygens">keygens</a> [<a href="Page.Form.html">Page.Form</a>]</td>
-<td></td></tr>
-<tr><td><a href="Page.Form.html#VALkeygens_with">keygens_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td></td></tr>
 <tr><td align="left"><br>L</td></tr>
 <tr><td><a href="Page.html#VALlink_with">link_with</a> [<a href="Page.html">Page</a>]</td>
@@ -367,17 +385,39 @@ Remove a single pair key/value from the default headers
 Remove a single cookie from the Cookiejar
 </div>
 </td></tr>
-<tr><td><a href="Page.Form.html#VALreset">reset</a> [<a href="Page.Form.html">Page.Form</a>]</td>
+<tr><td><a href="Page.Form.Field.html#VALreset">reset</a> [<a href="Page.Form.Field.html">Page.Form.Field</a>]</td>
 <td><div class="info">
-Reset the value of a field to its default (or remove it if there is no
-     default
-     value)
+Set the value back to the default value, or just clear the field if
+        there is no default value
+</div>
+</td></tr>
+<tr><td><a href="Page.Form.SelectList.html#VALreset">reset</a> [<a href="Page.Form.SelectList.html">Page.Form.SelectList</a>]</td>
+<td><div class="info">
+Reset the select list to its default value,
+        meaning that only the items with the
+        <code class="code">selected</code> attribute will be selected
+</div>
+</td></tr>
+<tr><td><a href="Page.Form.RadioButton.html#VALreset">reset</a> [<a href="Page.Form.RadioButton.html">Page.Form.RadioButton</a>]</td>
+<td><div class="info">
+Reset to its default value, meaning that only the radio buttons with the
+        <code class="code">checked</code> attribute will be selected
+</div>
+</td></tr>
+<tr><td><a href="Page.Form.Checkbox.html#VALreset">reset</a> [<a href="Page.Form.Checkbox.html">Page.Form.Checkbox</a>]</td>
+<td><div class="info">
+Reset to its default value, meaning that only the checkboxes with the
+        <code class="code">checked</code> attribute will be checked
 </div>
 </td></tr>
 <tr><td><a href="Page.Form.html#VALreset_all">reset_all</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.html#VALresolver">resolver</a> [<a href="Page.html">Page</a>]</td>
-<td></td></tr>
+<td><div class="info">
+Return the resolver of page, that take relative URIs to absolute ones using
+   the page base URI
+</div>
+</td></tr>
 <tr><td><a href="Agent.Monad.html#VALreturn">return</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
 <td></td></tr>
 <tr><td><a href="Agent.Monad.html#VALreturn_from_lwt">return_from_lwt</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
@@ -401,12 +441,16 @@ Reset the value of a field to its default (or remove it if there is no
 </td></tr>
 <tr><td><a href="Cookiejar.Cookie.html#VALsecure">secure</a> [<a href="Cookiejar.Cookie.html">Cookiejar.Cookie</a>]</td>
 <td></td></tr>
-<tr><td><a href="Page.Form.FileUpload.html#VALselect">select</a> [<a href="Page.Form.FileUpload.html">Page.Form.FileUpload</a>]</td>
-<td></td></tr>
 <tr><td><a href="Page.Form.SelectList.html#VALselect">select</a> [<a href="Page.Form.SelectList.html">Page.Form.SelectList</a>]</td>
-<td></td></tr>
+<td><div class="info">
+Select a specific item.
+</div>
+</td></tr>
 <tr><td><a href="Page.Form.RadioButton.html#VALselect">select</a> [<a href="Page.Form.RadioButton.html">Page.Form.RadioButton</a>]</td>
-<td></td></tr>
+<td><div class="info">
+<code class="code">select form rb</code> return <code class="code">form</code> where <code class="code">rb</code> is selected
+</div>
+</td></tr>
 <tr><td><a href="Page.Form.html#VALselect_list_with">select_list_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.Form.html#VALselect_lists">select_lists</a> [<a href="Page.Form.html">Page.Form</a>]</td>
@@ -414,14 +458,30 @@ Reset the value of a field to its default (or remove it if there is no
 <tr><td><a href="Page.Form.html#VALselect_lists_with">select_lists_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.Form.SelectList.html#VALselected">selected</a> [<a href="Page.Form.SelectList.html">Page.Form.SelectList</a>]</td>
-<td></td></tr>
+<td><div class="info">
+Return a list of selected items as strings
+</div>
+</td></tr>
 <tr><td><a href="Page.Form.RadioButton.html#VALselected">selected</a> [<a href="Page.Form.RadioButton.html">Page.Form.RadioButton</a>]</td>
 <td><div class="info">
 Return the possibly selected radio button
 </div>
 </td></tr>
+<tr><td><a href="Page.Form.SelectList.html#VALselected_default">selected_default</a> [<a href="Page.Form.SelectList.html">Page.Form.SelectList</a>]</td>
+<td><div class="info">
+Items with the attribute <code class="code">selected</code> set
+</div>
+</td></tr>
+<tr><td><a href="Page.Form.RadioButton.html#VALselected_default">selected_default</a> [<a href="Page.Form.RadioButton.html">Page.Form.RadioButton</a>]</td>
+<td><div class="info">
+Values with <code class="code">checked</code> attribute set
+</div>
+</td></tr>
 <tr><td><a href="Page.Form.Field.html#VALset">set</a> [<a href="Page.Form.Field.html">Page.Form.Field</a>]</td>
-<td></td></tr>
+<td><div class="info">
+Set the value of a text field
+</div>
+</td></tr>
 <tr><td><a href="Page.Form.html#VALset">set</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td></td></tr>
 <tr><td><a href="Agent.Monad.html#VALset">set</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
@@ -471,6 +531,11 @@ Submit a filled form
 <tr><td align="left"><br>T</td></tr>
 <tr><td><a href="Page.Link.html#VALtext">text</a> [<a href="Page.Link.html">Page.Link</a>]</td>
 <td></td></tr>
+<tr><td><a href="Page.Form.SelectList.html#VALtext">text</a> [<a href="Page.Form.SelectList.html">Page.Form.SelectList</a>]</td>
+<td><div class="info">
+Label of an item
+</div>
+</td></tr>
 <tr><td><a href="Page.Form.html#VALtext_with">text_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.Form.html#VALtextarea_with">textarea_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
@@ -494,18 +559,19 @@ Submit a filled form
 Convert a form to a Soup node
 </div>
 </td></tr>
-<tr><td><a href="Page.Form.SelectList.html#VALto_string">to_string</a> [<a href="Page.Form.SelectList.html">Page.Form.SelectList</a>]</td>
-<td><div class="info">
-Label of an item
-</div>
-</td></tr>
 <tr><td><a href="Agent.Monad.html#VALtry_bind">try_bind</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
 <td></td></tr>
 <tr><td align="left"><br>U</td></tr>
 <tr><td><a href="Page.Form.Checkbox.html#VALuncheck">uncheck</a> [<a href="Page.Form.Checkbox.html">Page.Form.Checkbox</a>]</td>
-<td></td></tr>
+<td><div class="info">
+<code class="code">uncheck form cb</code> return <code class="code">form</code> where cb is unchecked
+</div>
+</td></tr>
 <tr><td><a href="Page.Form.SelectList.html#VALunselect">unselect</a> [<a href="Page.Form.SelectList.html">Page.Form.SelectList</a>]</td>
-<td></td></tr>
+<td><div class="info">
+Unselect a specific item
+</div>
+</td></tr>
 <tr><td><a href="Page.Image.html#VALuri">uri</a> [<a href="Page.Image.html">Page.Image</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.Link.html#VALuri">uri</a> [<a href="Page.Link.html">Page.Link</a>]</td>
@@ -518,18 +584,30 @@ Return the absolute (resolved) uri corresponding to the action attribute
 <tr><td align="left"><br>V</td></tr>
 <tr><td><a href="Cookiejar.Cookie.html#VALvalue">value</a> [<a href="Cookiejar.Cookie.html">Cookiejar.Cookie</a>]</td>
 <td></td></tr>
+<tr><td><a href="Page.Form.SelectList.html#VALvalue">value</a> [<a href="Page.Form.SelectList.html">Page.Form.SelectList</a>]</td>
+<td><div class="info">
+Value (as sent in form data) of an item
+</div>
+</td></tr>
 <tr><td><a href="Page.Form.RadioButton.html#VALvalue">value</a> [<a href="Page.Form.RadioButton.html">Page.Form.RadioButton</a>]</td>
-<td></td></tr>
+<td><div class="info">
+Return the value (the label) of a radio button
+</div>
+</td></tr>
 <tr><td><a href="Page.Form.Checkbox.html#VALvalue">value</a> [<a href="Page.Form.Checkbox.html">Page.Form.Checkbox</a>]</td>
 <td><div class="info">
 Return the value (the label) of a checkbox
 </div>
 </td></tr>
 <tr><td><a href="Page.Form.RadioButton.html#VALvalues">values</a> [<a href="Page.Form.RadioButton.html">Page.Form.RadioButton</a>]</td>
-<td></td></tr>
+<td><div class="info">
+Return the values of all the radio buttons with the same name as the
+       given one
+</div>
+</td></tr>
 <tr><td><a href="Page.Form.Checkbox.html#VALvalues">values</a> [<a href="Page.Form.Checkbox.html">Page.Form.Checkbox</a>]</td>
 <td><div class="info">
-Return the values of all the checkboxes with the same name asthe
+Return the values of all the checkboxes with the same name as the
        given one
 </div>
 </td></tr>
@@ -539,8 +617,6 @@ Return all set values as a list
 </div>
 </td></tr>
 <tr><td align="left"><br>W</td></tr>
-<tr><td><a href="Page.Form.FileUpload.html#VALwhich_selected">which_selected</a> [<a href="Page.Form.FileUpload.html">Page.Form.FileUpload</a>]</td>
-<td></td></tr>
 <tr><td><a href="Page.html#VALwith_stop">with_stop</a> [<a href="Page.html">Page</a>]</td>
 <td><div class="info">
 see Lambdasoup's <code class="code">Soup.with_stop</code>
