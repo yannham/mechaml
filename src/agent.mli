@@ -24,7 +24,6 @@
       - Fetch and parse HTML pages
       - Analyze, fill and submit HTML forms
       - Manages cookies, headers and redirections
-      - Use a proxy (soon to be implemented)
 
     It is build on top of Cohttp, Lwt and Lambdasoup.
 *)
@@ -87,19 +86,7 @@ val save_image : string -> Page.Image.t -> t -> result Lwt.t
     using Lwt's asynchronous IO *)
 val save_content : string -> string -> unit Lwt.t
 
-(** {4 Proxy} *)
-
-(** Proxy are currently NOT SUPPORTED YET  - waiting for Cohttp support first *)
-
-val set_proxy : ?user:string
-  -> ?password:string
-  -> host:string
-  -> port:int
-  -> t -> t
-
-val disable_proxy : t -> t
-
-(** {5 Cookies} (see {!module:Cookiejar}) *)
+(** {4 Cookies} (see {!module:Cookiejar}) *)
 
 (** Return the current Cookiejar *)
 val cookie_jar : t -> Cookiejar.t
@@ -113,7 +100,7 @@ val add_cookie : Cookiejar.Cookie.t -> t -> t
 (** Remove a single cookie from the Cookiejar *)
 val remove_cookie : Cookiejar.Cookie.t -> t -> t
 
-(** {6 Headers} *)
+(** {5 Headers} *)
 
 (** Return the default headers sent when performing HTTP requests *)
 val client_headers : t -> Cohttp.Header.t
@@ -127,7 +114,7 @@ val add_client_header : string -> string -> t -> t
 (** Remove a single pair key/value from the default headers *)
 val remove_client_header : string -> t -> t
 
-(** {7 Redirection} *)
+(** {6 Redirection} *)
 
 (** Max redirection to avoid infinite loops (use 0 to disable automatic
    redirection) *)
@@ -136,7 +123,7 @@ val set_max_redirect : int -> t -> t
 (** The default maximum consecutive redirections *)
 val default_max_redirect : int
 
-(** {8 The Agent Monad}
+(** {7 The Agent Monad}
     This module defines a monad that implicitely manages the state corresponding to the agent
     inside the Lwt monad. This is basically the state monad and the Lwt one stacked *)
 
@@ -193,13 +180,6 @@ module Monad : sig
     val fold_left_s : ('a -> 'b -> 'a m) -> 'a -> 'b list -> 'a m
     val fold_right_s : ('a -> 'b -> 'b m) -> 'a list -> 'b -> 'b m
   end
-
-
-  (* val set_proxy : ?user:string *)
-  (*   -> ?password:string *)
-  (*   -> host:string *)
-  (*   -> port:int *)
-  (*   -> unit m *)
 
   (** get the current state of the agent, or set a new one *)
 

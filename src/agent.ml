@@ -58,15 +58,7 @@ module HttpResponse = struct
     content}
 end
 
-type proxy = {
-  user : string option;
-  password : string option;
-  host : string;
-  port : int
-}
-
 type t = {
-  proxy : proxy option;
   cookie_jar : Cookiejar.t;
   client_headers : Header.t;
   max_redirect : int;
@@ -78,8 +70,7 @@ type result = t * HttpResponse.t
 let default_max_redirect = 5
 
 let init ?(max_redirect = default_max_redirect) _ =
-  { proxy = None;
-    cookie_jar = Cookiejar.empty;
+  { cookie_jar = Cookiejar.empty;
     client_headers = Header.init ();
     max_redirect;
     redirect = 0}
@@ -159,12 +150,6 @@ let save_image file image agent =
     >|= fun _ -> (agent,response))
 
 let code_of_status = Code.code_of_status
-
-let set_proxy ?user ?password ~host ~port agent =
-  {agent with proxy = Some ({user = user; password = password;
-    host = host; port = port})}
-
-let disable_proxy agent = {agent with proxy = None}
 
 let cookie_jar agent = agent.cookie_jar
 let set_cookie_jar cookie_jar agent = {agent with cookie_jar = cookie_jar}
@@ -330,10 +315,6 @@ module Monad = struct
   let monadic_set s =
     fun agent ->
       Lwt.return (s agent, ())
-
-  (* let set_proxy ?user ?password ~host ~port = *)
-  (*   set_proxy ~user ~password ~host ~port *)
-  (*   |> monadic_set *)
 
   let cookie_jar = monadic_get cookie_jar
 

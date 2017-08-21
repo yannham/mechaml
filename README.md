@@ -2,14 +2,12 @@
 
 ## Description
 
-Mechaml is a simple web scraping library that allows to :
+Mechaml is a web scraping library that allows to :
 * Fetch web content
 * Analyze, fill and submit HTML forms
 * Handle cookies, headers and redirections
-* Use a web proxy **(soon to be implemented)**
 
-Mechaml is built on top of existing libraries that alreay provide most of the
-interesting features : [Cohttp](https://github.com/mirage/ocaml-cohttp) and
+Mechaml is built on top of existing libraries that provide low-level features : [Cohttp](https://github.com/mirage/ocaml-cohttp) and
 [Lwt](https://github.com/ocsigen/lwt) for asynchronous I/O and HTTP handling, and
 [Lambdasoup](https://github.com/aantron/lambda-soup) to parse HTML. It provides
 an interface that handles the interactions between these and add a few
@@ -18,15 +16,39 @@ other features.
 ## Overview
 
 The library is divided into 3 main modules :
-* Agent : User-agent features. Perform requests, get back content, headers, status code, etc...
+* Agent : User-agent features. Perform requests, get back content, headers, status code, ...
 * Cookiejar : Cookies handling
-* Page : HTML and forms parsing & handling
+* Page : HTML parsing and forms handling
 
 For more details, see the [documentation](https://yannham.github.io/mechaml/)
 
+## Installation
+
+### From opam
+```
+opam install cohttp lwt uri mechaml
+```
+
+### From source
+You can use oasis to regenerate the configuration script
+```
+oasis setup
+```
+
+But the one already provided should work out of the box :
+```
+./configure
+make
+```
+
+Use `make doc` to generate documentation.
+Available build flags include `--enable-tests` or `--enable-examples`. Use `make
+test` to build and run tests.
+
 ## Usage
 
-Here is sample of code that fetches a web page, fills a login form and submits it in the monadic style:
+Here is sample of code that fetches a web page, fills a login form and submits
+it in the monadic style:
 
 ```ocaml
 open Mechaml

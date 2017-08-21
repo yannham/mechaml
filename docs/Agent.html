@@ -32,7 +32,6 @@ Scraping agent
 <li>Fetch and parse HTML pages</li>
 <li>Analyze, fill and submit HTML forms</li>
 <li>Manages cookies, headers and redirections</li>
-<li>Use a proxy (soon to be implemented)</li>
 </ul>
 
     It is build on top of Cohttp, Lwt and Lambdasoup.<br>
@@ -95,13 +94,7 @@ Save the downloaded content in a file<br>
     using Lwt's asynchronous IO<br>
 </div>
 <br>
-<h4 id="4_Proxy">Proxy</h4><br>
-<br>
-Proxy are currently NOT SUPPORTED YET  - waiting for Cohttp support first<br>
-
-<pre><span id="VALset_proxy"><span class="keyword">val</span> set_proxy</span> : <code class="type">?user:string -><br>       ?password:string -> host:string -> port:int -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a></code></pre>
-<pre><span id="VALdisable_proxy"><span class="keyword">val</span> disable_proxy</span> : <code class="type"><a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a></code></pre><br>
-<h5 id="5_Cookies">Cookies</h5> (see <a href="Cookiejar.html"><code class="code">Cookiejar</code></a>)<br>
+<h4 id="4_Cookies">Cookies</h4> (see <a href="Cookiejar.html"><code class="code">Cookiejar</code></a>)<br>
 
 <pre><span id="VALcookie_jar"><span class="keyword">val</span> cookie_jar</span> : <code class="type"><a href="Agent.html#TYPEt">t</a> -> <a href="Cookiejar.html#TYPEt">Cookiejar.t</a></code></pre><div class="info ">
 Return the current Cookiejar<br>
@@ -119,7 +112,7 @@ Add a single cookie to the current Cookiejar<br>
 Remove a single cookie from the Cookiejar<br>
 </div>
 <br>
-<h6 id="6_Headers">Headers</h6><br>
+<h5 id="5_Headers">Headers</h5><br>
 
 <pre><span id="VALclient_headers"><span class="keyword">val</span> client_headers</span> : <code class="type"><a href="Agent.html#TYPEt">t</a> -> Cohttp.Header.t</code></pre><div class="info ">
 Return the default headers sent when performing HTTP requests<br>
@@ -137,7 +130,7 @@ Add a single pair key/value to the default headers<br>
 Remove a single pair key/value from the default headers<br>
 </div>
 <br>
-<div class="h7" id="7_Redirection">Redirection</div><br>
+<h6 id="6_Redirection">Redirection</h6><br>
 
 <pre><span id="VALset_max_redirect"><span class="keyword">val</span> set_max_redirect</span> : <code class="type">int -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a></code></pre><div class="info ">
 Max redirection to avoid infinite loops (use 0 to disable automatic
@@ -148,7 +141,7 @@ Max redirection to avoid infinite loops (use 0 to disable automatic
 The default maximum consecutive redirections<br>
 </div>
 <br>
-<div class="h8" id="8_TheAgentMonad">The Agent Monad</div>
+<div class="h7" id="7_TheAgentMonad">The Agent Monad</div>
     This module defines a monad that implicitely manages the state corresponding to the agent
     inside the Lwt monad. This is basically the state monad and the Lwt one stacked<br>
 
