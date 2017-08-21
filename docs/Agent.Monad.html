@@ -30,7 +30,10 @@
 <pre><span id="VALreturn_from_lwt"><span class="keyword">val</span> return_from_lwt</span> : <code class="type">'a Lwt.t -> 'a <a href="Agent.Monad.html#TYPEm">m</a></code></pre>
 <pre><span id="VALmap"><span class="keyword">val</span> map</span> : <code class="type">('a -> 'b) -> 'a <a href="Agent.Monad.html#TYPEm">m</a> -> 'b <a href="Agent.Monad.html#TYPEm">m</a></code></pre>
 <pre><span id="VALrun"><span class="keyword">val</span> run</span> : <code class="type"><a href="Agent.html#TYPEt">Agent.t</a> -> 'a <a href="Agent.Monad.html#TYPEm">m</a> -> <a href="Agent.html#TYPEt">Agent.t</a> * 'a</code></pre>
-<pre><span id="VALfail"><span class="keyword">val</span> fail</span> : <code class="type">exn -> 'a <a href="Agent.Monad.html#TYPEm">m</a></code></pre>
+<pre><span id="VALfail"><span class="keyword">val</span> fail</span> : <code class="type">exn -> 'a <a href="Agent.Monad.html#TYPEm">m</a></code></pre><div class="info ">
+Wrappers of Lwt's fail functions<br>
+</div>
+
 <pre><span id="VALfail_with"><span class="keyword">val</span> fail_with</span> : <code class="type">string -> 'a <a href="Agent.Monad.html#TYPEm">m</a></code></pre><br>
 Wrappers of <code class="code">Lwt.catch</code> and <code class="code">Lwt.try_bind</code> inside this monad<br>
 
@@ -48,10 +51,10 @@ get the current state of the agent, or set a new one<br>
 
 <pre><span id="VALget"><span class="keyword">val</span> get</span> : <code class="type"><a href="Agent.html#TYPEt">Agent.t</a> <a href="Agent.Monad.html#TYPEm">m</a></code></pre>
 <pre><span id="VALset"><span class="keyword">val</span> set</span> : <code class="type"><a href="Agent.html#TYPEt">Agent.t</a> -> unit <a href="Agent.Monad.html#TYPEm">m</a></code></pre><br>
-To use the monad operators on functions operating on the agent such as <a href="Agent.html#VALcookie_jar"><code class="code">Agent.cookie_jar</code></a> or <a href="Agent.html#VALset_cookie_jar"><code class="code">Agent.set_cookie_jar</code></a>, one needs to wrap their type to match the monad
-      constraint. For example, the first one go from <code class="code">Agent.t -&gt; Cookiejar.t</code> to
+Wrap the type of functions operating on the agent such as <a href="Agent.html#VALcookie_jar"><code class="code">Agent.cookie_jar</code></a> or <a href="Agent.html#VALset_cookie_jar"><code class="code">Agent.set_cookie_jar</code></a> to usable inside the monad.
+      For example, the first one go from <code class="code">Agent.t -&gt; Cookiejar.t</code> to
       <code class="code">Agent.t -&gt; (Agent.t * Cookiejar.t) Lwt.t</code> by just returning the agent
-      unmodified together with the cookie jar, the whole result being wrapped in
+      unmodified together with the current cookie jar and wrap the result in
       <code class="code">Lwt.return</code>
 <p>
 

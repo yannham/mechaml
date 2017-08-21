@@ -26,7 +26,7 @@
     {!add_to_headers}).
 
     It is mainly used by the {!module:Agent} module internally, but can be manipulated if
-    one need to programmatically the cookies sent by the agent. *)
+    one needs to edit manually the cookies sent by the agent. *)
 
 
 (** Representation of a cookie *)

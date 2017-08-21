@@ -163,7 +163,10 @@ The emtpy cookie jar
 <td></td></tr>
 <tr><td align="left"><br>F</td></tr>
 <tr><td><a href="Agent.Monad.html#VALfail">fail</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
-<td></td></tr>
+<td><div class="info">
+Wrappers of Lwt's fail functions
+</div>
+</td></tr>
 <tr><td><a href="Agent.Monad.html#VALfail_with">fail_with</a> [<a href="Agent.Monad.html">Agent.Monad</a>]</td>
 <td></td></tr>
 <tr><td><a href="Page.Form.html#VALfield_with">field_with</a> [<a href="Page.Form.html">Page.Form</a>]</td>
@@ -329,7 +332,7 @@ Given an uri and a cookie, return true if the
 </td></tr>
 <tr><td><a href="Page.Form.html#VALmeth">meth</a> [<a href="Page.Form.html">Page.Form</a>]</td>
 <td><div class="info">
-Return the method attribute of the form (`GET by default)
+Return the method attribute of the form or <code class="code">`GET</code> if none
 </div>
 </td></tr>
 <tr><td align="left"><br>N</td></tr>
@@ -434,7 +437,7 @@ Return the resolver of page, that take relative URIs to absolute ones using
 <tr><td><a href="Agent.html#VALsave_image">save_image</a> [<a href="Agent.html">Agent</a>]</td>
 <td><div class="info">
 <code class="code">save_image "/path/to/myfile.jpg" image agent</code> loads the image using <code class="code">get</code>, open
-   <code class="code">myfile.jpg</code> and write the content in.
+   <code class="code">myfile.jpg</code> and write the content in asynchronously, and return the result
 </div>
 </td></tr>
 <tr><td><a href="Cookiejar.Cookie.html#VALsecure">secure</a> [<a href="Cookiejar.Cookie.html">Cookiejar.Cookie</a>]</td>

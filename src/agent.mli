@@ -60,7 +60,9 @@ type result = t * HttpResponse.t
  *)
 val init : ?max_redirect:int -> unit -> t
 
-(** Perform a get request to the specified URI *)
+(** Perform a get request to the specified URI. [get "http://www.site/some/url"
+   agent] sends a HTTP GET request and return the updated state of the agent
+   together with the server's response *)
 
 val get : string -> t -> result Lwt.t
 val get_uri : Uri.t -> t -> result Lwt.t
@@ -76,10 +78,10 @@ val post_uri : Uri.t -> string -> t -> result Lwt.t
 (** Submit a filled form *)
 val submit : Page.Form.t -> t -> result Lwt.t
 
-(** Save the downloaded content in a file *)
+(** Save some downloaded content in a file *)
 
 (** [save_image "/path/to/myfile.jpg" image agent] loads the image using [get], open
-   [myfile.jpg] and write the content in.  *)
+   [myfile.jpg] and write the content in asynchronously, and return the result *)
 val save_image : string -> Page.Image.t -> t -> result Lwt.t
 
 (** [save_content "/path/to/myfile.html" content] write the specified content in a file
@@ -125,7 +127,7 @@ val default_max_redirect : int
 
 (** {7 The Agent Monad}
     This module defines a monad that implicitely manages the state corresponding to the agent
-    inside the Lwt monad. This is basically the state monad and the Lwt one stacked *)
+    inside the Lwt monad. This is basically the state monad (for {! Agent.t}) and the Lwt one stacked *)
 
 module Monad : sig
   type 'a m = t -> (t * 'a) Lwt.t
@@ -137,6 +139,7 @@ module Monad : sig
 
   val run : t -> 'a m -> (t * 'a)
 
+  (** Wrappers of Lwt's fail functions *)
   val fail : exn -> 'a m
   val fail_with : string -> 'a m
 
@@ -186,12 +189,12 @@ module Monad : sig
   val get : t m
   val set : t -> unit m
 
-  (** To use the monad operators on functions operating on the agent such as {!
+  (** Wrap the type of functions operating on the agent such as {!
       Agent.cookie_jar} or {!
-      Agent.set_cookie_jar}, one needs to wrap their type to match the monad
-      constraint. For example, the first one go from [Agent.t -> Cookiejar.t] to
+      Agent.set_cookie_jar} to usable inside the monad.
+      For example, the first one go from [Agent.t -> Cookiejar.t] to
       [Agent.t -> (Agent.t * Cookiejar.t) Lwt.t] by just returning the agent
-      unmodified together with the cookie jar, the whole result being wrapped in
+      unmodified together with the current cookie jar and wrap the result in
       [Lwt.return]
 
       Note that the redefined functions have the same name as their counterpart,

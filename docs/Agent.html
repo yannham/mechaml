@@ -66,7 +66,9 @@ Create a new empty agent. <code class="code">~max_redirect</code> indicates how 
    to <code class="code">0</code> to disable any automatic redirection.<br>
 </div>
 <br>
-Perform a get request to the specified URI<br>
+Perform a get request to the specified URI. <code class="code">get "http://www.site/some/url"
+   agent</code> sends a HTTP GET request and return the updated state of the agent
+   together with the server's response<br>
 
 <pre><span id="VALget"><span class="keyword">val</span> get</span> : <code class="type">string -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEresult">result</a> Lwt.t</code></pre>
 <pre><span id="VALget_uri"><span class="keyword">val</span> get_uri</span> : <code class="type">Uri.t -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEresult">result</a> Lwt.t</code></pre>
@@ -82,11 +84,11 @@ Send a raw post request to the specified URI<br>
 Submit a filled form<br>
 </div>
 <br>
-Save the downloaded content in a file<br>
+Save some downloaded content in a file<br>
 
 <pre><span id="VALsave_image"><span class="keyword">val</span> save_image</span> : <code class="type">string -> <a href="Page.Image.html#TYPEt">Page.Image.t</a> -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEresult">result</a> Lwt.t</code></pre><div class="info ">
 <code class="code">save_image "/path/to/myfile.jpg" image agent</code> loads the image using <code class="code">get</code>, open
-   <code class="code">myfile.jpg</code> and write the content in.<br>
+   <code class="code">myfile.jpg</code> and write the content in asynchronously, and return the result<br>
 </div>
 
 <pre><span id="VALsave_content"><span class="keyword">val</span> save_content</span> : <code class="type">string -> string -> unit Lwt.t</code></pre><div class="info ">
@@ -143,6 +145,6 @@ The default maximum consecutive redirections<br>
 <br>
 <div class="h7" id="7_TheAgentMonad">The Agent Monad</div>
     This module defines a monad that implicitely manages the state corresponding to the agent
-    inside the Lwt monad. This is basically the state monad and the Lwt one stacked<br>
+    inside the Lwt monad. This is basically the state monad (for <a href="Agent.html#TYPEt"><code class="code">Agent.t</code></a>) and the Lwt one stacked<br>
 
 <pre><span class="keyword">module</span> <a href="Agent.Monad.html">Monad</a>: <code class="code">sig</code> <a href="Agent.Monad.html">..</a> <code class="code">end</code></pre></body></html>

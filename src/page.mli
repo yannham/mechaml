@@ -96,7 +96,7 @@ module Form : sig
   (** Return the absolute (resolved) uri corresponding to the action attribute *)
   val uri : t -> Uri.t
 
-  (** Return the method attribute of the form (`GET by default)*)
+  (** Return the method attribute of the form or [`GET] if none *)
   val meth : t -> [`POST | `GET]
 
   (** Convert a form to a Soup node *)
