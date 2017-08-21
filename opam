@@ -1,6 +1,6 @@
 opam-version: "1.2"
 name: "mechaml"
-version: "0.2"
+version: "1.0.0"
 maintainer: "Yann Hamdaoui <yann.hamdaoui@gmail.com>"
 authors: "Yann Hamdaoui <yann.hamdaoui@gmail.com>"
 homepage: "https://github.com/yannham/mechaml"
