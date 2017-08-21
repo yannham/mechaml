@@ -1,5 +1,5 @@
 Name: Mechaml
-Version: 0.2
+Version: 1.0.0
 Synopsis: A web browsing library built on top of Lambdasoup and Cohttp. Inspired by WWW::Mechanize
 Authors: Yann Hamdaoui <yann.hamdaoui@centraliens.net>
 License: LGPL
