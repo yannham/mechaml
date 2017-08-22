@@ -2,6 +2,7 @@
 
 (** Connect to https://ocaml.org/index.fr.html and download all the png images
    of the page in /tmp *)
+
 open Mechaml
 module M = Agent.Monad
 open M.Infix
@@ -30,9 +31,11 @@ let save_images images =
 
 let action_download =
   Agent.get "https://ocaml.org/index.fr.html"
-  >|= Agent.HttpResponse.page
-  >|= Page.images_with "[src$=.png]"
-  >|= Page.to_list
+  >|= (fun response ->
+    response
+    |> Agent.HttpResponse.page
+    |> Page.images_with "[src$=.png]"
+    |> Page.to_list)
   >>= save_images
 
 let _ =

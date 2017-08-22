@@ -14,7 +14,7 @@ let require msg = function
 let action_search =
   Agent.get "http://github.com/yannham/mechaml/tree/master/src"
   >|= Agent.HttpResponse.page
-  >|= (function page ->
+  >|= (fun page ->
     let form = page
       |> Page.form_with "[action$=search]"
       |> require "search form not found" in
@@ -25,8 +25,8 @@ let action_search =
   >>= Agent.submit
   >>= (fun response ->
     response
-  |> Agent.HttpResponse.content
-  |> M.save_content "github-research-result.html")
+    |> Agent.HttpResponse.content
+    |> M.save_content "github-research-result.html")
 
 let _ =
   M.run (Agent.init ()) action_search

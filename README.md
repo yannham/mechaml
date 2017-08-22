@@ -2,7 +2,7 @@
 
 ## Description
 
-Mechaml is a web scraping library that allows to :
+Mechaml is a functional web scraping library that allows to :
 * Fetch web content
 * Analyze, fill and submit HTML forms
 * Handle cookies, headers and redirections
@@ -62,7 +62,7 @@ let require msg = function
 let action_login =
   Agent.get "http://www.somewebsite.com"
   >|= Agent.HttpResponse.page
-  >|= function page -> (
+  >|= (function page ->
     page
     |> Page.form_with "[name=login]"
     |> require "Can't find the login form !"
