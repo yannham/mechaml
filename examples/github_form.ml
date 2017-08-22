@@ -1,3 +1,8 @@
+(* This file is in the public domain *)
+
+(** Connect to the mechaml github page, fill the search form, submit the form and
+   download the results page in a file *)
+
 open Mechaml
 module M = Agent.Monad
 open M.Infix
@@ -6,7 +11,7 @@ let require msg = function
   | Some a -> a
   | None -> failwith msg
 
-let action =
+let action_search =
   Agent.get "http://github.com/yannham/mechaml/tree/master/src"
   >|= Agent.HttpResponse.page
   >|= (function page ->
@@ -18,10 +23,10 @@ let action =
       |> require "q field not found" in
     Page.Form.Field.set form field "module Form")
   >>= Agent.submit
+  >>= (fun response ->
+    response
+  |> Agent.HttpResponse.content
+  |> M.save_content "github-research-result.html")
 
 let _ =
-  action
-  |> M.run (Agent.init ())
-  |> snd
-  |> Agent.HttpResponse.content
-  |> Soup.write_file "github-research-result.html"
+  M.run (Agent.init ()) action_search

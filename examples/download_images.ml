@@ -1,3 +1,7 @@
+(* This file is in the public domain *)
+
+(** Connect to https://ocaml.org/index.fr.html and download all the png images
+   of the page in /tmp *)
 open Mechaml
 module M = Agent.Monad
 open M.Infix
@@ -24,24 +28,7 @@ let save_images images =
       |> M.return in
     M.catch save handler)
 
-(* let save_images images agent = *)
-(*   images *)
-(*   |> List.map (fun img -> *)
-(*     let file = Page.Image.source img *)
-(*       |> image_filename *)
-(*       |> (^) "/tmp/" in *)
-(*     (file,Agent.save_image file img agent)) *)
-(*   |> Lwt_list.map_p (fun (file,thread) -> *)
-(*     let f _ = *)
-(*       thread *)
-(*       |> Lwt.map (fun _ -> Ok file) in *)
-(*     let c e = *)
-(*       Error (file,e) *)
-(*       |> Lwt.return in *)
-(*     Lwt.catch f c) *)
-(*   |> Lwt.map (fun result -> (agent,result)) *)
-
-let action =
+let action_download =
   Agent.get "https://ocaml.org/index.fr.html"
   >|= Agent.HttpResponse.page
   >|= Page.images_with "[src$=.png]"
@@ -49,7 +36,7 @@ let action =
   >>= save_images
 
 let _ =
-  action
+  action_download
   |> M.run (Agent.init ())
   |> snd
   |> List.iter (function

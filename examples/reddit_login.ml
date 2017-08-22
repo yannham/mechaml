@@ -1,3 +1,8 @@
+(* This file is in the public domain *)
+
+(** Connect to reddit then fill and submit the login form then download the
+   resulting page *)
+
 open Mechaml
 module M = Agent.Monad
 open M.Infix
