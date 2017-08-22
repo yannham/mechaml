@@ -17,7 +17,7 @@ let (|?) = Infix.Option.(|?)
 module C = Cohttp.Cookie.Set_cookie_hdr
 
 let domain_from_uri uri =
-  Uri.host uri |? "zboub.com"
+  Uri.host uri |? ""
 
 module Cookie = struct
   type expiration = [

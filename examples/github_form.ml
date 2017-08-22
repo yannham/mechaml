@@ -13,9 +13,9 @@ let require msg = function
 
 let action_search =
   Agent.get "http://github.com/yannham/mechaml/tree/master/src"
-  >|= Agent.HttpResponse.page
-  >|= (fun page ->
-    let form = page
+  >|= (fun result ->
+    let form = result
+      |> Agent.HttpResponse.page
       |> Page.form_with "[action$=search]"
       |> require "search form not found" in
     let field = form
