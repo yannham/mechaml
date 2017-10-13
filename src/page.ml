@@ -525,10 +525,6 @@ module Link = struct
     |> Uri.of_string
     |> link.resolver
 
-  let make ?resolver:(resolver=id) ?text:(text="") ~href =
-    let attributes = [("href",href)] in
-    { resolver; elt = Soup.create_element ~attributes ~inner_text:text "a" }
-
   let to_node link = link.elt
 end
 
@@ -539,10 +535,6 @@ module Image = struct
   let uri image = image |> source
     |> Uri.of_string
     |> image.resolver
-
-  let make ?(resolver=id) ~source =
-    let attributes = [("src",source)] in
-    {resolver; elt = Soup.create_element ~attributes "img"}
 
   let to_node image = image.elt
 end

@@ -294,22 +294,6 @@ module Form : sig
         there is no default value *)
     val reset : t -> checkbox input -> t
   end
-
-  (* (** Operation on file upload fields - NOT IMPLEMENTED YET *) *)
-  (* module FileUpload : sig *)
-  (*   (** Upload the content of a file *) *)
-  (*   val upload_content : t -> file_upload input -> string -> t *)
-  (*  *)
-  (*   (** [upload_file form "/path/to/my/file"] will send the specified file in *)
-  (*      the form data *) *)
-  (*   val upload_file : t -> file_upload input -> string -> t *)
-  (*  *)
-  (*   (** Same as {! upload_file}, but read the file asynchronously using Lwt *) *)
-  (*   val upload_file_async : t -> file_upload input -> string -> t Lwt.t *)
-  (*  *)
-  (*   (** Return the content of the currently uploaded file if any *) *)
-  (*   val selected_content : t -> file_upload input -> string option *)
-  (* end *)
 end
 
 (** {4 Images and links} *)
@@ -322,8 +306,6 @@ module Link : sig
   val text : t -> string option
   val uri : t -> Uri.t
 
-  val make : ?resolver:(Uri.t -> Uri.t) -> ?text:string -> href:string -> t
-
   val to_node : t -> Soup.element Soup.node
 end
 
@@ -333,8 +315,6 @@ module Image : sig
 
   val source : t -> string
   val uri : t -> Uri.t
-
-  val make : ?resolver:(Uri.t -> Uri.t) -> source:string -> t
 
   val to_node : t -> Soup.element Soup.node
 end

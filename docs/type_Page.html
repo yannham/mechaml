@@ -193,9 +193,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;href&nbsp;:&nbsp;<span class="constructor">Page</span>.<span class="constructor">Link</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;text&nbsp;:&nbsp;<span class="constructor">Page</span>.<span class="constructor">Link</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;option<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;uri&nbsp;:&nbsp;<span class="constructor">Page</span>.<span class="constructor">Link</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Uri</span>.t<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;make&nbsp;:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?resolver:(<span class="constructor">Uri</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Uri</span>.t)&nbsp;<span class="keywordsign">-&gt;</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?text:string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;href:string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Page</span>.<span class="constructor">Link</span>.t<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;to_node&nbsp;:&nbsp;<span class="constructor">Page</span>.<span class="constructor">Link</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Soup</span>.element&nbsp;<span class="constructor">Soup</span>.node<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">end</span><br>
 &nbsp;&nbsp;<span class="keyword">module</span>&nbsp;<span class="constructor">Image</span>&nbsp;:<br>
@@ -203,7 +200,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;t<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;source&nbsp;:&nbsp;<span class="constructor">Page</span>.<span class="constructor">Image</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;uri&nbsp;:&nbsp;<span class="constructor">Page</span>.<span class="constructor">Image</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Uri</span>.t<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;make&nbsp;:&nbsp;?resolver:(<span class="constructor">Uri</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Uri</span>.t)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;source:string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Page</span>.<span class="constructor">Image</span>.t<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;to_node&nbsp;:&nbsp;<span class="constructor">Page</span>.<span class="constructor">Image</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Soup</span>.element&nbsp;<span class="constructor">Soup</span>.node<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">end</span><br>
 &nbsp;&nbsp;<span class="keyword">val</span>&nbsp;form_with&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Page</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Page</span>.<span class="constructor">Form</span>.t&nbsp;option<br>
