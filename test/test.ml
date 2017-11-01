@@ -14,7 +14,7 @@
 
 open Mechaml
 open Cohttp
-open Infix.Option
+open Option.Infix
 
 let _ = Random.self_init ()
 

@@ -17,22 +17,33 @@
   PERFORMANCE OF THIS SOFTWARE.
   }}}*)
 
-(** Some infix operators for the option Monad *)
-module Option : sig
-  (** The monadic bind operator *)
+(** Helpers for the option Monad *)
+
+(** Monadic operations *)
+val return : 'a -> 'a option
+val bind : 'a option -> ('a -> 'b option) -> 'b option
+val join : ('a option) option -> 'a option
+val map : ('a -> 'b) -> 'a option -> 'b option
+
+(** Apply a two arguments function to a pair of optionals : if one of the
+     component is [None], the result is [None], otherwise [map2 (Some x, Some y)
+     f] is [Some (f x y)] *)
+val map_pair : 'a option * 'b option -> ('a -> 'b -> 'c) -> 'c option
+
+(** Return the content of an optional, or the given default value if the first
+     argument is [None]. *)
+val default : 'a option -> 'a -> 'a
+
+module Infix : sig
+  (** bind *)
   val (>>=) : 'a option -> ('a -> 'b option) -> 'b option
 
-  (** The usual [map] + application : [None >|= f] is [None] and [Some x >|= f] is
-     [Some (f x)] *)
+  (** Map a function and apply it to the given argument *)
   val (>|=) : 'a option -> ('a -> 'b) -> 'b option
 
-  (** Apply a two argument function to a pair of optionals : if one of the
-     component is [None], then return [None], otherwise [(Some x, Some y) >>> f] is
-     [Some (f x y)] *)
+  (** map_pair *)
   val (>>>) : 'a option * 'b option-> ('a -> 'b -> 'c) -> 'c option
 
-  (** Return the content of an optional, or the given default value if the first
-     argument is [None]. Id est [Some x |? def] is [x] and [None |? def] is
-     [def]. *)
+  (** default *)
   val (|?) : 'a option -> 'a -> 'a
 end

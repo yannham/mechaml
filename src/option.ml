@@ -12,10 +12,17 @@
   THIS SOFTWARE.
   }}}*)
 
-module Option = struct
-  let (>>=) x f = match x with Some x -> f x | None -> None
-  let (>>>) (x,y) f = match x,y with Some x, Some y -> Some (f x y) | _ -> None
-  let (>|=) x f = match x with Some x -> Some (f x) | None -> None
-  let (>>) x f = match x,f with Some x, Some f -> Some (f x) | _ -> None
-  let (|?) x default = match x with Some x -> x | None -> default
+let return x = Some x
+let bind x f = match x with Some x -> f x | None -> None
+let join = function Some x -> x | None -> None
+let map f = function Some x -> Some (f x) | None -> None
+
+let map_pair (x,y) f = match x,y with Some x, Some y -> Some (f x y) | _ -> None
+let default x def = match x with Some x -> x | None -> def
+
+module Infix = struct
+  let (>>=) = bind
+  let (>|=) x f = map f x
+  let (>>>) = map_pair
+  let (|?) = default
 end

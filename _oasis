@@ -22,7 +22,7 @@ Library "mechaml"
   Path: src
   Pack: true
   Modules: Agent, Page, Cookiejar
-  InternalModules: Infix
+  InternalModules: Option
   BuildDepends: lambdasoup, lwt, cohttp, cohttp-lwt, cohttp-lwt-unix, uri
 
 Document "mechaml"

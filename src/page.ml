@@ -16,7 +16,7 @@ type t = { base_uri : Uri.t; soup : Soup.soup Soup.node }
 
 type elt = Soup.element Soup.node
 
-open Infix.Option
+open Option.Infix
 
 let id x = x
 
@@ -269,54 +269,42 @@ module Form = struct
 
   let textareas = textareas_with ""
 
-  (* let file_uploads_with selector f = *)
-  (*   f.elt *)
-  (*   |> Soup.select (tag_selector "input[type=file_upload]" selector) *)
-  (*   |> Soup.filter (input_filter "file_upload") *)
-  (*   |> seq_from_nodes id *)
-  (*  *)
-  (* let file_upload_with selector f = *)
-  (*   f *)
-  (*   |> file_uploads_with selector *)
-  (*   |> first *)
-  (*  *)
-  (* let file_uploads = file_uploads_with "" *)
-
   let iname input = Soup.attribute "name" input
   let ivalue input = Soup.attribute "value" input
 
   let singleton x = [x]
   let cons x l = x::l
   let uncurry f (x,y) = f x y
-  let radd m k v = StringMap.add k v m
-  let rrem m k = StringMap.remove k m
-  let rmem m k = StringMap.mem k m
-  let rfind m k = StringMap.find k m
+
+  (* flipped versions of functions on maps *)
+  let map_add m k v = StringMap.add k v m
+  let map_remove m k = StringMap.remove k m
+  let map_find m k = StringMap.find k m
 
   let update_form f newdata = {f with data = newdata |? f.data}
 
   let has_value m k v =
     try
-      rfind m k
+      map_find m k
       |> List.mem v
     with Not_found -> false
 
   let current_values m k =
     try
-      rfind m k
+      map_find m k
     with Not_found -> []
 
   let add_value m k v =
     v::(current_values m k)
-    |> radd m k
+    |> map_add m k
 
   let rem_value m k v =
     current_values m k
     |> List.filter ((<>) v)
-    |> radd m k
+    |> map_add m k
 
   let current_value m k =
-    match rfind m k with
+    match map_find m k with
       | exception Not_found -> None
       | [x] -> Some x
       | _ -> None
@@ -332,8 +320,6 @@ module Form = struct
       | None, _ -> f
       | Some name, [] -> clear name f
       | Some name, values -> set_multi name values f
-
-  open Infix.Option
 
   module Checkbox = struct
     let cb_selector name = Printf.sprintf "[type=checkbox][name=%s]" name
@@ -404,7 +390,7 @@ module Form = struct
 
     let select f rb =
       (iname rb, ivalue rb >|= singleton)
-      >>> radd f.data
+      >>> map_add f.data
       |> update_form f
 
     let is_selected f rb =
@@ -435,7 +421,7 @@ module Form = struct
 
     let unselect f sl item =
       iname sl
-      >|= rrem f.data
+      >|= map_remove f.data
       |> update_form f
 
     let is_selected f sl item =
@@ -455,9 +441,9 @@ module Form = struct
         if is_multiple sl then
           let vs = current_values f.data name in
           (if has_value f.data name v then vs else v::vs)
-          |> radd f.data name
+          |> map_add f.data name
         else
-          radd f.data name [v])
+          map_add f.data name [v])
       |> update_form f
 
     let selected_default f sl =
@@ -478,7 +464,7 @@ module Form = struct
     let set f fd v =
       iname fd
       >|= (fun name ->
-        radd f.data name [v])
+        map_add f.data name [v])
       |> update_form f
 
     let get f fd =
@@ -495,7 +481,7 @@ module Form = struct
   (* module FileUpload = struct *)
   (*   let select f fu path = *)
   (*     iname fu *)
-  (*     >|= (fun name -> radd f.data name [path]) *)
+  (*     >|= (fun name -> map_add f.data name [path]) *)
   (*     |> update_form f *)
   (*  *)
   (*   let which_selected f fu = *)

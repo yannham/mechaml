@@ -12,7 +12,7 @@
   THIS SOFTWARE.
   }}}*)
 
-let (|?) = Infix.Option.(|?)
+let (|?) = Option.Infix.(|?)
 
 module C = Cohttp.Cookie.Set_cookie_hdr
 
