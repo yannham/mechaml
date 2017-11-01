@@ -1,9 +1,9 @@
 # OASIS_START
-# DO NOT EDIT (digest: 7d3dcb565e5b738203d500437bb5ca58)
+# DO NOT EDIT (digest: 7918828be6d4775baca4fa5c19d61288)
 version = "1.0.0"
 description =
 "A web browsing library built on top of Lambdasoup and Cohttp. Inspired by WWW::Mechanize"
-requires = "lambdasoup lwt cohttp cohttp-lwt cohttp-lwt-unix uri"
+requires = "lambdasoup lwt cohttp cohttp-lwt cohttp-lwt-unix uri re"
 archive(byte) = "mechaml.cma"
 archive(byte, plugin) = "mechaml.cma"
 archive(native) = "mechaml.cmxa"

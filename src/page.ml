@@ -40,12 +40,22 @@ let is_input_field = function
   | "hidden" -> true
   | _ -> false
 
+let is_input_numeric = function
+  | "range"
+  | "number" -> true
+  | _ -> false
+
+let numeric_filter node =
+  Soup.attribute "type" node
+  >|= is_input_numeric
+  |? false
+
 let field_filter node =
-    match Soup.name node with
-      | "textarea" -> true
-      | "input" ->
-        Soup.attribute "type" node >|= is_input_field |? false
-      | _ -> false
+  match Soup.name node with
+    | "textarea" -> true
+    | "input" ->
+      Soup.attribute "type" node >|= is_input_field |? false
+    | _ -> false
 
 let tag_selector tag = function
   | "" -> tag
@@ -120,7 +130,7 @@ module Form = struct
   type select_list
   type menu
   type field
-  (* type file_upload *)
+
   type _ input = elt
   type _ inputs = Soup.element Soup.nodes
 
@@ -169,29 +179,28 @@ module Form = struct
 
   let values f = StringMap.fold (fun id value l -> (id,value)::l) f.data []
 
-  let checkboxes_with selector f =
+  let _inputs_with input selector f =
+    let default_selector = Printf.sprintf "input[type=%s]" input in
     f.elt
-    |> Soup.select (tag_selector "input[type=checkbox]" selector)
-    |> Soup.filter (input_filter "checkbox")
+    |> Soup.select (tag_selector default_selector selector)
+    |> Soup.filter (input_filter input)
     |> seq_from_nodes id
 
-  let checkbox_with selector f =
-    f |> checkboxes_with selector |> first
-
-  let checkboxes = checkboxes_with ""
-
-  let radio_buttons_with selector f =
-    f.elt
-    |> Soup.select (tag_selector "input[type=radio]" selector)
-    |> Soup.filter (input_filter "radio")
-    |> seq_from_nodes id
-
-  let radio_button_with selector f =
+  let _input_with input selector f =
     f
-    |> radio_buttons_with selector
+    |> _inputs_with input selector
     |> first
 
-  let radio_buttons = radio_buttons_with ""
+  let _inputs input f =
+    _inputs_with input "" f
+
+  let checkboxes_with = _inputs_with "checkbox"
+  let checkbox_with = _input_with "checkbox"
+  let checkboxes = _inputs "checkbox"
+
+  let radio_buttons_with = _inputs_with "radio"
+  let radio_button_with = _input_with "radio"
+  let radio_buttons = _inputs "radio"
 
   let select_lists_with selector f =
     f.elt
@@ -219,44 +228,30 @@ module Form = struct
 
   let fields = fields_with ""
 
-  let texts_with selector f =
+  let numerics_with selector f =
     f.elt
-    |> Soup.select (tag_selector "input[type=text]" selector)
-    |> Soup.filter (input_filter "text")
+    |> Soup.select (tag_selector "input" selector)
+    |> Soup.filter numeric_filter
     |> seq_from_nodes id
 
-  let text_with selector f =
+  let numeric_with selector f =
     f
-    |> texts_with selector
+    |> numerics_with selector
     |> first
 
-  let texts = texts_with ""
+  let numerics = numerics_with ""
 
-  let passwords_with selector f =
-    f.elt
-    |> Soup.select (tag_selector "input[type=password]" selector)
-    |> Soup.filter (input_filter "password")
-    |> seq_from_nodes id
+  let texts_with = _inputs_with "text"
+  let text_with = _input_with "text"
+  let texts = _inputs "text"
 
-  let password_with selector f =
-    f
-    |> passwords_with selector
-    |> first
+  let passwords_with = _inputs_with "password"
+  let password_with = _input_with "password"
+  let passwords =  _inputs "password"
 
-  let passwords = passwords_with ""
-
-  let hiddens_with selector f =
-    f.elt
-    |> Soup.select (tag_selector "input[type=hidden]" selector)
-    |> Soup.filter (input_filter "hidden")
-    |> seq_from_nodes id
-
-  let hidden_with selector f =
-    f
-    |> hiddens_with selector
-    |> first
-
-  let hiddens = hiddens_with ""
+  let hiddens_with = _inputs_with "hidden"
+  let hidden_with = _input_with "hidden"
+  let hiddens = _inputs "hidden"
 
   let textareas_with selector f =
     f.elt
@@ -268,6 +263,42 @@ module Form = struct
     f |> textareas_with selector |> first
 
   let textareas = textareas_with ""
+
+  let colors_with = _inputs_with "color"
+  let color_with = _input_with "color"
+  let colors = _inputs "color"
+
+  let dates_with = _inputs_with "date"
+  let date_with = _input_with "date"
+  let dates = _inputs "date"
+
+  let emails_with = _inputs_with "email"
+  let email_with = _input_with "email"
+  let emails = _inputs "email"
+
+  let months_with = _inputs_with "month"
+  let month_with = _input_with "month"
+  let months = _inputs "month"
+
+  let numbers_with = _inputs_with "number"
+  let number_with = _input_with "number"
+  let numbers = _inputs "number"
+
+  let tels_with = _inputs_with "tel"
+  let tel_with = _input_with "tel"
+  let tels = _inputs "tel"
+
+  let searchs_with = _inputs_with "search"
+  let search_with = _input_with "search"
+  let searchs = _inputs "search"
+
+  let times_with = _inputs_with "time"
+  let time_with = _input_with "time"
+  let times = _inputs "time"
+
+  let urls_with = _inputs_with "url"
+  let url_with = _input_with "url"
+  let urls = _inputs "url"
 
   let iname input = Soup.attribute "name" input
   let ivalue input = Soup.attribute "value" input

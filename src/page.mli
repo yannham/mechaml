@@ -77,10 +77,9 @@ module Form : sig
   type select_list
   type menu
   type field
-  (* type file_upload *)
 
   (** A form input *)
-  type _ input
+  type 'a input
 
   (** Return the name of the form *)
   val name : t -> string option
@@ -145,9 +144,15 @@ module Form : sig
   val select_lists : t -> select_list input seq
   val select_lists_with : string -> t -> select_list input seq
 
+  (** Select textual fields, either text, password, search, or textarea *)
   val field_with : string -> t -> field input option
   val fields : t -> field input seq
   val fields_with : string -> t -> field input seq
+
+  (** Select numeric fields, either number or range *)
+  val numeric_with : string -> t -> field input option
+  val numerics : t -> field input seq
+  val numerics_with : string -> t -> field input seq
 
   val text_with : string -> t -> field input option
   val texts : t -> field input seq
@@ -165,9 +170,41 @@ module Form : sig
   val textareas : t -> field input seq
   val textareas_with : string -> t -> field input seq
 
-  (* val file_upload_with : string -> t -> file_upload input option *)
-  (* val file_uploads : t -> file_upload input seq *)
-  (* val file_uploads_with : string -> t -> file_upload input seq *)
+  val color_with : string -> t -> field input option
+  val colors : t -> field input seq
+  val colors_with : string -> t -> field input seq
+
+  val date_with : string -> t -> field input option
+  val dates : t -> field input seq
+  val dates_with : string -> t -> field input seq
+
+  val email_with : string -> t -> field input option
+  val emails : t -> field input seq
+  val emails_with : string -> t -> field input seq
+
+  val month_with : string -> t -> field input option
+  val months : t -> field input seq
+  val months_with : string -> t -> field input seq
+
+  val number_with : string -> t -> field input option
+  val numbers : t -> field input seq
+  val numbers_with : string -> t -> field input seq
+
+  val tel_with : string -> t -> field input option
+  val tels : t -> field input seq
+  val tels_with : string -> t -> field input seq
+
+  val search_with : string -> t -> field input option
+  val searchs : t -> field input seq
+  val searchs_with : string -> t -> field input seq
+
+  val time_with : string -> t -> field input option
+  val times : t -> field input seq
+  val times_with : string -> t -> field input seq
+
+  val url_with : string -> t -> field input option
+  val urls : t -> field input seq
+  val urls_with : string -> t -> field input seq
 
   (** Reset or clear all the fields *)
 
@@ -278,12 +315,12 @@ module Form : sig
     val reset : t -> checkbox input -> t
   end
 
-  (** Operations on text fields : textarea, text/password type input, etc. *)
+  (** Operations on general fields : textarea, text, password, color, date, etc. *)
   module Field : sig
-    (** Set the value of a text field *)
+    (** Set the value of a field *)
     val set : t -> field input -> string -> t
 
-    (** Return the value of a text field *)
+    (** Return the content of the field, if any *)
     val get : t -> field input -> string option
 
     (** Return the default value of a field, specified via the attribute

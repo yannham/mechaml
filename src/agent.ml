@@ -88,7 +88,7 @@ and update_agent location agent (cohttp_response,body) =
       Cookiejar.add_from_headers location headers agent.cookie_jar}
   in
   body
-  |> Cohttp_lwt_body.to_string
+  |> Cohttp_lwt.Body.to_string
   >>= (function content ->
     if agent.redirect < agent.max_redirect then
       redirect (agent, HttpResponse.make ~location ~cohttp_response ~content)
@@ -110,7 +110,7 @@ let click link = link |> Page.Link.uri |> get_uri
 let post_uri uri content agent =
   let headers = agent.cookie_jar
     |> Cookiejar.add_to_headers uri agent.client_headers in
-  Client.post ~headers:headers ~body:(Cohttp_lwt_body.of_string content) uri
+  Client.post ~headers:headers ~body:(Cohttp_lwt.Body.of_string content) uri
   >>= update_agent uri agent
 
 let post uri_string content agent =

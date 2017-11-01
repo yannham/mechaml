@@ -9,17 +9,21 @@
 <link title="Index of types" rel=Appendix href="index_types.html">
 <link title="Index of values" rel=Appendix href="index_values.html">
 <link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
 <link title="Agent" rel="Chapter" href="Agent.html">
 <link title="Page" rel="Chapter" href="Page.html">
-<link title="Cookiejar" rel="Chapter" href="Cookiejar.html"><title>Cookiejar.Cookie</title>
+<link title="Cookiejar" rel="Chapter" href="Cookiejar.html">
+<link title="Formatting" rel="Chapter" href="Formatting.html"><title>Cookiejar.Cookie</title>
 </head>
 <body>
 <div class="navbar">&nbsp;<a class="up" href="Cookiejar.html" title="Cookiejar">Up</a>
 &nbsp;</div>
 <h1>Module <a href="type_Cookiejar.Cookie.html">Cookiejar.Cookie</a></h1>
 
-<pre><span class="keyword">module</span> Cookie: <code class="code">sig</code> <a href="Cookiejar.Cookie.html">..</a> <code class="code">end</code></pre><div class="info module top">
-Representation of a cookie<br>
+<pre><span id="MODULECookie"><span class="keyword">module</span> Cookie</span>: <code class="code">sig</code> <a href="Cookiejar.Cookie.html">..</a> <code class="code">end</code></pre><div class="info module top">
+<div class="info-desc">
+<p>Representation of a cookie</p>
+</div>
 </div>
 <hr width="100%">
 
@@ -36,11 +40,15 @@ Representation of a cookie<br>
 <pre><span id="VALpath"><span class="keyword">val</span> path</span> : <code class="type"><a href="Cookiejar.Cookie.html#TYPEt">t</a> -> string</code></pre>
 <pre><span id="VALsecure"><span class="keyword">val</span> secure</span> : <code class="type"><a href="Cookiejar.Cookie.html#TYPEt">t</a> -> bool</code></pre>
 <pre><span id="VALmatch_uri"><span class="keyword">val</span> match_uri</span> : <code class="type">Uri.t -> <a href="Cookiejar.Cookie.html#TYPEt">t</a> -> bool</code></pre><div class="info ">
-Given an uri and a cookie, return true if the
-     cookie's domain and path match the uri's one.<br>
+<div class="info-desc">
+<p>Given an uri and a cookie, return true if the
+     cookie's domain and path match the uri's one.</p>
+</div>
 </div>
 
 <pre><span id="VALmake"><span class="keyword">val</span> make</span> : <code class="type">?expiration:<a href="Cookiejar.Cookie.html#TYPEexpiration">expiration</a> -><br>       ?path:string -><br>       ?secure:bool -> domain:string -> string -> string -> <a href="Cookiejar.Cookie.html#TYPEt">t</a></code></pre><div class="info ">
-Create a cookie<br>
+<div class="info-desc">
+<p>Create a cookie</p>
+</div>
 </div>
 </body></html>

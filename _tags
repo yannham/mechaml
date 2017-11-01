@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: a75f74db19fa0634f4ceb0219c85e8ed)
+# DO NOT EDIT (digest: eda2ce5e29f7a6cbaddd7a37c25c2755)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -19,12 +19,14 @@ true: annot, bin_annot
 "src/agent.cmx": for-pack(Mechaml)
 "src/page.cmx": for-pack(Mechaml)
 "src/cookiejar.cmx": for-pack(Mechaml)
+"src/formatting.cmx": for-pack(Mechaml)
 "src/option.cmx": for-pack(Mechaml)
 <src/*.ml{,i,y}>: pkg_cohttp
 <src/*.ml{,i,y}>: pkg_cohttp-lwt
 <src/*.ml{,i,y}>: pkg_cohttp-lwt-unix
 <src/*.ml{,i,y}>: pkg_lambdasoup
 <src/*.ml{,i,y}>: pkg_lwt
+<src/*.ml{,i,y}>: pkg_re
 <src/*.ml{,i,y}>: pkg_uri
 # Executable example_github_form
 "examples/github_form.byte": pkg_cohttp
@@ -33,6 +35,7 @@ true: annot, bin_annot
 "examples/github_form.byte": pkg_lambdasoup
 "examples/github_form.byte": pkg_lwt
 "examples/github_form.byte": pkg_lwt_ssl
+"examples/github_form.byte": pkg_re
 "examples/github_form.byte": pkg_uri
 "examples/github_form.byte": use_mechaml
 # Executable example_download_images
@@ -42,6 +45,7 @@ true: annot, bin_annot
 "examples/download_images.byte": pkg_lambdasoup
 "examples/download_images.byte": pkg_lwt
 "examples/download_images.byte": pkg_lwt_ssl
+"examples/download_images.byte": pkg_re
 "examples/download_images.byte": pkg_uri
 "examples/download_images.byte": use_mechaml
 # Executable example_login
@@ -51,6 +55,7 @@ true: annot, bin_annot
 "examples/reddit_login.byte": pkg_lambdasoup
 "examples/reddit_login.byte": pkg_lwt
 "examples/reddit_login.byte": pkg_lwt_ssl
+"examples/reddit_login.byte": pkg_re
 "examples/reddit_login.byte": pkg_uri
 "examples/reddit_login.byte": use_mechaml
 <examples/*.ml{,i,y}>: pkg_cohttp
@@ -59,6 +64,7 @@ true: annot, bin_annot
 <examples/*.ml{,i,y}>: pkg_lambdasoup
 <examples/*.ml{,i,y}>: pkg_lwt
 <examples/*.ml{,i,y}>: pkg_lwt_ssl
+<examples/*.ml{,i,y}>: pkg_re
 <examples/*.ml{,i,y}>: pkg_uri
 <examples/*.ml{,i,y}>: use_mechaml
 # Executable unit_tests
@@ -68,6 +74,7 @@ true: annot, bin_annot
 "test/test.byte": pkg_cohttp-lwt-unix
 "test/test.byte": pkg_lambdasoup
 "test/test.byte": pkg_lwt
+"test/test.byte": pkg_re
 "test/test.byte": pkg_uri
 "test/test.byte": use_mechaml
 <test/*.ml{,i,y}>: pkg_alcotest
@@ -76,6 +83,7 @@ true: annot, bin_annot
 <test/*.ml{,i,y}>: pkg_cohttp-lwt-unix
 <test/*.ml{,i,y}>: pkg_lambdasoup
 <test/*.ml{,i,y}>: pkg_lwt
+<test/*.ml{,i,y}>: pkg_re
 <test/*.ml{,i,y}>: pkg_uri
 <test/*.ml{,i,y}>: use_mechaml
 # OASIS_STOP

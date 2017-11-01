@@ -10,9 +10,11 @@
 <link title="Index of types" rel=Appendix href="index_types.html">
 <link title="Index of values" rel=Appendix href="index_values.html">
 <link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
 <link title="Agent" rel="Chapter" href="Agent.html">
 <link title="Page" rel="Chapter" href="Page.html">
-<link title="Cookiejar" rel="Chapter" href="Cookiejar.html"><link title="Operations on HTTP responses " rel="Section" href="#2_OperationsonHTTPresponses">
+<link title="Cookiejar" rel="Chapter" href="Cookiejar.html">
+<link title="Formatting" rel="Chapter" href="Formatting.html"><link title="Operations on HTTP responses " rel="Section" href="#2_OperationsonHTTPresponses">
 <link title="Main operations " rel="Subsection" href="#3_Mainoperations">
 <title>Agent</title>
 </head>
@@ -22,19 +24,19 @@
 </div>
 <h1>Module <a href="type_Agent.html">Agent</a></h1>
 
-<pre><span class="keyword">module</span> Agent: <code class="code">sig</code> <a href="Agent.html">..</a> <code class="code">end</code></pre><div class="info module top">
-Scraping agent
-<p>
+<pre><span id="MODULEAgent"><span class="keyword">module</span> Agent</span>: <code class="code">sig</code> <a href="Agent.html">..</a> <code class="code">end</code></pre><div class="info module top">
+<div class="info-desc">
+<p>Scraping agent</p>
 
-    Mechaml is a web agent that allows to :
-<p>
+<p>Mechaml is a web agent that allows to :</p>
+
 <ul>
 <li>Fetch and parse HTML pages</li>
 <li>Analyze, fill and submit HTML forms</li>
 <li>Manages cookies, headers and redirections</li>
 </ul>
-
-    It is build on top of Cohttp, Lwt and Lambdasoup.<br>
+<p>It is build on top of Cohttp, Lwt and Lambdasoup.</p>
+</div>
 </div>
 <hr width="100%">
 
@@ -46,105 +48,122 @@ Scraping agent
 
 <pre><span id="TYPEhttp_headers"><span class="keyword">type</span> <code class="type"></code>http_headers</span> = <code class="type">Cohttp.Header.t</code> </pre>
 
-<br>
-<h2 id="2_OperationsonHTTPresponses">Operations on HTTP responses </h2><br>
+<h3 id="2_OperationsonHTTPresponses">Operations on HTTP responses </h3>
+<pre><span id="MODULEHttpResponse"><span class="keyword">module</span> <a href="Agent.HttpResponse.html">HttpResponse</a></span>: <code class="code">sig</code> <a href="Agent.HttpResponse.html">..</a> <code class="code">end</code></pre><div class="info">
+<p>The HttpResponse module defines a type and operations to extract content and
+   metadata from server response</p>
 
-<pre><span class="keyword">module</span> <a href="Agent.HttpResponse.html">HttpResponse</a>: <code class="code">sig</code> <a href="Agent.HttpResponse.html">..</a> <code class="code">end</code></pre><div class="info">
-The HttpResponse module defines a type and operations to extract content and
-   metadata from server response
 </div>
 
 <pre><span id="TYPEresult"><span class="keyword">type</span> <code class="type"></code>result</span> = <code class="type"><a href="Agent.html#TYPEt">t</a> * <a href="Agent.HttpResponse.html#TYPEt">HttpResponse.t</a></code> </pre>
 
-<br>
-<h3 id="3_Mainoperations">Main operations </h3><br>
-
+<h4 id="3_Mainoperations">Main operations </h4>
 <pre><span id="VALinit"><span class="keyword">val</span> init</span> : <code class="type">?max_redirect:int -> unit -> <a href="Agent.html#TYPEt">t</a></code></pre><div class="info ">
-Create a new empty agent. <code class="code">~max_redirect</code> indicates how many times the agent
+<div class="info-desc">
+<p>Create a new empty agent. <code class="code">~max_redirect</code> indicates how many times the agent
    will automatically and consecutively follow the <code class="code">Location</code> header in case of
    HTTP 302 or 303 response codes to avoid a redirect loop. Set
-   to <code class="code">0</code> to disable any automatic redirection.<br>
+   to <code class="code">0</code> to disable any automatic redirection.</p>
 </div>
-<br>
-Perform a get request to the specified URI. <code class="code">get "http://www.site/some/url"
+</div>
+<p>Perform a get request to the specified URI. <code class="code">get "http://www.site/some/url"
    agent</code> sends a HTTP GET request and return the updated state of the agent
-   together with the server's response<br>
+   together with the server's response</p>
 
 <pre><span id="VALget"><span class="keyword">val</span> get</span> : <code class="type">string -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEresult">result</a> Lwt.t</code></pre>
 <pre><span id="VALget_uri"><span class="keyword">val</span> get_uri</span> : <code class="type">Uri.t -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEresult">result</a> Lwt.t</code></pre>
 <pre><span id="VALclick"><span class="keyword">val</span> click</span> : <code class="type"><a href="Page.Link.html#TYPEt">Page.Link.t</a> -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEresult">result</a> Lwt.t</code></pre><div class="info ">
-Same as get, but work directly with links instead of URIs<br>
+<div class="info-desc">
+<p>Same as get, but work directly with links instead of URIs</p>
 </div>
-<br>
-Send a raw post request to the specified URI<br>
+</div>
+<p>Send a raw post request to the specified URI</p>
 
 <pre><span id="VALpost"><span class="keyword">val</span> post</span> : <code class="type">string -> string -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEresult">result</a> Lwt.t</code></pre>
 <pre><span id="VALpost_uri"><span class="keyword">val</span> post_uri</span> : <code class="type">Uri.t -> string -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEresult">result</a> Lwt.t</code></pre>
 <pre><span id="VALsubmit"><span class="keyword">val</span> submit</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEresult">result</a> Lwt.t</code></pre><div class="info ">
-Submit a filled form<br>
+<div class="info-desc">
+<p>Submit a filled form</p>
 </div>
-<br>
-Save some downloaded content in a file<br>
+</div>
+<p>Save some downloaded content in a file</p>
 
 <pre><span id="VALsave_image"><span class="keyword">val</span> save_image</span> : <code class="type">string -> <a href="Page.Image.html#TYPEt">Page.Image.t</a> -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEresult">result</a> Lwt.t</code></pre><div class="info ">
-<code class="code">save_image "/path/to/myfile.jpg" image agent</code> loads the image using <code class="code">get</code>, open
-   <code class="code">myfile.jpg</code> and write the content in asynchronously, and return the result<br>
+<div class="info-desc">
+<p><code class="code">save_image "/path/to/myfile.jpg" image agent</code> loads the image using <code class="code">get</code>, open
+   <code class="code">myfile.jpg</code> and write the content in asynchronously, and return the result</p>
+</div>
 </div>
 
 <pre><span id="VALsave_content"><span class="keyword">val</span> save_content</span> : <code class="type">string -> string -> unit Lwt.t</code></pre><div class="info ">
-<code class="code">save_content "/path/to/myfile.html" content</code> write the specified content in a file
-    using Lwt's asynchronous IO<br>
+<div class="info-desc">
+<p><code class="code">save_content "/path/to/myfile.html" content</code> write the specified content in a file
+    using Lwt's asynchronous IO</p>
 </div>
-<br>
-<h4 id="4_Cookies">Cookies</h4> (see <a href="Cookiejar.html"><code class="code">Cookiejar</code></a>)<br>
+</div>
+<h5 id="4_Cookies">Cookies</h5><p>(see <a href="Cookiejar.html"><code class="code">Cookiejar</code></a>)</p>
 
 <pre><span id="VALcookie_jar"><span class="keyword">val</span> cookie_jar</span> : <code class="type"><a href="Agent.html#TYPEt">t</a> -> <a href="Cookiejar.html#TYPEt">Cookiejar.t</a></code></pre><div class="info ">
-Return the current Cookiejar<br>
+<div class="info-desc">
+<p>Return the current Cookiejar</p>
+</div>
 </div>
 
 <pre><span id="VALset_cookie_jar"><span class="keyword">val</span> set_cookie_jar</span> : <code class="type"><a href="Cookiejar.html#TYPEt">Cookiejar.t</a> -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a></code></pre><div class="info ">
-Set the current Cookiejar<br>
+<div class="info-desc">
+<p>Set the current Cookiejar</p>
+</div>
 </div>
 
 <pre><span id="VALadd_cookie"><span class="keyword">val</span> add_cookie</span> : <code class="type"><a href="Cookiejar.Cookie.html#TYPEt">Cookiejar.Cookie.t</a> -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a></code></pre><div class="info ">
-Add a single cookie to the current Cookiejar<br>
+<div class="info-desc">
+<p>Add a single cookie to the current Cookiejar</p>
+</div>
 </div>
 
 <pre><span id="VALremove_cookie"><span class="keyword">val</span> remove_cookie</span> : <code class="type"><a href="Cookiejar.Cookie.html#TYPEt">Cookiejar.Cookie.t</a> -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a></code></pre><div class="info ">
-Remove a single cookie from the Cookiejar<br>
+<div class="info-desc">
+<p>Remove a single cookie from the Cookiejar</p>
 </div>
-<br>
-<h5 id="5_Headers">Headers</h5><br>
-
+</div>
+<h6 id="5_Headers">Headers</h6>
 <pre><span id="VALclient_headers"><span class="keyword">val</span> client_headers</span> : <code class="type"><a href="Agent.html#TYPEt">t</a> -> Cohttp.Header.t</code></pre><div class="info ">
-Return the default headers sent when performing HTTP requests<br>
+<div class="info-desc">
+<p>Return the default headers sent when performing HTTP requests</p>
+</div>
 </div>
 
 <pre><span id="VALset_client_headers"><span class="keyword">val</span> set_client_headers</span> : <code class="type">Cohttp.Header.t -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a></code></pre><div class="info ">
-Use the specified headers as new default headers<br>
+<div class="info-desc">
+<p>Use the specified headers as new default headers</p>
+</div>
 </div>
 
 <pre><span id="VALadd_client_header"><span class="keyword">val</span> add_client_header</span> : <code class="type">string -> string -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a></code></pre><div class="info ">
-Add a single pair key/value to the default headers<br>
+<div class="info-desc">
+<p>Add a single pair key/value to the default headers</p>
+</div>
 </div>
 
 <pre><span id="VALremove_client_header"><span class="keyword">val</span> remove_client_header</span> : <code class="type">string -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a></code></pre><div class="info ">
-Remove a single pair key/value from the default headers<br>
+<div class="info-desc">
+<p>Remove a single pair key/value from the default headers</p>
 </div>
-<br>
-<h6 id="6_Redirection">Redirection</h6><br>
-
+</div>
+<h7 id="6_Redirection">Redirection</h7>
 <pre><span id="VALset_max_redirect"><span class="keyword">val</span> set_max_redirect</span> : <code class="type">int -> <a href="Agent.html#TYPEt">t</a> -> <a href="Agent.html#TYPEt">t</a></code></pre><div class="info ">
-Max redirection to avoid infinite loops (use 0 to disable automatic
-   redirection)<br>
+<div class="info-desc">
+<p>Max redirection to avoid infinite loops (use 0 to disable automatic
+   redirection)</p>
+</div>
 </div>
 
 <pre><span id="VALdefault_max_redirect"><span class="keyword">val</span> default_max_redirect</span> : <code class="type">int</code></pre><div class="info ">
-The default maximum consecutive redirections<br>
+<div class="info-desc">
+<p>The default maximum consecutive redirections</p>
 </div>
-<br>
-<div class="h7" id="7_TheAgentMonad">The Agent Monad</div>
-    This module defines a monad that implicitely manages the state corresponding to the agent
-    inside the Lwt monad. This is basically the state monad (for <a href="Agent.html#TYPEt"><code class="code">Agent.t</code></a>) and the Lwt one stacked<br>
+</div>
+<div class="h8" id="7_TheAgentMonad">The Agent Monad</div><p>This module defines a monad that implicitely manages the state corresponding to the agent
+    inside the Lwt monad. This is basically the state monad (for <a href="Agent.html#TYPEt"><code class="code">Agent.t</code></a>) and the Lwt one stacked</p>
 
-<pre><span class="keyword">module</span> <a href="Agent.Monad.html">Monad</a>: <code class="code">sig</code> <a href="Agent.Monad.html">..</a> <code class="code">end</code></pre></body></html>
+<pre><span id="MODULEMonad"><span class="keyword">module</span> <a href="Agent.Monad.html">Monad</a></span>: <code class="code">sig</code> <a href="Agent.Monad.html">..</a> <code class="code">end</code></pre></body></html>

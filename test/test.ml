@@ -442,6 +442,127 @@ let tests_page = [
     check_field "text3" "default";
     check_field "area3" "default");
 
+  "forms_formatting", `Quick, (fun _ ->
+    let color_sample = [
+      ((0,0,0), Some "#000000");
+      ((255,255,255), Some "#FFFFFF");
+      ((128,128,128), Some "#808080");
+      ((30,75,145), Some "#1E4B91");
+      ((-10,128,128), None);
+      ((300,128,128), None);
+      ((128,-10,128), None);
+      ((128,300,128), None);
+      ((128,128,-10), None);
+      ((128,128,300), None)] in
+    let date_sample = [
+      ((31,1,2016), Some "2016-01-31");
+      ((31,3,2016), Some "2016-03-31");
+      ((31,5,2016), Some "2016-05-31");
+      ((31,7,2016), Some "2016-07-31");
+      ((31,8,2016), Some "2016-08-31");
+      ((31,12,2016), Some "2016-12-31");
+
+      ((31,2,2016), None);
+      ((31,4,2016), None);
+      ((31,6,2016), None);
+      ((31,9,2016), None);
+      ((31,11,2016), None);
+
+      ((29,2,1824), Some "1824-02-29");
+      ((29,2,800), Some "800-02-29");
+      ((29,2,1823), None);
+      ((29,2,801), None);
+      ((30,2,2524), None);
+      ((30,2,1825), None);
+
+      ((20, 5,-5), None);
+      ((20, -1,2000), None);
+      ((20, 15,2000), None);
+      ((-10, 5,2000), None);
+      ((40, 5,2000), None)] in
+    (* let email_sample = [ *)
+    (*   ("email@example.com", Some "email@example.com"); *)
+    (*   ("firstname.lastname@example.com", Some "firstname.lastname@example.com"); *)
+    (*   ("email@subdomain.example.com", Some "email@subdomain.example.com"); *)
+    (*   ("firstname+lastname@example.com", Some "firstname+lastname@example.com"); *)
+    (*   ("email@123.123.123.123", Some "email@123.123.123.123"); *)
+    (*   ("email@[123.123.123.123]", Some "email@[123.123.123.123]"); *)
+    (*   ("“email”@example.com", Some "“email”@example.com"); *)
+    (*   ("1234567890@example.com", Some "1234567890@example.com"); *)
+    (*   ("email@example-one.com", Some "email@example-one.com"); *)
+    (*   ("_______@example.com", Some "_______@example.com"); *)
+    (*   ("email@example.name", Some "email@example.name"); *)
+    (*   ("email@example.museum", Some "email@example.museum"); *)
+    (*   ("email@example.co.jp", Some "email@example.co.jp"); *)
+    (*   ("firstname-lastname@example.com", Some "firstname-lastname@example.com"); *)
+    (*   ("much.“more\\ unusual”@example.com", Some "much.“more\\ unusual”@example.com"); *)
+    (*   ("very.unusual.“@”.unusual.com@example.com", Some "very.unusual.“@”.unusual.com@example.com"); *)
+    (*   ("very.“(),:;<>[]”.VERY.“very@\\\\ \"very”.unusual@strange.example.com", Some "very.“(),:;<>[]”.VERY.“very@\\\\ \"very”.unusual@strange.example.com"); *)
+    (*  *)
+      (* ("plainaddress", None); *)
+      (* ("#@%^%#$@#$@#.com", None); *)
+      (* ("@example.com", None); *)
+      (* ("Joe Smith <email@example.com>", None); *)
+      (* ("email.example.com", None); *)
+      (* ("email@example@example.com", None); *)
+      (* (".email@example.com", None); *)
+      (* ("email.@example.com", None); *)
+      (* ("email..email@example.com", None); *)
+      (* ("あいうえお@example.com", None); *)
+      (* ("email@example.com (Joe Smith)", None); *)
+      (* ("email@example", None); *)
+      (* ("email@-example.com", None); *)
+      (* ("email@example.web", None); *)
+      (* ("email@111.222.333.44444", None); *)
+      (* ("email@example..com", None); *)
+      (* ("Abc..123@example.com", None); *)
+      (* ("“(),:;<>[\\]@example.com", None); *)
+      (* ("just\"not\"right@example.com", None); *)
+      (* ("this\\ is\"really\"not\\allowed@example.com", None)] in *)
+    let time_sample = [
+      ((0,0,0), Some "00:00:00");
+      ((10,20,30), Some "10:20:30");
+      ((14,8,48), Some "14:08:48");
+      ((23,55,3), Some "23:55:03");
+
+      ((-1,30,30), None);
+      ((35,30,30), None);
+      ((12,-1,30), None);
+      ((12,60,30), None);
+      ((12,30,-1), None);
+      ((12,30,60), None)] in
+
+    let check3 f_name (type s) (module M : Formatting.S with type t = s) f ((x,y,z),expected) =
+      let result = match f x y z with
+        | Some x -> Some (M.to_string x)
+        | None -> None in
+      let expected_string = match expected with
+        | Some s -> s
+        | None -> "None" in
+      let msg = Printf.sprintf "%s on (%d,%d,%d) : expected %s" f_name x y z
+        expected_string in
+      check_true msg (result = expected) in
+
+    (* let check_email (email,expected) = *)
+    (*   let result = match Formatting.Email.make email with *)
+    (*     | Some x -> Some (Formatting.Email.to_string x) *)
+    (*     | None -> None in *)
+    (*   let expected_string = match expected with *)
+    (*     | Some s -> s *)
+    (*     | None -> "None" in *)
+    (*   let msg = Printf.sprintf "email on %s : expected %s" email expected_string in *)
+    (*   check_true msg (result = expected) in *)
+
+    let color_unlabeled x y z = Formatting.Color.make ~red:x ~green:y ~blue:z in
+    let date_unabeled x y z = Formatting.Date.make ~day:x ~month:y ~year:z in
+    let time_unlabeled x y z = Formatting.Time.make ~hour:x ~minute:y ~second:z
+      in
+    List.iter (check3 "color" (module Formatting.Color) color_unlabeled) color_sample;
+    List.iter (check3 "date" (module Formatting.Date) date_unabeled) date_sample;
+    List.iter (check3 "time" (module Formatting.Time) time_unlabeled)
+      time_sample);
+    (* List.iter check_email email_sample); *)
+
   "links", `Quick, (fun _ ->
     let page = soup_index |> Page.from_soup in
     let links_with =

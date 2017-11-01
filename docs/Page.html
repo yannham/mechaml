@@ -11,9 +11,11 @@
 <link title="Index of types" rel=Appendix href="index_types.html">
 <link title="Index of values" rel=Appendix href="index_values.html">
 <link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
 <link title="Agent" rel="Chapter" href="Agent.html">
 <link title="Page" rel="Chapter" href="Page.html">
-<link title="Cookiejar" rel="Chapter" href="Cookiejar.html"><link title="Lazy sequences" rel="Section" href="#2_Lazysequences">
+<link title="Cookiejar" rel="Chapter" href="Cookiejar.html">
+<link title="Formatting" rel="Chapter" href="Formatting.html"><link title="Lazy sequences" rel="Section" href="#2_Lazysequences">
 <link title="Form" rel="Subsection" href="#3_Form">
 <title>Page</title>
 </head>
@@ -24,50 +26,63 @@
 </div>
 <h1>Module <a href="type_Page.html">Page</a></h1>
 
-<pre><span class="keyword">module</span> Page: <code class="code">sig</code> <a href="Page.html">..</a> <code class="code">end</code></pre><div class="info module top">
-Page
-<p>
+<pre><span id="MODULEPage"><span class="keyword">module</span> Page</span>: <code class="code">sig</code> <a href="Page.html">..</a> <code class="code">end</code></pre><div class="info module top">
+<div class="info-desc">
+<p>Page</p>
 
-    This module contains all the functions used to analyze a page, select specific
-    elements, and manage forms.<br>
+<p>This module contains all the functions used to analyze a page, select specific
+    elements, and manage forms.</p>
+</div>
 </div>
 <hr width="100%">
 
 <pre><span id="TYPEt"><span class="keyword">type</span> <code class="type"></code>t</span> </pre>
 <div class="info ">
-The type of an html page<br>
+<div class="info-desc">
+<p>The type of an html page</p>
+</div>
 </div>
 
 
 <pre><span id="VALfrom_soup"><span class="keyword">val</span> from_soup</span> : <code class="type">?location:Uri.t -> Soup.soup Soup.node -> <a href="Page.html#TYPEt">t</a></code></pre><div class="info ">
-Make a new page from a base URI and a Lambdasoup document<br>
+<div class="info-desc">
+<p>Make a new page from a base URI and a Lambdasoup document</p>
+</div>
 </div>
 
 <pre><span id="VALfrom_string"><span class="keyword">val</span> from_string</span> : <code class="type">?location:Uri.t -> string -> <a href="Page.html#TYPEt">t</a></code></pre><div class="info ">
-Make a new page from a base URI and a HTML string<br>
+<div class="info-desc">
+<p>Make a new page from a base URI and a HTML string</p>
+</div>
 </div>
 
 <pre><span id="VALbase_uri"><span class="keyword">val</span> base_uri</span> : <code class="type"><a href="Page.html#TYPEt">t</a> -> Uri.t</code></pre><div class="info ">
-Return the location of a page (or <code class="code">Uri.empty</code> if not specified)<br>
+<div class="info-desc">
+<p>Return the location of a page (or <code class="code">Uri.empty</code> if not specified)</p>
+</div>
 </div>
 
 <pre><span id="VALresolver"><span class="keyword">val</span> resolver</span> : <code class="type"><a href="Page.html#TYPEt">t</a> -> Uri.t -> Uri.t</code></pre><div class="info ">
-Return the resolver of page, that take relative URIs to absolute ones using
-   the page base URI<br>
+<div class="info-desc">
+<p>Return the resolver of page, that take relative URIs to absolute ones using
+   the page base URI</p>
+</div>
 </div>
 
 <pre><span id="VALsoup"><span class="keyword">val</span> soup</span> : <code class="type"><a href="Page.html#TYPEt">t</a> -> Soup.soup Soup.node</code></pre><div class="info ">
-Convert to Lambdasoup<br>
+<div class="info-desc">
+<p>Convert to Lambdasoup</p>
 </div>
-<br>
-<h2 id="2_Lazysequences">Lazy sequences</h2>
-    Lambdasoup provides lazy sequences to traverse only needed part of an HTML
+</div>
+<h3 id="2_Lazysequences">Lazy sequences</h3><p>Lambdasoup provides lazy sequences to traverse only needed part of an HTML
     document when used in combination with <code class="code">with_stop</code>. We provide a wrapper
-    that is compatible with Mechaml types such as forms, images, inputs, etc.<br>
+    that is compatible with Mechaml types such as forms, images, inputs, etc.</p>
 
 <pre><span id="TYPEseq"><span class="keyword">type</span> <code class="type">+'a</code> seq</span> </pre>
 <div class="info ">
-Lazy sequences of HTML elements. See <code class="code">Soup.nodes</code> type<br>
+<div class="info-desc">
+<p>Lazy sequences of HTML elements. See <code class="code">Soup.nodes</code> type</p>
+</div>
 </div>
 
 
@@ -82,11 +97,12 @@ Lazy sequences of HTML elements. See <code class="code">Soup.nodes</code> type<b
 }
 
 <div class="info ">
-<code class="code">Soup.stop</code> type<br>
+<div class="info-desc">
+<p><code class="code">Soup.stop</code> type</p>
+</div>
 </div>
 
-<br>
-Operations on lazy sequences<br>
+<p>Operations on lazy sequences</p>
 
 <pre><span id="VALiter"><span class="keyword">val</span> iter</span> : <code class="type">('a -> unit) -> 'a <a href="Page.html#TYPEseq">seq</a> -> unit</code></pre>
 <pre><span id="VALfold"><span class="keyword">val</span> fold</span> : <code class="type">('a -> 'b -> 'a) -> 'a -> 'b <a href="Page.html#TYPEseq">seq</a> -> 'a</code></pre>
@@ -96,29 +112,27 @@ Operations on lazy sequences<br>
 <pre><span id="VALfind_first"><span class="keyword">val</span> find_first</span> : <code class="type">('a -> bool) -> 'a <a href="Page.html#TYPEseq">seq</a> -> 'a option</code></pre>
 <pre><span id="VALto_list"><span class="keyword">val</span> to_list</span> : <code class="type">'a <a href="Page.html#TYPEseq">seq</a> -> 'a list</code></pre>
 <pre><span id="VALwith_stop"><span class="keyword">val</span> with_stop</span> : <code class="type">('a <a href="Page.html#TYPEstop">stop</a> -> 'a) -> 'a</code></pre><div class="info ">
-see Lambdasoup's <code class="code">Soup.with_stop</code><br>
+<div class="info-desc">
+<p>see Lambdasoup's <code class="code">Soup.with_stop</code></p>
 </div>
-<br>
-<h3 id="3_Form">Form</h3><br>
+</div>
+<h4 id="3_Form">Form</h4>
+<pre><span id="MODULEForm"><span class="keyword">module</span> <a href="Page.Form.html">Form</a></span>: <code class="code">sig</code> <a href="Page.Form.html">..</a> <code class="code">end</code></pre><div class="info">
+<p>Operations on forms and inputs</p>
 
-<pre><span class="keyword">module</span> <a href="Page.Form.html">Form</a>: <code class="code">sig</code> <a href="Page.Form.html">..</a> <code class="code">end</code></pre><div class="info">
-Operations on forms and inputs
 </div>
-<br>
-<h4 id="4_Imagesandlinks">Images and links</h4><br>
+<h5 id="4_Imagesandlinks">Images and links</h5>
+<pre><span id="MODULELink"><span class="keyword">module</span> <a href="Page.Link.html">Link</a></span>: <code class="code">sig</code> <a href="Page.Link.html">..</a> <code class="code">end</code></pre><div class="info">
+<p>Operations on hypertext links</p>
 
-<pre><span class="keyword">module</span> <a href="Page.Link.html">Link</a>: <code class="code">sig</code> <a href="Page.Link.html">..</a> <code class="code">end</code></pre><div class="info">
-Operations on hypertext links
 </div>
 
-<pre><span class="keyword">module</span> <a href="Page.Image.html">Image</a>: <code class="code">sig</code> <a href="Page.Image.html">..</a> <code class="code">end</code></pre><div class="info">
-Operations on images
+<pre><span id="MODULEImage"><span class="keyword">module</span> <a href="Page.Image.html">Image</a></span>: <code class="code">sig</code> <a href="Page.Image.html">..</a> <code class="code">end</code></pre><div class="info">
+<p>Operations on images</p>
+
 </div>
-<br>
-<h5 id="5_Nodesselection">Nodes selection</h5><br>
-<br>
-All the following function are built using the same pattern.
-<p>
+<h6 id="5_Nodesselection">Nodes selection</h6><p>All the following function are built using the same pattern.</p>
+
 <ul>
 <li>xxxs (eg <a href="Page.html#VALforms"><code class="code">Page.forms</code></a>) return all the elements of a certain type as a lazy
     sequence.
@@ -129,7 +143,6 @@ All the following function are built using the same pattern.
 <li>xxxs_with proceed as the previous one, but return a lazy sequence of all elements matching the
     selector.</li>
 </ul>
-<br>
 
 <pre><span id="VALform_with"><span class="keyword">val</span> form_with</span> : <code class="type">string -> <a href="Page.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEt">Form.t</a> option</code></pre>
 <pre><span id="VALforms_with"><span class="keyword">val</span> forms_with</span> : <code class="type">string -> <a href="Page.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEt">Form.t</a> <a href="Page.html#TYPEseq">seq</a></code></pre>

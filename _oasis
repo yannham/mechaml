@@ -21,9 +21,10 @@ Flag "examples"
 Library "mechaml"
   Path: src
   Pack: true
-  Modules: Agent, Page, Cookiejar
+  Modules: Agent, Page, Cookiejar, Formatting
   InternalModules: Option
-  BuildDepends: lambdasoup, lwt, cohttp, cohttp-lwt, cohttp-lwt-unix, uri
+  BuildDepends: lambdasoup, lwt, cohttp, cohttp-lwt, cohttp-lwt-unix, uri,
+    re
 
 Document "mechaml"
   Title: Mechaml docs

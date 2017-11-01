@@ -10,9 +10,11 @@
 <link title="Index of types" rel=Appendix href="index_types.html">
 <link title="Index of values" rel=Appendix href="index_values.html">
 <link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
 <link title="Agent" rel="Chapter" href="Agent.html">
 <link title="Page" rel="Chapter" href="Page.html">
-<link title="Cookiejar" rel="Chapter" href="Cookiejar.html"><title>Page.Form.Field</title>
+<link title="Cookiejar" rel="Chapter" href="Cookiejar.html">
+<link title="Formatting" rel="Chapter" href="Formatting.html"><title>Page.Form.Field</title>
 </head>
 <body>
 <div class="navbar"><a class="pre" href="Page.Form.SelectList.html" title="Page.Form.SelectList">Previous</a>
@@ -20,26 +22,36 @@
 &nbsp;</div>
 <h1>Module <a href="type_Page.Form.Field.html">Page.Form.Field</a></h1>
 
-<pre><span class="keyword">module</span> Field: <code class="code">sig</code> <a href="Page.Form.Field.html">..</a> <code class="code">end</code></pre><div class="info module top">
-Operations on text fields : textarea, text/password type input, etc.<br>
+<pre><span id="MODULEField"><span class="keyword">module</span> Field</span>: <code class="code">sig</code> <a href="Page.Form.Field.html">..</a> <code class="code">end</code></pre><div class="info module top">
+<div class="info-desc">
+<p>Operations on general fields : textarea, text, password, color, date, etc.</p>
+</div>
 </div>
 <hr width="100%">
 
 <pre><span id="VALset"><span class="keyword">val</span> set</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEfield">Page.Form.field</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string -> <a href="Page.Form.html#TYPEt">Page.Form.t</a></code></pre><div class="info ">
-Set the value of a text field<br>
+<div class="info-desc">
+<p>Set the value of a field</p>
+</div>
 </div>
 
 <pre><span id="VALget"><span class="keyword">val</span> get</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEfield">Page.Form.field</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string option</code></pre><div class="info ">
-Return the value of a text field<br>
+<div class="info-desc">
+<p>Return the content of the field, if any</p>
+</div>
 </div>
 
 <pre><span id="VALdefault_value"><span class="keyword">val</span> default_value</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEfield">Page.Form.field</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string option</code></pre><div class="info ">
-Return the default value of a field, specified via the attribute
-       <code class="code">value</code><br>
+<div class="info-desc">
+<p>Return the default value of a field, specified via the attribute
+       <code class="code">value</code></p>
+</div>
 </div>
 
 <pre><span id="VALreset"><span class="keyword">val</span> reset</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> <a href="Page.Form.html#TYPEt">Page.Form.t</a></code></pre><div class="info ">
-Set the value back to the default value, or just clear the field if
-        there is no default value<br>
+<div class="info-desc">
+<p>Set the value back to the default value, or just clear the field if
+        there is no default value</p>
+</div>
 </div>
 </body></html>

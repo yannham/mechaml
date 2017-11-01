@@ -10,9 +10,11 @@
 <link title="Index of types" rel=Appendix href="index_types.html">
 <link title="Index of values" rel=Appendix href="index_values.html">
 <link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
 <link title="Agent" rel="Chapter" href="Agent.html">
 <link title="Page" rel="Chapter" href="Page.html">
-<link title="Cookiejar" rel="Chapter" href="Cookiejar.html"><title>Agent.Monad.List</title>
+<link title="Cookiejar" rel="Chapter" href="Cookiejar.html">
+<link title="Formatting" rel="Chapter" href="Formatting.html"><title>Agent.Monad.List</title>
 </head>
 <body>
 <div class="navbar"><a class="pre" href="Agent.Monad.Infix.html" title="Agent.Monad.Infix">Previous</a>
@@ -20,14 +22,16 @@
 &nbsp;</div>
 <h1>Module <a href="type_Agent.Monad.List.html">Agent.Monad.List</a></h1>
 
-<pre><span class="keyword">module</span> List: <code class="code">sig</code> <a href="Agent.Monad.List.html">..</a> <code class="code">end</code></pre><div class="info module top">
-The List module mainly wrap the Lwt_list one in the Agent monad. Functions
+<pre><span id="MODULEList"><span class="keyword">module</span> List</span>: <code class="code">sig</code> <a href="Agent.Monad.List.html">..</a> <code class="code">end</code></pre><div class="info module top">
+<div class="info-desc">
+<p>The List module mainly wrap the Lwt_list one in the Agent monad. Functions
      suffixed with
      _s chains the actions sequentially, passing around the updated agent to the
      next one. The _m ones do everything in parallel, sending a copy of the
      initial state to every threads and returning this same unupdated state.
      The latter can be useful to retrive a bunch of ressources in batch where
-     the updated state is not of interest (e.g images)<br>
+     the updated state is not of interest (e.g images)</p>
+</div>
 </div>
 <hr width="100%">
 

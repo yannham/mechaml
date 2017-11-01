@@ -10,9 +10,11 @@
 <link title="Index of types" rel=Appendix href="index_types.html">
 <link title="Index of values" rel=Appendix href="index_values.html">
 <link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
 <link title="Agent" rel="Chapter" href="Agent.html">
 <link title="Page" rel="Chapter" href="Page.html">
-<link title="Cookiejar" rel="Chapter" href="Cookiejar.html"><title>Agent.Monad</title>
+<link title="Cookiejar" rel="Chapter" href="Cookiejar.html">
+<link title="Formatting" rel="Chapter" href="Formatting.html"><title>Agent.Monad</title>
 </head>
 <body>
 <div class="navbar"><a class="pre" href="Agent.HttpResponse.html" title="Agent.HttpResponse">Previous</a>
@@ -20,7 +22,7 @@
 &nbsp;</div>
 <h1>Module <a href="type_Agent.Monad.html">Agent.Monad</a></h1>
 
-<pre><span class="keyword">module</span> Monad: <code class="code">sig</code> <a href="Agent.Monad.html">..</a> <code class="code">end</code></pre><hr width="100%">
+<pre><span id="MODULEMonad"><span class="keyword">module</span> Monad</span>: <code class="code">sig</code> <a href="Agent.Monad.html">..</a> <code class="code">end</code></pre><hr width="100%">
 
 <pre><span id="TYPEm"><span class="keyword">type</span> <code class="type">'a</code> m</span> = <code class="type"><a href="Agent.html#TYPEt">Agent.t</a> -> (<a href="Agent.html#TYPEt">Agent.t</a> * 'a) Lwt.t</code> </pre>
 
@@ -31,35 +33,35 @@
 <pre><span id="VALmap"><span class="keyword">val</span> map</span> : <code class="type">('a -> 'b) -> 'a <a href="Agent.Monad.html#TYPEm">m</a> -> 'b <a href="Agent.Monad.html#TYPEm">m</a></code></pre>
 <pre><span id="VALrun"><span class="keyword">val</span> run</span> : <code class="type"><a href="Agent.html#TYPEt">Agent.t</a> -> 'a <a href="Agent.Monad.html#TYPEm">m</a> -> <a href="Agent.html#TYPEt">Agent.t</a> * 'a</code></pre>
 <pre><span id="VALfail"><span class="keyword">val</span> fail</span> : <code class="type">exn -> 'a <a href="Agent.Monad.html#TYPEm">m</a></code></pre><div class="info ">
-Wrappers of Lwt's fail functions<br>
+<div class="info-desc">
+<p>Wrappers of Lwt's fail functions</p>
+</div>
 </div>
 
-<pre><span id="VALfail_with"><span class="keyword">val</span> fail_with</span> : <code class="type">string -> 'a <a href="Agent.Monad.html#TYPEm">m</a></code></pre><br>
-Wrappers of <code class="code">Lwt.catch</code> and <code class="code">Lwt.try_bind</code> inside this monad<br>
+<pre><span id="VALfail_with"><span class="keyword">val</span> fail_with</span> : <code class="type">string -> 'a <a href="Agent.Monad.html#TYPEm">m</a></code></pre><p>Wrappers of <code class="code">Lwt.catch</code> and <code class="code">Lwt.try_bind</code> inside this monad</p>
 
 <pre><span id="VALcatch"><span class="keyword">val</span> catch</span> : <code class="type">(unit -> 'a <a href="Agent.Monad.html#TYPEm">m</a>) -> (exn -> 'a <a href="Agent.Monad.html#TYPEm">m</a>) -> 'a <a href="Agent.Monad.html#TYPEm">m</a></code></pre>
 <pre><span id="VALtry_bind"><span class="keyword">val</span> try_bind</span> : <code class="type">(unit -> 'a <a href="Agent.Monad.html#TYPEm">m</a>) -><br>       ('a -> 'b <a href="Agent.Monad.html#TYPEm">m</a>) -> (exn -> 'b <a href="Agent.Monad.html#TYPEm">m</a>) -> 'b <a href="Agent.Monad.html#TYPEm">m</a></code></pre>
-<pre><span class="keyword">module</span> <a href="Agent.Monad.Infix.html">Infix</a>: <code class="code">sig</code> <a href="Agent.Monad.Infix.html">..</a> <code class="code">end</code></pre><div class="info">
-The Infix module defines operators for common bind operations
+<pre><span id="MODULEInfix"><span class="keyword">module</span> <a href="Agent.Monad.Infix.html">Infix</a></span>: <code class="code">sig</code> <a href="Agent.Monad.Infix.html">..</a> <code class="code">end</code></pre><div class="info">
+<p>The Infix module defines operators for common bind operations</p>
+
 </div>
 
-<pre><span class="keyword">module</span> <a href="Agent.Monad.List.html">List</a>: <code class="code">sig</code> <a href="Agent.Monad.List.html">..</a> <code class="code">end</code></pre><div class="info">
-The List module mainly wrap the Lwt_list one in the Agent monad.
+<pre><span id="MODULEList"><span class="keyword">module</span> <a href="Agent.Monad.List.html">List</a></span>: <code class="code">sig</code> <a href="Agent.Monad.List.html">..</a> <code class="code">end</code></pre><div class="info">
+<p>The List module mainly wrap the Lwt_list one in the Agent monad.</p>
+
 </div>
-<br>
-get the current state of the agent, or set a new one<br>
+<p>get the current state of the agent, or set a new one</p>
 
 <pre><span id="VALget"><span class="keyword">val</span> get</span> : <code class="type"><a href="Agent.html#TYPEt">Agent.t</a> <a href="Agent.Monad.html#TYPEm">m</a></code></pre>
-<pre><span id="VALset"><span class="keyword">val</span> set</span> : <code class="type"><a href="Agent.html#TYPEt">Agent.t</a> -> unit <a href="Agent.Monad.html#TYPEm">m</a></code></pre><br>
-Wrap the type of functions operating on the agent such as <a href="Agent.html#VALcookie_jar"><code class="code">Agent.cookie_jar</code></a> or <a href="Agent.html#VALset_cookie_jar"><code class="code">Agent.set_cookie_jar</code></a> to usable inside the monad.
+<pre><span id="VALset"><span class="keyword">val</span> set</span> : <code class="type"><a href="Agent.html#TYPEt">Agent.t</a> -> unit <a href="Agent.Monad.html#TYPEm">m</a></code></pre><p>Wrap the type of functions operating on the agent such as <a href="Agent.html#VALcookie_jar"><code class="code">Agent.cookie_jar</code></a> or <a href="Agent.html#VALset_cookie_jar"><code class="code">Agent.set_cookie_jar</code></a> to usable inside the monad.
       For example, the first one go from <code class="code">Agent.t -&gt; Cookiejar.t</code> to
       <code class="code">Agent.t -&gt; (Agent.t * Cookiejar.t) Lwt.t</code> by just returning the agent
       unmodified together with the current cookie jar and wrap the result in
-      <code class="code">Lwt.return</code>
-<p>
+      <code class="code">Lwt.return</code></p>
 
-      Note that the redefined functions have the same name as their counterpart,
-      and thus will shadow or can be shadowed by them.<br>
+<p>Note that the redefined functions have the same name as their counterpart,
+      and thus will shadow or can be shadowed by them.</p>
 
 <pre><span id="VALsave_content"><span class="keyword">val</span> save_content</span> : <code class="type">string -> string -> unit <a href="Agent.Monad.html#TYPEm">m</a></code></pre>
 <pre><span id="VALcookie_jar"><span class="keyword">val</span> cookie_jar</span> : <code class="type"><a href="Cookiejar.html#TYPEt">Cookiejar.t</a> <a href="Agent.Monad.html#TYPEm">m</a></code></pre>

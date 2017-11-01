@@ -11,9 +11,11 @@
 <link title="Index of types" rel=Appendix href="index_types.html">
 <link title="Index of values" rel=Appendix href="index_values.html">
 <link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
 <link title="Agent" rel="Chapter" href="Agent.html">
 <link title="Page" rel="Chapter" href="Page.html">
-<link title="Cookiejar" rel="Chapter" href="Cookiejar.html"><title>Page.Form.SelectList</title>
+<link title="Cookiejar" rel="Chapter" href="Cookiejar.html">
+<link title="Formatting" rel="Chapter" href="Formatting.html"><title>Page.Form.SelectList</title>
 </head>
 <body>
 <div class="navbar"><a class="pre" href="Page.Form.RadioButton.html" title="Page.Form.RadioButton">Previous</a>
@@ -22,57 +24,81 @@
 </div>
 <h1>Module <a href="type_Page.Form.SelectList.html">Page.Form.SelectList</a></h1>
 
-<pre><span class="keyword">module</span> SelectList: <code class="code">sig</code> <a href="Page.Form.SelectList.html">..</a> <code class="code">end</code></pre><div class="info module top">
-Operations on Menu (select lists)<br>
+<pre><span id="MODULESelectList"><span class="keyword">module</span> SelectList</span>: <code class="code">sig</code> <a href="Page.Form.SelectList.html">..</a> <code class="code">end</code></pre><div class="info module top">
+<div class="info-desc">
+<p>Operations on Menu (select lists)</p>
+</div>
 </div>
 <hr width="100%">
 
 <pre><span id="TYPEitem"><span class="keyword">type</span> <code class="type"></code>item</span> </pre>
 <div class="info ">
-Represent an item of the list<br>
+<div class="info-desc">
+<p>Represent an item of the list</p>
+</div>
 </div>
 
 
 <pre><span id="VALitems"><span class="keyword">val</span> items</span> : <code class="type"><a href="Page.Form.html#TYPEselect_list">Page.Form.select_list</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> <a href="Page.Form.SelectList.html#TYPEitem">item</a> list</code></pre><div class="info ">
-Return a list of all items of a given list<br>
+<div class="info-desc">
+<p>Return a list of all items of a given list</p>
+</div>
 </div>
 
 <pre><span id="VALis_multiple"><span class="keyword">val</span> is_multiple</span> : <code class="type"><a href="Page.Form.html#TYPEselect_list">Page.Form.select_list</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> bool</code></pre><div class="info ">
-Check if the select list supports multiple selection<br>
+<div class="info-desc">
+<p>Check if the select list supports multiple selection</p>
+</div>
 </div>
 
 <pre><span id="VALselected"><span class="keyword">val</span> selected</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEselect_list">Page.Form.select_list</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string list</code></pre><div class="info ">
-Return a list of selected items as strings<br>
+<div class="info-desc">
+<p>Return a list of selected items as strings</p>
+</div>
 </div>
 
 <pre><span id="VALselect"><span class="keyword">val</span> select</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -><br>       <a href="Page.Form.html#TYPEselect_list">Page.Form.select_list</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -><br>       <a href="Page.Form.SelectList.html#TYPEitem">item</a> -> <a href="Page.Form.html#TYPEt">Page.Form.t</a></code></pre><div class="info ">
-Select a specific item. If multiple selection is not enabled,
-        this unselect any previously selected item<br>
+<div class="info-desc">
+<p>Select a specific item. If multiple selection is not enabled,
+        this unselect any previously selected item</p>
+</div>
 </div>
 
 <pre><span id="VALunselect"><span class="keyword">val</span> unselect</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -><br>       <a href="Page.Form.html#TYPEselect_list">Page.Form.select_list</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -><br>       <a href="Page.Form.SelectList.html#TYPEitem">item</a> -> <a href="Page.Form.html#TYPEt">Page.Form.t</a></code></pre><div class="info ">
-Unselect a specific item<br>
+<div class="info-desc">
+<p>Unselect a specific item</p>
+</div>
 </div>
 
 <pre><span id="VALis_selected"><span class="keyword">val</span> is_selected</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -><br>       <a href="Page.Form.html#TYPEselect_list">Page.Form.select_list</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> <a href="Page.Form.SelectList.html#TYPEitem">item</a> -> bool</code></pre><div class="info ">
-Check if the specified item is selected<br>
+<div class="info-desc">
+<p>Check if the specified item is selected</p>
+</div>
 </div>
 
 <pre><span id="VALtext"><span class="keyword">val</span> text</span> : <code class="type"><a href="Page.Form.SelectList.html#TYPEitem">item</a> -> string</code></pre><div class="info ">
-Label of an item<br>
+<div class="info-desc">
+<p>Label of an item</p>
+</div>
 </div>
 
 <pre><span id="VALvalue"><span class="keyword">val</span> value</span> : <code class="type"><a href="Page.Form.SelectList.html#TYPEitem">item</a> -> string</code></pre><div class="info ">
-Value (as sent in form data) of an item<br>
+<div class="info-desc">
+<p>Value (as sent in form data) of an item</p>
+</div>
 </div>
 
 <pre><span id="VALselected_default"><span class="keyword">val</span> selected_default</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEselect_list">Page.Form.select_list</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> string list</code></pre><div class="info ">
-Items with the attribute <code class="code">selected</code> set<br>
+<div class="info-desc">
+<p>Items with the attribute <code class="code">selected</code> set</p>
+</div>
 </div>
 
 <pre><span id="VALreset"><span class="keyword">val</span> reset</span> : <code class="type"><a href="Page.Form.html#TYPEt">Page.Form.t</a> -> <a href="Page.Form.html#TYPEcheckbox">Page.Form.checkbox</a> <a href="Page.Form.html#TYPEinput">Page.Form.input</a> -> <a href="Page.Form.html#TYPEt">Page.Form.t</a></code></pre><div class="info ">
-Reset the select list to its default value,
+<div class="info-desc">
+<p>Reset the select list to its default value,
         meaning that only the items with the
-        <code class="code">selected</code> attribute will be selected<br>
+        <code class="code">selected</code> attribute will be selected</p>
+</div>
 </div>
 </body></html>

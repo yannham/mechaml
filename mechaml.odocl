@@ -1,6 +1,7 @@
 # OASIS_START
-# DO NOT EDIT (digest: cd0771f66469954e3e39be56b381d19b)
+# DO NOT EDIT (digest: 57d02d2bde924bb8ce1c0f78475bc691)
 src/Agent
 src/Page
 src/Cookiejar
+src/Formatting
 # OASIS_STOP

@@ -10,9 +10,11 @@
 <link title="Index of types" rel=Appendix href="index_types.html">
 <link title="Index of values" rel=Appendix href="index_values.html">
 <link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
 <link title="Agent" rel="Chapter" href="Agent.html">
 <link title="Page" rel="Chapter" href="Page.html">
-<link title="Cookiejar" rel="Chapter" href="Cookiejar.html"><title>Page.Form</title>
+<link title="Cookiejar" rel="Chapter" href="Cookiejar.html">
+<link title="Formatting" rel="Chapter" href="Formatting.html"><title>Page.Form</title>
 </head>
 <body>
 <div class="navbar">&nbsp;<a class="up" href="Page.html" title="Page">Up</a>
@@ -20,15 +22,16 @@
 </div>
 <h1>Module <a href="type_Page.Form.html">Page.Form</a></h1>
 
-<pre><span class="keyword">module</span> Form: <code class="code">sig</code> <a href="Page.Form.html">..</a> <code class="code">end</code></pre><div class="info module top">
-Operations on forms and inputs<br>
+<pre><span id="MODULEForm"><span class="keyword">module</span> Form</span>: <code class="code">sig</code> <a href="Page.Form.html">..</a> <code class="code">end</code></pre><div class="info module top">
+<div class="info-desc">
+<p>Operations on forms and inputs</p>
+</div>
 </div>
 <hr width="100%">
 
 <pre><span id="TYPEt"><span class="keyword">type</span> <code class="type"></code>t</span> </pre>
 
-<br>
-Phantom types for inputs<br>
+<p>Phantom types for inputs</p>
 
 <pre><span id="TYPEcheckbox"><span class="keyword">type</span> <code class="type"></code>checkbox</span> </pre>
 
@@ -45,58 +48,75 @@ Phantom types for inputs<br>
 <pre><span id="TYPEfield"><span class="keyword">type</span> <code class="type"></code>field</span> </pre>
 
 
-<pre><span id="TYPEinput"><span class="keyword">type</span> <code class="type">'_</code> input</span> </pre>
+<pre><span id="TYPEinput"><span class="keyword">type</span> <code class="type">'a</code> input</span> </pre>
 <div class="info ">
-A form input<br>
+<div class="info-desc">
+<p>A form input</p>
+</div>
 </div>
 
 
 <pre><span id="VALname"><span class="keyword">val</span> name</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> string option</code></pre><div class="info ">
-Return the name of the form<br>
+<div class="info-desc">
+<p>Return the name of the form</p>
+</div>
 </div>
 
 <pre><span id="VALaction"><span class="keyword">val</span> action</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> Uri.t</code></pre><div class="info ">
-Return the action attribute of the form<br>
+<div class="info-desc">
+<p>Return the action attribute of the form</p>
+</div>
 </div>
 
 <pre><span id="VALuri"><span class="keyword">val</span> uri</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> Uri.t</code></pre><div class="info ">
-Return the absolute (resolved) uri corresponding to the action attribute<br>
+<div class="info-desc">
+<p>Return the absolute (resolved) uri corresponding to the action attribute</p>
+</div>
 </div>
 
 <pre><span id="VALmeth"><span class="keyword">val</span> meth</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> [ `GET | `POST ]</code></pre><div class="info ">
-Return the method attribute of the form or <code class="code">`GET</code> if none<br>
+<div class="info-desc">
+<p>Return the method attribute of the form or <code class="code">`GET</code> if none</p>
+</div>
 </div>
 
 <pre><span id="VALto_node"><span class="keyword">val</span> to_node</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> Soup.element Soup.node</code></pre><div class="info ">
-Convert a form to a Soup node<br>
+<div class="info-desc">
+<p>Convert a form to a Soup node</p>
+</div>
 </div>
 
 <pre><span id="VALinput_to_node"><span class="keyword">val</span> input_to_node</span> : <code class="type">'a <a href="Page.Form.html#TYPEinput">input</a> -> Soup.element Soup.node</code></pre><div class="info ">
-Convert an input to a Soup node<br>
+<div class="info-desc">
+<p>Convert an input to a Soup node</p>
 </div>
-<br>
-Set directly the value(s) of a field<br>
+</div>
+<p>Set directly the value(s) of a field</p>
 
 <pre><span id="VALset"><span class="keyword">val</span> set</span> : <code class="type">string -> string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEt">t</a></code></pre>
-<pre><span id="VALset_multi"><span class="keyword">val</span> set_multi</span> : <code class="type">string -> string list -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEt">t</a></code></pre><br>
-Get the value(s) of a field<br>
+<pre><span id="VALset_multi"><span class="keyword">val</span> set_multi</span> : <code class="type">string -> string list -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEt">t</a></code></pre><p>Get the value(s) of a field</p>
 
 <pre><span id="VALget"><span class="keyword">val</span> get</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> string option</code></pre>
 <pre><span id="VALget_multi"><span class="keyword">val</span> get_multi</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> string list</code></pre>
 <pre><span id="VALclear"><span class="keyword">val</span> clear</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEt">t</a></code></pre><div class="info ">
-Remove the value of a field<br>
+<div class="info-desc">
+<p>Remove the value of a field</p>
+</div>
 </div>
 
 <pre><span id="VALvalues"><span class="keyword">val</span> values</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> (string * string list) list</code></pre><div class="info ">
-Return all set values as a list<br>
+<div class="info-desc">
+<p>Return all set values as a list</p>
+</div>
 </div>
 
 <pre><span id="VALiname"><span class="keyword">val</span> iname</span> : <code class="type">'a <a href="Page.Form.html#TYPEinput">input</a> -> string option</code></pre><div class="info ">
-Return the name of an input<br>
+<div class="info-desc">
+<p>Return the name of an input</p>
 </div>
-<br>
-All the following function are built using the same pattern.
-<p>
+</div>
+<p>All the following function are built using the same pattern.</p>
+
 <ul>
 <li>xxxs (eg <a href="Page.Form.html#VALcheckboxes"><code class="code">Page.Form.checkboxes</code></a>) return all the inputs of a certain type as a lazy
       sequence.
@@ -108,7 +128,6 @@ All the following function are built using the same pattern.
 <li>xxxs_with proceed as the previous one, but return a lazy sequence of all inputs matching the
       selector.</li>
 </ul>
-<br>
 
 <pre><span id="VALcheckbox_with"><span class="keyword">val</span> checkbox_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEcheckbox">checkbox</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
 <pre><span id="VALcheckboxes"><span class="keyword">val</span> checkboxes</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEcheckbox">checkbox</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
@@ -119,9 +138,22 @@ All the following function are built using the same pattern.
 <pre><span id="VALselect_list_with"><span class="keyword">val</span> select_list_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEselect_list">select_list</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
 <pre><span id="VALselect_lists"><span class="keyword">val</span> select_lists</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEselect_list">select_list</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
 <pre><span id="VALselect_lists_with"><span class="keyword">val</span> select_lists_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEselect_list">select_list</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
-<pre><span id="VALfield_with"><span class="keyword">val</span> field_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALfield_with"><span class="keyword">val</span> field_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre><div class="info ">
+<div class="info-desc">
+<p>Select textual fields, either text, password, search, or textarea</p>
+</div>
+</div>
+
 <pre><span id="VALfields"><span class="keyword">val</span> fields</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
 <pre><span id="VALfields_with"><span class="keyword">val</span> fields_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALnumeric_with"><span class="keyword">val</span> numeric_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre><div class="info ">
+<div class="info-desc">
+<p>Select numeric fields, either number or range</p>
+</div>
+</div>
+
+<pre><span id="VALnumerics"><span class="keyword">val</span> numerics</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALnumerics_with"><span class="keyword">val</span> numerics_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
 <pre><span id="VALtext_with"><span class="keyword">val</span> text_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
 <pre><span id="VALtexts"><span class="keyword">val</span> texts</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
 <pre><span id="VALtexts_with"><span class="keyword">val</span> texts_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
@@ -133,24 +165,54 @@ All the following function are built using the same pattern.
 <pre><span id="VALhiddens_with"><span class="keyword">val</span> hiddens_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
 <pre><span id="VALtextarea_with"><span class="keyword">val</span> textarea_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
 <pre><span id="VALtextareas"><span class="keyword">val</span> textareas</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
-<pre><span id="VALtextareas_with"><span class="keyword">val</span> textareas_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre><br>
-Reset or clear all the fields<br>
+<pre><span id="VALtextareas_with"><span class="keyword">val</span> textareas_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALcolor_with"><span class="keyword">val</span> color_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALcolors"><span class="keyword">val</span> colors</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALcolors_with"><span class="keyword">val</span> colors_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALdate_with"><span class="keyword">val</span> date_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALdates"><span class="keyword">val</span> dates</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALdates_with"><span class="keyword">val</span> dates_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALemail_with"><span class="keyword">val</span> email_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALemails"><span class="keyword">val</span> emails</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALemails_with"><span class="keyword">val</span> emails_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALmonth_with"><span class="keyword">val</span> month_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALmonths"><span class="keyword">val</span> months</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALmonths_with"><span class="keyword">val</span> months_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALnumber_with"><span class="keyword">val</span> number_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALnumbers"><span class="keyword">val</span> numbers</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALnumbers_with"><span class="keyword">val</span> numbers_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALtel_with"><span class="keyword">val</span> tel_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALtels"><span class="keyword">val</span> tels</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALtels_with"><span class="keyword">val</span> tels_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALsearch_with"><span class="keyword">val</span> search_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALsearchs"><span class="keyword">val</span> searchs</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALsearchs_with"><span class="keyword">val</span> searchs_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALtime_with"><span class="keyword">val</span> time_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALtimes"><span class="keyword">val</span> times</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALtimes_with"><span class="keyword">val</span> times_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALurl_with"><span class="keyword">val</span> url_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> option</code></pre>
+<pre><span id="VALurls"><span class="keyword">val</span> urls</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre>
+<pre><span id="VALurls_with"><span class="keyword">val</span> urls_with</span> : <code class="type">string -> <a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEfield">field</a> <a href="Page.Form.html#TYPEinput">input</a> <a href="Page.html#TYPEseq">Page.seq</a></code></pre><p>Reset or clear all the fields</p>
 
 <pre><span id="VALreset_all"><span class="keyword">val</span> reset_all</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEt">t</a></code></pre>
 <pre><span id="VALclear_all"><span class="keyword">val</span> clear_all</span> : <code class="type"><a href="Page.Form.html#TYPEt">t</a> -> <a href="Page.Form.html#TYPEt">t</a></code></pre>
-<pre><span class="keyword">module</span> <a href="Page.Form.Checkbox.html">Checkbox</a>: <code class="code">sig</code> <a href="Page.Form.Checkbox.html">..</a> <code class="code">end</code></pre><div class="info">
-Operation on Checkboxes
+<pre><span id="MODULECheckbox"><span class="keyword">module</span> <a href="Page.Form.Checkbox.html">Checkbox</a></span>: <code class="code">sig</code> <a href="Page.Form.Checkbox.html">..</a> <code class="code">end</code></pre><div class="info">
+<p>Operation on Checkboxes</p>
+
 </div>
 
-<pre><span class="keyword">module</span> <a href="Page.Form.RadioButton.html">RadioButton</a>: <code class="code">sig</code> <a href="Page.Form.RadioButton.html">..</a> <code class="code">end</code></pre><div class="info">
-Operations on Radio Buttons
+<pre><span id="MODULERadioButton"><span class="keyword">module</span> <a href="Page.Form.RadioButton.html">RadioButton</a></span>: <code class="code">sig</code> <a href="Page.Form.RadioButton.html">..</a> <code class="code">end</code></pre><div class="info">
+<p>Operations on Radio Buttons</p>
+
 </div>
 
-<pre><span class="keyword">module</span> <a href="Page.Form.SelectList.html">SelectList</a>: <code class="code">sig</code> <a href="Page.Form.SelectList.html">..</a> <code class="code">end</code></pre><div class="info">
-Operations on Menu (select lists)
+<pre><span id="MODULESelectList"><span class="keyword">module</span> <a href="Page.Form.SelectList.html">SelectList</a></span>: <code class="code">sig</code> <a href="Page.Form.SelectList.html">..</a> <code class="code">end</code></pre><div class="info">
+<p>Operations on Menu (select lists)</p>
+
 </div>
 
-<pre><span class="keyword">module</span> <a href="Page.Form.Field.html">Field</a>: <code class="code">sig</code> <a href="Page.Form.Field.html">..</a> <code class="code">end</code></pre><div class="info">
-Operations on text fields : textarea, text/password type input, etc.
+<pre><span id="MODULEField"><span class="keyword">module</span> <a href="Page.Form.Field.html">Field</a></span>: <code class="code">sig</code> <a href="Page.Form.Field.html">..</a> <code class="code">end</code></pre><div class="info">
+<p>Operations on general fields : textarea, text, password, color, date, etc.</p>
+
 </div>
 </body></html>
