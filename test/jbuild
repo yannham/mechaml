@@ -1,0 +1,11 @@
+(jbuild_version 1)
+
+(executable
+  ((name (test))
+   (libraries (mechaml alcotest))))
+
+(alias
+  ((name runtest)
+   (package mechaml)
+   (deps (test.exe (files_recursively_in page)))
+   (action (run ${<}))))

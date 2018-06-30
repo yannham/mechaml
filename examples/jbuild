@@ -1,0 +1,16 @@
+(jbuild_version 1)
+
+(executables
+  ((names example_github_form)
+   (modules github_form)
+   (libraries (mechaml uri lwt lwt_ssl))))
+
+(executables
+  ((names example_download_images)
+   (modules download_images)
+   (libraries (mechaml uri lwt lwt_ssl))))
+
+(executables
+  ((names example_login)
+   (modules reddit_login)
+   (libraries (mechaml uri lwt lwt_ssl))))

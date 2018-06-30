@@ -1,0 +1,11 @@
+(jbuild_version 1)
+
+(library
+  ((name mechaml)
+   (public_name mechaml)
+   (synopsis "A web browsing library built on top of Lambdasoup and Cohttp. Inspired by WWW::Mechanize")
+   (modules (:standard \ Option))
+   (
+   (libraries (lambdasoup lwt cohttp cohttp-lwt cohttp-lwt-unix re uri)))))
+
+(documentation ())
