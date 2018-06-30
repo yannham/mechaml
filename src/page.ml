@@ -132,7 +132,6 @@ module Form = struct
   type field
 
   type _ input = elt
-  type _ inputs = Soup.element Soup.nodes
 
   let name f = Soup.attribute "name" f.elt
 
@@ -168,11 +167,10 @@ module Form = struct
     get_multi key f
     |> (function
       | [] -> None
-      | x::xs -> Some x)
+      | x::_ -> Some x)
 
   let clear key f =
     {f with data = f.data |> StringMap.remove key}
-  let reset = clear
 
   let clear_all f =
     {f with data = StringMap.empty }
@@ -304,8 +302,6 @@ module Form = struct
   let ivalue input = Soup.attribute "value" input
 
   let singleton x = [x]
-  let cons x l = x::l
-  let uncurry f (x,y) = f x y
 
   (* flipped versions of functions on maps *)
   let map_add m k v = StringMap.add k v m
@@ -450,7 +446,7 @@ module Form = struct
       iname sl
       >|= current_values f.data |? []
 
-    let unselect f sl item =
+    let unselect f sl _ =
       iname sl
       >|= map_remove f.data
       |> update_form f
@@ -477,7 +473,7 @@ module Form = struct
           map_add f.data name [v])
       |> update_form f
 
-    let selected_default f sl =
+    let selected_default _ sl =
       items sl
       |> List.fold_left (fun values item ->
         if Soup.has_attribute "selected" item then
@@ -490,7 +486,7 @@ module Form = struct
   end
 
   module Field = struct
-    let fset = set
+    (* let fset = set *)
 
     let set f fd v =
       iname fd

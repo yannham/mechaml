@@ -130,7 +130,7 @@ let submit form agent =
       get_uri target agent
 
 let save_content file data =
-  Lwt_io.open_file Lwt_io.output file
+  Lwt_io.open_file ~mode:Lwt_io.output file
   >>= (fun out ->
     Lwt_io.write out data
     |> ignore;
@@ -143,8 +143,6 @@ let save_image file image agent =
   >>= (function (agent,response) ->
     save_content file (HttpResponse.content response)
     >|= fun _ -> (agent,response))
-
-let code_of_status = Code.code_of_status
 
 let cookie_jar agent = agent.cookie_jar
 let set_cookie_jar cookie_jar agent = {agent with cookie_jar = cookie_jar}
@@ -293,8 +291,8 @@ module Monad = struct
       List.fold_right f' l (return e)
   end
 
-  let set agent' agent =
-    Lwt.return (agent',())
+  let set new_agent _ =
+    Lwt.return (new_agent,())
 
   let get agent =
     Lwt.return (agent,agent)

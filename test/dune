@@ -1,0 +1,4 @@
+(test
+  (name test)
+  (deps page/index.html page/index.xml)
+  (libraries mechaml alcotest))

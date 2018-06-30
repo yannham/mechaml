@@ -102,8 +102,8 @@ module JarMap = Map.Make(Key)
 type t = Cookie.t JarMap.t
 
 let map = JarMap.map
-let iter f = JarMap.iter (fun x -> f)
-let fold f = JarMap.fold (fun x -> f)
+let iter f = JarMap.iter (fun _ -> f)
+let fold f = JarMap.fold (fun _ -> f)
 let is_empty = JarMap.is_empty
 
 let empty = JarMap.empty
