@@ -442,7 +442,7 @@ let tests_page = [
     check_field "text3" "default";
     check_field "area3" "default");
 
-  "forms_formatting", `Quick, (fun _ ->
+  "forms_format", `Quick, (fun _ ->
     let color_sample = [
       ((0,0,0), Some "#000000");
       ((255,255,255), Some "#FFFFFF");
@@ -453,8 +453,7 @@ let tests_page = [
       ((128,-10,128), None);
       ((128,300,128), None);
       ((128,128,-10), None);
-      ((128,128,300), None)] in
-    let date_sample = [
+      ((128,128,300), None)] in let date_sample = [
       ((31,1,2016), Some "2016-01-31");
       ((31,3,2016), Some "2016-03-31");
       ((31,5,2016), Some "2016-05-31");
@@ -532,7 +531,7 @@ let tests_page = [
       ((12,30,-1), None);
       ((12,30,60), None)] in
 
-    let check3 f_name (type s) (module M : Formatting.S with type t = s) f ((x,y,z),expected) =
+    let check3 f_name (type s) (module M : Format.S with type t = s) f ((x,y,z),expected) =
       let result = match f x y z with
         | Some x -> Some (M.to_string x)
         | None -> None in
@@ -544,8 +543,8 @@ let tests_page = [
       check_true msg (result = expected) in
 
     (* let check_email (email,expected) = *)
-    (*   let result = match Formatting.Email.make email with *)
-    (*     | Some x -> Some (Formatting.Email.to_string x) *)
+    (*   let result = match Format.Email.make email with *)
+    (*     | Some x -> Some (Format.Email.to_string x) *)
     (*     | None -> None in *)
     (*   let expected_string = match expected with *)
     (*     | Some s -> s *)
@@ -553,13 +552,13 @@ let tests_page = [
     (*   let msg = Printf.sprintf "email on %s : expected %s" email expected_string in *)
     (*   check_true msg (result = expected) in *)
 
-    let color_unlabeled x y z = Formatting.Color.make ~red:x ~green:y ~blue:z in
-    let date_unabeled x y z = Formatting.Date.make ~day:x ~month:y ~year:z in
-    let time_unlabeled x y z = Formatting.Time.make ~hour:x ~minute:y ~second:z
+    let color_unlabeled x y z = Format.Color.make ~red:x ~green:y ~blue:z in
+    let date_unabeled x y z = Format.Date.make ~day:x ~month:y ~year:z in
+    let time_unlabeled x y z = Format.Time.make ~hour:x ~minute:y ~second:z
       in
-    List.iter (check3 "color" (module Formatting.Color) color_unlabeled) color_sample;
-    List.iter (check3 "date" (module Formatting.Date) date_unabeled) date_sample;
-    List.iter (check3 "time" (module Formatting.Time) time_unlabeled)
+    List.iter (check3 "color" (module Format.Color) color_unlabeled) color_sample;
+    List.iter (check3 "date" (module Format.Date) date_unabeled) date_sample;
+    List.iter (check3 "time" (module Format.Time) time_unlabeled)
       time_sample);
     (* List.iter check_email email_sample); *)
 

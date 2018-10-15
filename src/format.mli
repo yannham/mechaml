@@ -12,7 +12,7 @@
   THIS SOFTWARE.
   }}}*)
 
-(** Formatting
+(** Format
 
     This module contains type definitions and helpers to deal with some HTML5
     formatted input types, such as dates, colors, range, etc. Each module
@@ -53,6 +53,6 @@ module Time : sig
   include S
 
   (** Create a time representation from hours, minutes and seconds. If an
-      invalid time is given (eg hours < 0), then [None] is returned. *)
+      invalid time is given (e.g. hours < 0), then [None] is returned. *)
   val make : hour:int -> minute:int -> second:int -> t option
 end
