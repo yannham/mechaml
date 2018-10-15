@@ -29,6 +29,7 @@ type http_status_code = Cohttp.Code.status_code
 type http_headers = Cohttp.Header.t
 
 (** {2 Operations on HTTP responses } *)
+
 (** The HttpResponse module defines a type and operations to extract content and
    metadata from server response *)
 module HttpResponse : sig

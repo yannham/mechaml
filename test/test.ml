@@ -54,7 +54,7 @@ let uri = random_uri ()
 let cookies = random_cookies (Uri.host uri |? "dunno.com") 10
 let jar = jar_from cookies
 
-let rec jar_mem c jar =
+let jar_mem c jar =
   let f x c =
     if x=c then
       raise Exit

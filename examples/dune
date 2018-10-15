@@ -1,0 +1,3 @@
+(executables
+  (names github_form download_images reddit_login)
+  (libraries mechaml uri lwt lwt_ssl))

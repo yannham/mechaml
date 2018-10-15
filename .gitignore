@@ -3,6 +3,7 @@ headerize.sh
 
 tags
 .vim-last-repl
+.merlin
 
 /test.ml
 
@@ -17,8 +18,9 @@ tags
 *.cmxa
 *.docdir
 
-# ocamlbuild working directory
+# build
 _build/
+*.install
 
 # ocamlbuild targets
 *.byte
