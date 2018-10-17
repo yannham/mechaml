@@ -20,30 +20,26 @@ The library is divided into 3 main modules :
 * Cookiejar : Cookies handling
 * Page : HTML parsing and forms handling
 
-For more details, see the [documentation](https://yannham.github.io/mechaml/)
+The Format module provides helpers to manage the formatted content in forms such
+as date, colors, etc. For more details, see the [documentation](https://yannham.github.io/mechaml/)
 
 ## Installation
 
 ### From opam
 ```
-opam install cohttp lwt uri mechaml
+opam install mechaml
 ```
 
 ### From source
-You can use oasis to regenerate the configuration script
+Mechaml uses the dune build system, which can be installed through opam. Then,
+just run 
 ```
-oasis setup
+dune build
 ```
+to build the library.
 
-But the one already provided should work out of the box :
-```
-./configure
-make
-```
-
-Use `make doc` to generate documentation.
-Available build flags include `--enable-tests` or `--enable-examples`. Use `make
-test` to build and run tests.
+Use `dune build @doc` to generate the documentation, `dune runtest` to build and
+execute tests, and `dune build examples/XXX.exe` to compile example XXX.
 
 ## Usage
 
