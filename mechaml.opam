@@ -5,7 +5,7 @@ homepage: "https://github.com/yannham/mechaml"
 version: "1.1.0"
 bug-reports: "https://github.com/yannham/mechaml/issues"
 license: "LGPL v3"
-dev-repo: "git://github.com/yannham/mechaml.git"
+dev-repo: "https://github.com/yannham/mechaml.git"
 doc: "https://yannham.github.io/mechaml/"
 build: [["dune" "build" "-p" name "-j" jobs]]
 build-test: [["dune" "runtest" "-p" name "-j" jobs]]
