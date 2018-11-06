@@ -14,13 +14,13 @@
 
 (** Format
 
-    This module contains type definitions and helpers to deal with some HTML5
-    formatted input types, such as dates, colors, range, etc. Each module
-    correspond to a from input type and implements a [to_string] function that
-    generates a well-formed string from a representation. The generated string
-    may then be put in a form using [Page.Form.Field.set], for example. Each
-    module provides a [make] function to create and manipulate this
-    representation.
+    This module contains type definitions and helpers to deal with some of the
+    HTML5 formatted input types, such as dates, colors, range, etc. Each module
+    corresponds to a form input type and implements a [to_string] function that
+    generates a well-formed string from an internal representation. The
+    generated string may then be put in a form using [Page.Form.Field.set], for
+    example. Each module provides a [make] function to create and manipulate
+    this representation.
 *)
 
 (** The common interface of all formatting modules *)
@@ -35,7 +35,7 @@ module Color : sig
   include S
 
   (** Create a color representation from its red, green and blue components.
-      Arguments must lie between 0 and 255 included, otherwise None is returned *)
+    Arguments must lie between 0 and 255 included, otherwise None is returned *)
   val make : red:int -> green:int -> blue:int -> t option
 end
 
@@ -44,7 +44,7 @@ module Date : sig
   include S
 
   (** Create a date representation from a day, a month and a year. If the date
-      is not a valid date string as defined by the W3C, [None] is returned *)
+    is not a valid date string, [None] is returned *)
   val make : day:int -> month:int -> year:int -> t option
 end
 
@@ -53,6 +53,6 @@ module Time : sig
   include S
 
   (** Create a time representation from hours, minutes and seconds. If an
-      invalid time is given (e.g. hours < 0), then [None] is returned. *)
+    invalid time is given (e.g. hours < 0), then [None] is returned. *)
   val make : hour:int -> minute:int -> second:int -> t option
 end

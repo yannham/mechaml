@@ -25,17 +25,17 @@ type t
 (** Make a new page from a base URI and a Lambdasoup document *)
 val from_soup : ?location:Uri.t -> Soup.soup Soup.node -> t
 
-(** Make a new page from a base URI and a HTML string *)
+(** Make a new page from a base URI and an HTML string *)
 val from_string : ?location:Uri.t -> string -> t
 
 (** Return the location of a page (or [Uri.empty] if not specified) *)
 val base_uri : t -> Uri.t
 
-(** Return the resolver of page, that take relative URIs to absolute ones using
-   the page base URI *)
+(** Return the resolver of page, which is a function that takes relative URIs of
+   the page to absolute ones using the page base URI *)
 val resolver : t -> Uri.t -> Uri.t
 
-(** Convert to Lambdasoup *)
+(** Convert to a Lambdasoup HTML node *)
 val soup : t -> Soup.soup Soup.node
 
 (** {2 Lazy sequences}
@@ -112,7 +112,7 @@ module Form : sig
   (** Remove the value of a field *)
   val clear : string -> t -> t
 
-  (** Return all set values as a list *)
+  (** Return all set values as an associative list *)
   val values : t -> (string * string list) list
 
   (** Return the name of an input *)
@@ -124,13 +124,10 @@ module Form : sig
       sequence.
       For example, [checkboxes myform] will return all the checkboxes of the form
       - xxx_with take a CSS selector as parameter, and return the first input that
-      matches the selector, or [None] if there isn't any. Eg, [fields_with myform
-      "\[name$=text2\]"] will try to find any text field which name ends with
-      [text2]
-      - xxxs_with proceed as the previous one, but return a lazy sequence of all inputs matching the
-      selector.
-
-  *)
+      matches the selector, or [None] if there isn't any.
+      Eg, [fields_with myform "\[name$=text2\]"] will try to find any text field
+      which name ends with [text2] - xxxs_with proceed as the previous one, but
+      return a lazy sequence of all inputs matching the selector.  *)
 
   val checkbox_with : string -> t -> checkbox input option
   val checkboxes : t -> checkbox input seq
@@ -227,10 +224,10 @@ module Form : sig
        given one *)
     val checked : t -> checkbox input -> string list
 
-    (** [check form cb] return [form] where cb is checked *)
+    (** [check form cb] return [form] where [cb] is checked *)
     val check : t -> checkbox input -> t
 
-    (** [uncheck form cb] return [form] where cb is unchecked *)
+    (** [uncheck form cb] return [form] where [cb] is unchecked *)
     val uncheck : t -> checkbox input -> t
 
     (** Check if the specified checkbox is checked *)
@@ -246,8 +243,8 @@ module Form : sig
 
   (** Operations on Radio Buttons *)
   module RadioButton : sig
-    (** Similar to checkboxes, except that selecting one radio button in group
-       automatically unselect the others *)
+    (** Similar to checkboxes, except that selecting one radio button in a group
+       automatically unselects the others *)
 
     (** Return the value (the label) of a radio button*)
     val value : radio_button input -> string
@@ -276,12 +273,12 @@ module Form : sig
     val reset : t -> checkbox input -> t
   end
 
-  (** Operations on Menu (select lists) *)
+  (** Operations on Menus (select lists) *)
   module SelectList : sig
-    (** Represent an item of the list *)
+    (** Type of an item of the list *)
     type item
 
-    (** Return a list of all items of a given list *)
+    (** Return all items of a given list *)
     val items : select_list input -> item list
 
     (** Check if the select list supports multiple selection *)
@@ -320,7 +317,7 @@ module Form : sig
     (** Set the value of a field *)
     val set : t -> field input -> string -> t
 
-    (** Return the content of the field, if any *)
+    (** Return the content of a field, if any *)
     val get : t -> field input -> string option
 
     (** Return the default value of a field, specified via the attribute
@@ -364,11 +361,11 @@ end
     sequence.
     For example, [forms mypage] will return all the forms in the page
     - xxx_with take a CSS selector as parameter, and return the first element that
-    matches the selector, or [None] if there isn't any. Eg, [link_with
-    "\[href$=.jpg\]" mypage] will try to find a link that point to a JPEG image
+    matches the selector, or [None] if there isn't any.
+    Eg, [link_with "\[href$=.jpg\]" mypage] will try to find a link that point
+    to a JPEG image
     - xxxs_with proceed as the previous one, but return a lazy sequence of all elements matching the
-    selector.
-*)
+    selector.  *)
 
 val form_with : string -> t -> Form.t option
 val forms_with : string -> t -> Form.t seq

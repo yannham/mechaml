@@ -27,8 +27,8 @@ val join : ('a option) option -> 'a option
 val map : ('a -> 'b) -> 'a option -> 'b option
 
 (** Apply a two arguments function to a pair of optionals : if one of the
-     component is [None], the result is [None], otherwise [map2 (Some x, Some y)
-     f] is [Some (f x y)] *)
+     component is [None], the result is [None], otherwise
+     [map2 (Some x, Some y) f] is [Some (f x y)] *)
 val map_pair : 'a option * 'b option -> ('a -> 'b -> 'c) -> 'c option
 
 (** Return the content of an optional, or the given default value if the first

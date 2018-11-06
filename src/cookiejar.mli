@@ -22,11 +22,12 @@
     list of all cookies created by the [Set-Cookie] headers sent by the server.
     It is able to automatically extract cookies from server headers (see
     {!add_from_headers}), or to select and add relevant
-    coookies to the [Cookie] client header before a request (see
+    coookies to the [Cookie] client header before sending an HTTP request (see
     {!add_to_headers}).
 
-    It is mainly used by the {!module:Agent} module internally, but can be manipulated if
-    one needs to edit manually the cookies sent by the agent. *)
+    It is mainly used by the {!module:Agent} module internally, but can be used
+    wherever one needs to manually edit the cookies sent by the agent.
+ *)
 
 
 (** Representation of a cookie *)
@@ -44,9 +45,8 @@ module Cookie : sig
   val path : t -> string
   val secure : t -> bool
 
-  (** Given an uri and a cookie, return true if the
-     cookie's domain and path match the uri's one.
-   *)
+  (** Given an URI and a cookie, return true if the
+     cookie's domain and path match the URI's one.  *)
   val match_uri : Uri.t -> t -> bool
 
   (** Create a cookie *)
@@ -61,7 +61,7 @@ end
 
 type t
 
-(** The emtpy cookie jar*)
+(** The empty cookie jar*)
 val empty : t
 
 (** Add a cookie to the jar *)
@@ -71,12 +71,11 @@ val add : Cookie.t -> t -> t
 val remove : Cookie.t -> t -> t
 
 (** Given a header received from a server, update the jar according to
-    possible [Set-Cookie] HTTP header
- *)
+    possible [Set-Cookie] HTTP headers *)
 val add_from_headers : Uri.t -> Cohttp.Header.t -> t -> t
 
-(** Given an URI to request, update the client HTTP headers with relevant
-   cookies before sending it to the server *)
+(** Given a target URI, update the client HTTP headers with relevant
+   cookies before sending to the server *)
 val add_to_headers : Uri.t -> Cohttp.Header.t -> t -> Cohttp.Header.t
 
 val map : (Cookie.t -> Cookie.t) -> t -> t

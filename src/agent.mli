@@ -20,7 +20,7 @@
       - Analyze, fill and submit HTML forms
       - Manages cookies, headers and redirections
 
-    It is build on top of Cohttp, Lwt and Lambdasoup.
+    It is built on top of Cohttp, Lwt and Lambdasoup.
 *)
 
 
@@ -31,7 +31,7 @@ type http_headers = Cohttp.Header.t
 (** {2 Operations on HTTP responses } *)
 
 (** The HttpResponse module defines a type and operations to extract content and
-   metadata from server response *)
+   metadata from the server response *)
 module HttpResponse : sig
   type t
 
@@ -51,14 +51,13 @@ type result = t * HttpResponse.t
 
 (** Create a new empty agent. [~max_redirect] indicates how many times the agent
    will automatically and consecutively follow the [Location] header in case of
-   HTTP 302 or 303 response codes to avoid a redirect loop. Set
-   to [0] to disable any automatic redirection.
- *)
+   an HTTP 302 or 303 response code, to avoid a redirect loop. Set
+   to [0] to disable automatic redirection.  *)
 val init : ?max_redirect:int -> unit -> t
 
-(** Perform a get request to the specified URI. [get "http://www.site/some/url"
-   agent] sends a HTTP GET request and return the updated state of the agent
-   together with the server's response *)
+(** The following functions perform a get request to the specified URI.
+   [get "http://www.site/some/url" agent] sends a HTTP GET request and return
+   the updated state of the agent together with the server response *)
 
 val get : string -> t -> result Lwt.t
 val get_uri : Uri.t -> t -> result Lwt.t
@@ -66,7 +65,7 @@ val get_uri : Uri.t -> t -> result Lwt.t
 (** Same as get, but work directly with links instead of URIs *)
 val click : Page.Link.t -> t -> result Lwt.t
 
-(** Send a raw post request to the specified URI *)
+(** The following functions send a raw post request to the specified URI *)
 
 val post : string -> string -> t -> result Lwt.t
 val post_uri : Uri.t -> string -> t -> result Lwt.t
@@ -76,12 +75,13 @@ val submit : Page.Form.t -> t -> result Lwt.t
 
 (** Save some downloaded content in a file *)
 
-(** [save_image "/path/to/myfile.jpg" image agent] loads the image using [get], open
-   [myfile.jpg] and write the content in asynchronously, and return the result *)
+(** [save_image "/path/to/myfile.jpg" image agent] loads the image using [get],
+   opens [myfile.jpg], write the content in asynchronously and then returns the
+   result *)
 val save_image : string -> Page.Image.t -> t -> result Lwt.t
 
-(** [save_content "/path/to/myfile.html" content] write the specified content in a file
-    using Lwt's asynchronous IO *)
+(** [save_content "/path/to/myfile.html" content] writes the specified content in a file
+    using Lwt asynchronous I/O *)
 val save_content : string -> string -> unit Lwt.t
 
 (** {4 Cookies} (see {!module:Cookiejar}) *)
@@ -106,24 +106,25 @@ val client_headers : t -> Cohttp.Header.t
 (** Use the specified headers as new default headers *)
 val set_client_headers : Cohttp.Header.t -> t -> t
 
-(** Add a single pair key/value to the default headers *)
+(** Add a single key/value pair to the default headers *)
 val add_client_header : string -> string -> t -> t
 
-(** Remove a single pair key/value from the default headers *)
+(** Remove a single key/value pair from the default headers *)
 val remove_client_header : string -> t -> t
 
 (** {6 Redirection} *)
 
-(** Max redirection to avoid infinite loops (use 0 to disable automatic
-   redirection) *)
+(** Set the maximum consecutive redirections (to avoid infinite
+   loops). Use [0] to disable automatic redirection) *)
 val set_max_redirect : int -> t -> t
 
 (** The default maximum consecutive redirections *)
 val default_max_redirect : int
 
 (** {7 The Agent Monad}
-    This module defines a monad that implicitely manages the state corresponding to the agent
-    inside the Lwt monad. This is basically the state monad (for {! Agent.t}) and the Lwt one stacked *)
+    This module defines a monad that implicitly manages the state corresponding
+    to the agent while being inside the Lwt monad. This is basically the state
+    monad (for {! Agent.t}) and the Lwt one stacked *)
 
 module Monad : sig
   type 'a m = t -> (t * 'a) Lwt.t
@@ -136,6 +137,7 @@ module Monad : sig
   val run : t -> 'a m -> (t * 'a)
 
   (** Wrappers of Lwt's fail functions *)
+
   val fail : exn -> 'a m
   val fail_with : string -> 'a m
 
@@ -156,13 +158,13 @@ module Monad : sig
     val (=|<) : ('a -> 'b) -> 'a m -> 'b m
   end
 
-  (** The List module mainly wrap the Lwt_list one in the Agent monad. Functions
-     suffixed with
-     _s chains the actions sequentially, passing around the updated agent to the
-     next one. The _m ones do everything in parallel, sending a copy of the
-     initial state to every threads and returning this same unupdated state.
-     The latter can be useful to retrive a bunch of ressources in batch where
-     the updated state is not of interest (e.g images) *)
+  (** The List module wraps the functions of the Lwt_list module inside
+     the Agent monad. Functions suffixed with _s chain the actions sequentially,
+     passing around the updated agent from an action to the next one. The
+     functions suffixed with _m do everything in parallel, using a copy of the
+     initial state in every thread and returning this same original state.  The
+     latter can be useful to retrieve a bunch of resources in batch where the
+     updated state is not of interest (e.g download images) *)
   module List : sig
     val iter_s : ('a -> unit m) -> 'a list -> unit m
     val iter_p : ('a -> unit m) -> 'a list -> unit m
@@ -180,22 +182,20 @@ module Monad : sig
     val fold_right_s : ('a -> 'b -> 'b m) -> 'a list -> 'b -> 'b m
   end
 
-  (** get the current state of the agent, or set a new one *)
+  (** Get the current state of the agent, or set a new one *)
 
   val get : t m
   val set : t -> unit m
 
-  (** Wrap the type of functions operating on the agent such as {!
-      Agent.cookie_jar} or {!
-      Agent.set_cookie_jar} to usable inside the monad.
-      For example, the first one go from [Agent.t -> Cookiejar.t] to
-      [Agent.t -> (Agent.t * Cookiejar.t) Lwt.t] by just returning the agent
-      unmodified together with the current cookie jar and wrap the result in
-      [Lwt.return]
+  (** Wrap the type of functions operating on the agent such as {!  Agent.cookie_jar}
+    or {!  Agent.set_cookie_jar} to be usable inside the monad. For example, the
+    first one go from [Agent.t -> Cookiejar.t] to
+    [Agent.t -> (Agent.t * Cookiejar.t) Lwt.t] by just returning the agent
+    unmodified together with the current cookie jar and wrap the result through
+    [Lwt.return]
 
-      Note that the redefined functions have the same name as their counterpart,
-      and thus will shadow or can be shadowed by them.
-  *)
+    Note that the redefined functions have the same name as their counterpart,
+    and thus will shadow or can be shadowed by them. *)
 
   val save_content : string -> string -> unit m
 
