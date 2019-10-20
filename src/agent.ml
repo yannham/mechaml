@@ -200,15 +200,31 @@ module Monad = struct
   module Infix = struct
     let (>>=) = bind
 
-    let (=<<) x f = f >>= x
+    let (=<<) f x = x >>= f
 
     let (>>) x y = x >>= (fun _ -> y)
 
     let (<<) y x = x >> y
 
-    let (>|=) (x : 'a m) (f : 'a -> 'b) = x |> map f
+    let (>|=) x f = x |> map f
 
     let (=|<) f x = x |> map f
+  end
+
+  module Syntax = struct
+    let (let*) = bind
+
+    let (and*) x y =
+      fun agent ->
+        let x' = x agent
+        and y' = y agent in
+        Lwt.bind x' (fun (_,x'') ->
+          Lwt.bind y' (fun (_,y'') ->
+            Lwt.return (agent,(x'',y''))))
+
+    let (let+) x f = x |> map f
+
+    let (and+) = (and*)
   end
 
   module List = struct

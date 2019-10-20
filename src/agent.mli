@@ -158,6 +158,21 @@ module Monad : sig
     val (=|<) : ('a -> 'b) -> 'a m -> 'b m
   end
 
+  (** The Syntax module implements the monadic operators provided by OCaml 4.08 *)
+  module Syntax: sig
+    val (let*) : 'a m -> ('a -> 'b m) -> 'b m
+
+    (** The semantic of [( and* )] is the same as in {!  Agent.Monad.List.iter_p},
+        that is the two elements are fed with the same initial agent and
+        evaluated in parallel. As there is no reason to choose one state over the
+        other as a result, we restore the state to the same initial value.
+        *)
+    val (and*) : 'a m -> 'b m -> ('a * 'b) m
+
+    val (let+) : 'a m -> ('a -> 'b) -> 'b m
+    val (and+) : 'a m -> 'b m -> ('a * 'b) m
+  end
+
   (** The List module wraps the functions of the Lwt_list module inside
      the Agent monad. Functions suffixed with _s chain the actions sequentially,
      passing around the updated agent from an action to the next one. The
