@@ -1,3 +1,4 @@
 (executables
-  (names github_form download_images reddit_login)
+  (names github_form github_form_bind_operators download_images
+  download_images_bind_operators reddit_login reddit_login_bind_operators)
   (libraries mechaml uri lwt lwt_ssl))
