@@ -16,8 +16,6 @@ type t = { base_uri : Uri.t; soup : Soup.soup Soup.node }
 
 type elt = Soup.element Soup.node
 
-open Option.Infix
-
 let id x = x
 
 let is_identifier_char c =
@@ -30,9 +28,12 @@ let tag_filter tag node =
   Soup.name node = tag
 
 let input_filter input_type node =
-  Soup.name node = "input"
-  && (Soup.attribute "type" node >|= fun t ->
-    t=input_type) |? false
+    let is_input =
+      match (Soup.attribute "type" node) with
+        | Some type_attr -> type_attr = input_type
+        | None -> false
+    in
+    Soup.name node = "input" && is_input
 
 let is_input_field = function
   | "text"
@@ -46,15 +47,17 @@ let is_input_numeric = function
   | _ -> false
 
 let numeric_filter node =
-  Soup.attribute "type" node
-  >|= is_input_numeric
-  |? false
+  match (Soup.attribute "type" node) with
+    | Some type_attr -> is_input_numeric type_attr
+    | None -> false
 
 let field_filter node =
   match Soup.name node with
     | "textarea" -> true
     | "input" ->
-      Soup.attribute "type" node >|= is_input_field |? false
+        (match (Soup.attribute "type" node) with
+          | Some type_attr -> is_input_field type_attr
+          | None -> false)
     | _ -> false
 
 let tag_selector tag = function
@@ -65,9 +68,12 @@ let tag_selector tag = function
 
 let from_soup ?(location=Uri.empty) soup =
   let base_uri =
-    Soup.select_one "base[href]" soup
-    >>= Soup.attribute "href"
-    >|= Uri.of_string |? location in
+    Option.Syntax.(
+      let* base = Soup.select_one "base[href]" soup in
+      let+ href = Soup.attribute "href" base in
+      Uri.of_string href
+    )
+    |> Option.value ~default:location in
   {base_uri; soup}
 
 let from_string ?(location=Uri.empty) s =
@@ -136,10 +142,9 @@ module Form = struct
   let name f = Soup.attribute "name" f.elt
 
   let action f =
-    f.elt
-    |> Soup.attribute "action"
-    >|= Uri.of_string
+    Soup.attribute "action" f.elt
     |> Soup.require
+    |> Uri.of_string
 
   let uri f =
     f
@@ -147,11 +152,14 @@ module Form = struct
     |> f.resolver
 
   let meth f =
-    let m = f.elt
-      |> Soup.attribute "method"
-      >|= String.lowercase_ascii
-      >|= String.trim in
-    match m with
+    let meth =
+      Option.Syntax.(
+        let+ m = Soup.attribute "method" f.elt in
+        m
+        |> String.lowercase_ascii
+        |> String.trim
+      ) in
+    match meth with
       | Some "post" -> `POST
       | _ -> `GET
 
@@ -164,10 +172,9 @@ module Form = struct
 
   let get_multi key f = StringMap.find key f.data
   let get key f =
-    get_multi key f
-    |> (function
+    match (get_multi key f) with
       | [] -> None
-      | x::_ -> Some x)
+      | x::_ -> Some x
 
   let clear key f =
     {f with data = f.data |> StringMap.remove key}
@@ -308,7 +315,7 @@ module Form = struct
   let map_remove m k = StringMap.remove k m
   let map_find m k = StringMap.find k m
 
-  let update_form f newdata = {f with data = newdata |? f.data}
+  let update_form f newdata = {f with data = Option.value newdata ~default:f.data}
 
   let has_value m k v =
     try
@@ -354,38 +361,57 @@ module Form = struct
     let value cb = ivalue cb |> Soup.require
 
     let choices f cb =
-      iname cb
-      >|= cb_selector
-      >|= (fun s ->
-        Soup.select s f.elt)
+      Option.Syntax.(
+        let+ name = iname cb in
+        let selector = cb_selector name in
+        Soup.select selector f.elt
+      )
       |> Soup.require
       |> seq_from_nodes id
 
     let values f cb =
-      choices f cb |> fold (fun l cb ->
+      choices f cb
+      |> fold (fun l cb ->
         match ivalue cb with
           | Some v -> v::l
           | None -> l) []
 
     let checked f cb =
-      iname cb >|= current_values f.data |? []
+      Option.Syntax.(
+        let+ name = iname cb in
+        current_values f.data name
+      )
+      |> Option.value ~default:[]
 
     let check f cb =
-      (iname cb, ivalue cb) >>> add_value f.data
+      Option.Syntax.(
+        let+ name = iname cb
+        and+ value = ivalue cb in
+        add_value f.data name value
+      )
       |> update_form f
 
     let uncheck f cb =
-      (iname cb, ivalue cb) >>> rem_value f.data
+      Option.Syntax.(
+        let+ name = iname cb
+        and+ value = ivalue cb in
+        rem_value f.data name value
+      )
       |> update_form f
 
     let is_checked f cb =
-      (iname cb, ivalue cb) >>> has_value f.data |? false
+      Option.Syntax.(
+        let+ name = iname cb
+        and+ value = ivalue cb in
+        has_value f.data name value
+      )
+      |> Option.value ~default:false
 
     let checked_default f cb =
       choices f cb
       |> fold (fun values cb ->
         if Soup.has_attribute "checked" cb then
-          (ivalue cb |? "on")::values
+          (Option.value (ivalue cb) ~default:"on")::values
         else
           values) []
       |> List.rev
@@ -399,10 +425,11 @@ module Form = struct
     let value rb = ivalue rb |> Soup.require
 
     let choices f rb =
-      iname rb
-      >|= rb_selector
-      >|= (fun s ->
-        Soup.select s f.elt)
+      Option.Syntax.(
+        let+ name = iname rb in
+        let selector = rb_selector name in
+        Soup.select selector f.elt
+      )
       |> Soup.require
       |> seq_from_nodes id
 
@@ -413,22 +440,33 @@ module Form = struct
           | None -> l) []
 
     let selected f rb =
-      iname rb >>= current_value f.data
+      Option.Syntax.(
+        let* name = iname rb in
+        current_value f.data name
+      )
 
     let select f rb =
-      (iname rb, ivalue rb >|= singleton)
-      >>> map_add f.data
+      Option.Syntax.(
+        let+ name = iname rb
+        and+ value = ivalue rb in
+        map_add f.data name (singleton value)
+      )
       |> update_form f
 
     let is_selected f rb =
-      (iname rb, ivalue rb) >>> has_value f.data |? false
+      Option.Syntax.(
+        let+ name = iname rb
+        and+ value = ivalue rb in
+        has_value f.data name value
+      )
+      |> Option.value ~default:false
 
     let selected_default f rb =
       with_stop (fun stop ->
         choices f rb
         |> iter (fun rb' ->
           if Soup.has_attribute "checked" rb' then
-            Some (ivalue rb' |? "on")
+            Some (Option.value (ivalue rb') ~default:"on")
             |> stop.throw);
         None)
 
@@ -443,34 +481,48 @@ module Form = struct
     let is_multiple = Soup.has_attribute "multiple"
 
     let selected f sl =
-      iname sl
-      >|= current_values f.data |? []
+      Option.Syntax.(
+        let+ name = iname sl in
+        current_values f.data name
+      )
+      |> Option.value ~default:[]
 
     let unselect f sl _ =
-      iname sl
-      >|= map_remove f.data
+      Option.Syntax.(
+        let+ name = iname sl in
+        map_remove f.data name
+      )
       |> update_form f
 
     let is_selected f sl item =
-      (iname sl, ivalue item) >>> has_value f.data |? false
+      Option.Syntax.(
+        let+ name = iname sl
+        and+ value = ivalue item in
+        has_value f.data name value
+      )
+      |> Option.value ~default:false
 
     let text item =
-      item |> Soup.leaf_text |? ""
+      item
+      |> Soup.leaf_text
+      |> Option.value ~default:""
 
     let value item =
       item
-      |> ivalue |? text item
+      |> ivalue
+      |> Option.value ~default:(text item)
 
     let select f sl item =
-      iname sl
-      >|= (function name ->
+      Option.Syntax.(
+        let+ name = iname sl in
         let v = value item in
         if is_multiple sl then
           let vs = current_values f.data name in
           (if has_value f.data name v then vs else v::vs)
           |> map_add f.data name
         else
-          map_add f.data name [v])
+          map_add f.data name [v]
+      )
       |> update_form f
 
     let selected_default _ sl =
@@ -489,13 +541,17 @@ module Form = struct
     (* let fset = set *)
 
     let set f fd v =
-      iname fd
-      >|= (fun name ->
-        map_add f.data name [v])
+      Option.Syntax.(
+        let+ name = iname fd in
+        map_add f.data name [v]
+      )
       |> update_form f
 
     let get f fd =
-      iname fd >>= current_value f.data
+      Option.Syntax.(
+        let* name = iname fd in
+        current_value f.data name
+      )
 
     let default_value _ fd =
       match Soup.name fd with

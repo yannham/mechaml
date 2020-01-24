@@ -17,34 +17,17 @@
   PERFORMANCE OF THIS SOFTWARE.
   }}}*)
 
-(** Helpers for the option Monad *)
+(* Compatibility with versions prior to OCaml 4.08 *)
 
-(** Monadic operations *)
-
-val return : 'a -> 'a option
+val value : 'a option -> default:'a -> 'a
 val bind : 'a option -> ('a -> 'b option) -> 'b option
-val join : ('a option) option -> 'a option
 val map : ('a -> 'b) -> 'a option -> 'b option
 
-(** Apply a two arguments function to a pair of optionals : if one of the
-     component is [None], the result is [None], otherwise
-     [map2 (Some x, Some y) f] is [Some (f x y)] *)
-val map_pair : 'a option * 'b option -> ('a -> 'b -> 'c) -> 'c option
+(* Implementation of binding operators *)
 
-(** Return the content of an optional, or the given default value if the first
-     argument is [None]. *)
-val default : 'a option -> 'a -> 'a
-
-module Infix : sig
-  (** bind *)
-  val (>>=) : 'a option -> ('a -> 'b option) -> 'b option
-
-  (** Map a function and apply it to the given argument *)
-  val (>|=) : 'a option -> ('a -> 'b) -> 'b option
-
-  (** map_pair *)
-  val (>>>) : 'a option * 'b option-> ('a -> 'b -> 'c) -> 'c option
-
-  (** default *)
-  val (|?) : 'a option -> 'a -> 'a
+module Syntax : sig
+  val (let*) : 'a option -> ('a -> 'b option) -> 'b option
+  val (and*) : 'a option -> 'b option -> ('a * 'b) option
+  val (let+) : 'a option -> ('a -> 'b) -> 'b option
+  val (and+) : 'a option -> 'b option -> ('a * 'b) option
 end

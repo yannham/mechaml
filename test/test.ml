@@ -14,7 +14,6 @@
 
 open Mechaml
 open Cohttp
-open Option.Infix
 
 let _ = Random.self_init ()
 
@@ -51,7 +50,7 @@ let jar_from =
   List.fold_left (fun j c -> Cookiejar.add c j) Cookiejar.empty
 
 let uri = random_uri ()
-let cookies = random_cookies (Uri.host uri |? "dunno.com") 10
+let cookies = random_cookies (Option.value (Uri.host uri) ~default:"dunno.com") 10
 let jar = jar_from cookies
 
 let jar_mem c jar =
@@ -176,7 +175,7 @@ let tests_cookiejar = [
     |> check_true "Mismatch between a jar generated from multiple \
       \"Set-Cookie\" headers and the first cookie of the original list";
 
-    let cookie = random_cookie (Uri.host uri |? "dunno.com") in
+    let cookie = random_cookie (Option.value (Uri.host uri) ~default:"dunno.com") in
     let name = Cookiejar.Cookie.name cookie in
     let value = Cookiejar.Cookie.value cookie in
     let domain = Cookiejar.Cookie.domain cookie in

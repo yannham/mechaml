@@ -12,12 +12,11 @@
   THIS SOFTWARE.
   }}}*)
 
-let (|?) = Option.Infix.(|?)
-
 module C = Cohttp.Cookie.Set_cookie_hdr
 
 let domain_from_uri uri =
-  Uri.host uri |? ""
+  Uri.host uri
+  |> Option.value ~default:""
 
 module Cookie = struct
   type expiration = [
@@ -79,8 +78,8 @@ module Cookie = struct
     { name = C.cookie c |> fst;
       value = C.cookie c |> snd;
       expiration = C.expiration c;
-      domain = C.domain c |? domain_from_uri uri;
-      path = C.path c |? "";
+      domain = Option.value (C.domain c) ~default:(domain_from_uri uri);
+      path = Option.value (C.path c) ~default:"";
       secure = C.secure c }
 end
 
