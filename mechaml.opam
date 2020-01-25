@@ -11,7 +11,7 @@ Mechaml is a functional web scraping library that allows to :
 """
 bug-reports: "https://github.com/yannham/mechaml/issues"
 license: "LGPL v3"
-dev-repo: "git://github.com/yannham/mechaml.git"
+dev-repo: "git+https://github.com/yannham/mechaml.git"
 doc: "https://yannham.github.io/mechaml/"
 tags: ["web" "scraping" "mechanize" "http" "client"]
 build: [
