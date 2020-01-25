@@ -2,4 +2,5 @@
   (name mechaml)
   (public_name mechaml)
   (synopsis "A web browsing library built on top of Lambdasoup and Cohttp. Inspired by WWW::Mechanize")
-  (libraries lambdasoup lwt cohttp cohttp-lwt cohttp-lwt-unix re uri))
+  (libraries lambdasoup lwt cohttp cohttp-lwt cohttp-lwt-unix re uri)
+  (preprocess future_syntax))
