@@ -1,21 +1,32 @@
-opam-version: "1.2"
+opam-version: "2.0"
 maintainer: "Yann Hamdaoui <yann.hamdaoui@gmail.com>"
 authors: "Yann Hamdaoui <yann.hamdaoui@gmail.com>"
 homepage: "https://github.com/yannham/mechaml"
+synopsis: "A functional web scraping library"
+description: """
+Mechaml is a functional web scraping library that allows to :
+ - Fetch web content
+ - Analyze, fill and submit HTML forms
+ - Handle cookies, headers and redirections
+"""
 bug-reports: "https://github.com/yannham/mechaml/issues"
 license: "LGPL v3"
 dev-repo: "git://github.com/yannham/mechaml.git"
-build: [["dune" "build" "-p" name "-j" jobs]]
-build-test: [["dune" "runtest" "-p" name "-j" jobs]]
-build-doc: ["make doc"]
+doc: "https://yannham.github.io/mechaml/"
+tags: ["web" "scraping" "mechanize" "http" "client"]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "build" "@doc" "-p" name ] {with-doc}
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+]
 depends: [
-  "dune" {build & >= "1.1.0"}
-  "cohttp" {>= "0.21.0" & < "2.0.0"}
+  "dune" {build & >= "1.8.0"}
+  "cohttp" {>= "0.21.0" & < "3.0.0"}
   "cohttp-lwt"
   "cohttp-lwt-unix"
   "lwt"
   "uri"
   "lambdasoup" {< "0.7.0"}
-  "alcotest" {test & >= "0.8.0"}
+  "alcotest" {with-test & >= "0.8.0"}
   "ocaml" {>= "4.03.0"}
 ]
