@@ -21,6 +21,7 @@ build: [
 ]
 depends: [
   "dune" {build & >= "1.8.0"}
+  "ocaml-syntax-shims" {build}
   "cohttp" {>= "0.21.0" & < "3.0.0"}
   "cohttp-lwt"
   "cohttp-lwt-unix"
