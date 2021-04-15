@@ -101,7 +101,7 @@ let check_bool msg = Alcotest.(check bool) msg
 let check_true msg = check_bool msg true
 let check_string = Alcotest.(check string)
 let check_int = Alcotest.(check int)
-let fail = Alcotest.fail
+let fail s = Alcotest.fail s
 
 let test_selector (type s) page f (module M : PageElement with type t = s) node prefix selector expected_count =
   let nodes = f selector page in
