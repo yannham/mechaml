@@ -1,16 +1,21 @@
-1.2.0
------
- - Implement OCaml custom binding operators (let+, and+, let*, and*) for the
-     Agent monad
+## 1.2.1
 
-1.1.0
------
+ - Bump upper bound of Cohttp and Lambdasoup dependencies
+ - Restore compatibility with Alcotest 1.4.0 (Craig Ferguson)
+
+## 1.2.0
+
+ - Implement OCaml custom binding operators (let+, and+, let*, and*) for the
+   Agent monad
+
+## 1.1.0
+
  - Add a Format module to help generating formatted contents for forms
  - Migration from Oasis to Dune
  - Compatibility with OCaml 4.07
 
-1.0.0
------
+## 1.0.0
+
  - Breaking change: separate the agent data and server's response in the Agent module
  - add an Agent.Monad module that combines state (agent) and promises (Lwt) together with associated helpers
  - add wrappers and support for Lambdasoup lazy traversal of HTML documents
