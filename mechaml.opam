@@ -22,12 +22,12 @@ build: [
 depends: [
   "dune" {>= "1.8.0"}
   "ocaml-syntax-shims" {build}
-  "cohttp" {>= "0.21.0" & < "3.0.0"}
+  "cohttp" {>= "0.21.0" & < "5.0.0"}
   "cohttp-lwt"
   "cohttp-lwt-unix"
   "lwt"
   "uri"
-  "lambdasoup" {< "0.7.0"}
+  "lambdasoup" {< "0.8.0"}
   "alcotest" {with-test & >= "0.8.0"}
   "ocaml" {>= "4.03.0"}
 ]
